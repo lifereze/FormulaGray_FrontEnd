@@ -18,8 +18,7 @@ export const Hero3 = () => {
           </div>
           <div className="text-normal font-bold pl-4">
             <span>
-              Our{" "}
-              <span className={`text-[${colors.primary}]`}>Support team</span>{" "}
+              Our <span style={{ color: colors.primary }}>Support team</span>{" "}
               and <br />
             </span>{" "}
             institutions attend to your burning questions in less than 10
@@ -29,7 +28,7 @@ export const Hero3 = () => {
         <div className="flex m-3 items-center">
           <div className="text-normal font-bold pl-4">
             Get admitted to the{" "}
-            <span className={`text-[${colors.primary}]`}>
+            <span style={{ color: colors.primary }}>
               World Class Universities.
             </span>
           </div>
@@ -50,8 +49,8 @@ export const Hero3 = () => {
             />
           </div>
           <div className="text-normal font-bold pl-4">
-            <span className={`text-[${colors.primary}]`}>Focus</span> on your
-            studies and leave the rest to us
+            <span style={{ color: colors.primary }}>Focus</span> on your studies
+            and leave the rest to us
           </div>
         </div>
       </div>

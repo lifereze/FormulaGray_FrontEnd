@@ -32,7 +32,8 @@ export const Hero1 = () => {
             <div>
               <button
                 type="button"
-                className={`inline-flex items-center m-4 px-3 py-1.5 border border-transparent text-xs font-medium rounded-full shadow-sm text-white bg-[${colors.primary}] hover:bg-[${colors.primaryHover}] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500`}
+                className="inline-flex items-center m-4 px-3 py-1.5 border border-transparent text-xs font-medium rounded-full shadow-sm text-white hover:bg-[#07443f] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                style={{ backgroundColor: colors.primary }}
               >
                 Learn more
               </button>
@@ -59,12 +60,14 @@ export const Hero1 = () => {
             </div>
             <div className="font-bold">Agency</div>
             <div className="">
-              Do you recruit prospective students who want to study in Canada , the United States, the United Kingdom or Australia? Register to become an ApplyBoard Certified Recruitment Partner.
+              Do you recruit prospective students who want to study in Canada ,
+              the United States, the United Kingdom or Australia? Register to
+              become an ApplyBoard Certified Recruitment Partner.
             </div>
             <div>
               <button
                 type="button"
-                className={`inline-flex items-center m-4 px-3 py-1.5 border border-transparent text-xs font-medium rounded-full shadow-sm text-white bg-[${colors.primary}] hover:bg-[${colors.primaryHover}] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500`}
+                className="inline-flex items-center m-4 px-3 py-1.5 border border-transparent text-xs font-medium rounded-full shadow-sm text-white hover:bg-[#07443f] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               >
                 Learn more
               </button>
@@ -91,12 +94,15 @@ export const Hero1 = () => {
             </div>
             <div className="font-bold">Partner school</div>
             <div className="">
-              When your institution joins Formula Gray Platform, you get international visibility from students all over the world, looking for enrolment.
+              When your institution joins Formula Gray Platform, you get
+              international visibility from students all over the world, looking
+              for enrolment.
             </div>
             <div>
               <button
                 type="button"
-                className={`inline-flex items-center m-4 px-3 py-1.5 border border-transparent text-xs font-medium rounded-full shadow-sm text-white bg-[${colors.primary}] hover:bg-[${colors.primaryHover}] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500`}
+                className="inline-flex items-center m-4 px-3 py-1.5 border border-transparent text-xs font-medium rounded-full shadow-sm text-white hover:bg-[#07443f] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                style={{ backgroundColor: colors.primary }}
               >
                 Learn more
               </button>

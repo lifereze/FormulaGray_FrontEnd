@@ -101,7 +101,7 @@ export const Footer = () => {
             <div className="flex justify-start lg:w-0 lg:flex-1 text-base font-medium text-gray-500 hover:text-gray-900">
               <a href="/">
                 <span className="sr-only">Formula Gray</span>
-                <span className={`text-[${colors.primary}] pt-3`}>Formula</span>
+                <span className="pt-3" style={{color: colors.primary}}>Formula</span>
                 Gray
               </a>
             </div>
