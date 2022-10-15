@@ -46,7 +46,8 @@ export const Hero2 = () => {
                       viewBox="0 0 24 24"
                       strokeWidth={1.5}
                       stroke="currentColor"
-                      className="w-6 h-6 border rounded-full mr-1.5 bg-[#07443f]"
+                      className="w-6 h-6 border rounded-full mr-1.5 "
+                      style={{ backgroundColor: colors.primary }}
                     >
                       <path
                         strokeLinecap="round"
@@ -68,7 +69,8 @@ export const Hero2 = () => {
                       viewBox="0 0 24 24"
                       strokeWidth={1.5}
                       stroke="currentColor"
-                      className="w-6 h-6 border rounded-full mr-1.5 bg-[#07443f]"
+                      className="w-6 h-6 border rounded-full mr-1.5"
+                      style={{ backgroundColor: colors.primary }}
                     >
                       <path
                         strokeLinecap="round"
@@ -87,7 +89,8 @@ export const Hero2 = () => {
                       viewBox="0 0 24 24"
                       strokeWidth={1.5}
                       stroke="currentColor"
-                      className="w-6 h-6 border rounded-full mr-1.5 bg-[#07443f]"
+                      className="w-6 h-6 border rounded-full mr-1.5 "
+                      style={{ backgroundColor: colors.primary }}
                     >
                       <path
                         strokeLinecap="round"
@@ -109,7 +112,8 @@ export const Hero2 = () => {
                       viewBox="0 0 24 24"
                       strokeWidth={1.5}
                       stroke="currentColor"
-                      className="w-6 h-6 border rounded-full mr-1.5 bg-[#07443f]"
+                      className="w-6 h-6 border rounded-full mr-1.5 "
+                      style={{ backgroundColor: colors.primary }}
                     >
                       <path
                         strokeLinecap="round"
@@ -128,7 +132,8 @@ export const Hero2 = () => {
                       viewBox="0 0 24 24"
                       strokeWidth={1.5}
                       stroke="currentColor"
-                      className="w-6 h-6 border rounded-full mr-1.5 bg-[#07443f]"
+                      className="w-6 h-6 border rounded-full mr-1.5"
+                      style={{ backgroundColor: colors.primary }}
                     >
                       <path
                         strokeLinecap="round"

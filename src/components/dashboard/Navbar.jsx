@@ -136,14 +136,14 @@ export const Navbar = () => {
         </Transition.Root>
 
         {/* Static sidebar for desktop */}
-        <div className="hidden lg:fixed lg:inset-y-0 lg:flex lg:w-64">
+        <div className="hidden lg:fixed lg:inset-y-0 lg:flex lg:w-40">
           {/* Sidebar component */}
           <div className="flex min-h-0 flex-1 flex-col">
             <div className="flex h-16 flex-shrink-0 items-center px-4">
               <div className="text-lg font-bold text-black">
-                <div className="mt-6">
+                <div className="mt-1">
                   <a href="/">
-                    <img src={Logo} />.
+                    <img src={Logo} />
                   </a>
                 </div>
               </div>
@@ -167,7 +167,7 @@ export const Navbar = () => {
                         className={classNames(
                           item.current
                             ? "text-[#0092D2]"
-                            : "text-[#0092D2] group-hover:text-[#0075a8]",
+                            : "text-[#0092D2] group-hover:text-white",
                           "mr-3 flex-shrink-0 h-6 w-6"
                         )}
                         aria-hidden="true"

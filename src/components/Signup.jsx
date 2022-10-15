@@ -8,7 +8,7 @@ export const Signup = () => {
   return (
     <>
       {}
-      <div className="flex min-h-full">
+      <div className="flex overflow-y-hidden h-screen min-h-full">
         <div className="relative hidden w-0 flex-1 lg:block">
           <img
             className="absolute inset-0 h-full w-full object-cover"

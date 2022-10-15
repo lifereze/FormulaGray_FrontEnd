@@ -3,7 +3,7 @@ import { colors } from "../../constants/colors";
 
 export const Hero1 = () => {
   return (
-    <div className="flex justify-center">
+    <div className="flex mt-20 justify-center">
       <div className="flex flex-col md:flex-row md:w-10/12 text-lg">
         <div className="flex  px-2  md:w-1/3">
           <div className="flex flex-col items-center shadow p-4 m-3 border">
