@@ -1,6 +1,5 @@
 import React from "react";
 import { colors } from "../../constants/colors";
-// import Typed from 'react-typed';
 
 export const Hero = () => {
   return (
