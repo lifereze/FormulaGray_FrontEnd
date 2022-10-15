@@ -1,10 +1,10 @@
 import Logo from "../constants/images/formulargray_03.png";
 export const Signup = () => {
-    const signUpOptions = [
-      { id: "student", title: "Student" },
-      { id: "agency", title: "Agency" },
-      { id: "institution", title: "Institition" },
-    ];
+  const signUpOptions = [
+    { id: "student", title: "Student" },
+    { id: "agency", title: "Agency" },
+    { id: "institution", title: "Institition" },
+  ];
   return (
     <>
       {}
@@ -19,7 +19,9 @@ export const Signup = () => {
         <div className="flex h-full flex-1 flex-col justify-center py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
           <div className="mx-auto w-full max-w-sm lg:w-96">
             <div>
-              <img className="h-8 w-auto" src={Logo} alt="Your Company" />
+              <a href="/">
+                <img className="h-8 w-auto" src={Logo} alt="Your Company" />
+              </a>
               <h2 className="mt-2 text-3xl font-bold tracking-tight text-gray-900">
                 Create an account
               </h2>

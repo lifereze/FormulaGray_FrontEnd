@@ -412,7 +412,7 @@ export const Navbar = () => {
                 </div>
                 <div>
                   <a
-                    href="#"
+                    href="/signup"
                     className="flex w-full items-center justify-center rounded-md border border-transparent px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-[#07443f]"
                     style={{ backgroundColor: colors.primary }}
                   >
@@ -421,7 +421,7 @@ export const Navbar = () => {
                   <p className="mt-6 text-center text-base font-medium text-gray-500">
                     Existing customer?
                     <a
-                      href="#"
+                      href="/signin"
                       className="hover:text-[#07443f]"
                       style={{ color: colors.primary }}
                     >
