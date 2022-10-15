@@ -1,5 +1,5 @@
 import React from "react";
-import {colors} from '../constants/colors'
+import {colors} from '../../constants/colors'
 
 export const Hero4 = () => {
   return (

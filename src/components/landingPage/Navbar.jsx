@@ -1,4 +1,6 @@
 import { Fragment } from "react";
+import Logo from "../../constants/images/formulargray_03.png";
+
 import { Popover, Transition } from "@headlessui/react";
 import {
   ArrowPathIcon,
@@ -15,7 +17,7 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
-import { colors } from "../constants/colors";
+import { colors } from "../../constants/colors";
 
 const features = [
   {
@@ -104,13 +106,14 @@ export const Navbar = () => {
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <div className="flex items-center justify-between py-6 md:justify-start md:space-x-10">
             <div className="flex justify-start lg:w-0 lg:flex-1 text-base font-medium text-gray-500 hover:text-gray-900">
-              <a href="/">
+              {/* <a href="/">
                 <span className="sr-only">Formula Gray</span>
                 <span className="pt-3" style={{ color: colors.primary }}>
                   Formula
                 </span>
                 Gray
-              </a>
+              </a> */}
+              <img className="h-12 w-auto" src={Logo} alt="Your Company" />
             </div>
             <div className="-my-2 -mr-2 md:hidden">
               <Popover.Button className="inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-[#07443f]">
@@ -308,13 +311,13 @@ export const Navbar = () => {
             </Popover.Group>
             <div className="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
               <a
-                href="#"
+                href="/signin"
                 className="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900"
               >
                 Sign in
               </a>
               <a
-                href="#"
+                href="/signup"
                 className="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-[#07443f]"
                 style={{ backgroundColor: colors.primary }}
               >
@@ -341,13 +344,18 @@ export const Navbar = () => {
               <div className="px-5 pt-5 pb-6">
                 <div className="flex items-center justify-between">
                   <div className="flex justify-start lg:w-0 lg:flex-1 text-base font-medium text-gray-500 hover:text-gray-900">
-                    <a href="/">
+                    {/* <a href="/">
                       <span className="sr-only">Formula Gray</span>
                       <span className="pt-3" style={{ color: colors.primary }}>
                         Formula
                       </span>
                       Gray
-                    </a>
+                    </a> */}
+                    <img
+                      className="h-12 w-auto"
+                      src={Logo}
+                      alt="Your Company"
+                    />
                   </div>
                   <div className="-mr-2">
                     <Popover.Button className="inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-[#07443f]">
