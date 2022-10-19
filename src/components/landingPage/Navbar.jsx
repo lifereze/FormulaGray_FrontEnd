@@ -17,7 +17,6 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
-import { colors } from "../../constants/colors";
 
 const features = [
   {
@@ -108,7 +107,7 @@ export const Navbar = () => {
             <div className="flex justify-start lg:w-0 lg:flex-1 text-base font-medium text-gray-500 hover:text-gray-900">
               {/* <a href="/">
                 <span className="sr-only">Formula Gray</span>
-                <span className="pt-3" style={{ color: colors.primary }}>
+                <span className="pt-3 text-cyan-500">
                   Formula
                 </span>
                 Gray
@@ -160,8 +159,7 @@ export const Navbar = () => {
                                 className="-m-3 flex items-start rounded-lg p-3 hover:bg-gray-50"
                               >
                                 <item.icon
-                                  className="h-6 w-6 flex-shrink-0"
-                                  style={{ color: colors.primary }}
+                                  className="h-6 w-6 flex-shrink-0 text-cyan-500"
                                   aria-hidden="true"
                                 />
                                 <div className="ml-4">
@@ -255,8 +253,7 @@ export const Navbar = () => {
                                 className="-m-3 flex items-start rounded-lg p-3 hover:bg-gray-50"
                               >
                                 <item.icon
-                                  className="h-6 w-6 flex-shrink-0"
-                                  style={{ color: colors.primary }}
+                                  className="h-6 w-6 flex-shrink-0 text-cyan-500"
                                   aria-hidden="true"
                                 />
                                 <div className="ml-4">
@@ -294,8 +291,7 @@ export const Navbar = () => {
                             <div className="mt-5 text-sm">
                               <a
                                 href="#"
-                                className={`font-medium hover:text-[#07443f]`}
-                                style={{ color: colors.primary }}
+                                className={`font-medium text-cyan-500 hover:text-cyan-700`}
                               >
                                 View all posts
                                 <span aria-hidden="true"> &rarr;</span>
@@ -318,8 +314,7 @@ export const Navbar = () => {
               </a>
               <a
                 href="/signup"
-                className="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-[#07443f]"
-                style={{ backgroundColor: colors.primary }}
+                className="ml-8 inline-flex items-center bg-cyan-500 justify-center whitespace-nowrap rounded-md border border-transparent px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-cyan-700"
               >
                 Sign up
               </a>
@@ -346,7 +341,7 @@ export const Navbar = () => {
                   <div className="flex justify-start lg:w-0 lg:flex-1 text-base font-medium text-gray-500 hover:text-gray-900">
                     {/* <a href="/">
                       <span className="sr-only">Formula Gray</span>
-                      <span className="pt-3" style={{ color: colors.primary }}>
+                      <span className="pt-3 text-cyan-500">
                         Formula
                       </span>
                       Gray
@@ -373,8 +368,7 @@ export const Navbar = () => {
                         className="-m-3 flex items-center rounded-md p-3 hover:bg-gray-50"
                       >
                         <item.icon
-                          className="h-6 w-6 flex-shrink-0"
-                          style={{ color: colors.primary }}
+                          className="h-6 w-6 flex-shrink-0 text-cyan-500"
                           aria-hidden="true"
                         />
                         <span className="ml-3 text-base font-medium text-gray-900">
@@ -413,8 +407,7 @@ export const Navbar = () => {
                 <div>
                   <a
                     href="/signup"
-                    className="flex w-full items-center justify-center rounded-md border border-transparent px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-[#07443f]"
-                    style={{ backgroundColor: colors.primary }}
+                    className="flex w-full items-center  bg-cyan-500 justify-center rounded-md border border-transparent px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-cyan-700"
                   >
                     Sign up
                   </a>
@@ -422,8 +415,7 @@ export const Navbar = () => {
                     Existing customer?
                     <a
                       href="/signin"
-                      className="hover:text-[#07443f]"
-                      style={{ color: colors.primary }}
+                      className="text-cyan-500 hover:text-cyan-700"
                     >
                       Sign in
                     </a>

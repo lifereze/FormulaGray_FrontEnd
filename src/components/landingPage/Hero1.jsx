@@ -1,5 +1,4 @@
 import React from "react";
-import { colors } from "../../constants/colors";
 
 export const Hero1 = () => {
   return (
@@ -32,8 +31,7 @@ export const Hero1 = () => {
             <div>
               <button
                 type="button"
-                className="inline-flex items-center m-4 px-3 py-1.5 border border-transparent text-xs font-medium rounded-full shadow-sm text-white hover:bg-[#07443f] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                style={{ backgroundColor: colors.primary }}
+                className="inline-flex bg-cyan-500 items-center m-4 px-3 py-1.5 border border-transparent text-xs font-medium rounded-full shadow-sm text-white hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500"
               >
                 Learn more
               </button>
@@ -67,7 +65,7 @@ export const Hero1 = () => {
             <div>
               <button
                 type="button"
-                className="inline-flex items-center m-4 px-3 py-1.5 border border-transparent text-xs font-medium rounded-full shadow-sm text-white hover:bg-[#07443f] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                className="inline-flex items-center m-4 px-3 py-1.5 border border-transparent text-xs font-medium rounded-full shadow-sm text-white hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500"
               >
                 Learn more
               </button>
@@ -101,8 +99,7 @@ export const Hero1 = () => {
             <div>
               <button
                 type="button"
-                className="inline-flex items-center m-4 px-3 py-1.5 border border-transparent text-xs font-medium rounded-full shadow-sm text-white hover:bg-[#07443f] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                style={{ backgroundColor: colors.primary }}
+                className="inline-flex bg-cyan-500 items-center m-4 px-3 py-1.5 border border-transparent text-xs font-medium rounded-full shadow-sm text-white hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500"
               >
                 Learn more
               </button>

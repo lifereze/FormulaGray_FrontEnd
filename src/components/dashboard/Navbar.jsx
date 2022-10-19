@@ -1,6 +1,5 @@
 import { Fragment, useState } from "react";
 import { Dialog, Menu, Transition } from "@headlessui/react";
-import { colors } from "../../constants/colors";
 import Logo from "../../constants/images/formulargray_03.png";
 import {
   Bars3BottomLeftIcon,
@@ -157,8 +156,8 @@ export const Navbar = () => {
                       href={item.href}
                       className={classNames(
                         item.current
-                          ? "text-[#0092D2]"
-                          : "text-[#0092D2] hover:bg-[#0075a8] hover:text-white",
+                          ? "text-cyan-500"
+                          : "text-cyan-500 hover:bg-cyan-700 hover:text-white",
                         "group flex items-center px-2 py-2 text-sm font-medium rounded-md"
                       )}
                       aria-current={item.current ? "page" : undefined}
@@ -166,8 +165,8 @@ export const Navbar = () => {
                       <item.icon
                         className={classNames(
                           item.current
-                            ? "text-[#0092D2]"
-                            : "text-[#0092D2] group-hover:text-white",
+                            ? "text-cyan-500"
+                            : "text-cyan-500 group-hover:text-white",
                           "mr-3 flex-shrink-0 h-6 w-6"
                         )}
                         aria-hidden="true"
@@ -198,7 +197,7 @@ export const Navbar = () => {
                   <Menu as="div" className="relative ml-4 flex-shrink-0">
                     <div className="flex">
                       <div>
-                        <Menu.Button className="flex rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                        <Menu.Button className="flex rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2">
                           <span className="sr-only">Open user menu</span>
                           <img
                             className="h-8 w-8 rounded-full"
@@ -233,7 +232,7 @@ export const Navbar = () => {
                                 "block px-4 py-2 text-sm text-gray-700"
                               )}
                             >
-                              Leave chat
+                              Menu link
                             </a>
                           )}
                         </Menu.Item>

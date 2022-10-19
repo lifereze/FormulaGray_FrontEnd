@@ -1,5 +1,4 @@
 import React from "react";
-import { colors } from "../../constants/colors";
 
 export const Hero3 = () => {
   return (
@@ -18,7 +17,7 @@ export const Hero3 = () => {
           </div>
           <div className="text-normal font-bold pl-4">
             <span>
-              Our <span style={{ color: colors.primary }}>Support team</span>{" "}
+              Our <span className='text-cyan-500'>Support team</span>{" "}
               and <br />
             </span>{" "}
             institutions attend to your burning questions in less than 10
@@ -29,7 +28,7 @@ export const Hero3 = () => {
           <div className="flex m-3 items-center mb-20">
             <div className="text-normal font-bold pl-4">
               Get admitted to the{" "}
-              <span style={{ color: colors.primary }}>
+              <span className='text-cyan-500'>
                 World Class Universities.
               </span>
             </div>
@@ -52,7 +51,7 @@ export const Hero3 = () => {
             />
           </div>
           <div className="text-normal font-bold pl-4">
-            <span style={{ color: colors.primary }}>Focus</span> on your studies
+            <span className='text-cyan-500'>Focus</span> on your studies
             and leave the rest to us
           </div>
         </div>

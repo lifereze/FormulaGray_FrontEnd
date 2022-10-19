@@ -1,12 +1,11 @@
 import React from 'react'
 import Campus from '../constants/images/campus.png'
-import {colors} from '../constants/colors'
 
 export const Card = () => {
   return (
-    <div className="">
+    <div className="space-y-2 mb-3">
       <div className="relative">
-        <div className="absolute top-0 left-0 text-white">
+        <div className="absolute top-0 left-1 text-white">
           T Level - Education
           <br />
           and Childcare <br />
@@ -41,18 +40,17 @@ export const Card = () => {
         <div>Ellesmere Port, North West, United Kingdom</div>
       </div>
       <div className="flex">
-        <div className="font-bold">Tiution </div>
+        <div className="font-bold mr-2">Tiution</div>
         <div>$4500 </div>
       </div>
       <div className="flex">
-        <div className="font-bold">Application fee </div>
+        <div className="font-bold mr-2">Application fee </div>
         <div>$4500 </div>
       </div>
       <div className="w-full flex justify-center m-2">
         <button
           type="button"
-          className="w-3/4 py-2 rounded-2xl text-white font-bold hover:bg-[#0075a8]"
-          style={{ backgroundColor: colors.primary }}
+          className="w-3/4 py-2 rounded-2xl bg-cyan-500 text-white font-bold hover:bg-cyan-700"
         >
           Select student
         </button>

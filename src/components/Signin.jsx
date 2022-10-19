@@ -1,5 +1,5 @@
-import Logo from '../constants/images/formulargray_03.png'
-import {colors} from '../constants/colors'
+import Logo from "../constants/images/formulargray_03.png";
+
 export const Signin = () => {
   return (
     <>
@@ -40,7 +40,7 @@ export const Signin = () => {
                         type="email"
                         autoComplete="email"
                         required
-                        className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                        className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-cyan-500 focus:outline-none focus:ring-cyan-500 sm:text-sm"
                       />
                     </div>
                   </div>
@@ -59,7 +59,7 @@ export const Signin = () => {
                         type="password"
                         autoComplete="current-password"
                         required
-                        className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                        className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-cyan-500 focus:outline-none focus:ring-cyan-500 sm:text-sm"
                       />
                     </div>
                   </div>
@@ -70,7 +70,7 @@ export const Signin = () => {
                         id="remember-me"
                         name="remember-me"
                         type="checkbox"
-                        className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                        className="h-4 w-4 rounded border-gray-300 text-cyan-600 focus:ring-cyan-500"
                       />
                       <label
                         htmlFor="remember-me"
@@ -82,9 +82,8 @@ export const Signin = () => {
 
                     <div className="text-sm">
                       <a
-                        href="#"
-                        className="font-medium  hover:text-indigo-500"
-                        style={{color: colors.primary }}
+                        href="/"
+                        className="font-medium bg-cyan-500 hover:text-cyan-700"
                       >
                         Forgot your password?
                       </a>
@@ -92,14 +91,16 @@ export const Signin = () => {
                   </div>
                   <div className="flex">
                     <div>Don't have an account? </div>
-                    <div className=" ml-1" style={{color: colors.primary}}>
+                    <div
+                      className=" ml-1 bg-cyan-500"
+                    >
                       <a href="/signup">Sign up</a>
                     </div>
                   </div>
                   <div>
                     <button
                       type="submit"
-                      className="flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                      className="flex w-full justify-center rounded-md border border-transparent bg-cyan-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2"
                     >
                       Sign in
                     </button>

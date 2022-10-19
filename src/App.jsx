@@ -9,6 +9,7 @@ import { Applications } from "./components/dashboard/Applications";
 import { Programs } from "./components/dashboard/Programs";
 import { Students } from "./components/dashboard/Students";
 import { Visa } from "./components/dashboard/Visa";
+import { AddStudent } from "./components/dashboard/AddStudent";
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
           <Route path="students" element={<Students />} />
           <Route path="schools" element={<Schools />} />
           <Route path="visa" element={<Visa />} />
+          <Route path="addStudent" element={<AddStudent />} />
         </Routes>{" "}
       </Router>
     </div>
