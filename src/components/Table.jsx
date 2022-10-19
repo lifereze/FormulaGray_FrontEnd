@@ -227,7 +227,7 @@ export const Table = (props) => {
                       </td>
                       <td className="whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
                         <a
-                          href="#"
+                          href="/viewStudent"
                           className="text-cyan-600 hover:text-cyan-900"
                         >
                           Edit<span className="sr-only">, {person.name}</span>

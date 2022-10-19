@@ -10,7 +10,7 @@ import { Programs } from "./components/dashboard/Programs";
 import { Students } from "./components/dashboard/Students";
 import { Visa } from "./components/dashboard/Visa";
 import { AddStudent } from "./components/dashboard/AddStudent";
-
+import { ViewEditStudent } from "./components/dashboard/ViewEditStudent";
 
 function App() {
   return (
@@ -18,15 +18,16 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<LandingPage />} />{" "}
-          <Route path="signin" element={<Signin />} />
-          <Route path="signup" element={<Signup />} />
-          <Route path="dashboard" element={<Dashboard />} />
-          <Route path="applications" element={<Applications />} />
-          <Route path="programs" element={<Programs />} />
-          <Route path="students" element={<Students />} />
-          <Route path="schools" element={<Schools />} />
-          <Route path="visa" element={<Visa />} />
-          <Route path="addStudent" element={<AddStudent />} />
+          <Route path="/signin" element={<Signin />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/applications" element={<Applications />} />
+          <Route path="/programs" element={<Programs />} />
+          <Route path="/students" element={<Students />} />
+          <Route path="/schools" element={<Schools />} />
+          <Route path="/visa" element={<Visa />} />
+          <Route path="/addStudent" element={<AddStudent />} />
+          <Route path="/viewStudent" element={<ViewEditStudent />} />
         </Routes>{" "}
       </Router>
     </div>
