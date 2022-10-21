@@ -196,6 +196,13 @@ export const Navbar = () => {
                   {/* Profile dropdown */}
                   <Menu as="div" className="relative ml-4 flex-shrink-0">
                     <div className="flex">
+                      <div className="ml-3 mr-3">
+                        <div className="text-base font-medium text-cyan-500">
+                          Dennis
+                        </div>
+                        <div className="text-sm text-center text-gray-300">Agent</div>
+                      </div>
+
                       <div>
                         <Menu.Button className="flex rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2">
                           <span className="sr-only">Open user menu</span>
@@ -205,11 +212,6 @@ export const Navbar = () => {
                             alt=""
                           />
                         </Menu.Button>
-                      </div>
-                      <div className="ml-3 mr-3">
-                        <div className="text-base font-medium text-gray-800">
-                          Dennis Mutuma
-                        </div>
                       </div>
                     </div>
 

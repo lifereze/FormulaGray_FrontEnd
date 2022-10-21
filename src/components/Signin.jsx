@@ -25,7 +25,7 @@ export const Signin = () => {
 
             <div className="mt-10">
               <div className="mt-8">
-                <form action="#" method="POST" className="space-y-6">
+                <form action="/dashboard" className="space-y-6">
                   <div>
                     <label
                       htmlFor="email"
@@ -91,9 +91,7 @@ export const Signin = () => {
                   </div>
                   <div className="flex">
                     <div>Don't have an account? </div>
-                    <div
-                      className=" ml-1 bg-cyan-500"
-                    >
+                    <div className=" ml-1 bg-cyan-500">
                       <a href="/signup">Sign up</a>
                     </div>
                   </div>
