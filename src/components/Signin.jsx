@@ -83,7 +83,7 @@ export const Signin = () => {
                     <div className="text-sm">
                       <a
                         href="/"
-                        className="font-medium bg-cyan-500 hover:text-cyan-700"
+                        className="font-medium text-cyan-500 hover:text-cyan-700"
                       >
                         Forgot your password?
                       </a>
@@ -91,7 +91,7 @@ export const Signin = () => {
                   </div>
                   <div className="flex">
                     <div>Don't have an account? </div>
-                    <div className=" ml-1 bg-cyan-500">
+                    <div className=" ml-1 text-cyan-500">
                       <a href="/signup">Sign up</a>
                     </div>
                   </div>
