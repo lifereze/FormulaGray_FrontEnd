@@ -11,6 +11,7 @@ import { Students } from "./components/dashboard/Students";
 import { Visa } from "./components/dashboard/Visa";
 import { AddStudent } from "./components/dashboard/AddStudent";
 import { ViewEditStudent } from "./components/dashboard/ViewEditStudent";
+import {Countdown} from './components/countdown/Countdown'
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route path="/visa" element={<Visa />} />
           <Route path="/addStudent" element={<AddStudent />} />
           <Route path="/viewStudent" element={<ViewEditStudent />} />
+          <Route path="/countdown" element={<Countdown />} />
         </Routes>{" "}
       </Router>
     </div>
