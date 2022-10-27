@@ -225,30 +225,30 @@ export const Countdown = () => {
               developing the best user experience for you to be able to make
               applications for your students easily.
             </p>
-            <div className="grid grid-cols-2 md:grid-cols-4 md:w-1/2  text-white font-bold text-xl mx-auto ">
-              <div className="border w-36 h-36 grow-0 shrink-0 rounded-full p-10 border-2 bg-gray-500 hover:bg-blue-500">
+            <div className="grid grid-cols-2 md:grid-cols-4 md:w-1/2 text-center text-white font-bold text-xl mx-auto ">
+              <div className="w-36 h-36 grow-0 shrink-0 rounded-full p-10 border-2 bg-gray-500 hover:bg-blue-500">
                 {day}
                 <br />
                 Days
               </div>
-              <div className="border w-36 h-36 grow-0 shrink-0 rounded-full p-10 border-2 bg-gray-500 hover:bg-blue-500">
+              <div className="w-36 h-36 grow-0 shrink-0 rounded-full p-10 border-2 bg-gray-500 hover:bg-blue-500">
                 {hour}
                 <br />
                 Hours
               </div>
-              <div className="border w-36 h-36 grow-0 shrink-0 rounded-full p-10 border-2 bg-gray-500 hover:bg-blue-500">
+              <div className="w-36 h-36 grow-0 shrink-0 rounded-full p-10 border-2 bg-gray-500 hover:bg-blue-500">
                 {minute}
                 <br />
                 Minutes
               </div>
-              <div className="border w-36 h-36 grow-0 shrink-0 rounded-full p-10 border-2 bg-gray-500 hover:bg-blue-500">
+              <div className="w-36 h-36 grow-0 shrink-0 rounded-full p-10 border-2 bg-gray-500 hover:bg-blue-500">
                 {second}
                 <br />
                 Seconds
               </div>
             </div>
             <div className="flex text-gray-600 font-bold text-xl justify-center m-3 ">
-              <div className="border w-48 h-48 grow-0 shrink-0 rounded-md p-8 border-2 m-3 shadow-lg">
+              <div className="w-48 h-48 grow-0 shrink-0 rounded-md p-8 border-2 m-3 shadow-lg">
                 Recruitment partners <br />
                 <br />
                 <span>{partners}</span> +
