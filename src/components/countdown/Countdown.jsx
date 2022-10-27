@@ -247,7 +247,7 @@ export const Countdown = () => {
               <div className="border w-48 h-48 grow-0 shrink-0 rounded-md p-10 border-2 m-3">
                 Recruitment partners <br />
                 <br />
-                <span className='m-3'>{partners}</span> +
+                <span className='m-1'>{partners}</span> +
               </div>
             </div>
           </div>
