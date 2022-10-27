@@ -11,8 +11,21 @@ export const Countdown = () => {
   const [minute, setMinute] = useState("");
   const [second, setSecond] = useState("");
   const [partners, setPartners] = useState(150);
-
   var countDownDate = new Date("Dec 1, 2022 00:00:00").getTime();
+
+  useEffect(()=>{
+     let startValue = 0;
+     let endValue = 500;
+
+     const counter = () => {
+       startValue++;
+       setPartners(startValue);
+       if (startValue === endValue) {
+         clearInterval(partnerCounter);
+       }
+     };
+  let partnerCounter = setInterval(counter, 5);
+  },[])
 
   var myTimer = setInterval(function () {
     var now = new Date().getTime();
@@ -29,16 +42,7 @@ export const Countdown = () => {
     setSecond(seconds);
   }, 1000);
 
-//   let startValue = 0;
-//   let endValue = 500;
-//   const counter = () => {
-//     startValue++;
-//     setPartners(startValue);
-//     if (startValue == endValue) {
-//       clearInterval(partnerCounter);
-//     }
-//   };
-//   let partnerCounter = setInterval(counter, 100);
+ 
 
   return (
     <div className="relative overflow-hidden bg-gray-50">
@@ -221,33 +225,33 @@ export const Countdown = () => {
               developing the best user experience for you to be able to make
               applications for your students easily.
             </p>
-            <div className="flex text-white font-bold text-xl justify-center m-3">
-              <div className="border w-36 h-36 grow-0 shrink-0 rounded-full p-10 border-2 m-3 bg-gray-500">
+            <div className="grid grid-cols-2 md:grid-cols-4 md:w-1/2  text-white font-bold text-xl mx-auto ">
+              <div className="border w-36 h-36 grow-0 shrink-0 rounded-full p-10 border-2 bg-gray-500 hover:bg-blue-500">
                 {day}
                 <br />
                 Days
               </div>
-              <div className="border w-36 h-36 grow-0 shrink-0 rounded-full p-10 border-2 m-3 bg-gray-500">
+              <div className="border w-36 h-36 grow-0 shrink-0 rounded-full p-10 border-2 bg-gray-500 hover:bg-blue-500">
                 {hour}
                 <br />
                 Hours
               </div>
-              <div className="border w-36 h-36 grow-0 shrink-0 rounded-full p-10 border-2 m-3 bg-gray-500">
+              <div className="border w-36 h-36 grow-0 shrink-0 rounded-full p-10 border-2 bg-gray-500 hover:bg-blue-500">
                 {minute}
                 <br />
                 Minutes
               </div>
-              <div className="border w-36 h-36 grow-0 shrink-0 rounded-full p-10 border-2 m-3 bg-gray-500">
+              <div className="border w-36 h-36 grow-0 shrink-0 rounded-full p-10 border-2 bg-gray-500 hover:bg-blue-500">
                 {second}
                 <br />
                 Seconds
               </div>
             </div>
-            <div className="flex text-gray-600 font-bold text-xl justify-center m-3">
-              <div className="border w-48 h-48 grow-0 shrink-0 rounded-md p-10 border-2 m-3">
+            <div className="flex text-gray-600 font-bold text-xl justify-center m-3 ">
+              <div className="border w-48 h-48 grow-0 shrink-0 rounded-md p-8 border-2 m-3 shadow-lg">
                 Recruitment partners <br />
                 <br />
-                <span className='m-1'>{partners}</span> +
+                <span>{partners}</span> +
               </div>
             </div>
           </div>
