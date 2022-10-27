@@ -10,7 +10,7 @@ export const Countdown = () => {
   const [hour, setHour] = useState("");
   const [minute, setMinute] = useState("");
   const [second, setSecond] = useState("");
-  const [partners, setPartners] = useState(0);
+  const [partners, setPartners] = useState(150);
 
   var countDownDate = new Date("Dec 1, 2022 00:00:00").getTime();
 
@@ -247,7 +247,7 @@ export const Countdown = () => {
               <div className="border w-48 h-48 grow-0 shrink-0 rounded-md p-10 border-2 m-3">
                 Recruitment partners <br />
                 <br />
-                <span>{partners}</span>
+                <span className='m-3'>{partners}</span> +
               </div>
             </div>
           </div>
