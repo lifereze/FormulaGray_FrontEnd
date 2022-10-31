@@ -13,19 +13,19 @@ export const Countdown = () => {
   const [partners, setPartners] = useState(150);
   var countDownDate = new Date("Dec 1, 2022 00:00:00").getTime();
 
-  useEffect(()=>{
-     let startValue = 0;
-     let endValue = 500;
+  useEffect(() => {
+    let startValue = 0;
+    let endValue = 500;
 
-     const counter = () => {
-       startValue++;
-       setPartners(startValue);
-       if (startValue === endValue) {
-         clearInterval(partnerCounter);
-       }
-     };
-  let partnerCounter = setInterval(counter, 5);
-  },[])
+    const counter = () => {
+      startValue++;
+      setPartners(startValue);
+      if (startValue === endValue) {
+        clearInterval(partnerCounter);
+      }
+    };
+    let partnerCounter = setInterval(counter, 5);
+  }, []);
 
   var myTimer = setInterval(function () {
     var now = new Date().getTime();
@@ -41,8 +41,6 @@ export const Countdown = () => {
     setMinute(minutes);
     setSecond(seconds);
   }, 1000);
-
- 
 
   return (
     <div className="relative overflow-hidden bg-gray-50">

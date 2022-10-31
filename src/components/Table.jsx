@@ -62,13 +62,13 @@ export const Table = (props) => {
     <div className="px-4 sm:px-6 lg:px-8">
       <div className="sm:flex sm:items-center">
         <div className="sm:flex-auto">
-          <h1 className="text-xl font-bold text-cyan-500">{props.heading}</h1>
+          <h1 className="text-xl font-bold text-indigo-500">{props.heading}</h1>
         </div>
         <div className="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
           <a href="/addStudent">
             <button
               type="button"
-              className="inline-flex items-center justify-center rounded-md border border-transparent bg-cyan-500 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2 sm:w-auto"
+              className="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-500 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto"
             >
               {props.buttonName}
             </button>
@@ -83,13 +83,13 @@ export const Table = (props) => {
                 <div className="absolute top-0 left-12 flex h-12 items-center space-x-3 bg-gray-50 sm:left-16">
                   <button
                     type="button"
-                    className="inline-flex items-center rounded border border-gray-300 bg-white px-2.5 py-1.5 text-xs font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-30"
+                    className="inline-flex items-center rounded border border-gray-300 bg-white px-2.5 py-1.5 text-xs font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-30"
                   >
                     Bulk edit
                   </button>
                   <button
                     type="button"
-                    className="inline-flex items-center rounded border border-gray-300 bg-white px-2.5 py-1.5 text-xs font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-30"
+                    className="inline-flex items-center rounded border border-gray-300 bg-white px-2.5 py-1.5 text-xs font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-30"
                   >
                     Delete all
                   </button>
@@ -104,7 +104,7 @@ export const Table = (props) => {
                     >
                       <input
                         type="checkbox"
-                        className="absolute left-4 top-1/2 -mt-2 h-4 w-4 rounded border-gray-300 text-cyan-600 focus:ring-cyan-500 sm:left-6"
+                        className="absolute left-4 top-1/2 -mt-2 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 sm:left-6"
                         ref={checkbox}
                         checked={checked}
                         onChange={toggleAll}
@@ -182,7 +182,7 @@ export const Table = (props) => {
                         )}
                         <input
                           type="checkbox"
-                          className="absolute left-4 top-1/2 -mt-2 h-4 w-4 rounded border-gray-300 text-cyan-500 focus:ring-cyan-500 sm:left-6"
+                          className="absolute left-4 top-1/2 -mt-2 h-4 w-4 rounded border-gray-300 text-indigo-500 focus:ring-indigo-500 sm:left-6"
                           value={person.email}
                           checked={selectedPeople.includes(person)}
                           onChange={(e) =>
@@ -198,7 +198,7 @@ export const Table = (props) => {
                         className={classNames(
                           "whitespace-nowrap py-4 pr-3 text-sm font-medium",
                           selectedPeople.includes(person)
-                            ? "text-cyan-600"
+                            ? "text-indigo-600"
                             : "text-gray-900"
                         )}
                       >
@@ -228,7 +228,7 @@ export const Table = (props) => {
                       <td className="whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
                         <a
                           href="/viewStudent"
-                          className="text-cyan-600 hover:text-cyan-900"
+                          className="text-indigo-600 hover:text-indigo-900"
                         >
                           Edit<span className="sr-only">, {person.name}</span>
                         </a>

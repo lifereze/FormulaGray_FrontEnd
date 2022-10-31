@@ -16,9 +16,7 @@ export const Applications = () => {
                 <div>
                   <div className="divide-y divide-gray-200">
                     <div className="text-center">
-                      <div
-                        className="text-xl font-bold text-cyan-500"
-                      >
+                      <div className="text-xl font-bold text-indigo-500">
                         Applications<div></div>
                       </div>
                     </div>

@@ -100,7 +100,7 @@ export const Footer = () => {
             <div className="flex justify-start lg:w-0 lg:flex-1 text-base font-medium text-gray-500 hover:text-gray-900">
               <a href="/">
                 <span className="sr-only">Formula Gray</span>
-                <span className="pt-3 text-cyan-500">Formula</span>
+                <span className="pt-3 text-indigo-500">Formula</span>
                 Gray
               </a>
             </div>
@@ -198,4 +198,4 @@ export const Footer = () => {
       </div>
     </footer>
   );
-}
+};

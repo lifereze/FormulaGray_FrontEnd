@@ -4,7 +4,7 @@ export const EditStudent = (props) => {
   return (
     <>
       <div>
-        <h3 className="text-lg font-medium leading-6 text-cyan-500">
+        <h3 className="text-lg font-medium leading-6 text-indigo-500">
           Applicant Information
         </h3>
         <p className="mt-1 max-w-2xl text-sm text-gray-500">
@@ -20,7 +20,7 @@ export const EditStudent = (props) => {
               <span className="ml-4 flex-shrink-0">
                 <button
                   type="button"
-                  className="rounded-md bg-white font-medium text-cyan-600 hover:text-cyan-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2"
+                  className="rounded-md bg-white font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                 >
                   Update
                 </button>
@@ -36,7 +36,7 @@ export const EditStudent = (props) => {
               <span className="ml-4 flex-shrink-0">
                 <button
                   type="button"
-                  className="rounded-md bg-white font-medium text-cyan-600 hover:text-cyan-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2"
+                  className="rounded-md bg-white font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                 >
                   Update
                 </button>
@@ -50,7 +50,7 @@ export const EditStudent = (props) => {
               <span className="ml-4 flex-shrink-0">
                 <button
                   type="button"
-                  className="rounded-md bg-white font-medium text-cyan-600 hover:text-cyan-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2"
+                  className="rounded-md bg-white font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                 >
                   Update
                 </button>
@@ -58,15 +58,13 @@ export const EditStudent = (props) => {
             </dd>
           </div>
           <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
-            <dt className="text-sm font-medium text-gray-500">
-              Applications
-            </dt>
+            <dt className="text-sm font-medium text-gray-500">Applications</dt>
             <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
               <span className="flex-grow">1</span>
               <span className="ml-4 flex-shrink-0">
                 <button
                   type="button"
-                  className="rounded-md bg-white font-medium text-cyan-600 hover:text-cyan-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2"
+                  className="rounded-md bg-white font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                 >
                   Update
                 </button>
@@ -86,7 +84,7 @@ export const EditStudent = (props) => {
               <span className="ml-4 flex-shrink-0">
                 <button
                   type="button"
-                  className="rounded-md bg-white font-medium text-cyan-600 hover:text-cyan-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2"
+                  className="rounded-md bg-white font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                 >
                   Update
                 </button>
@@ -113,7 +111,7 @@ export const EditStudent = (props) => {
                   <div className="ml-4 flex flex-shrink-0 space-x-4">
                     <button
                       type="button"
-                      className="rounded-md bg-white font-medium text-cyan-600 hover:text-cyan-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2"
+                      className="rounded-md bg-white font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                     >
                       Update
                     </button>
@@ -122,7 +120,7 @@ export const EditStudent = (props) => {
                     </span>
                     <button
                       type="button"
-                      className="rounded-md bg-white font-medium text-cyan-600 hover:text-cyan-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2"
+                      className="rounded-md bg-white font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                     >
                       Remove
                     </button>
@@ -141,7 +139,7 @@ export const EditStudent = (props) => {
                   <div className="ml-4 flex flex-shrink-0 space-x-4">
                     <button
                       type="button"
-                      className="rounded-md bg-white font-medium text-cyan-600 hover:text-cyan-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2"
+                      className="rounded-md bg-white font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                     >
                       Update
                     </button>
@@ -150,7 +148,7 @@ export const EditStudent = (props) => {
                     </span>
                     <button
                       type="button"
-                      className="rounded-md bg-white font-medium text-cyan-600 hover:text-cyan-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2"
+                      className="rounded-md bg-white font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                     >
                       Remove
                     </button>

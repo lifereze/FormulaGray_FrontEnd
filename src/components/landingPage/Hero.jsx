@@ -2,7 +2,7 @@ import React from "react";
 
 export const Hero = () => {
   return (
-    <main className="lg:relative bg-cyan-500">
+    <main className="lg:relative bg-indigo-500">
       <div className="mx-auto w-full max-w-7xl pt-16 pb-20 text-center lg:py-48 lg:text-left text-white">
         <div className="px-4 sm:px-8 lg:w-1/2 xl:pr-16">
           <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-5xl xl:text-6xl">
@@ -21,7 +21,7 @@ export const Hero = () => {
             <div className="mt-3 rounded-md shadow sm:mt-0 sm:ml-3">
               <a
                 href="#"
-                className="flex w-full items-center text-cyan-500 justify-center rounded-md border border-transparent bg-white px-8 py-3 text-base font-medium hover:bg-gray-250 md:py-4 md:px-10 md:text-lg"
+                className="flex w-full items-center text-indigo-500 justify-center rounded-md border border-transparent bg-white px-8 py-3 text-base font-medium hover:bg-gray-250 md:py-4 md:px-10 md:text-lg"
               >
                 Get started
               </a>

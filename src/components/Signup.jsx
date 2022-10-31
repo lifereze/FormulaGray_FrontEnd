@@ -1,14 +1,51 @@
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Notification } from "../components/ui";
+import { validateSignupData } from "../validator";
+import { signup } from "../data/controller";
+import { userStore } from "../stores";
 import Logo from "../constants/images/formulargray_03.png";
+
 export const Signup = () => {
-  const signUpOptions = [
-    { id: "student", title: "Student" },
-    { id: "agency", title: "Agency" },
-    { id: "institution", title: "Institition" },
-  ];
+  const navigate = useNavigate();
+  const storeUser = userStore((state) => state.storeUser);
+
+  const [userDetails, setUserDetails] = useState({
+    email: "",
+    password: "",
+    confirmPassword: "",
+    role: "recruitmentPartner",
+  });
+  const [loading, setLoading] = useState(false);
+  const [info, setInfo] = useState({ message: "", type: "" });
+
+  const handleSubmit = async () => {
+    const validationResult = await validateSignupData(userDetails);
+
+    if (!validationResult.status) {
+      setInfo({ message: validationResult.message, type: "error" });
+      return;
+    }
+    setInfo({ message: "", type: "" });
+    setLoading(true);
+    signup(userDetails).then((response) => {
+      console.log("Response------", response);
+      setLoading(false);
+      setInfo({ message: response.message, type: response.status });
+      console.log(response);
+      if (response.status === "success") {
+        storeUser(response.data.user);
+        navigate("/dashboard");
+      }
+    });
+  };
   return (
     <>
       {}
       <div className="flex overflow-y-hidden h-screen min-h-full">
+        <div>
+          <Notification type={info.type} message={info.message} />
+        </div>
         <div className="relative hidden w-0 flex-1 lg:block">
           <img
             className="absolute inset-0 h-full w-full object-cover"
@@ -29,7 +66,7 @@ export const Signup = () => {
 
             <div className="mt-2">
               <div className="mt-3">
-                <form action="#" method="POST" className="space-y-6">
+                <div className="space-y-6">
                   <div>
                     <label
                       htmlFor="email"
@@ -44,11 +81,17 @@ export const Signup = () => {
                         type="email"
                         autoComplete="email"
                         required
-                        className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-cyan-500 focus:outline-none focus:ring-cyan-500 sm:text-sm"
+                        onChange={(e) => {
+                          setUserDetails((prevState) => ({
+                            ...prevState,
+                            [e.target.name]: e.target.value,
+                          }));
+                        }}
+                        className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                       />
                     </div>
                   </div>
-                  <div>
+                  {/* <div>
                     <label className="text-base font-medium text-gray-900">
                       Sign up as:
                     </label>
@@ -62,7 +105,7 @@ export const Signup = () => {
                               name="signUpOption"
                               type="radio"
                               defaultChecked={option.id === "student"}
-                              className="h-4 w-4 border-gray-300 text-cyan-600 focus:ring-cyan-500"
+                              className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
                             />
                             <label
                               htmlFor={option.id}
@@ -74,7 +117,7 @@ export const Signup = () => {
                         ))}
                       </div>
                     </fieldset>
-                  </div>
+                  </div> */}
 
                   <div className="space-y-1">
                     <label
@@ -90,7 +133,13 @@ export const Signup = () => {
                         type="password"
                         autoComplete="current-password"
                         required
-                        className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-cyan-500 focus:outline-none focus:ring-cyan-500 sm:text-sm"
+                        onChange={(e) => {
+                          setUserDetails((prevState) => ({
+                            ...prevState,
+                            [e.target.name]: e.target.value,
+                          }));
+                        }}
+                        className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                       />
                     </div>
                   </div>
@@ -108,7 +157,13 @@ export const Signup = () => {
                         type="password"
                         autoComplete="current-password"
                         required
-                        className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-cyan-500 focus:outline-none focus:ring-cyan-500 sm:text-sm"
+                        onChange={(e) => {
+                          setUserDetails((prevState) => ({
+                            ...prevState,
+                            [e.target.name]: e.target.value,
+                          }));
+                        }}
+                        className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                       />
                     </div>
                   </div>
@@ -122,12 +177,13 @@ export const Signup = () => {
                   <div>
                     <button
                       type="submit"
-                      className="flex w-full justify-center rounded-md border border-transparent bg-cyan-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2"
+                      onClick={handleSubmit}
+                      className="flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                     >
                       Sign up
                     </button>
                   </div>
-                </form>
+                </div>
               </div>
             </div>
           </div>

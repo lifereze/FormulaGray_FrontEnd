@@ -1,10 +1,49 @@
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Logo from "../constants/images/formulargray_03.png";
+import { userStore } from "../stores";
+import { Notification } from "../components/ui";
+
+import { validateSigninData } from "../validator";
+import { signin } from "../data/controller";
 
 export const Signin = () => {
+  const navigate = useNavigate();
+  const storeUser = userStore((state) => state.storeUser);
+
+  const [userDetails, setUserDetails] = useState({
+    email: "",
+    password: "",
+  });
+  const [loading, setLoading] = useState(false);
+  const [info, setInfo] = useState({ message: "", type: "" });
+
+  const handleSubmit = async () => {
+    const validationResult = await validateSigninData(userDetails);
+
+    if (!validationResult.status) {
+      setInfo({ message: validationResult.message, type: "error" });
+      return;
+    }
+    setInfo({ message: "", type: "" });
+    setLoading(true);
+    signin(userDetails).then((response) => {
+      setLoading(false);
+      setInfo({ message: response.message, type: response.status });
+      if (response.status === "success") {
+        storeUser(response.data.user);
+        navigate("/dashboard");
+      }
+    });
+  };
+
   return (
     <>
       {}
       <div className="flex overflow-y-hidden h-screen min-h-full">
+        <div>
+          <Notification type={info.type} message={info.message} />
+        </div>
         <div className="relative hidden w-0 flex-1 lg:block">
           <img
             className="absolute inset-0 h-full w-full object-cover"
@@ -16,7 +55,7 @@ export const Signin = () => {
           <div className="mx-auto w-full max-w-sm lg:w-96">
             <div>
               <a href="/">
-                <img className="h-12 w-auto" src={Logo} alt="Your Company" />
+                <img className="h-12 w-auto" src={Logo} alt="Formular Gray" />
               </a>
               <h2 className="mt-6 text-3xl font-bold tracking-tight text-gray-900">
                 Sign in to your account
@@ -25,7 +64,7 @@ export const Signin = () => {
 
             <div className="mt-10">
               <div className="mt-8">
-                <form action="/dashboard" className="space-y-6">
+                <div className="space-y-6">
                   <div>
                     <label
                       htmlFor="email"
@@ -40,7 +79,13 @@ export const Signin = () => {
                         type="email"
                         autoComplete="email"
                         required
-                        className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-cyan-500 focus:outline-none focus:ring-cyan-500 sm:text-sm"
+                        onChange={(e) => {
+                          setUserDetails((prevState) => ({
+                            ...prevState,
+                            [e.target.name]: e.target.value,
+                          }));
+                        }}
+                        className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                       />
                     </div>
                   </div>
@@ -59,7 +104,13 @@ export const Signin = () => {
                         type="password"
                         autoComplete="current-password"
                         required
-                        className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-cyan-500 focus:outline-none focus:ring-cyan-500 sm:text-sm"
+                        onChange={(e) => {
+                          setUserDetails((prevState) => ({
+                            ...prevState,
+                            [e.target.name]: e.target.value,
+                          }));
+                        }}
+                        className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                       />
                     </div>
                   </div>
@@ -70,7 +121,7 @@ export const Signin = () => {
                         id="remember-me"
                         name="remember-me"
                         type="checkbox"
-                        className="h-4 w-4 rounded border-gray-300 text-cyan-600 focus:ring-cyan-500"
+                        className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
                       />
                       <label
                         htmlFor="remember-me"
@@ -83,7 +134,7 @@ export const Signin = () => {
                     <div className="text-sm">
                       <a
                         href="/"
-                        className="font-medium text-cyan-500 hover:text-cyan-700"
+                        className="font-medium text-indigo-500 hover:text-indigo-700"
                       >
                         Forgot your password?
                       </a>
@@ -91,19 +142,21 @@ export const Signin = () => {
                   </div>
                   <div className="flex">
                     <div>Don't have an account? </div>
-                    <div className=" ml-1 text-cyan-500">
+                    <div className=" ml-1 text-indigo-500">
                       <a href="/signup">Sign up</a>
                     </div>
                   </div>
                   <div>
                     <button
                       type="submit"
-                      className="flex w-full justify-center rounded-md border border-transparent bg-cyan-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2"
+                      onClick={handleSubmit}
+                      loading={loading}
+                      className="flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                     >
                       Sign in
                     </button>
                   </div>
-                </form>
+                </div>
               </div>
             </div>
           </div>

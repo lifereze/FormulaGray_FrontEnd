@@ -1,5 +1,5 @@
-import React from 'react'
-import Campus from '../constants/images/campus.png'
+import React from "react";
+import Campus from "../constants/images/campus.png";
 
 export const Card = () => {
   return (
@@ -50,11 +50,11 @@ export const Card = () => {
       <div className="w-full flex justify-center m-2">
         <button
           type="button"
-          className="w-3/4 py-2 rounded-2xl bg-cyan-500 text-white font-bold hover:bg-cyan-700"
+          className="w-3/4 py-2 rounded-2xl bg-indigo-500 text-white font-bold hover:bg-indigo-700"
         >
           Select student
         </button>
       </div>
     </div>
   );
-}
+};

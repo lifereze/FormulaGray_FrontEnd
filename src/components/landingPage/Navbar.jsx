@@ -107,7 +107,7 @@ export const Navbar = () => {
             <div className="flex justify-start lg:w-0 lg:flex-1 text-base font-medium text-gray-500 hover:text-gray-900">
               {/* <a href="/">
                 <span className="sr-only">Formula Gray</span>
-                <span className="pt-3 text-cyan-500">
+                <span className="pt-3 text-indigo-500">
                   Formula
                 </span>
                 Gray
@@ -159,7 +159,7 @@ export const Navbar = () => {
                                 className="-m-3 flex items-start rounded-lg p-3 hover:bg-gray-50"
                               >
                                 <item.icon
-                                  className="h-6 w-6 flex-shrink-0 text-cyan-500"
+                                  className="h-6 w-6 flex-shrink-0 text-indigo-500"
                                   aria-hidden="true"
                                 />
                                 <div className="ml-4">
@@ -253,7 +253,7 @@ export const Navbar = () => {
                                 className="-m-3 flex items-start rounded-lg p-3 hover:bg-gray-50"
                               >
                                 <item.icon
-                                  className="h-6 w-6 flex-shrink-0 text-cyan-500"
+                                  className="h-6 w-6 flex-shrink-0 text-indigo-500"
                                   aria-hidden="true"
                                 />
                                 <div className="ml-4">
@@ -291,7 +291,7 @@ export const Navbar = () => {
                             <div className="mt-5 text-sm">
                               <a
                                 href="#"
-                                className={`font-medium text-cyan-500 hover:text-cyan-700`}
+                                className={`font-medium text-indigo-500 hover:text-indigo-700`}
                               >
                                 View all posts
                                 <span aria-hidden="true"> &rarr;</span>
@@ -314,7 +314,7 @@ export const Navbar = () => {
               </a>
               <a
                 href="/signup"
-                className="ml-8 inline-flex items-center bg-cyan-500 justify-center whitespace-nowrap rounded-md border border-transparent px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-cyan-700"
+                className="ml-8 inline-flex items-center bg-indigo-500 justify-center whitespace-nowrap rounded-md border border-transparent px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
               >
                 Sign up
               </a>
@@ -341,7 +341,7 @@ export const Navbar = () => {
                   <div className="flex justify-start lg:w-0 lg:flex-1 text-base font-medium text-gray-500 hover:text-gray-900">
                     {/* <a href="/">
                       <span className="sr-only">Formula Gray</span>
-                      <span className="pt-3 text-cyan-500">
+                      <span className="pt-3 text-indigo-500">
                         Formula
                       </span>
                       Gray
@@ -368,7 +368,7 @@ export const Navbar = () => {
                         className="-m-3 flex items-center rounded-md p-3 hover:bg-gray-50"
                       >
                         <item.icon
-                          className="h-6 w-6 flex-shrink-0 text-cyan-500"
+                          className="h-6 w-6 flex-shrink-0 text-indigo-500"
                           aria-hidden="true"
                         />
                         <span className="ml-3 text-base font-medium text-gray-900">
@@ -407,7 +407,7 @@ export const Navbar = () => {
                 <div>
                   <a
                     href="/signup"
-                    className="flex w-full items-center  bg-cyan-500 justify-center rounded-md border border-transparent px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-cyan-700"
+                    className="flex w-full items-center  bg-indigo-500 justify-center rounded-md border border-transparent px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
                   >
                     Sign up
                   </a>
@@ -415,7 +415,7 @@ export const Navbar = () => {
                     Existing customer?
                     <a
                       href="/signin"
-                      className="text-cyan-500 hover:text-cyan-700"
+                      className="text-indigo-500 hover:text-indigo-700"
                     >
                       Sign in
                     </a>

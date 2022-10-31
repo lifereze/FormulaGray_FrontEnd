@@ -156,8 +156,8 @@ export const Navbar = () => {
                       href={item.href}
                       className={classNames(
                         item.current
-                          ? "text-cyan-500"
-                          : "text-cyan-500 hover:bg-cyan-700 hover:text-white",
+                          ? "text-indigo-500"
+                          : "text-indigo-500 hover:bg-indigo-700 hover:text-white",
                         "group flex items-center px-2 py-2 text-sm font-medium rounded-md"
                       )}
                       aria-current={item.current ? "page" : undefined}
@@ -165,8 +165,8 @@ export const Navbar = () => {
                       <item.icon
                         className={classNames(
                           item.current
-                            ? "text-cyan-500"
-                            : "text-cyan-500 group-hover:text-white",
+                            ? "text-indigo-500"
+                            : "text-indigo-500 group-hover:text-white",
                           "mr-3 flex-shrink-0 h-6 w-6"
                         )}
                         aria-hidden="true"
@@ -197,14 +197,16 @@ export const Navbar = () => {
                   <Menu as="div" className="relative ml-4 flex-shrink-0">
                     <div className="flex">
                       <div className="ml-3 mr-3">
-                        <div className="text-base font-medium text-cyan-500">
+                        <div className="text-base font-medium text-indigo-500">
                           Dennis
                         </div>
-                        <div className="text-sm text-center text-gray-300">Agent</div>
+                        <div className="text-sm text-center text-gray-300">
+                          Agent
+                        </div>
                       </div>
 
                       <div>
-                        <Menu.Button className="flex rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2">
+                        <Menu.Button className="flex rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                           <span className="sr-only">Open user menu</span>
                           <img
                             className="h-8 w-8 rounded-full"

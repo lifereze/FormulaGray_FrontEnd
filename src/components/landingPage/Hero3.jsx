@@ -17,8 +17,8 @@ export const Hero3 = () => {
           </div>
           <div className="text-normal font-bold pl-4">
             <span>
-              Our <span className='text-cyan-500'>Support team</span>{" "}
-              and <br />
+              Our <span className="text-indigo-500">Support team</span> and{" "}
+              <br />
             </span>{" "}
             institutions attend to your burning questions in less than 10
             minutes.
@@ -28,9 +28,7 @@ export const Hero3 = () => {
           <div className="flex m-3 items-center mb-20">
             <div className="text-normal font-bold pl-4">
               Get admitted to the{" "}
-              <span className='text-cyan-500'>
-                World Class Universities.
-              </span>
+              <span className="text-indigo-500">World Class Universities.</span>
             </div>
             <div>
               <img
@@ -51,8 +49,8 @@ export const Hero3 = () => {
             />
           </div>
           <div className="text-normal font-bold pl-4">
-            <span className='text-cyan-500'>Focus</span> on your studies
-            and leave the rest to us
+            <span className="text-indigo-500">Focus</span> on your studies and
+            leave the rest to us
           </div>
         </div>
       </div>

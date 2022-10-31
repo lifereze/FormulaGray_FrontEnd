@@ -18,7 +18,7 @@ export const Dashboard = () => {
                       <div>
                         <button
                           type="button"
-                          className="inline-flex ml-2 items-center rounded border border-transparent px-2.5 py-1.5 text-xs font-medium text-red-500 shadow-sm hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2"
+                          className="inline-flex ml-2 items-center rounded border border-transparent px-2.5 py-1.5 text-xs font-medium text-red-500 shadow-sm hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                         >
                           20
                         </button>
@@ -29,7 +29,7 @@ export const Dashboard = () => {
                       <div>
                         <button
                           type="button"
-                          className="inline-flex ml-2 items-center rounded border border-transparent px-2.5 py-1.5 text-xs font-medium text-red-500 shadow-sm hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2"
+                          className="inline-flex ml-2 items-center rounded border border-transparent px-2.5 py-1.5 text-xs font-medium text-red-500 shadow-sm hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                         >
                           8
                         </button>
@@ -40,7 +40,7 @@ export const Dashboard = () => {
                       <div>
                         <button
                           type="button"
-                          className="inline-flex ml-2 items-center rounded border border-transparent px-2.5 py-1.5 text-xs font-medium text-red-500 shadow-sm hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2"
+                          className="inline-flex ml-2 items-center rounded border border-transparent px-2.5 py-1.5 text-xs font-medium text-red-500 shadow-sm hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                         >
                           12
                         </button>
@@ -51,7 +51,7 @@ export const Dashboard = () => {
                       <div>
                         <button
                           type="button"
-                          className="inline-flex ml-2 items-center rounded border border-transparent px-2.5 py-1.5 text-xs font-medium text-red-500 shadow-sm hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2"
+                          className="inline-flex ml-2 items-center rounded border border-transparent px-2.5 py-1.5 text-xs font-medium text-red-500 shadow-sm hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                         >
                           0
                         </button>
@@ -71,9 +71,7 @@ export const Dashboard = () => {
               <div className="flex  border-b border-[#0092D2] pb-2 flex-col ml-4">
                 <div className="text-gray-500 mt-6">Account activity</div>
               </div>
-              <div
-                className="space-y-2 bg-cyan-500 m-1 md:m-3 h-32 rounded-md w-full md:w-64"
-              >
+              <div className="space-y-2 bg-indigo-500 m-1 md:m-3 h-32 rounded-md w-full md:w-64">
                 <div className="relative">
                   <div className="absolute top-0 left-2 mt-1 text-white font-bold">
                     USD Balance

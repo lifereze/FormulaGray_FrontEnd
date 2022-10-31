@@ -5,7 +5,7 @@ export const Hero2 = () => {
     <main className="mt-1">
       <div>
         {/* Hero card */}
-        <div className="w-full flex items-center justify-center bg-cyan-500">
+        <div className="w-full flex items-center justify-center bg-indigo-500">
           <div className="w-full md:w-1/2 flex flex-col items-center px-4 sm:px-6 py-16 lg:px-8 ">
             <div className="w-full flex flex-col items-center text-white font-bold tracking-tight text-3xl lg:text-5xl">
               <span className="block">Want to study overseas?</span>
@@ -23,7 +23,7 @@ export const Hero2 = () => {
                       viewBox="0 0 24 24"
                       strokeWidth={1.5}
                       stroke="currentColor"
-                      className="w-6 h-6 border rounded-full mr-1.5 bg-cyan-500"
+                      className="w-6 h-6 border rounded-full mr-1.5 bg-indigo-500"
                     >
                       <path
                         strokeLinecap="round"
@@ -42,7 +42,7 @@ export const Hero2 = () => {
                       viewBox="0 0 24 24"
                       strokeWidth={1.5}
                       stroke="currentColor"
-                      className="w-6 h-6 border rounded-full mr-1.5 bg-cyan-500"
+                      className="w-6 h-6 border rounded-full mr-1.5 bg-indigo-500"
                     >
                       <path
                         strokeLinecap="round"
@@ -64,7 +64,7 @@ export const Hero2 = () => {
                       viewBox="0 0 24 24"
                       strokeWidth={1.5}
                       stroke="currentColor"
-                      className="w-6 h-6 border rounded-full mr-1.5 bg-cyan-500"
+                      className="w-6 h-6 border rounded-full mr-1.5 bg-indigo-500"
                     >
                       <path
                         strokeLinecap="round"
@@ -83,7 +83,7 @@ export const Hero2 = () => {
                       viewBox="0 0 24 24"
                       strokeWidth={1.5}
                       stroke="currentColor"
-                      className="w-6 h-6 border rounded-full mr-1.5 bg-cyan-500 "
+                      className="w-6 h-6 border rounded-full mr-1.5 bg-indigo-500 "
                     >
                       <path
                         strokeLinecap="round"
@@ -105,7 +105,7 @@ export const Hero2 = () => {
                       viewBox="0 0 24 24"
                       strokeWidth={1.5}
                       stroke="currentColor"
-                      className="w-6 h-6 border rounded-full mr-1.5 bg-cyan-500"
+                      className="w-6 h-6 border rounded-full mr-1.5 bg-indigo-500"
                     >
                       <path
                         strokeLinecap="round"
@@ -124,7 +124,7 @@ export const Hero2 = () => {
                       viewBox="0 0 24 24"
                       strokeWidth={1.5}
                       stroke="currentColor"
-                      className="w-6 h-6 border rounded-full mr-1.5 bg-cyan-500"
+                      className="w-6 h-6 border rounded-full mr-1.5 bg-indigo-500"
                     >
                       <path
                         strokeLinecap="round"
