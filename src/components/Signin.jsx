@@ -32,7 +32,7 @@ export const Signin = () => {
       setInfo({ message: response.message, type: response.status });
       if (response.status === "success") {
         storeUser(response.data.user);
-        navigate("/dashboard");
+        navigate("/recruitmentPartner/register");
       }
     });
   };
