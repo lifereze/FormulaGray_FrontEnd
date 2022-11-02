@@ -11,8 +11,9 @@ import { Students } from "./components/dashboard/Students";
 import { Visa } from "./components/dashboard/Visa";
 import { AddStudent } from "./components/dashboard/AddStudent";
 import { ViewEditStudent } from "./components/dashboard/ViewEditStudent";
-import {Countdown} from './components/countdown/Countdown'
-
+import { Countdown } from "./components/countdown/Countdown";
+import { RecruitmentPartnerRegister } from "./components/pages/recruitmentPartnerJourney/RecruitmentPartnerRegister";
+import { VerifyEmail } from "./components/pages/VerifyEmail";
 function App() {
   return (
     <div className="">
@@ -30,7 +31,15 @@ function App() {
           <Route path="/addStudent" element={<AddStudent />} />
           <Route path="/viewStudent" element={<ViewEditStudent />} />
           <Route path="/countdown" element={<Countdown />} />
-        </Routes>{" "}
+          <Route
+            path="/recruitmentPartner/register"
+            element={<RecruitmentPartnerRegister />}
+          />
+          <Route
+            path="/emailVerificationLink/:token"
+            element={<VerifyEmail />}
+          />
+        </Routes>
       </Router>
     </div>
   );

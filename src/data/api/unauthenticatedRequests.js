@@ -28,3 +28,22 @@ export const signinUser = async (user) => {
       return error.response;
     });
 };
+
+export const sendEmailVerificationLink = async (email) => {
+  return await api
+    .post("/auth/sendEmailVerificationLink", email)
+    .then((response) => response)
+    .catch((error) => {
+      return error.response;
+    });
+};
+
+export const verifyEmail = async (token) => {
+  return await api
+    .post("/auth/verifyEmail", token)
+    .then((response) => response)
+    .catch((error) => {
+      return error.response;
+    });
+};
+

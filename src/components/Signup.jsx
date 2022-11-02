@@ -2,9 +2,14 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Notification } from "../components/ui";
 import { validateSignupData } from "../validator";
-import { signup } from "../data/controller";
+import { signup, send_email_verification_link } from "../data/controller";
 import { userStore } from "../stores";
 import Logo from "../constants/images/formulargray_03.png";
+
+const signUpOptions = [
+  { id: "student", title: "Student" },
+  { id: "recruitmentPartner", title: "Recruitment partner" },
+];
 
 export const Signup = () => {
   const navigate = useNavigate();
@@ -14,7 +19,7 @@ export const Signup = () => {
     email: "",
     password: "",
     confirmPassword: "",
-    role: "recruitmentPartner",
+    role: "",
   });
   const [loading, setLoading] = useState(false);
   const [info, setInfo] = useState({ message: "", type: "" });
@@ -35,7 +40,26 @@ export const Signup = () => {
       console.log(response);
       if (response.status === "success") {
         storeUser(response.data.user);
-        navigate("/dashboard");
+        send_email_verification_link({ email: userDetails.email }).then(
+          (response) => {
+            if (response.status === "success") {
+              setInfo({
+                message:
+                  "Please check your email to complete registration then Login.",
+                type: "success",
+              });
+              
+              setTimeout(() => {
+                navigate("/signin");
+              }, 5000);
+            } else {
+              setInfo({
+                message: "Something went wrong.",
+                type: "error",
+              });
+            }
+          }
+        );
       }
     });
   };
@@ -91,7 +115,7 @@ export const Signup = () => {
                       />
                     </div>
                   </div>
-                  {/* <div>
+                  <div>
                     <label className="text-base font-medium text-gray-900">
                       Sign up as:
                     </label>
@@ -102,9 +126,15 @@ export const Signup = () => {
                           <div key={option.id} className="flex items-center">
                             <input
                               id={option.id}
-                              name="signUpOption"
+                              name="role"
+                              value={option.id}
                               type="radio"
-                              defaultChecked={option.id === "student"}
+                              onChange={(e) => {
+                                setUserDetails((prevState) => ({
+                                  ...prevState,
+                                  [e.target.name]: e.target.value,
+                                }));
+                              }}
                               className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
                             />
                             <label
@@ -117,7 +147,7 @@ export const Signup = () => {
                         ))}
                       </div>
                     </fieldset>
-                  </div> */}
+                  </div>
 
                   <div className="space-y-1">
                     <label

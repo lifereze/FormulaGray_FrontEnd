@@ -1,4 +1,9 @@
-import { signinUser, signupUser } from "../api/unauthenticatedRequests";
+import {
+  signinUser,
+  signupUser,
+  sendEmailVerificationLink,
+  verifyEmail,
+} from "../api/unauthenticatedRequests";
 import { refreshSession } from "../api/authenticatedRequests";
 
 export const signin = async (userDetails) => {
@@ -13,6 +18,15 @@ export const signup = async (userDetails) => {
   return _returnResponse(response);
 };
 
+export const send_email_verification_link = async (email) => {
+  const response = await sendEmailVerificationLink(email);
+  return _returnResponse(response);
+};
+
+export const verify_email = async (token) => {
+  const response = await verifyEmail(token);
+  return _returnResponse(response);
+};
 export const refresh = async () => {
   const response = await refreshSession();
   return _returnResponse(response);

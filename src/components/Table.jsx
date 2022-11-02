@@ -2,36 +2,47 @@ import { useLayoutEffect, useRef, useState } from "react";
 
 const people = [
   {
-    name: "Lindsay Walton",
+    firstName: "Lindsay",
+    lastName: "Walton",
     studentId: 87234,
     email: "lindsay.walton@example.com",
     nationality: "Nigerian",
     recruitmentPartner: "formulargray@education.com",
     education: "Bachelors (Nigeria)",
     applications: 1,
-    leadStatus: "Application started",
+    applicationStatus: "Application started",
+    recruiterType: "owner",
+    refferal: "Walk in",
+    leadStatus: "Ready to apply",
   },
   {
-    name: "Dennis Mutuma",
+    firstName: "Dennis",
+    lastName: "Mutuma",
     studentId: 87235,
     email: "denniscapi@gmail.com",
     nationality: "Kenyan",
     recruitmentPartner: "formulargray@education.com",
     education: "Bachelors (Kenya)",
     applications: 1,
-    leadStatus: "Application completed",
+    applicationStatus: "Application completed",
+    recruiterType: "owner",
+    refferal: "Walk in",
+    leadStatus: "Ready to apply",
   },
   {
-    name: "Ivy Kiwia",
+    firstName: "Ivy",
+    lastName: "Kiwia",
     studentId: 87236,
     email: "lindsay.walton@example.com",
     nationality: "Israel",
     recruitmentPartner: "formulargray@education.com",
     education: "Bachelors (Israel)",
     applications: 1,
-    leadStatus: "Application ongoing",
+    applicationStatus: "Application ongoing",
+    recruiterType: "owner",
+    refferal: "Walk in",
+    leadStatus: "Ready to apply",
   },
-  // More people...
 ];
 
 function classNames(...classes) {
@@ -59,7 +70,7 @@ export const Table = (props) => {
   }
 
   return (
-    <div className="px-4 sm:px-6 lg:px-8">
+    <div className="px-4 sm:px-6 lg:px-8 mr-2 md:ml-8 md:mr-8">
       <div className="sm:flex sm:items-center">
         <div className="sm:flex-auto">
           <h1 className="text-xl font-bold text-indigo-500">{props.heading}</h1>
@@ -112,21 +123,27 @@ export const Table = (props) => {
                     </th>
                     <th
                       scope="col"
-                      className="min-w-[12rem] py-3.5 pr-3 text-left text-sm font-semibold text-gray-900"
-                    >
-                      Name
-                    </th>
-                    <th
-                      scope="col"
                       className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                     >
-                      Student Id
+                      Id
                     </th>
                     <th
                       scope="col"
                       className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                     >
                       Email
+                    </th>
+                    <th
+                      scope="col"
+                      className="min-w-[12rem] py-3.5 pr-3 text-left text-sm font-semibold text-gray-900"
+                    >
+                      First name
+                    </th>
+                    <th
+                      scope="col"
+                      className="min-w-[12rem] py-3.5 pr-3 text-left text-sm font-semibold text-gray-900"
+                    >
+                      Last name
                     </th>
                     <th
                       scope="col"
@@ -144,6 +161,12 @@ export const Table = (props) => {
                       scope="col"
                       className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                     >
+                      Recruitment type
+                    </th>
+                    <th
+                      scope="col"
+                      className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                    >
                       Education
                     </th>
                     <th
@@ -151,6 +174,12 @@ export const Table = (props) => {
                       className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                     >
                       Applications
+                    </th>
+                    <th
+                      scope="col"
+                      className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                    >
+                      Refferal source
                     </th>
                     <th
                       scope="col"
@@ -194,6 +223,12 @@ export const Table = (props) => {
                           }
                         />
                       </td>
+                      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                        {person.studentId}
+                      </td>
+                      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                        {person.email}
+                      </td>
                       <td
                         className={classNames(
                           "whitespace-nowrap py-4 pr-3 text-sm font-medium",
@@ -202,13 +237,17 @@ export const Table = (props) => {
                             : "text-gray-900"
                         )}
                       >
-                        {person.name}
+                        {person.firstName}
                       </td>
-                      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                        {person.studentId}
-                      </td>
-                      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                        {person.email}
+                      <td
+                        className={classNames(
+                          "whitespace-nowrap py-4 pr-3 text-sm font-medium",
+                          selectedPeople.includes(person)
+                            ? "text-indigo-600"
+                            : "text-gray-900"
+                        )}
+                      >
+                        {person.lastName}
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                         {person.nationality}
@@ -217,10 +256,16 @@ export const Table = (props) => {
                         {person.recruitmentPartner}
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                        {person.recruiterType}
+                      </td>
+                      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                         {person.education}
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                         {person.applications}
+                      </td>
+                      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                        {person.refferal}
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                         {person.leadStatus}

@@ -1,6 +1,7 @@
 import { Fragment, useState } from "react";
 import { Dialog, Menu, Transition } from "@headlessui/react";
 import Logo from "../../constants/images/formulargray_03.png";
+import {userStore} from '../../stores'
 import {
   Bars3BottomLeftIcon,
   HomeIcon,
@@ -31,6 +32,7 @@ function classNames(...classes) {
 
 export const Navbar = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const user = userStore((state) => state.user);
 
   return (
     <>
@@ -198,7 +200,7 @@ export const Navbar = () => {
                     <div className="flex">
                       <div className="ml-3 mr-3">
                         <div className="text-base font-medium text-indigo-500">
-                          Dennis
+                          {/* {user.name} */}
                         </div>
                         <div className="text-sm text-center text-gray-300">
                           Agent
