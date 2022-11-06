@@ -1,6 +1,7 @@
-import { Fragment } from "react";
+import { Fragment,useEffect,useState } from "react";
 import Logo from "../../constants/images/formulargray_03.png";
-
+import {userStore} from '../../stores'
+import {refreshSession} from '../../data/api/authenticatedRequests'
 import { Popover, Transition } from "@headlessui/react";
 import {
   ArrowPathIcon,
@@ -99,6 +100,16 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 export const Navbar = () => {
+  const user = userStore((state) => state.user);
+  useEffect(()=>{
+   const getUser= async ()=>{
+      const res=await refreshSession();
+      console.log(res)
+    
+    }
+   
+    getUser();
+      },[])
   return (
     <div className="relative bg-gray-50">
       <Popover className="relative bg-white shadow">

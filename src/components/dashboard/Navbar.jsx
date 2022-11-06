@@ -1,6 +1,7 @@
-import { Fragment, useState } from "react";
+import { Fragment, useState,useEffect } from "react";
 import { Dialog, Menu, Transition } from "@headlessui/react";
 import Logo from "../../constants/images/formulargray_03.png";
+import {refreshSession} from '../../data/api/authenticatedRequests'
 import {userStore} from '../../stores'
 import {
   Bars3BottomLeftIcon,
@@ -31,7 +32,15 @@ function classNames(...classes) {
 }
 
 export const Navbar = () => {
+
   const [sidebarOpen, setSidebarOpen] = useState(false);
+
+//   useEffect(async ()=>{
+// const res=await refreshSession();
+// console.log(res)
+// console.log('heello')
+
+//   },[])
   const user = userStore((state) => state.user);
 
   return (
