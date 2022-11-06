@@ -1,7 +1,13 @@
+import React from "react";
+import { useRecruiter } from "../../../stores";
+
 export const ContactInformation = () => {
+
+  const setRecruiter = useRecruiter((state) => state.storeRecruiter);
   return (
     <div className="flex text-center justify-center m-8">
-      <form className="space-y-8 divide-y divide-gray-200 w-1/2">
+
+      <div className="space-y-8 divide-y divide-gray-200 w-1/2">
         <div className="space-y-8 divide-y divide-gray-200">
           <div>
             <div>
@@ -216,14 +222,15 @@ export const ContactInformation = () => {
               Cancel
             </button>
             <button
-              type="submit"
+
+              onClick={()=>setRecruiter({step:'business'})}
               className="ml-3 inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
             >
-              Save
+              Next
             </button>
           </div>
         </div>
-      </form>
+      </div>
     </div>
   );
 };

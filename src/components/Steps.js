@@ -1,12 +1,40 @@
+import React, { useState, useEffect } from "react";
 import { CheckIcon } from "@heroicons/react/24/solid";
-
-const steps = [
-  { id: "01", name: "Contact information", href: "#", status: "current" },
-  { id: "02", name: "Business information", href: "#", status: "upcoming" },
-  { id: "03", name: "Recruitment details", href: "#", status: "upcoming" },
-];
+import { useRecruiter } from "../stores";
 
 export const Steps = () => {
+  const navSteps = [
+    { id: "01", name: "Contact information", href: "#", status: "current" },
+    { id: "02", name: "Business information", href: "#", status: "upcoming" },
+    { id: "03", name: "Recruitment details", href: "#", status: "upcoming" },
+  ];
+  const [steps, setSteps] = useState(navSteps);
+  const recruiter = useRecruiter((state) => state.recruiter);
+  useEffect(() => {
+    const nextNavSteps = steps.map((step) => {
+      if (
+        step.name == "Business information" &&
+        (recruiter.step == "business" ||
+          recruiter.step == "recruitment-details")
+      ) {
+        return {
+          ...step,
+          status: "current",
+        };
+      } else if (
+        step.name == "Recruitment details" &&
+        recruiter.step == "recruitment-details"
+      ) {
+        return {
+          ...step,
+          status: "current",
+        };
+      } else {
+        return step;
+      }
+    });
+    setSteps(nextNavSteps);
+  }, [recruiter]);
   return (
     <nav aria-label="Progress" className="m-2">
       <ol
@@ -85,4 +113,4 @@ export const Steps = () => {
       </ol>
     </nav>
   );
-}
+};
