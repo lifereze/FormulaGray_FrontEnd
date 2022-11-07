@@ -3,7 +3,7 @@ import {AiFillDelete} from 'react-icons/ai'
 function RecruitmentDetails() {
   return (
     <div className="flex text-center justify-center m-8">
-    <div className="space-y-8 divide-y divide-gray-200 w-1/2">
+    <div className="space-y-8 divide-y divide-gray-200 lg:w-1/2 w-10/12">
       <div className="space-y-8 divide-y divide-gray-200">
         <div>
           <div>

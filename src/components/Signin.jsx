@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Logo from "../constants/images/formulargray_03.png";
 import { userStore } from "../stores";
 import { Notification } from "../components/ui";
-
+import Spinner from "./utils/Spinner";
 import { validateSigninData } from "../validator";
 import { signin } from "../data/controller";
 
@@ -148,14 +148,19 @@ export const Signin = () => {
                     </div>
                   </div>
                   <div>
-                    <button
+                    {loading &&<button
+                   
+                      className="flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                    >
+                      <Spinner/>
+                    </button>||<button
                       type="submit"
                       onClick={handleSubmit}
-                      loading={loading}
+                   
                       className="flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                     >
                       Sign in
-                    </button>
+                    </button>}
                   </div>
                 </div>
               </div>

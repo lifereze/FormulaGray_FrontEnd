@@ -101,10 +101,12 @@ function classNames(...classes) {
 }
 export const Navbar = () => {
   const user = userStore((state) => state.user);
+  const setUser = userStore((state) => state.storeUser);
   useEffect(()=>{
    const getUser= async ()=>{
       const res=await refreshSession();
       console.log(res)
+      setUser(res.data.user)
     
     }
    
@@ -316,7 +318,7 @@ export const Navbar = () => {
                 )}
               </Popover>
             </Popover.Group>
-            <div className="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
+          {!user&&  <div className="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
               <a
                 href="/signin"
                 className="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900"
@@ -329,7 +331,11 @@ export const Navbar = () => {
               >
                 Sign up
               </a>
-            </div>
+            </div>||
+            <div className="">
+              {user && user.email && user.email.split("@")[0]}
+           
+            </div>}
           </div>
         </div>
 

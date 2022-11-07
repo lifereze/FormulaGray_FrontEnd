@@ -5,7 +5,7 @@ import { validateSignupData } from "../validator";
 import { signup, send_email_verification_link } from "../data/controller";
 import { userStore } from "../stores";
 import Logo from "../constants/images/formulargray_03.png";
-
+import Spinner from "./utils/Spinner";
 const signUpOptions = [
   { id: "student", title: "Student" },
   { id: "recruitmentPartner", title: "Recruitment partner" },
@@ -205,13 +205,18 @@ export const Signup = () => {
                     </div>
                   </div>
                   <div>
-                    <button
+                    {loading&&<button
+                    
+                      className="flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                    >
+                      <Spinner />
+                    </button>||<button
                       type="submit"
                       onClick={handleSubmit}
                       className="flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                     >
                       Sign up
-                    </button>
+                    </button>}
                   </div>
                 </div>
               </div>
