@@ -1,6 +1,53 @@
-import React from 'react'
-import {AiFillDelete} from 'react-icons/ai'
+import React,{useState,useEffect} from 'react'
+import { useNavigate } from "react-router-dom";
+import { updateRecruitmentDetails } from '../../../data/api/authenticatedRequests';
+import Spinner from '../../utils/Spinner';
+import Select from 'react-select';
 function RecruitmentDetails() {
+    const navigate = useNavigate();
+    const [studentsFrom,setStudentsFrom]=useState([]);
+    const [studentsTo,setStudentsTo]=useState([]);
+    const [averageCharge,setAverageCharge]=useState()
+    const [averageStudentsAnnually,setAverageStudentsAnnually]=useState();
+    const [loading,setLoading]=useState(false);
+    const onChangeHandler=(e)=>{
+        if(e.target.name=='charge'){
+          setAverageCharge(e.target.value)
+       
+        }
+        if(e.target.name=='students'){
+          setAverageStudentsAnnually(e.target.value)
+        
+        }
+        
+      
+          }
+    const getStudentsFrom =(students)=>{
+        const countries=[];
+        students.map((student)=>{
+            countries.push(student.value);
+        })
+        setStudentsFrom(countries)
+
+    }
+    const getStudentsTo =(students)=>{
+        const countries=[];
+        students.map((student)=>{
+            countries.push(student.value);
+        })
+        setStudentsTo(countries)
+
+    }
+    const onSubmitHandler=async ()=>{
+        setLoading(true);
+        const res=await updateRecruitmentDetails({'studentsFrom':studentsFrom,'studentsTo':studentsTo,'averageCharge':averageCharge,'averageStudentsAnnually':averageStudentsAnnually});
+        console.log(res)
+        navigate("/dashboard");
+        setLoading(false);
+
+
+    }
+    
   return (
     <div className="flex text-center justify-center m-8">
     <div className="space-y-8 divide-y divide-gray-200 lg:w-1/2 w-10/12">
@@ -15,235 +62,81 @@ function RecruitmentDetails() {
            
             <div className=''>
             <div className=' text-left py-1'>
-            Which countries do you primarily recruit students from? Please indicate the yearly volume for each.
+            Which countries do you primarily recruit students from? 
             </div>
-            <div className=' grid grid-cols-11 gap-x-2 '>
-                <div className='  col-span-5'>
-            <select
-        name='country'
-        className="w-full rounded-md cursor-pointer border focus:outline-none focus:ring-0 focus:border-blue-500"
-   
-      >
-        <option value=''>Country</option>
-        <option value='Kenya'>Kenya</option>
-        <option value='Tanzania'>Tanzania</option>
-        <option value='Rwanda'>Rwanda</option>
-        <option value='Djibouti'>Djibouti</option>
-        </select></div>
-                <div className='  col-span-5'>
-            <select
-        name='volume'
-        className="w-full rounded-md cursor-pointer border focus:outline-none focus:ring-0 focus:border-blue-500"
-   
-      >
-        <option value=''>Volume</option>
-        <option value='1-5'>1-5</option>
-        <option value='6-20'>6-20</option>
-        <option value='21-50'>21-50</option>
-        <option value='51-100'>51-100</option>
-        </select></div>
-        <div className=' col-span-1 flex items-center justify-center cursor-pointer rounded-full hover:bg-gray-200'>
-            <AiFillDelete className=' text-red-500 text-2xl' />
-        </div>
-            </div>
+         
+                <div className=' '>
+                <Select
+
+    isMulti
+    onChange={(e)=>getStudentsFrom(e)}
+    name="country"
+    options={[
+        {value:'Kenya',label:'Kenya'},
+        {value:'Nigeria',label:'Nigeria'}
+    ]}
+    className="basic-multi-select"
+    classNamePrefix="select"
+  />
+          </div>
+               
+       
+        
             </div>
             <div className='mt-10'>
             <div className=' text-left py-1 '>
-            Which countries do you send students to? Please indicate the yearly volume for each.
+            Which countries do you send students to? 
             </div>
-            <div className=' grid grid-cols-11 gap-x-2 '>
-                <div className='  col-span-5'>
-            <select
-        name='country'
-        className="w-full rounded-md cursor-pointer border focus:outline-none focus:ring-0 focus:border-blue-500"
-   
-      >
-        <option value=''>Country</option>
-        <option value='Kenya'>Kenya</option>
-        <option value='Tanzania'>Tanzania</option>
-        <option value='Rwanda'>Rwanda</option>
-        <option value='Djibouti'>Djibouti</option>
-        </select></div>
-                <div className='  col-span-5'>
-            <select
-        name='volume'
-        className="w-full rounded-md cursor-pointer border focus:outline-none focus:ring-0 focus:border-blue-500"
-   
-      >
-        <option value=''>Volume</option>
-        <option value='1-5'>1-5</option>
-        <option value='6-20'>6-20</option>
-        <option value='21-50'>21-50</option>
-        <option value='51-100'>51-100</option>
-        </select></div>
-        <div className=' col-span-1 flex items-center justify-center cursor-pointer rounded-full hover:bg-gray-200'>
-            <AiFillDelete className=' text-red-500 text-2xl' />
-        </div>
+            <div className='  '>
+            <Select
+
+isMulti
+name="country"
+onChange={(e)=>getStudentsTo(e)}
+options={[
+    {value:'USA',label:'USA'},
+    {value:'UK',label:'UK'}
+]}
+className="basic-multi-select"
+classNamePrefix="select"
+/>
             </div>
-            </div>
-            <div className=' mt-10'>
-<div className=' text-sm text-left py-1 text-gray-700 font-medium'>What types of marketing methods do you use for your business?</div>
-<select
-        name='marketing-methods'
-        className="w-full rounded-md cursor-pointer border focus:outline-none focus:ring-0 focus:border-blue-500"
-   
-      >
-        <option value=''>What types of marketing methods do you use for your business?</option>
-        <option value='Education Fairs, Workshops And Seminars'>Education Fairs, Workshops And Seminars</option>
-        <option value='Newspapers, Magazines And Pamphlet Advertisement'>Newspapers, Magazines And Pamphlet Advertisement</option>
-        <option value='Facebook, Instagram And Google Ads'>Facebook, Instagram And Google Ads</option>
-        <option value='B2B Agent Networks'>B2B Agent Networks</option>
-        <option value='Other'>Other</option>
-        </select>
             </div>
             <div className=' mt-3'>
-<div className=' text-sm text-left py-1 text-gray-700 font-medium'>What is the average fee you charge to Students?</div>
-<select
-        name='marketing-methods'
-        className="w-full rounded-md cursor-pointer border focus:outline-none focus:ring-0 focus:border-blue-500"
-   
-      >
-        <option value=''>What is the average fee you charge to Students?</option>
-        <option value='0-200'>$0-$200</option>
-        <option value='200-500'>$200-$500</option>
-        <option value='500-1000'>$500-$1000</option>
-        <option value='1000-2000'>$1000-$2000</option>
-        <option value='above 2000'>$2000 +</option>
-        </select>
+<div className=' text-sm text-left py-1 text-gray-700 font-medium'>What is the average charge per student?</div>
+<div className=''>
+<input
+                      type="number"
+                      name="charge"
+                      id="charge"
+                      value={averageCharge}
+                      onChange={(e)=>onChangeHandler(e)}
+                      autoComplete="given-name"
+                      placeholder="Charge per student"
+                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                    />
+</div>
             </div>
             <div className=' mt-3'>
-<div className=' text-sm text-left py-1 text-gray-700 font-medium'>Why did you choose apply Formulagray over the competitors?</div>
-<select
-        name='marketing-methods'
-        className="w-full rounded-md cursor-pointer border focus:outline-none focus:ring-0 focus:border-blue-500"
-   
-      >
-        <option value=''>Why did you choose apply Formulagray over the competitors?</option>
-        <option value='Covers More Schools Globally'>Covers More Schools Globally</option>
-        <option value='Unified Platform For All Needs'>Unified Platform For All Needs</option>
-        <option value='Transparent And Faster Payments'>Transparent And Faster Payments</option>
-        <option value='Better Industry Insights And Training'>Better Industry Insights And Training</option>
-        <option value='other'>Other</option>
-        </select>
+<div className=' text-sm text-left py-1 text-gray-700 font-medium'>What is the average number of students you get anually?</div>
+<div className=''>
+<input
+                      type="number"
+                      name="students"
+                      id="students"
+                  value={averageStudentsAnnually}
+                  onChange={(e)=>onChangeHandler(e)}
+                      autoComplete="given-name"
+                      placeholder="Students anually"
+                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                    />
+</div>
             </div>
-            <div className=' mt-3'>
-<div className=' text-sm text-left py-1 text-gray-700 font-medium'>How can we help you grow your business?</div>
-<select
-        name='marketing-methods'
-        className="w-full rounded-md cursor-pointer border focus:outline-none focus:ring-0 focus:border-blue-500"
-   
-      >
-        <option value=''>How can we help you grow your business?</option>
-        <option value='Bring More Student Leads To My Business'>Bring More Student Leads To My Business</option>
-        <option value='Help Me Manage My Offices And Employees'>Help Me Manage My Offices And Employees</option>
-        <option value='Keep Me Updated On Industry News'>Keep Me Updated On Industry News</option>
-        <option value='Provide Services Such As SoP Review, Pre And Post Landing Services'>Provide Services Such As SoP Review, Pre And Post Landing Services</option>
-        <option value='Provide Destination Specific Training'>Provide Destination Specific Training</option>
-        </select>
-            </div>
-            <div className='mt-3'>
-            <div 
-                
-                className=" text-left pb-1 text-sm font-medium text-gray-700"
-              >
-                What will make your experience working at formulagray delightful?
-                </div>
-              <div className="mt-1">
-                <input
-                  type="text"
-                  name="experience"
-                  id="experience"
-                  autoComplete="given-name"
-                  placeholder="What will make your experience working at formulagray delightful?"
-                  className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                />
-             
-            </div>
-            </div>
-            <div className='mt-3'>
-            <div 
-                
-                className=" text-left pb-1 text-sm font-medium text-gray-700"
-              >
-                What educational associations or groups do yo belong to /represent?
-                </div>
-              <div className="mt-1">
-                <input
-                  type="text"
-                  name="experience"
-                  id="experience"
-                  autoComplete="given-name"
-                  placeholder="What educational associations or groups do yo belong to /represent?"
-                  className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                />
-             
-            </div>
-            </div>
-            <div className='mt-10'>
-                <div className=' text-left text-gray-700 font-medium'>
-                Reference
-                </div>
-                <div className=' text-left italic'>
-                (Optional but recommended)
-                </div>
-                <div className='mt-3'>
-            <div 
-                
-                className=" text-left pb-1 text-sm font-medium text-gray-700"
-              >
-                Reference school name
-                </div>
-              <div className="mt-1">
-                <input
-                  type="text"
-                  name="school-name"
-                  id="school-name"
-                  autoComplete="given-name"
-                  placeholder="Reference school name"
-                  className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                />
-             
-            </div>
-            </div>
-                <div className='mt-3'>
-            <div 
-                
-                className=" text-left pb-1 text-sm font-medium text-gray-700"
-              >
-                Reference business name
-                </div>
-              <div className="mt-1">
-                <input
-                  type="text"
-                  name="business-name"
-                  id="business-name"
-                  autoComplete="given-name"
-                  placeholder="Reference business name"
-                  className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                />
-             
-            </div>
-            </div>
-                <div className='mt-3'>
-            <div 
-                
-                className=" text-left pb-1 text-sm font-medium text-gray-700"
-              >
-                Reference phone number
-                </div>
-              <div className="mt-1">
-                <input
-                  type="text"
-                  name="phone-number"
-                  id="phone-number"
-                  autoComplete="given-number"
-                  placeholder="Reference phone number"
-                  className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                />
-             
-            </div>
-            </div>
-            </div>
+          
+           
+           
+         
+          
           </div>
  
         </div>
@@ -257,12 +150,18 @@ function RecruitmentDetails() {
           >
             Cancel
           </button>
-          <button
+          {!loading&&<button
             type="submit"
+            onClick={onSubmitHandler}
             className="ml-3 inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
           >
             Save
-          </button>
+          </button>||<button
+   
+            className="ml-3 inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+          >
+            <Spinner />
+          </button>}
         </div>
       </div>
     </div>

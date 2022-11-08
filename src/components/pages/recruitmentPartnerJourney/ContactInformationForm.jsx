@@ -1,9 +1,54 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 import { useRecruiter } from "../../../stores";
-
+import { editUser } from "../../../data/api/authenticatedRequests";
+import Spinner from "../../utils/Spinner";
 export const ContactInformation = () => {
-
+const [firstName,setFirstName]=useState('');
+const [firstNameError,setFirstNameError]=useState('');
+const [lastName,setLastName]=useState('');
+const [lastNameError,setLastNameError]=useState('');
+const [email,setEmail]=useState('');
+const [emailError,setEmailError]=useState('');
+const [phone,setPhone]=useState('');
+const [phoneError,setPhoneError]=useState('');
+const [loading,setLoading]=useState(false);
   const setRecruiter = useRecruiter((state) => state.storeRecruiter);
+  const onChangeHandler=(e)=>{
+if(e.target.name=='firstName'){
+  setFirstName(e.target.value)
+  setFirstNameError('')
+}
+if(e.target.name=='lastName'){
+  setLastName(e.target.value)
+  setLastNameError('')
+}
+
+if(e.target.name=='phone'){
+  setPhone(e.target.value)
+  setPhoneError('')
+}
+  }
+  const onSubmitHandler=async ()=>{
+    
+    if(firstName==''||lastName==''||phone==''){
+      if(firstName==''){
+        setFirstNameError('First name cannot be empty')
+      }
+      if(lastName==''){
+        setLastNameError('Last name cannot be empty')
+      }
+      if(phone==''){
+        setPhoneError('Phone cannot be empty')
+      }
+      return;
+    }
+    setLoading(true)
+    const res=await editUser({'firstName':firstName,'lastName':lastName,'phone':phone})
+setLoading(false)
+console.log(res)
+return setRecruiter({step:'business'})
+  
+  }
   return (
     <div className="flex text-center justify-center m-8">
 
@@ -27,12 +72,15 @@ export const ContactInformation = () => {
                   <div className="mt-1">
                     <input
                       type="text"
-                      name="first-name"
+                      name="firstName"
                       id="first-name"
+                      value={firstName}
+                      onChange={(e)=>onChangeHandler(e)}
                       autoComplete="given-name"
                       placeholder="First name"
                       className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                     />
+                   {firstNameError&& <div className=" text-red-500 text-sm">{firstNameError}</div>}
                   </div>
                 </div>
 
@@ -46,12 +94,16 @@ export const ContactInformation = () => {
                   <div className="mt-1">
                     <input
                       type="text"
-                      name="last-name"
+                      name="lastName"
                       id="last-name"
+                      value={lastName}
+                      onChange={(e)=>onChangeHandler(e)}
                       autoComplete="family-name"
                       placeholder="Last name"
                       className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                     />
+                                       {lastNameError&& <div className=" text-red-500 text-sm">{lastNameError}</div>}
+
                   </div>
                 </div>
 
@@ -82,19 +134,24 @@ export const ContactInformation = () => {
                   </label>
                   <div className="mt-1">
                     <input
-                      type="number"
+                      type="tel"
                       name="phone"
                       id="phone"
-                      autoComplete="given-name"
+                      value={phone}
+                      onChange={(e)=>onChangeHandler(e)}
+
+                      autoComplete="given-phone"
                       placeholder="+254 0111000000"
                       className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                     />
+                                       {phoneError&& <div className=" text-red-500 text-sm">{phoneError}</div>}
+
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+            {/* <div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
               <div className="sm:col-span-6">
                 <label
                   htmlFor="photo"
@@ -209,7 +266,7 @@ export const ContactInformation = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
 
@@ -221,13 +278,19 @@ export const ContactInformation = () => {
             >
               Cancel
             </button>
-            <button
+          { !loading&& <button
 
-              onClick={()=>setRecruiter({step:'business'})}
+              onClick={onSubmitHandler}
               className="ml-3 inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
             >
               Next
-            </button>
+            </button>||<button
+
+
+className="ml-3 inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+>
+<Spinner />
+</button>}
           </div>
         </div>
       </div>

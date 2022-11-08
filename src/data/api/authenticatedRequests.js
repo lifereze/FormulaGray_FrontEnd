@@ -17,3 +17,27 @@ export const refreshSession = async () => {
       return error.response;
     });
 };
+export const editUser = async (data) => {
+  return await api
+    .patch("/user/edit", data)
+    .then((response) => response)
+    .catch((error) => {
+      return error.response;
+    });
+};
+export const updateBusinessDetails = async (data) => {
+  return await api
+    .patch("/recruitmentPartner/business/update", data)
+    .then((response) => response)
+    .catch((error) => {
+      return error.response;
+    });
+};
+export const updateRecruitmentDetails = async (data) => {
+  return await api
+    .patch("/recruitmentPartner/update", data)
+    .then((response) => response)
+    .catch((error) => {
+      return error.response;
+    });
+};

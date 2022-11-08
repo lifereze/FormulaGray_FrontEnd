@@ -1,7 +1,62 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import { useRecruiter } from "../../../stores";
+import { updateBusinessDetails } from "../../../data/api/authenticatedRequests";
+import Spinner from "../../utils/Spinner";
 function BusinessInformationForm() {
+    const [businessName,setBusinessName]=useState('');
+const [businessNameError,setBusinessNameError]=useState('');
+    const [country,setCountry]=useState('');
+const [countryError,setCountryError]=useState('');
+    const [city,setCity]=useState('');
+const [cityError,setCityError]=useState('');
+    const [streetAddress,setStreetAddress]=useState('');
+const [streetAddressError,setStreetAddressError]=useState('');
+const [loading,setLoading]=useState(false);
+
     const setRecruiter = useRecruiter((state) => state.storeRecruiter);
+    const onChangeHandler=(e)=>{
+        if(e.target.name=='businessName'){
+          setBusinessName(e.target.value)
+          setBusinessNameError('')
+        }
+        if(e.target.name=='country'){
+          setCountry(e.target.value)
+          setCountryError('')
+        }
+        
+        if(e.target.name=='city'){
+          setCity(e.target.value)
+          setCityError('')
+        }
+        if(e.target.name=='streetAddress'){
+          setStreetAddress(e.target.value)
+          setStreetAddressError('')
+        }
+          }
+          const onSubmitHandler=async ()=>{
+       
+            if(businessName==''||country==''||city==''||streetAddress==''){
+              if(businessName==''){
+                setBusinessNameError('Business Name cannot be empty')
+              }
+              if(country==''){
+                setCountryError('Country cannot be empty')
+              }
+              if(city==''){
+                setCityError('City cannot be empty')
+              }
+              if(streetAddress==''){
+                setStreetAddressError('Street Address cannot be empty')
+              }
+              return;
+            }
+            setLoading(true)
+            const res=await updateBusinessDetails({'name':businessName,'country':country,'city':city,'streetAddress':streetAddress})
+        setLoading(false)
+         console.log(res);
+         return setRecruiter({step:'recruitment-details'})
+
+          }
   return (
     <div className="flex text-center justify-center m-8">
     <div className="space-y-8 divide-y divide-gray-200 lg:w-1/2 w-10/12">
@@ -25,12 +80,15 @@ function BusinessInformationForm() {
                 <div className="mt-1">
                   <input
                     type="text"
-                    name="business-name"
+                    name="businessName"
                     id="business-name"
+                    value={businessName}
+                    onChange={(e)=>onChangeHandler(e)}
                     autoComplete="given-name"
                     placeholder="Business name"
                     className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                   />
+                  {businessNameError&&<div className='text-sm text-red-500'>{businessNameError}</div>}
                
               </div>
 
@@ -41,18 +99,20 @@ function BusinessInformationForm() {
               <div 
                   className=" text-left pb-1 text-sm font-medium text-gray-700"
                 >
-                  Street Adress
+                  Country
                   </div>
                 <div className="mt-1">
                   <input
                     type="text"
-                    name="street-adress"
-                    id="street-adress"
-                    autoComplete="given-name"
-                    placeholder="Street Adress"
+                    name="country"
+                    id="country"
+                    autoComplete="given-country"
+                    value={country}
+                    onChange={(e)=>onChangeHandler(e)}
+                    placeholder="Country"
                     className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                   />
-               
+               {countryError&&<div className='text-sm text-red-500'>{countryError}</div>}
               </div>
 
            
@@ -69,11 +129,14 @@ function BusinessInformationForm() {
                     type="text"
                     name="city"
                     id="city"
+                    value={city}
+                    onChange={(e)=>onChangeHandler(e)}
                     autoComplete="given-name"
                     placeholder="City"
                     className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                   />
-               
+                              {cityError&&<div className='text-sm text-red-500'>{cityError}</div>}
+
               </div>
 
            
@@ -83,152 +146,22 @@ function BusinessInformationForm() {
               <div 
                   className=" text-left pb-1 text-sm font-medium text-gray-700"
                 >
-                  State/Province
+                  Street Adress
                   </div>
                 <div className="mt-1">
                   <input
                     type="text"
-                    name="state"
-                    id="state"
+                    name="streetAddress"
+                    id="street-adress"
+                    value={streetAddress}
+                    onChange={(e)=>onChangeHandler(e)}
                     autoComplete="given-name"
-                    placeholder="State/Province"
+                    placeholder="Street Adress"
                     className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                   />
-               
-              </div>
-
-           
-            
+               {streetAddressError&&<div className='text-sm text-red-500'>{streetAddressError}</div>}
+              </div>           
             </div>
-            <div className="mt-3">
-              <div 
-                  className=" text-left pb-1 text-sm font-medium text-gray-700"
-                >
-                  Postal Code
-                  </div>
-                <div className="mt-1">
-                  <input
-                    type="text"
-                    name="postal-code"
-                    id="postal-code"
-                    autoComplete="given-name"
-                    placeholder="Postal Code"
-                    className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                  />
-               
-              </div>
-
-           
-            
-            </div>
-            <div className="mt-3">
-              <div 
-                  className=" text-left pb-1 text-sm font-medium text-gray-700"
-                >
-                  Website URL
-                  </div>
-                <div className="mt-1">
-                  <input
-                    type="text"
-                    name="website"
-                    id="website"
-                    autoComplete="given-name"
-                    placeholder="Website URL (Optional)"
-                    className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                  />
-               
-              </div>
-
-           
-            
-            </div>
-<div className=' font-semibold mt-5'>
-    Business Socials
-</div>
-<div className="mt-3">
-              <div 
-                  className=" text-left pb-1 text-sm font-medium text-gray-700"
-                >
-                  Facebook
-                  </div>
-                <div className="mt-1">
-                  <input
-                    type="text"
-                    name="facebook"
-                    id="facebook"
-                    autoComplete="given-name"
-                    placeholder="Facebook (Optional)"
-                    className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                  />
-               
-              </div>
-
-           
-            
-            </div> 
-<div className="mt-3">
-              <div 
-                  className=" text-left pb-1 text-sm font-medium text-gray-700"
-                >
-                  Instagram
-                  </div>
-                <div className="mt-1">
-                  <input
-                    type="text"
-                    name="instagram"
-                    id="instagram"
-                    autoComplete="given-name"
-                    placeholder="Instagram (Optional)"
-                    className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                  />
-               
-              </div>
-
-           
-            
-            </div> 
-<div className="mt-3">
-              <div 
-                  className=" text-left pb-1 text-sm font-medium text-gray-700"
-                >
-                  Linkedin
-                  </div>
-                <div className="mt-1">
-                  <input
-                    type="text"
-                    name="linkedin"
-                    id="linkedin"
-                    autoComplete="given-name"
-                    placeholder="Linkedin (Optional)"
-                    className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                  />
-               
-              </div>
-
-           
-            
-            </div> 
-<div className="mt-3">
-              <div 
-                  className=" text-left pb-1 text-sm font-medium text-gray-700"
-                >
-                  Twitter
-                  </div>
-                <div className="mt-1">
-                  <input
-                    type="text"
-                    name="twitter"
-                    id="twitter"
-                    autoComplete="given-name"
-                    placeholder="Twitter (Optional)"
-                    className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                  />
-               
-              </div>
-
-           
-            
-            </div> 
         </div>
       </div>
 
@@ -240,13 +173,20 @@ function BusinessInformationForm() {
           >
             Cancel
           </button>
-          <button
-            type="submit"
-            onClick={()=>setRecruiter({step:'recruitment-details'})}
+         {!loading&& <button
+            
+            onClick={onSubmitHandler}
             className="ml-3 inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
           >
             Next
-          </button>
+          </button>||
+          <button
+        
+          className="ml-3 inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+        >
+          <Spinner />
+        </button>
+          }
         </div>
       </div>
     </div>
