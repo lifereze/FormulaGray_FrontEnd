@@ -1,16 +1,18 @@
-import React from "react";
+import React,{useEffect,useState} from "react";
 import { Navbar } from "./Navbar";
 import { Card } from "../Card";
 import Banner from "./Banner";
 import SideBar from "./SideBar";
 export const Dashboard = () => {
+  
   return (
     <div className=" grid grid-cols-12 ">
-<div className="col-span-2">
+<div className="md:col-span-2 hidden md:block ">
   <SideBar />
 </div>
+
   
-      <div className=" col-span-10 h-screen overflow-y-scroll w-full overflow-x-hidden">
+      <div className=" md:col-span-10 col-span-12 h-screen overflow-y-scroll w-full overflow-x-hidden">
         <div>
           <div className="w-full   ">
             <div className="xl:col-span-5 xl:border-r xl:border-gray-200  ">
@@ -23,7 +25,7 @@ export const Dashboard = () => {
               <div className="flex  border-b border-[#0092D2] pb-2 flex-col ml-4">
                 <div className="text-gray-500 mt-6">Programs</div>
               </div>
-              <div className="grid grid-col-1 md:grid-cols-3 space-x-4 mt-3">
+              <div className="grid grid-col-1 md:grid-cols-3 space-x-4 space-y-2 mt-3 md:mx-2 mx-10">
                 <Card />
                 <Card />
                 <Card />
