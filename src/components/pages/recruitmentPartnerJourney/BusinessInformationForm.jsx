@@ -2,6 +2,10 @@ import React,{useState,useEffect} from 'react'
 import { useRecruiter } from "../../../stores";
 import { updateBusinessDetails } from "../../../data/api/authenticatedRequests";
 import Spinner from "../../utils/Spinner";
+import ImageUpload from '../../uploads/ImageUpload';
+import FileUpload from '../../uploads/FileUpload';
+import { firebaseUploadImg,firebaseUploadDoc } from "../../../data/api/upload";
+import { getDownloadURL } from "firebase/storage";
 function BusinessInformationForm() {
     const [businessName,setBusinessName]=useState('');
 const [businessNameError,setBusinessNameError]=useState('');
@@ -12,8 +16,84 @@ const [cityError,setCityError]=useState('');
     const [streetAddress,setStreetAddress]=useState('');
 const [streetAddressError,setStreetAddressError]=useState('');
 const [loading,setLoading]=useState(false);
-
+const [isImageLoading, setFileLoading] = useState();
+const [isDocLoading, setDocLoading] = useState();
+const [imageUrl, setImageUrl] = useState("");
+const [docUrl, setDocUrl] = useState("");
+const [docName,setDocName]=useState();
     const setRecruiter = useRecruiter((state) => state.storeRecruiter);
+    const uploadImage = (input) => {
+        const files = input.target.files || [];
+        if (files.length === 0) {
+          return false;
+        }
+        const reader = new FileReader();
+    
+        reader.readAsDataURL(files[0]);
+    
+        reader.onload = (e) => {
+          setFileLoading(true);
+          const uploadTask = firebaseUploadImg(files[0]);
+          uploadTask.on(
+            "state_changed",
+            (snapshot) => {
+              const prog = Math.round(
+                (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+              );
+            },
+            (err) => {},
+            () => {
+              getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+                setFileLoading(false);
+                setImageUrl(url);
+              });
+            }
+          );
+    
+          return true;
+        };
+    
+        reader.onprogress = function (e) {
+          //Loader
+        };
+      };
+      const uploadDoc = (input) => {
+        const files = input.target.files || [];
+        setDocName(input.target.files[0].name)
+        if (files.length === 0) {
+          return false;
+        }
+        const reader = new FileReader();
+    
+        reader.readAsDataURL(files[0]);
+    
+        reader.onload = (e) => {
+            console.log(e)
+            setDocLoading(true);
+          const uploadTask = firebaseUploadDoc(files[0]);
+          uploadTask.on(
+            "state_changed",
+            (snapshot) => {
+              const prog = Math.round(
+                (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+              );
+            },
+            (err) => {},
+            () => {
+              getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+                setDocLoading(false);
+                setDocUrl(url);
+              });
+            }
+          );
+    
+          return true;
+        };
+    
+        reader.onprogress = function (e) {
+          //Loader
+        };
+      };
     const onChangeHandler=(e)=>{
         if(e.target.name=='businessName'){
           setBusinessName(e.target.value)
@@ -95,6 +175,8 @@ const [loading,setLoading]=useState(false);
            
             
             </div>
+            <ImageUpload uploadImage={uploadImage} isImageLoading={isImageLoading} imageUrl={imageUrl}  />
+            <FileUpload uploadDoc={uploadDoc} isDocLoading={isDocLoading} docName={docName} docUrl={docUrl}  />
             <div className="mt-3">
               <div 
                   className=" text-left pb-1 text-sm font-medium text-gray-700"
