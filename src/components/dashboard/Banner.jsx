@@ -10,10 +10,12 @@ import {BsFillCheckSquareFill} from 'react-icons/bs'
 import {MdCancelPresentation,MdCastForEducation} from 'react-icons/md'
 import {GiHamburgerMenu} from 'react-icons/gi'
 import Drawer from "./Drawer";
+import StudentUpload from "../modals/StudentUpload";
 function Banner() {
     const user = userStore((state) => state.user);
     const setUser = userStore((state) => state.storeUser);
     const [showDrawer,setShowDrawer]=useState(false);
+    const [studentUpload,setStudentUpload]=useState(false);
     useEffect(()=>{
         const getUser= async ()=>{
            const res=await refreshSession();
@@ -45,7 +47,7 @@ function Banner() {
         <div className=' md:text-2xl font-semibold'>
         Welcome, {user && user.email && user.email.split("@")[0]}
         </div>
-<div className='p-2 bg-white text-black rounded-lg cursor-pointer'>
+<div className='p-2 bg-white text-black rounded-lg cursor-pointer' onClick={()=>setStudentUpload(true)}>
     Add new student
 </div>
       </div>
@@ -78,6 +80,7 @@ function Banner() {
 </div>
     </div>
     {showDrawer&&<Drawer setShowDrawer={setShowDrawer} />}
+    {studentUpload&&<StudentUpload setStudentUpload={setStudentUpload}/>}
     </>
   )
 }

@@ -1,8 +1,9 @@
-import React,{useState,useEffect} from 'react'
+import React,{useState,useEffect,useMemo} from 'react'
 import { useNavigate } from "react-router-dom";
 import { updateRecruitmentDetails } from '../../../data/api/authenticatedRequests';
 import Spinner from '../../utils/Spinner';
 import Select from 'react-select';
+import countryList from 'react-select-country-list'
 function RecruitmentDetails() {
     const navigate = useNavigate();
     const [studentsFrom,setStudentsFrom]=useState([]);
@@ -10,6 +11,7 @@ function RecruitmentDetails() {
     const [averageCharge,setAverageCharge]=useState()
     const [averageStudentsAnnually,setAverageStudentsAnnually]=useState();
     const [loading,setLoading]=useState(false);
+    const countries = useMemo(() => countryList().getData(), [])
     const onChangeHandler=(e)=>{
         if(e.target.name=='charge'){
           setAverageCharge(e.target.value)
@@ -71,10 +73,7 @@ function RecruitmentDetails() {
     isMulti
     onChange={(e)=>getStudentsFrom(e)}
     name="country"
-    options={[
-        {value:'Kenya',label:'Kenya'},
-        {value:'Nigeria',label:'Nigeria'}
-    ]}
+    options={countries}
     className="basic-multi-select"
     classNamePrefix="select"
   />

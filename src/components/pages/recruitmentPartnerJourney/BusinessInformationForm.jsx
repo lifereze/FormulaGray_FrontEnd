@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react'
+import React,{useState,useEffect, useMemo} from 'react'
 import { useRecruiter } from "../../../stores";
 import { updateBusinessDetails } from "../../../data/api/authenticatedRequests";
 import Spinner from "../../utils/Spinner";
@@ -6,6 +6,8 @@ import ImageUpload from '../../uploads/ImageUpload';
 import FileUpload from '../../uploads/FileUpload';
 import { firebaseUploadImg,firebaseUploadDoc } from "../../../data/api/upload";
 import { getDownloadURL } from "firebase/storage";
+import Select from 'react-select';
+import countryList from 'react-select-country-list'
 function BusinessInformationForm() {
     const [businessName,setBusinessName]=useState('');
 const [businessNameError,setBusinessNameError]=useState('');
@@ -22,6 +24,10 @@ const [imageUrl, setImageUrl] = useState("");
 const [docUrl, setDocUrl] = useState("");
 const [docName,setDocName]=useState();
     const setRecruiter = useRecruiter((state) => state.storeRecruiter);
+    const options = useMemo(() => countryList().getData(), [])
+    useEffect(()=>{
+console.log(options)
+    },[options])
     const uploadImage = (input) => {
         const files = input.target.files || [];
         if (files.length === 0) {
