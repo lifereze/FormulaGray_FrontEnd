@@ -1,14 +1,19 @@
 import React from "react";
 import { Navbar } from "./Navbar";
 import { Table } from "../Table";
-
+import SideBar from "./SideBar";
+import Banner from "./Banner";
 export const Students = () => {
   return (
-    <div>
-      <Navbar />
-      <main className="flex-1">
+    <div className=" grid grid-cols-12">
+
+    <div className="md:col-span-2 hidden md:block h-screen overflow-y-hidden ">
+    <SideBar />
+    </div>
+    <div className="md:col-span-10 col-span-12 h-screen overflow-y-scroll w-full overflow-x-hidden">
+          <Banner />
         <div>
-          <div className="ml-2 lg:ml-36">
+          <div className="ml-2 ">
               <section
                 aria-labelledby="activity-title"
                 className="mt-2 xl:mt-4"
@@ -30,7 +35,7 @@ export const Students = () => {
               </section>
           </div>
         </div>
-      </main>
+      </div>
     </div>
   );
 };

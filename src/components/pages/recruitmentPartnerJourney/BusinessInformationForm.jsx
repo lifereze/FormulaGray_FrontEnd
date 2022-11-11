@@ -182,7 +182,7 @@ console.log(options)
             
             </div>
             <ImageUpload uploadImage={uploadImage} isImageLoading={isImageLoading} imageUrl={imageUrl}  />
-            <FileUpload uploadDoc={uploadDoc} isDocLoading={isDocLoading} docName={docName} docUrl={docUrl}  />
+            <FileUpload uploadDoc={uploadDoc} isDocLoading={isDocLoading} docName={docName} docUrl={docUrl} title="Business Certificate"  />
             <div className="mt-3">
               <div 
                   className=" text-left pb-1 text-sm font-medium text-gray-700"

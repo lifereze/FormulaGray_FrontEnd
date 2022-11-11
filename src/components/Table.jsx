@@ -70,10 +70,10 @@ export const Table = (props) => {
   }
 
   return (
-    <div className="px-4 sm:px-6 lg:px-8 mr-2 md:ml-8 md:mr-8">
+    <div className="px-4 sm:px-6  mr-2 ">
       <div className="sm:flex sm:items-center">
         <div className="sm:flex-auto">
-          <h1 className="text-xl font-bold text-indigo-500">{props.heading}</h1>
+        <h1 className="text-xl font-bold text-indigo-500">{props.heading}</h1>
         </div>
         <div className="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
           <a href="/addStudent">

@@ -1,17 +1,22 @@
 import React from "react";
 import { Navbar } from "./Navbar";
 import {Form} from "./Form";
-
+import SideBar from "./SideBar";
+import Banner from "./Banner";
 export const AddStudent = (props) => {
   return (
-    <div>
-      <Navbar />
-      <main className="flex-1">
-        <div>
-          <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 xl:grid xl:max-w-5xl xl:grid-cols-3">
-            <div className="xl:col-span-6 xl:border-r xl:border-gray-200 xl:pr-8 ">
-              <section
-                aria-labelledby="activity-title"
+    <>
+    <div className=" grid grid-cols-12">
+
+    <div className="md:col-span-2 hidden md:block h-screen overflow-y-hidden ">
+  <SideBar />
+</div>
+      <div className="md:col-span-10 col-span-12 h-screen overflow-y-scroll w-full overflow-x-hidden">
+      <Banner />
+          <div className="mx-auto   px-4 sm:px-6 lg:px-8 ">
+            <div className="xl:col-span-6 xl:border-r xl:border-gray-200  xl:pr-8 ">
+              <div
+             
                 className="mt-2 xl:mt-4"
               >
                 <div>
@@ -23,11 +28,12 @@ export const AddStudent = (props) => {
                     </div>
                   </div>
                 </div>
-              </section>
+              </div>
             </div>
           </div>
-        </div>
-      </main>
+    
+      </div>
     </div>
+    </>
   );
 };

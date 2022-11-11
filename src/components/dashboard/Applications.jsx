@@ -1,14 +1,21 @@
-import React from "react";
+import { Fragment,useEffect,useState } from "react";
 import { Navbar } from "./Navbar";
 import { Table } from "../Table";
+import SideBar from "./SideBar";
+import Banner from "./Banner";
 
 export const Applications = () => {
+  
   return (
-    <div>
-      <Navbar />
-      <main className="flex-1">
-        <div>
-          <div className="ml-2 lg:ml-36">
+    <>
+    <div className=" grid grid-cols-12">
+    <div className="md:col-span-2 hidden md:block ">
+  <SideBar />
+</div>
+    
+        <div className="md:col-span-10 col-span-12 h-screen overflow-y-scroll w-full overflow-x-hidden">
+         <Banner />
+          <div className=" ">
             <section aria-labelledby="activity-title" className="mt-6 xl:mt-8">
               <div>
                 <div className="divide-y divide-gray-200">
@@ -29,7 +36,9 @@ export const Applications = () => {
             </section>
           </div>
         </div>
-      </main>
+     
     </div>
+
+    </>
   );
 };

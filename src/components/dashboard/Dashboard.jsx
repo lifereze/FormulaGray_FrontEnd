@@ -3,9 +3,31 @@ import { Navbar } from "./Navbar";
 import { Card } from "../Card";
 import Banner from "./Banner";
 import SideBar from "./SideBar";
+import Info from './cards/Info'
+import {HiDocumentText} from 'react-icons/hi'
+import {BsFillCheckSquareFill} from 'react-icons/bs'
+import {MdCancelPresentation,MdCastForEducation} from 'react-icons/md'
+import {userStore} from '../../stores'
+
+import StudentUpload from "../modals/StudentUpload";
+import {refreshSession} from '../../data/api/authenticatedRequests'
 export const Dashboard = () => {
-  
+  const user = userStore((state) => state.user);
+  const setUser = userStore((state) => state.storeUser);
+
+  const [studentUpload,setStudentUpload]=useState(false);
+  useEffect(()=>{
+    const getUser= async ()=>{
+       const res=await refreshSession();
+       console.log(res)
+       setUser(res.data.user)
+     
+     }
+    
+     getUser();
+       },[])
   return (
+    <>
     <div className=" grid grid-cols-12 ">
 <div className="md:col-span-2 hidden md:block ">
   <SideBar />
@@ -19,6 +41,41 @@ export const Dashboard = () => {
               <div className=" ">
 
   <Banner />
+  <div className=' flex bg-blue-500 md:px-10 px-4 justify-between items-center'>
+        <div className=' md:text-2xl font-semibold'>
+        {/* Welcome, {user && user.email && user.email.split("@")[0]} */}
+        </div>
+<div className='p-2 bg-white text-black rounded-lg cursor-pointer' onClick={()=>setStudentUpload(true)}>
+    Add new student
+</div>
+      </div>
+<div className='grid bg-blue-500 md:px-10 px-4 pb-10 grid-cols-12 gap-x-4 gap-y-4 pt-10'>
+    <div className=' md:col-span-3 col-span-6'>
+    <Info icon={   <HiDocumentText className=' text-xl text-white' />}
+    number={7}
+    title='Applications'
+    />
+    </div>
+    <div className=' md:col-span-3 col-span-6'>
+    <Info icon={   <BsFillCheckSquareFill className=' text-xl text-white' />}
+    number={0}
+    title='Accepted'
+    />
+    </div>
+    <div className=' md:col-span-3 col-span-6'>
+    <Info icon={   <MdCancelPresentation className=' text-xl text-white' />}
+    number={0}
+    title='Rejected'
+    />
+    </div>
+    <div className=' md:col-span-3 col-span-6'>
+    <Info icon={   <MdCastForEducation className=' text-xl text-white' />}
+    number={7}
+    title='Students'
+    />
+    </div>
+
+</div>
 
                
               </div>
@@ -65,5 +122,7 @@ export const Dashboard = () => {
         </div>
       </div>
     </div>
+    {studentUpload&&<StudentUpload setStudentUpload={setStudentUpload}/>}
+    </>
   );
 };

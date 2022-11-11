@@ -1,7 +1,52 @@
+import React,{useState,useEffect, useMemo} from 'react'
+import FileUpload from '../uploads/FileUpload';
+import { firebaseUploadImg,firebaseUploadDoc } from "../../data/api/upload";
+import { getDownloadURL } from "firebase/storage";
 export const Form = (props) => {
+  const [isDocLoading, setDocLoading] = useState();
+
+const [docUrl, setDocUrl] = useState("");
+const [docName,setDocName]=useState();
+  const uploadDoc = (input) => {
+    const files = input.target.files || [];
+    setDocName(input.target.files[0].name)
+    if (files.length === 0) {
+      return false;
+    }
+    const reader = new FileReader();
+
+    reader.readAsDataURL(files[0]);
+
+    reader.onload = (e) => {
+        console.log(e)
+        setDocLoading(true);
+      const uploadTask = firebaseUploadDoc(files[0]);
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          const prog = Math.round(
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+          );
+        },
+        (err) => {},
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+            setDocLoading(false);
+            setDocUrl(url);
+          });
+        }
+      );
+
+      return true;
+    };
+
+    reader.onprogress = function (e) {
+      //Loader
+    };
+  };
   return (
-    <>
-      <div>
+    <div className="">
+      {/* <div>
         <div className="md:grid md:grid-cols-3 md:gap-6">
           <div className="md:col-span-1">
             <div className="px-4 sm:px-0">
@@ -142,13 +187,13 @@ export const Form = (props) => {
             </form>
           </div>
         </div>
-      </div>
+      </div> */}
 
-      <div className="hidden sm:block" aria-hidden="true">
+      {/* <div className="hidden sm:block" aria-hidden="true">
         <div className="py-5">
           <div className="border-t border-gray-200" />
         </div>
-      </div>
+      </div> */}
 
       <div className="mt-10 sm:mt-0">
         <div className="md:grid md:grid-cols-3 md:gap-6">
@@ -163,7 +208,6 @@ export const Form = (props) => {
             </div>
           </div>
           <div className="mt-5 md:col-span-2 md:mt-0">
-            <form action="#" method="POST">
               <div className="overflow-hidden shadow sm:rounded-md">
                 <div className="bg-white px-4 py-5 sm:p-6">
                   <div className="grid grid-cols-6 gap-6">
@@ -310,7 +354,44 @@ export const Form = (props) => {
                   </a>
                 </div>
               </div>
-            </form>
+         
+          </div>
+        </div>
+      </div>
+      <div className="mt-10 ">
+        <div className="md:grid md:grid-cols-3 md:gap-6">
+          <div className="md:col-span-1">
+            <div className="px-4 sm:px-0">
+              <h3 className="text-lg font-medium leading-6 text-gray-900">
+                Document uploads
+              </h3>
+              <p className="mt-1 text-sm text-gray-600">
+                Please upload the following documents appropriately.
+              </p>
+            </div>
+          </div>
+          <div className="mt-5 md:col-span-2 md:mt-0">
+              <div className="overflow-hidden shadow sm:rounded-md">
+                <div className="bg-white px-4 py-5 sm:p-6">
+                <FileUpload uploadDoc={uploadDoc} isDocLoading={isDocLoading} docName={docName} docUrl={docUrl} title="Bachelors degree certificate"  />
+                <FileUpload uploadDoc={uploadDoc} isDocLoading={isDocLoading} docName={docName} docUrl={docUrl} title="Bachelors degree transcript"  />
+                <FileUpload uploadDoc={uploadDoc} isDocLoading={isDocLoading} docName={docName} docUrl={docUrl} title="Resume"  />
+                <FileUpload uploadDoc={uploadDoc} isDocLoading={isDocLoading} docName={docName} docUrl={docUrl} title="Letter of recommendation"  />
+                <FileUpload uploadDoc={uploadDoc} isDocLoading={isDocLoading} docName={docName} docUrl={docUrl} title="Statement of purpose"  />
+
+                </div>
+                <div className="bg-gray-50 px-4 py-3 text-right sm:px-6">
+                  <a href="#">
+                    <button
+                      type="submit"
+                      className="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                    >
+                      Save
+                    </button>
+                  </a>
+                </div>
+              </div>
+         
           </div>
         </div>
       </div>
@@ -321,7 +402,7 @@ export const Form = (props) => {
         </div>
       </div>
 
-      <div className="mt-10 sm:mt-0">
+      {/* <div className="mt-10 sm:mt-0">
         <div className="md:grid md:grid-cols-3 md:gap-6">
           <div className="md:col-span-1">
             <div className="px-4 sm:px-0">
@@ -480,7 +561,7 @@ export const Form = (props) => {
             </form>
           </div>
         </div>
-      </div>
-    </>
+      </div> */}
+    </div>
   );
 };
