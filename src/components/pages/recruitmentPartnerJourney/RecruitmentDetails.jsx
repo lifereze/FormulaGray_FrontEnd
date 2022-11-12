@@ -2,6 +2,7 @@ import React,{useState,useEffect,useMemo} from 'react'
 import { useNavigate } from "react-router-dom";
 import { updateRecruitmentDetails } from '../../../data/api/authenticatedRequests';
 import Spinner from '../../utils/Spinner';
+import { useRecruiter } from "../../../stores";
 import Select from 'react-select';
 import countryList from 'react-select-country-list'
 function RecruitmentDetails() {
@@ -11,6 +12,7 @@ function RecruitmentDetails() {
     const [averageCharge,setAverageCharge]=useState()
     const [averageStudentsAnnually,setAverageStudentsAnnually]=useState();
     const [loading,setLoading]=useState(false);
+    const setRecruiter = useRecruiter((state) => state.storeRecruiter);
     const countries = useMemo(() => countryList().getData(), [])
     const onChangeHandler=(e)=>{
         if(e.target.name=='charge'){
@@ -145,9 +147,10 @@ classNamePrefix="select"
         <div className="flex justify-end">
           <button
             type="button"
+            onClick={()=>setRecruiter({step:'busines'})}
             className="rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
           >
-            Cancel
+            Back
           </button>
           {!loading&&<button
             type="submit"

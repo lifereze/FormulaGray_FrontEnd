@@ -1,8 +1,8 @@
 import React from "react";
-import { Navbar } from "./Navbar";
-import { Table } from "../Table";
-import SideBar from "./SideBar";
-import Banner from "./Banner";
+import { Navbar } from "../Navbar";
+import { Table } from "./Table";
+import SideBar from "../SideBar";
+import Banner from "../Banner";
 export const Students = () => {
   return (
     <div className=" grid grid-cols-12">

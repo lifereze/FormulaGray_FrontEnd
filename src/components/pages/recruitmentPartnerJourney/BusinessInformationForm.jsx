@@ -23,6 +23,7 @@ const [isDocLoading, setDocLoading] = useState();
 const [imageUrl, setImageUrl] = useState("");
 const [docUrl, setDocUrl] = useState("");
 const [docName,setDocName]=useState();
+const [entity,setEntity]=useState('');
     const setRecruiter = useRecruiter((state) => state.storeRecruiter);
     const options = useMemo(() => countryList().getData(), [])
     useEffect(()=>{
@@ -181,9 +182,27 @@ console.log(options)
            
             
             </div>
-            <ImageUpload uploadImage={uploadImage} isImageLoading={isImageLoading} imageUrl={imageUrl}  />
-            <FileUpload uploadDoc={uploadDoc} isDocLoading={isDocLoading} docName={docName} docUrl={docUrl} title="Business Certificate"  />
-            <div className="mt-3">
+            <div>
+      <div
+        className=" my-1 text-left pb-1 text-sm font-medium text-gray-700"
+      >
+        What entity are you?
+      </div>
+      <select
+        name={'entity'}
+        className="w-full rounded-md border focus:outline-none focus:ring-0 focus:border-bloow-blue"
+        onChange={(e)=>{setEntity(e.target.value)}}
+      >   <option value="business">
+               Company
+                </option>
+                <option value="individual">
+               Individual
+                </option>
+      </select>
+    </div>
+            {entity=='individual'&&<ImageUpload uploadImage={uploadImage} isImageLoading={isImageLoading} imageUrl={imageUrl}  />}
+{   entity=='business'&&         <FileUpload uploadDoc={uploadDoc} isDocLoading={isDocLoading} docName={docName} docUrl={docUrl} title="Business Certificate"  />
+}            <div className="mt-3">
               <div 
                   className=" text-left pb-1 text-sm font-medium text-gray-700"
                 >
@@ -257,9 +276,10 @@ console.log(options)
         <div className="flex justify-end">
           <button
             type="button"
+            onClick={()=>setRecruiter({step:'contact'})}
             className="rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
           >
-            Cancel
+            Back
           </button>
          {!loading&& <button
             
