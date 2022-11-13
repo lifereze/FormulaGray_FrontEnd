@@ -1,8 +1,48 @@
 import React, { useState, useEffect, useRef } from "react";
 import MusicLoader from "../loaders/MusicLoader";
-import Spinner from "../utils/BlueSpinner";
 import { AiFillFilePdf } from "react-icons/ai";
-function FileUpload({ uploadDoc, isDocLoading, docName, docUrl, title, name }) {
+import { firebaseUploadImg,firebaseUploadDoc } from "../../data/api/upload";
+import { getDownloadURL } from "firebase/storage";
+function FileUpload({ setDocUrl, docUrl, title, name }) {
+    const [docName,setDocName]=useState();
+    const [isDocLoading, setDocLoading] = useState();
+    const uploadDoc = (input) => {
+        const files = input.target.files || [];
+        setDocName(input.target.files[0].name)
+        if (files.length === 0) {
+          return false;
+        }
+        const reader = new FileReader();
+    
+        reader.readAsDataURL(files[0]);
+    
+        reader.onload = (e) => {
+            console.log(e)
+            setDocLoading(true);
+          const uploadTask = firebaseUploadDoc(files[0]);
+          uploadTask.on(
+            "state_changed",
+            (snapshot) => {
+              const prog = Math.round(
+                (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+              );
+            },
+            (err) => {},
+            () => {
+              getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+                setDocLoading(false);
+                setDocUrl(url);
+              });
+            }
+          );
+    
+          return true;
+        };
+    
+        reader.onprogress = function (e) {
+          //Loader
+        };
+      };
   const fileRef = useRef(null);
 
   const thumbnailUpload = () => {
@@ -27,7 +67,7 @@ function FileUpload({ uploadDoc, isDocLoading, docName, docUrl, title, name }) {
           {isDocLoading && (
             <div className="flex flex-col justify-center items-center h-32">
               <div>
-                <Spinner />
+                <MusicLoader />
               </div>
             </div>
           )}
@@ -44,12 +84,7 @@ function FileUpload({ uploadDoc, isDocLoading, docName, docUrl, title, name }) {
                   className="px-2 py-1 bg-transparent border-2 font-semibold border-bloow-gray rounded-full hover:underline cursor-pointer hover:bg-gray-100"
                   onClick={!isDocLoading ? thumbnailUpload : () => {}}
                 >
-                  {(isDocLoading && (
-                    <div className="">
-                      <Spinner />
-                    </div>
-                  )) ||
-                    title}
+                  {title}
                 </span>
                 <input
                   name={name ? name : "thumbnail"}

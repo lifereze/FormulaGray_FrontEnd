@@ -3,13 +3,31 @@ import FileUpload from '../uploads/FileUpload';
 import { firebaseUploadImg,firebaseUploadDoc } from "../../data/api/upload";
 import { getDownloadURL } from "firebase/storage";
 export const Form = (props) => {
-  const [isDocLoading, setDocLoading] = useState();
+  const [isResumeLoading, setResumeLoading] = useState();
+const [resumeUrl, setResumeUrl] = useState("");
+const [resumeName,setResumeName]=useState();
 
-const [docUrl, setDocUrl] = useState("");
-const [docName,setDocName]=useState();
+  const [isDegreeLoading, setDegreeLoading] = useState();
+const [degreeUrl, setDegreeUrl] = useState("");
+const [degreeName,setDegreeName]=useState();
+
+  const [isTranscriptLoading, setTranscriptLoading] = useState();
+const [transcriptUrl, setTranscriptUrl] = useState("");
+const [transcriptName,setTranscriptName]=useState();
+
+  const [isRecommendationLoading, setRecommendationLoading] = useState();
+const [recommendationUrl, setRecommendationUrl] = useState("");
+const [recommendationName,setRecommendationName]=useState();
+
+  const [isStatementLoading, setStatementLoading] = useState();
+const [statementUrl, setStatementUrl] = useState("");
+const [statementName,setStatementName]=useState();
+
   const uploadDoc = (input) => {
     const files = input.target.files || [];
-    setDocName(input.target.files[0].name)
+ 
+    
+   
     if (files.length === 0) {
       return false;
     }
@@ -19,7 +37,23 @@ const [docName,setDocName]=useState();
 
     reader.onload = (e) => {
         console.log(e)
-        setDocLoading(true);
+        if(input.target.name=='degree'){
+         
+          setDegreeLoading(true);
+        }
+        if(input.target.name=='resume'){
+          setResumeLoading(true);
+        }
+        if(input.target.name=='transcript'){
+          setTranscriptLoading(true);
+        }
+        if(input.target.name=='recommendation'){
+          setRecommendationLoading(true);
+        }
+        if(input.target.name=='statement'){
+          setStatementLoading(true);
+        }
+       
       const uploadTask = firebaseUploadDoc(files[0]);
       uploadTask.on(
         "state_changed",
@@ -31,8 +65,32 @@ const [docName,setDocName]=useState();
         (err) => {},
         () => {
           getDownloadURL(uploadTask.snapshot.ref).then((url) => {
-            setDocLoading(false);
-            setDocUrl(url);
+            if(input.target.name=='degree'){
+              setDegreeName(input.target.files[0].name)
+              setDegreeLoading(false);
+              setDegreeUrl(url);
+            }
+            if(input.target.name=='resume'){
+              setResumeName(input.target.files[0].name)
+              setResumeLoading(false);
+              setResumeUrl(url);
+            }
+            if(input.target.name=='transcript'){
+              setTranscriptName(input.target.files[0].name)
+              setTranscriptLoading(false);
+              setTranscriptUrl(url);
+            }
+            if(input.target.name=='recommendation'){
+              setRecommendationName(input.target.files[0].name)
+              setRecommendationLoading(false);
+              setRecommendationUrl(url);
+            }
+            if(input.target.name=='statement'){
+              setStatementName(input.target.files[0].name)
+              setStatementLoading(false);
+              setStatementUrl(url);
+            }
+           
           });
         }
       );
@@ -373,11 +431,11 @@ const [docName,setDocName]=useState();
           <div className="mt-5 md:col-span-2 md:mt-0">
               <div className="overflow-hidden shadow sm:rounded-md">
                 <div className="bg-white px-4 py-5 sm:p-6">
-                <FileUpload uploadDoc={uploadDoc} isDocLoading={isDocLoading} docName={docName} docUrl={docUrl} title="Bachelors degree certificate"  />
-                <FileUpload uploadDoc={uploadDoc} isDocLoading={isDocLoading} docName={docName} docUrl={docUrl} title="Bachelors degree transcript"  />
-                <FileUpload uploadDoc={uploadDoc} isDocLoading={isDocLoading} docName={docName} docUrl={docUrl} title="Resume"  />
-                <FileUpload uploadDoc={uploadDoc} isDocLoading={isDocLoading} docName={docName} docUrl={docUrl} title="Letter of recommendation"  />
-                <FileUpload uploadDoc={uploadDoc} isDocLoading={isDocLoading} docName={docName} docUrl={docUrl} title="Statement of purpose"  />
+                <FileUpload uploadDoc={uploadDoc} isDocLoading={isDegreeLoading} docName={degreeName} docUrl={degreeUrl} name='degree' title="Bachelors degree certificate"  />
+                <FileUpload uploadDoc={uploadDoc} isDocLoading={isTranscriptLoading} docName={transcriptName} docUrl={transcriptUrl} name='transcript' title="Bachelors degree transcript"  />
+                <FileUpload uploadDoc={uploadDoc} isDocLoading={isResumeLoading} docName={resumeName} docUrl={resumeUrl} name='resume' title="Resume"  />
+                <FileUpload uploadDoc={uploadDoc} isDocLoading={isRecommendationLoading} docName={recommendationName} docUrl={recommendationUrl} name='recommendation' title="Letter of recommendation"  />
+                <FileUpload uploadDoc={uploadDoc} isDocLoading={isStatementLoading} docName={statementName} docUrl={statementUrl} name='statement' title="Statement of purpose"  />
 
                 </div>
                 <div className="bg-gray-50 px-4 py-3 text-right sm:px-6">

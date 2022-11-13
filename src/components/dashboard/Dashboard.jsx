@@ -45,9 +45,11 @@ export const Dashboard = () => {
         <div className=' md:text-2xl font-semibold'>
         {/* Welcome, {user && user.email && user.email.split("@")[0]} */}
         </div>
-<div className='p-2 bg-white text-black rounded-lg cursor-pointer' onClick={()=>setStudentUpload(true)}>
+        <a href="/addStudent">
+<div className='p-2 bg-white text-black rounded-lg cursor-pointer' >
     Add new student
 </div>
+</a>
       </div>
 <div className='grid bg-blue-500 md:px-10 px-4 pb-10 grid-cols-12 gap-x-4 gap-y-4 pt-10'>
     <div className=' md:col-span-3 col-span-6'>
