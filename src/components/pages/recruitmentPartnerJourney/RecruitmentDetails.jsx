@@ -46,9 +46,10 @@ function RecruitmentDetails() {
         setLoading(true);
         const res=await updateRecruitmentDetails({'studentsFrom':studentsFrom,'studentsTo':studentsTo,'averageCharge':averageCharge,'averageStudentsAnnually':averageStudentsAnnually});
         console.log(res)
-        navigate("/dashboard");
         setLoading(false);
 
+       navigate("/dashboard");
+      
 
     }
     
@@ -95,7 +96,10 @@ isMulti
 name="country"
 onChange={(e)=>getStudentsTo(e)}
 options={[
-    {value:'USA',label:'USA'},
+    {value:'America',label:'America'},
+    {value:'Canada',label:'Canada'},
+    {value:'Europe',label:'Europe'},
+    {value:'Australia',label:'Australia'},
     {value:'UK',label:'UK'}
 ]}
 className="basic-multi-select"

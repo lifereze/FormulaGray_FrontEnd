@@ -1,18 +1,26 @@
 import React,{useState,useEffect} from "react";
-import { useRecruiter } from "../../../stores";
+import { useRecruiter, userStore } from "../../../stores";
 import { editUser } from "../../../data/api/authenticatedRequests";
 import Spinner from "../../utils/Spinner";
 export const ContactInformation = () => {
+  const user = userStore((state) => state.user);
+  const storeUser = userStore((state) => state.storeUser);
 const [firstName,setFirstName]=useState('');
 const [firstNameError,setFirstNameError]=useState('');
 const [lastName,setLastName]=useState('');
 const [lastNameError,setLastNameError]=useState('');
-const [email,setEmail]=useState('');
+const [email,setEmail]=useState(user?.email);
 const [emailError,setEmailError]=useState('');
 const [phone,setPhone]=useState('');
 const [phoneError,setPhoneError]=useState('');
 const [loading,setLoading]=useState(false);
   const setRecruiter = useRecruiter((state) => state.storeRecruiter);
+  useEffect(()=>{
+setEmail(user?.email)
+setPhone(user?.phone)
+setFirstName(user?.firstName)
+setLastName(user?.lastName)
+  },[user])
   const onChangeHandler=(e)=>{
 if(e.target.name=='firstName'){
   setFirstName(e.target.value)
@@ -46,7 +54,11 @@ if(e.target.name=='phone'){
     const res=await editUser({'firstName':firstName,'lastName':lastName,'phone':phone})
 setLoading(false)
 console.log(res)
-return setRecruiter({step:'business'})
+if(res.status==200){
+  const updatedDetails=res.data.user
+storeUser({...user,updatedDetails})
+}
+ return setRecruiter({step:'business'})
   
   }
   return (
@@ -118,6 +130,7 @@ return setRecruiter({step:'business'})
                     <input
                       id="email"
                       name="email"
+                      value={email}
                       type="email"
                       autoComplete="email"
                       placeholder="example@gmail.com"

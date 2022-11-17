@@ -38,7 +38,7 @@ function Banner() {
     <FaUserAlt className=' text-2xl' />
 </div>
 </div>
-<div className=" text-white hidden md:block capitalize font-semibold text-lg">Hello {user && user.email && user.email.split("@")[0]},</div>
+<div className=" text-white hidden md:block capitalize font-semibold text-lg">Hello {user &&(user.firstName&&user.firstName|| user.email.split("@")[0])},</div>
 </div>  
     </div>
     {showDrawer&&<Drawer setShowDrawer={setShowDrawer} />}

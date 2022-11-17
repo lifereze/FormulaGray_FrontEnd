@@ -111,6 +111,7 @@ export const Navbar = () => {
     }
    
     getUser();
+  console.log(user)
       },[])
   return (
     <div className="relative bg-gray-50">
@@ -332,8 +333,8 @@ export const Navbar = () => {
                 Sign up
               </a>
             </div>||
-            <div className="">
-              {user && user.email && user.email.split("@")[0]}
+            <div className=" font-semibold capitalize text-purple-900">
+              {user &&user.firstName && user.firstName|| user.email && user.email.split("@")[0]}
            
             </div>}
           </div>

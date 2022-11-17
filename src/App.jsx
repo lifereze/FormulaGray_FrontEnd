@@ -9,7 +9,8 @@ import { Applications } from "./components/dashboard/applications/Applications";
 import { Programs } from "./components/dashboard/programs/Programs";
 import { Students } from "./components/dashboard/students/Students";
 import { Visa } from "./components/dashboard/Visa";
-import { AddStudent } from "./components/dashboard/AddStudent";
+import { AddStudent } from "./components/dashboard/students/AddStudent";
+import { EditStudent } from "./components/dashboard/students/EditStudent";
 import { ViewEditStudent } from "./components/dashboard/ViewEditStudent";
 import { Countdown } from "./components/countdown/Countdown";
 import { RecruitmentPartnerRegister } from "./components/pages/recruitmentPartnerJourney/RecruitmentPartnerRegister";
@@ -26,11 +27,13 @@ function App() {
           <Route path="/applications" element={<Applications />} />
           <Route path="/programs" element={<Programs />} />
           <Route path="/students" element={<Students />} />
+          <Route path="/student/:id" element={<EditStudent />} />
           <Route path="/schools" element={<Schools />} />
           <Route path="/visa" element={<Visa />} />
           <Route path="/addStudent" element={<AddStudent />} />
           <Route path="/viewStudent" element={<ViewEditStudent />} />
           <Route path="/countdown" element={<Countdown />} />
+
           <Route
             path="/recruitmentPartner/register"
             element={<RecruitmentPartnerRegister />}

@@ -41,3 +41,35 @@ export const updateRecruitmentDetails = async (data) => {
       return error.response;
     });
 };
+export const uploadStudent = async (data) => {
+  return await api
+    .post("/student/create", data)
+    .then((response) => response)
+    .catch((error) => {
+      return error.response;
+    });
+};
+export const getAllStudents = async () => {
+  return await api
+    .get("/student/students")
+    .then((response) => response)
+    .catch((error) => {
+      return error.response;
+    });
+};
+export const getStudent = async (id) => {
+  return await api
+    .get(`/student/get/${id}`)
+    .then((response) => response)
+    .catch((error) => {
+      return error.response;
+    });
+};
+export const updateStudent = async (id) => {
+  return await api
+    .patch(`/student/edit/${id}`)
+    .then((response) => response)
+    .catch((error) => {
+      return error.response;
+    });
+};

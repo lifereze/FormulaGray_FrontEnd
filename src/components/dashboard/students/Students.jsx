@@ -1,9 +1,29 @@
-import React from "react";
+import React,{useEffect,useState} from "react";
 import { Navbar } from "../Navbar";
 import { Table } from "./Table";
 import SideBar from "../SideBar";
 import Banner from "../Banner";
+import { getAllStudents } from "../../../data/api/authenticatedRequests";
 export const Students = () => {
+  const [students,setStudents]=useState();
+  const [loading,setLoading]=useState(false);
+  useEffect(()=>{
+const getStudents=async ()=>{
+try {
+  setLoading(true)
+  const res= await getAllStudents();
+  setStudents(res.data.students)
+  setLoading(false)
+console.log(res.data.students);
+
+} catch (error) {
+ console.log(error) 
+}
+
+
+}
+getStudents();
+  },[])
   return (
     <div className=" grid grid-cols-12">
 
@@ -22,12 +42,13 @@ export const Students = () => {
                   <div className="divide-y divide-gray-200">
                     <div className=" text-center">
                       <div>
-                        <Table
-                          heading="Students"
-                          buttonName="Add student"
+                       {!loading && students&& <Table
+                   
+                          students={students}
+                       
                           buttonLink="/addStudent"
-                          editLink="/viewEditStudent"
-                        />
+                     
+                        />}
                       </div>
                     </div>
                   </div>
