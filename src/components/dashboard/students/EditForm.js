@@ -7,9 +7,10 @@ import {
   updateStudent,
   getStudent,
 } from "../../../data/api/authenticatedRequests";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 export const EditForm = (props) => {
   let { id } = useParams();
+  const navigate = useNavigate();
   const initialize = {
     firstName: "",
     lastName: "",
@@ -35,29 +36,11 @@ export const EditForm = (props) => {
       lastName,
       email,
       phoneNumber,
-      country,
-      city,
-      state,
-      streetAddress,
-      zipCode,
+
       location,
     },
     setStudent,
   ] = useState(initialize);
-  useEffect(() => {
-    const getAStudent = async () => {
-      console.log(id);
-      try {
-        const res = await getStudent(id);
-        console.log(res);
-
-        setStudent(res.data.student);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    getAStudent();
-  }, []);
 
   const [isLoading, setIsLoading] = useState();
 
@@ -80,7 +63,25 @@ export const EditForm = (props) => {
   const [isStatementLoading, setStatementLoading] = useState();
   const [statementUrl, setStatementUrl] = useState("");
   const [statementName, setStatementName] = useState();
+  useEffect(() => {
+    const getAStudent = async () => {
+      console.log(id);
+      try {
+        const res = await getStudent(id);
+        console.log(res);
 
+        setStudent(res.data?.student);
+        setResumeUrl(res.data?.student?.resume);
+        setDegreeUrl(res.data?.student?.BACertificate);
+        setTranscriptUrl(res.data?.student?.BATranscript);
+        setRecommendationUrl(res.data?.student?.recommendationLetter);
+        setStatementUrl(res.data?.student?.statementOfPurpose);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getAStudent();
+  }, []);
   const uploadDoc = (input) => {
     const files = input.target.files || [];
 
@@ -161,28 +162,34 @@ export const EditForm = (props) => {
       ...prevState,
       [input.target.name]: input.target.value,
     }));
-    console.log(firstName, lastName, country);
+    console.log(firstName, lastName, location.country);
   };
   const onSubmitHandler = async () => {
     setIsLoading(true);
-    const res = await updateStudent({
-      firstName,
-      lastName,
-      email,
-      phoneNumber,
-      country,
-      city,
-      state,
-      streetAddress,
-      zipCode,
-      BACertificate: degreeUrl,
-      BATranscript: transcriptUrl,
-      resume: resumeUrl,
-      recommendationLetter: recommendationUrl,
-      statementOfPurpose: statementUrl,
-    });
+    const res = await updateStudent(
+      {
+        firstName,
+        lastName,
+        email,
+        phoneNumber,
+        country: location.country,
+        city: location.city,
+        state: location.state,
+        streetAddress: location.streetAddress,
+        zipCode: location.zipCode,
+        BACertificate: degreeUrl,
+        BATranscript: transcriptUrl,
+        resume: resumeUrl,
+        recommendationLetter: recommendationUrl,
+        statementOfPurpose: statementUrl,
+      },
+      id
+    );
     setIsLoading(false);
     console.log(res);
+    if (res.status == 200) {
+      navigate("/students");
+    }
   };
   return (
     <div className="">
@@ -276,8 +283,8 @@ export const EditForm = (props) => {
                     </label>
                     <select
                       id="country"
-                      name="country"
-                      value={country}
+                      name="location.country"
+                      value={location.country}
                       onChange={(e) => handleChange(e)}
                       autoComplete="country-name"
                       className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
@@ -320,7 +327,7 @@ export const EditForm = (props) => {
                     <input
                       onChange={(e) => handleChange(e)}
                       type="text"
-                      name="city"
+                      name="location.city"
                       id="city"
                       defaultValue={location.city}
                       autoComplete="city"
@@ -337,7 +344,7 @@ export const EditForm = (props) => {
                     <input
                       onChange={(e) => handleChange(e)}
                       type="text"
-                      name="state"
+                      name="location.state"
                       id="state"
                       defaultValue={location.state}
                       autoComplete="state"
@@ -354,7 +361,7 @@ export const EditForm = (props) => {
                     <input
                       onChange={(e) => handleChange(e)}
                       type="text"
-                      name="streetAddress"
+                      name="location.streetAddress"
                       defaultValue={location.streetAddress}
                       id="street-address"
                       autoComplete="street-address"
@@ -371,7 +378,7 @@ export const EditForm = (props) => {
                     <input
                       onChange={(e) => handleChange(e)}
                       type="text"
-                      name="zipCode"
+                      name="location.zipCode"
                       defaultValue={location.zipCode}
                       id="zip-code"
                       autoComplete="zip-code"

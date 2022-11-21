@@ -65,9 +65,9 @@ export const getStudent = async (id) => {
       return error.response;
     });
 };
-export const updateStudent = async (id) => {
+export const updateStudent = async (data, id) => {
   return await api
-    .patch(`/student/edit/${id}`)
+    .patch(`/student/edit/${id}`, data)
     .then((response) => response)
     .catch((error) => {
       return error.response;

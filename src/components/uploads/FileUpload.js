@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from "react";
 import MusicLoader from "../loaders/MusicLoader";
 import Spinner from "../utils/BlueSpinner";
 import { AiFillFilePdf } from "react-icons/ai";
+import { MdEdit } from "react-icons/md";
+
 function FileUpload({ uploadDoc, isDocLoading, docName, docUrl, title, name }) {
   const fileRef = useRef(null);
 
@@ -13,15 +15,29 @@ function FileUpload({ uploadDoc, isDocLoading, docName, docUrl, title, name }) {
     <div>
       {(docUrl !== "" && (
         <div className="rounded p-4 text-center group">
-          <div className="flex justify-start mb-2 text-sm text-gray-600 font-semibold">
-            {title}
+          <div className="flex justify-between mb-2 items-center text-sm text-gray-600 font-semibold">
+            <div className="">{title}</div>
+            <div
+              className="  p-1 rounded-lg  hover:bg-gray-300 cursor-pointer"
+              onClick={() => thumbnailUpload()}
+            >
+              <MdEdit className=" text-purple-900 text-xl" />
+              <input
+                name={name ? name : "thumbnail"}
+                type="file"
+                className="hidden"
+                ref={fileRef}
+                onChange={uploadDoc}
+                accept=".pdf,.doc"
+              />
+            </div>
           </div>
           {!isDocLoading && (
             <div className="flex space-x-2 items-center justify-center ">
               <div className="">
                 <AiFillFilePdf className=" text-blue-500 text-xl" />
               </div>
-              <div className="">{docName}</div>
+              <div className="">{docName ? docName : name}</div>
             </div>
           )}
           {isDocLoading && (

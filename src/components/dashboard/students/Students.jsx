@@ -32,7 +32,7 @@ getStudents();
     </div>
     <div className="md:col-span-10 col-span-12 h-screen overflow-y-scroll w-full overflow-x-hidden">
           <Banner />
-        <div>
+        {!loading &&<div className=" flex-grow">
           <div className="ml-2 ">
               <section
                 aria-labelledby="activity-title"
@@ -42,7 +42,7 @@ getStudents();
                   <div className="divide-y divide-gray-200">
                     <div className=" text-center">
                       <div>
-                       {!loading && students&& <Table
+                       { students&& <Table
                    
                           students={students}
                        
@@ -55,7 +55,7 @@ getStudents();
                 </div>
               </section>
           </div>
-        </div>
+        </div>}
       </div>
     </div>
   );

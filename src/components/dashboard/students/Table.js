@@ -151,7 +151,7 @@ export const Table = ({ students }) => {
                       </td>
                       <td className="whitespace-nowrap py-4 px-3  text-left text-sm font-medium sm:pr-6">
                         <a
-                          href={`/student/${student._id}`}
+                          href={`/student/edit/${student._id}`}
                           className="text-indigo-600 hover:text-indigo-900"
                         >
                           Edit
