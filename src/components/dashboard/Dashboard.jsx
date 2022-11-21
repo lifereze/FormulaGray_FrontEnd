@@ -8,7 +8,7 @@ import {HiDocumentText} from 'react-icons/hi'
 import {BsFillCheckSquareFill} from 'react-icons/bs'
 import {MdCancelPresentation,MdCastForEducation} from 'react-icons/md'
 import {userStore} from '../../stores'
-
+import { getAllStudents } from "../../data/api/authenticatedRequests";
 import StudentUpload from "../modals/StudentUpload";
 import {refreshSession} from '../../data/api/authenticatedRequests'
 export const Dashboard = () => {
@@ -16,6 +16,7 @@ export const Dashboard = () => {
   const setUser = userStore((state) => state.storeUser);
 
   const [studentUpload,setStudentUpload]=useState(false);
+  const [studentCount,setStudentCount]=useState();
   useEffect(()=>{
     const getUser= async ()=>{
        const res=await refreshSession();
@@ -25,6 +26,15 @@ export const Dashboard = () => {
      }
     
      getUser();
+       },[])
+       useEffect(()=>{
+        const getStudents= async ()=>{
+const res=await getAllStudents();
+setStudentCount(res?.data?.students?.length)
+console.log(res)
+        }
+        getStudents();
+
        },[])
   return (
     <>
@@ -72,7 +82,7 @@ export const Dashboard = () => {
     </div>
     <div className=' md:col-span-3 col-span-6'>
     <Info icon={   <MdCastForEducation className=' text-xl text-white' />}
-    number={7}
+    number={studentCount?studentCount:''}
     title='Students'
     />
     </div>
