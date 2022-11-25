@@ -1,6 +1,8 @@
 import React from "react";
 import { Navbar } from "../Navbar";
-import { ProgramsCard } from "./ProgramsCard";
+import { ProgramsSection } from "./ProgramsSection";
+import StudentFilter from "./filter/StudentFilter";
+import Filter from "./filter/Filter";
 import SideBar from "../SideBar";
 import Banner from "../Banner";
 export const Programs = () => {
@@ -22,7 +24,16 @@ export const Programs = () => {
                       <div className="text-xl font-bold text-indigo-500 mb-3 border-b p-2">
                         Programs
                       </div>
-                      <ProgramsCard />
+                      <div className=" grid grid-cols-10">
+                        <div className=" col-span-4">
+                        <Filter />
+                        </div>
+                     <div className=" col-span-6">
+                     <ProgramsSection />
+                     </div>
+                      
+                      </div>
+                     
                     </div>
                   </div>
                 </div>

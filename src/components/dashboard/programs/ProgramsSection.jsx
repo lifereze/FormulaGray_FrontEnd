@@ -119,7 +119,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export const ProgramsCard = () => {
+export const ProgramsSection = () => {
   return (
     <div>
       <ul
