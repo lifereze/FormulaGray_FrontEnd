@@ -5,6 +5,7 @@ import { Signin } from "./components/Signin";
 import { Signup } from "./components/Signup";
 import { Dashboard } from "./components/dashboard/Dashboard";
 import { Schools } from "./components/dashboard/schools/Schools";
+import School from "./components/dashboard/schools/School";
 import { Applications } from "./components/dashboard/applications/Applications";
 import { Programs } from "./components/dashboard/programs/Programs";
 import { Students } from "./components/dashboard/students/Students";
@@ -29,6 +30,7 @@ function App() {
           <Route path="/students" element={<Students />} />
           <Route path="/student/edit/:id" element={<EditStudent />} />
           <Route path="/schools" element={<Schools />} />
+          <Route exact path="/schools/school" element={<School />} />
           <Route path="/visa" element={<Visa />} />
           <Route path="/addStudent" element={<AddStudent />} />
           <Route path="/viewStudent" element={<ViewEditStudent />} />
