@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from "react";
 import Select from "react-select";
 import countryList from "react-select-country-list";
-import { intakes } from "../../../../data/data";
+import { intakes } from "../../data/data";
 function ProgramFilter() {
   const countries = useMemo(() => countryList().getData(), []);
   return (

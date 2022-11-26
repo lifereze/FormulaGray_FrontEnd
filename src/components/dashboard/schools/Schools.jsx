@@ -3,6 +3,7 @@ import { Navbar } from "../Navbar";
 import { SchoolsCard } from "./SchoolsCard";
 import SideBar from "../SideBar";
 import Banner from "../Banner";
+import Filter from "../../filter/Filter";
 export const Schools = () => {
   return (
     <div className=" grid grid-cols-12">
@@ -14,15 +15,22 @@ export const Schools = () => {
           <Banner />
         <div>
           <div className="mx-auto  px-4 sm:px-6 lg:px-8 xl:grid  xl:grid-cols-3">
-            <div className="xl:col-span-5 xl:border-r xl:border-gray-200 xl:pr-8 ">
+            <div className="xl:col-span-5  ">
            
                 <div>
                   <div className="divide-y divide-gray-200">
                     <div className="pt-3 text-center">
-                      <div className="text-xl font-bold text-indigo-500 mb-3 border-b p-2">
+                      <div className="text-xl font-bold text-blue-600 mb-3 border-b p-2">
                         Schools
                       </div>
+                      <div className=" grid grid-cols-10">
+                        <div className=" col-span-4">
+                          <Filter />
+                        </div>
+                      <div className="col-span-6">
                       <SchoolsCard />
+                      </div>
+                      </div>
                     </div>
                   </div>
                 </div>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from "react";
 import Select from "react-select";
 import countryList from "react-select-country-list";
-import { education } from "../../../../data/data";
+import { education } from "../../data/data";
 function StudentFilter() {
   const countries = useMemo(() => countryList().getData(), []);
   return (
