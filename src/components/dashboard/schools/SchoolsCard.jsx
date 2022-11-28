@@ -90,7 +90,7 @@ export const SchoolsCard = () => {
       className="grid  gap-3 grid-cols-2 "
     >
       {schools.map((school) => (
-        <a href="#">
+        <a href="/schools/school">
           <li
             key={school.name}
             className="col-span-1 flex flex-col rounded-lg bg-white text-center shadow"

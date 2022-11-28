@@ -4,14 +4,17 @@ import Campus1 from "../../../constants/images/uni.jpg";
 import Campus2 from "../../../constants/images/moi.jpg";
 import SideBar from "../SideBar";
 import Banner from "../Banner";
-import {FaFlagUsa} from 'react-icons/fa'
+import ProgramsCard from '../programs/ProgramsCard';
+import {FaFlagUsa,FaDonate,FaRegCalendarAlt} from 'react-icons/fa'
 import {IoLocationSharp} from 'react-icons/io5'
-import {AiOutlineHome} from 'react-icons/ai'
+import {AiOutlineHome,AiOutlineDollar} from 'react-icons/ai'
 import {GrDocumentText} from 'react-icons/gr'
 import {BsCheck2} from 'react-icons/bs'
+import {MdOutlineSchool} from 'react-icons/md'
+import {GiOpenBook} from 'react-icons/gi'
 function School() {
   return (
-    <div className=" grid grid-cols-12">
+    <div className=" grid grid-cols-12 ">
 
     <div className="md:col-span-2 hidden md:block h-screen overflow-y-hidden ">
     <SideBar />
@@ -51,7 +54,7 @@ function School() {
 <img src={Campus2} className="h-full w-full rounded-lg" />
 </div>
           </div>
-          <div className=' flex w-full mt-10 px-10 bg-blue-100'>
+          <div className=' flex w-full space-x-10 mt-10 px-10 pb-10 bg-blue-100'>
 <div className=' w-2/3 px-2'>
 <div className=' flex items-center py-4 space-x-4'>
     <div className=' p-2 bg-blue-200 rounded-full'>
@@ -79,7 +82,7 @@ Cheshire College – South & West offers exciting opportunities for their 11,000
         <BsCheck2 className=' font-semibold text-lg' />
     </div>
     <div className=' text-lg font-semibold'>
-        Work While Studying
+        Co-op/Internship participation
     </div>
 
 </div>
@@ -97,7 +100,7 @@ Cheshire College – South & West offers exciting opportunities for their 11,000
         <BsCheck2 className=' font-semibold text-lg' />
     </div>
     <div className=' text-lg font-semibold'>
-        Work While Studying
+        Conditional Offer letter
     </div>
 
 </div>
@@ -106,11 +109,144 @@ Cheshire College – South & West offers exciting opportunities for their 11,000
         <BsCheck2 className=' font-semibold text-lg' />
     </div>
     <div className=' text-lg font-semibold'>
-        Work While Studying
+       Accomoditions
     </div>
 
 </div>
 </div>
+<div className=' flex items-center py-4 space-x-4'>
+    <div className=' p-2 bg-blue-200 rounded-full'>
+<GiOpenBook className=' text-blue-600 text-2xl' />
+</div>
+<div className=' text-4xl font-semibold'>Programs</div>
+</div>
+<div className=' space-y-6'>
+    <ProgramsCard 
+    name= "Design, Surveying and Planning for Construction"
+    campus= "University of Toronto"
+    location= "Ellesmere Port"
+    intake='July 2023'
+    deadline='September 2023'
+    fees= "$14,250.00"
+    applicationFees='free'
+    commision="$250.00"
+    />
+    <ProgramsCard 
+    name= "Design, Surveying and Planning for Construction"
+    campus= "University of Toronto"
+    location= "Ellesmere Port"
+    intake='July 2023'
+    deadline='September 2023'
+    fees= "$14,250.00"
+    applicationFees='free'
+    commision="$250.00"
+    />
+    <ProgramsCard 
+    name= "Design, Surveying and Planning for Construction"
+    campus= "University of Toronto"
+    location= "Ellesmere Port"
+    intake='July 2023'
+    deadline='September 2023'
+    fees= "$14,250.00"
+    applicationFees='free'
+    commision="$250.00"
+    />
+</div>
+</div>
+<div className='w-1/3'>
+   <div className=' py-2 text-lg'> Institution details</div>
+   <div className=' bg-white text-gray-500 space-y-4 rounded-lg p-4'>
+<div className=' flex justify-between items-center'>
+    <div className=''>Founded</div>
+    <div className=''>2017</div>
+</div>
+<div className=' flex justify-between items-center'>
+    <div className=''>School ID</div>
+    <div className=''>2007</div>
+</div>
+<div className=' flex justify-between items-center'>
+    <div className=''>Provider ID number
+</div>
+    <div className=''>10005972</div>
+</div>
+<div className=' flex justify-between items-center'>
+    <div className=''>Institution type
+</div>
+    <div className=''>Public</div>
+</div>
+   </div>
+   <div className=' py-2 text-lg mt-4'> Cost and Duration</div>
+   <div className=' bg-white  space-y-4 rounded-lg p-4'>
+<div className=' flex items-center space-x-6'>
+    <div className=' text-blue-500'>
+        <FaDonate className=' text-4xl' />
+    </div>
+<div className=''>
+    <div className=' text-lg'>£ 0.00 GPB </div>
+    <div className=' text-sm text-gray-500'>Application fee</div>
+</div>
+</div>
+<div className=' flex items-center space-x-6'>
+    <div className=' text-blue-500'>
+        <FaRegCalendarAlt className=' text-4xl' />
+    </div>
+<div className=''>
+    <div className=' text-lg'>No Data Available  </div>
+    <div className=' text-sm text-gray-500'>Average graduate program</div>
+</div>
+</div>
+<div className=' flex items-center space-x-6'>
+    <div className=' text-blue-500'>
+        <FaRegCalendarAlt className=' text-4xl' />
+    </div>
+<div className=''>
+    <div className=' text-lg'>2 Years </div>
+    <div className=' text-sm text-gray-500'>Average undergraduate program</div>
+</div>
+</div>
+<div className=' flex items-center space-x-6'>
+    <div className=' text-blue-500'>
+        <AiOutlineDollar className=' text-4xl' />
+    </div>
+<div className=''>
+    <div className=' text-lg'>£9,207.00 GBP / Year </div>
+    <div className=' text-sm text-gray-500'>Cost of Living</div>
+</div>
+</div>
+<div className=' flex items-center space-x-6'>
+    <div className=' text-blue-500'>
+        <MdOutlineSchool className=' text-4xl' />
+    </div>
+<div className=''>
+    <div className=' text-lg'>£11,383.33 GBP / Year </div>
+    <div className=' text-sm text-gray-500'>Tuition</div>
+</div>
+</div>
+    </div>
+    <div className='py-2 text-lg mt-4'>Average Time to Receive Letter of Acceptance</div>
+    <div className=' bg-white text-gray-500 space-y-4 rounded-lg p-4'>
+<div className=' flex justify-between items-center'>
+    <div className=''>January - April</div>
+    <div className=''>N/A</div>
+</div>
+<div className=' flex justify-between items-center'>
+    <div className=''>May - August</div>
+    <div className=''>N/A</div>
+</div>
+<div className=' flex justify-between items-center'>
+    <div className=''>September - December
+</div>
+    <div className=''>N/A</div>
+</div>
+
+   </div>
+   <div className='py-2 text-lg mt-4'>Top Disciplines</div>
+   <div className=' bg-white text-gray-500 space-y-4 rounded-lg p-4'>
+   <div className=''>Engineering and Technology</div>
+   <div className=''>Business, Management and Economics</div>
+   <div className=''>Arts</div>
+   <div className=''>Education</div>
+   </div>
 </div>
           </div>
           </div>
