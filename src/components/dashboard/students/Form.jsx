@@ -4,6 +4,9 @@ import { firebaseUploadImg,firebaseUploadDoc } from "../../../data/api/upload";
 import { getDownloadURL } from "firebase/storage";
 import Spinner from '../../utils/Spinner';
 import { uploadStudent } from '../../../data/api/authenticatedRequests';
+import {useDropzone} from 'react-dropzone';
+
+
 export const Form = (props) => {
   const initialize = {
     firstName:"",
@@ -137,6 +140,32 @@ const [statementName,setStatementName]=useState();
       //Loader
     };
   };
+ 
+    const {getRootProps, getInputProps, open, acceptedFiles} = useDropzone({
+      // Disable click and keydown behavior
+      noClick: true,
+      noKeyboard: true
+    });
+      
+   if(acceptedFiles.length>0){
+    const uploadTask = firebaseUploadDoc(acceptedFiles[0]);
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const prog = Math.round(
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        );
+      },
+      (err) => {},
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref).then((url) => {console.log(url)})})
+  console.log(acceptedFiles)
+   }
+    const files = acceptedFiles.map(file => (
+      <li key={file.path}>
+        {file.path} - {file.size} bytes
+      </li>
+    ))
   const handleChange = (input) => {
     setStudent((prevState) => ({
       ...prevState,
@@ -352,6 +381,19 @@ console.log(res)
                 <FileUpload uploadDoc={uploadDoc} isDocLoading={isResumeLoading} docName={resumeName} docUrl={resumeUrl} name='resume' title="Resume"  />
                 <FileUpload uploadDoc={uploadDoc} isDocLoading={isRecommendationLoading} docName={recommendationName} docUrl={recommendationUrl} name='recommendation' title="Letter of recommendation"  />
                 <FileUpload uploadDoc={uploadDoc} isDocLoading={isStatementLoading} docName={statementName} docUrl={statementUrl} name='statement' title="Statement of purpose"  />
+                <div className="container">
+      <div {...getRootProps({className: 'dropzone'})}>
+        <input {...getInputProps()} />
+        <p>Drag 'n' drop some files here</p>
+        <button type="button" onClick={open}>
+          Open File Dialog
+        </button>
+      </div>
+      <aside>
+        <h4>Files</h4>
+        <ul>{files}</ul>
+      </aside>
+    </div>
                 { !isLoading&& <button
 
 onClick={onSubmitHandler}
