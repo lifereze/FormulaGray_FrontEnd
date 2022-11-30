@@ -125,7 +125,7 @@ export const ProgramsSection = () => {
     <div>
   
         {projects.map((project) => (
-          <div className="p-2 border text-left mb-2 border-gray-500 rounded-lg ">
+          <div className="p-2 border text-left mb-4 border-gray-500 bg-gray-200 shadow-lg rounded-lg ">
                 <div className=" text-blue-600 font-semibold">{project.name}</div>
             <div className=" flex  justify-between items-center py-4">
             <div className="">

@@ -4,6 +4,7 @@ import { Table } from "./Table";
 import SideBar from "../SideBar";
 import Banner from "../Banner";
 import { getAllStudents } from "../../../data/api/authenticatedRequests";
+import PageLoader  from "../../utils/PageLoader";
 export const Students = () => {
   const [students,setStudents]=useState();
   const [loading,setLoading]=useState(false);
@@ -55,7 +56,7 @@ getStudents();
                 </div>
               </section>
           </div>
-        </div>}
+        </div>|| <PageLoader/>}
       </div>
     </div>
   );

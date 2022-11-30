@@ -6,7 +6,7 @@ function StudentFilter() {
   const countries = useMemo(() => countryList().getData(), []);
   return (
     <div className=" w-full text-left border-b pb-6 border-gray-500 ">
-      <div className=" text-blue-500 text-left text-lg pb-4  ">Eligibility</div>
+      <div className=" text-white text-left text-lg pb-4  ">Eligibility</div>
       <div className="  ">
         <div className=" pb-2">Select Student</div>
         <div className="">

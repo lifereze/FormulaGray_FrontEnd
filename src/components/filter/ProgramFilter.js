@@ -5,8 +5,8 @@ import { intakes } from "../../data/data";
 function ProgramFilter() {
   const countries = useMemo(() => countryList().getData(), []);
   return (
-    <div className=" w-full text-left border-b pb-6 pt-10 border-gray-500 ">
-      <div className=" text-blue-500 text-left text-lg pb-4  ">
+    <div className=" w-full text-left  pb-6 pt-10 ">
+      <div className=" text-white text-left text-lg pb-4  ">
         Program Filters
       </div>
       <div className="  ">

@@ -18,10 +18,11 @@ import { RecruitmentPartnerRegister } from "./components/pages/recruitmentPartne
 import { VerifyEmail } from "./components/pages/VerifyEmail";
 function App() {
   return (
-    <div className="">
+    <div className=" bg-midnight">
       <Router>
         <Routes>
           <Route path="/" element={<LandingPage />} />{" "}
+        
           <Route path="/signin" element={<Signin />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/dashboard" element={<Dashboard />} />
@@ -44,6 +45,7 @@ function App() {
             path="/emailVerificationLink/:token"
             element={<VerifyEmail />}
           />
+       
         </Routes>
       </Router>
     </div>

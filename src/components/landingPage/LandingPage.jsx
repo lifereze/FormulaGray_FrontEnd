@@ -9,7 +9,7 @@ import { Footer } from "./Footer";
 
 export const LandingPage = () => {
   return (
-    <div className="">
+    <div className=" bg-white">
       <Navbar />
       <Hero />
       <Hero1 />

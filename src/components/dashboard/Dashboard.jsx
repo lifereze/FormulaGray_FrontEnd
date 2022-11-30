@@ -51,7 +51,7 @@ console.log(res)
               <div className=" ">
 
   <Banner />
-  <div className=' flex bg-blue-500 md:px-10 px-4 justify-between items-center'>
+  <div className=' flex  bg-blue-500 pt-5 md:px-10 px-4 justify-between items-center'>
         <div className=' md:text-2xl font-semibold'>
         {/* Welcome, {user && user.email && user.email.split("@")[0]} */}
         </div>
@@ -61,7 +61,7 @@ console.log(res)
 </div>
 </a>
       </div>
-<div className='grid bg-blue-500 md:px-10 px-4 pb-10 grid-cols-12 gap-x-4 gap-y-4 pt-10'>
+<div className='grid bg-blue-500  md:px-10 px-4 pb-10 grid-cols-12 gap-x-4 gap-y-4 pt-10'>
     <div className=' md:col-span-3 col-span-6'>
     <Info icon={   <HiDocumentText className=' text-xl text-white' />}
     number={7}
