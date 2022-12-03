@@ -61,6 +61,7 @@ const [recommendationName,setRecommendationName]=useState();
 const [statementUrl, setStatementUrl] = useState("");
 const [statementName,setStatementName]=useState();
 
+
   const uploadDoc = (input) => {
     const files = input.target.files || [];
  
@@ -158,9 +159,14 @@ const [statementName,setStatementName]=useState();
       },
       (err) => {},
       () => {
-        getDownloadURL(uploadTask.snapshot.ref).then((url) => {console.log(url)})})
+        getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+         
+          
+          console.log(url)})})
   console.log(acceptedFiles)
+
    }
+  
     const files = acceptedFiles.map(file => (
       <li key={file.path}>
         {file.path} - {file.size} bytes
@@ -381,18 +387,23 @@ console.log(res)
                 <FileUpload uploadDoc={uploadDoc} isDocLoading={isResumeLoading} docName={resumeName} docUrl={resumeUrl} name='resume' title="Resume"  />
                 <FileUpload uploadDoc={uploadDoc} isDocLoading={isRecommendationLoading} docName={recommendationName} docUrl={recommendationUrl} name='recommendation' title="Letter of recommendation"  />
                 <FileUpload uploadDoc={uploadDoc} isDocLoading={isStatementLoading} docName={statementName} docUrl={statementUrl} name='statement' title="Statement of purpose"  />
-                <div className="container">
-      <div {...getRootProps({className: 'dropzone'})}>
+                <div className="mb-4 mt-10 text-left text-sm text-gray-600 font-semibold">
+          Other Files
+          </div>
+          <div className="flex justify-center ">
+                <div className="p-8  w-10/12  border-2 border-dashed w-full">
+      <div {...getRootProps({className: 'dropzone'})} onClick={open}>
         <input {...getInputProps()} />
         <p>Drag 'n' drop some files here</p>
-        <button type="button" onClick={open}>
-          Open File Dialog
+        <button type="button" className='bg-midnight text-white rounded-full py-2 px-6'  >
+          Other Files
         </button>
       </div>
       <aside>
-        <h4>Files</h4>
+        <h4 className='text-midnight font-semibold'>Files</h4>
         <ul>{files}</ul>
       </aside>
+    </div>
     </div>
                 { !isLoading&& <button
 

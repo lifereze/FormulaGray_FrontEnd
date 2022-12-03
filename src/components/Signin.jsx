@@ -41,7 +41,7 @@ export const Signin = () => {
   return (
     <>
       {}
-      <div className="flex overflow-y-hidden h-screen min-h-full">
+      <div className="flex overflow-y-hidden text-white h-screen min-h-full">
         <div>
           <Notification type={info.type} message={info.message} />
         </div>
@@ -58,7 +58,7 @@ export const Signin = () => {
               <a href="/">
                 <img className="h-12 w-auto" src={Logo} alt="Formular Gray" />
               </a>
-              <h2 className="mt-6 text-3xl font-bold tracking-tight text-gray-900">
+              <h2 className="mt-6 text-3xl font-bold tracking-tight text-gray-200">
                 Sign in to your account
               </h2>
             </div>
@@ -69,7 +69,7 @@ export const Signin = () => {
                   <div>
                     <label
                       htmlFor="email"
-                      className="block text-sm font-medium text-gray-700"
+                      className="block text-sm font-medium text-gray-400"
                     >
                       Email address
                     </label>
@@ -94,7 +94,7 @@ export const Signin = () => {
                   <div className="space-y-1">
                     <label
                       htmlFor="password"
-                      className="block text-sm font-medium text-gray-700"
+                      className="block text-sm font-medium text-gray-400"
                     >
                       Password
                     </label>

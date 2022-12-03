@@ -66,7 +66,7 @@ export const Signup = () => {
   return (
     <>
       {}
-      <div className="flex overflow-y-hidden h-screen min-h-full">
+      <div className="flex overflow-y-hidden h-screen text-white min-h-full">
         <div>
           <Notification type={info.type} message={info.message} />
         </div>
@@ -83,7 +83,7 @@ export const Signup = () => {
               <a href="/">
                 <img className="h-8 w-auto" src={Logo} alt="Your Company" />
               </a>
-              <h2 className="mt-2 text-3xl font-bold tracking-tight text-gray-900">
+              <h2 className="mt-2 text-3xl font-bold tracking-tight text-gray-500">
                 Create an account
               </h2>
             </div>
@@ -94,7 +94,7 @@ export const Signup = () => {
                   <div>
                     <label
                       htmlFor="email"
-                      className="block text-sm font-medium text-gray-700"
+                      className="block text-sm font-medium text-gray-300"
                     >
                       Email address
                     </label>
@@ -116,7 +116,7 @@ export const Signup = () => {
                     </div>
                   </div>
                   <div>
-                    <label className="text-base font-medium text-gray-900">
+                    <label className="text-base font-medium text-gray-500">
                       Sign up as:
                     </label>
                     <fieldset className="mt-3">
@@ -139,7 +139,7 @@ export const Signup = () => {
                             />
                             <label
                               htmlFor={option.id}
-                              className="ml-3 block text-sm font-medium text-gray-700"
+                              className="ml-3 block text-sm font-medium text-gray-300"
                             >
                               {option.title}
                             </label>
@@ -152,7 +152,7 @@ export const Signup = () => {
                   <div className="space-y-1">
                     <label
                       htmlFor="password"
-                      className="block text-sm font-medium text-gray-700"
+                      className="block text-sm font-medium text-gray-300"
                     >
                       Password
                     </label>
@@ -176,7 +176,7 @@ export const Signup = () => {
                   <div className="space-y-1">
                     <label
                       htmlFor="password"
-                      className="block text-sm font-medium text-gray-700"
+                      className="block text-sm font-medium text-gray-300"
                     >
                       Confirm password
                     </label>
