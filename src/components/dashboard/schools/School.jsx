@@ -24,13 +24,13 @@ function School() {
           <div className=' flex space-x-6 items-center pt-8 pb-8 px-20'>
             <img src={Logo} className=" w-40 object-cover h-20" />
             <div className=''>
-            <div className=' text-4xl font-semibold'>Cheshire College South and West - Ellesmere Port</div>
+            <div className=' text-4xl font-semibold text-white'>Cheshire College South and West - Ellesmere Port</div>
             <div className=' flex space-x-2 text-sm pt-2'>
-                <div className='flex items-center space-x-1 border-r text-gray-500 pr-2 border-gray-500'>
+                <div className='flex items-center space-x-1 border-r text-gray-400 pr-2 border-gray-500'>
                     <FaFlagUsa className=' text-base mt-1'/>
 <div className=''>Ellesmere Port, North West, GB</div>
                 </div>
-                <div className='flex items-center space-x-1  text-gray-500  '>
+                <div className='flex items-center space-x-1  text-gray-400  '>
                     <IoLocationSharp className=' text-lg'/>
 <div className=''>Off Sutton Way</div>
                 </div>
@@ -114,11 +114,18 @@ Cheshire College – South & West offers exciting opportunities for their 11,000
 
 </div>
 </div>
+<div className=' flex justify-between items-center'>
 <div className=' flex items-center py-4 space-x-4'>
     <div className=' p-2 bg-blue-200 rounded-full'>
 <GiOpenBook className=' text-blue-600 text-2xl' />
 </div>
 <div className=' text-4xl font-semibold'>Programs</div>
+</div>
+<div className=' mr-4  text-blue-600 p-2 cursor-pointer'>
+    <a href='/programs'>
+    View All
+    </a>
+</div>
 </div>
 <div className=' space-y-6'>
     <ProgramsCard 
