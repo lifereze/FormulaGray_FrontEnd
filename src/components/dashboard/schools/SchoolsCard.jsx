@@ -8,7 +8,7 @@ export const SchoolsCard = ({institution}) => {
       className=""
     >
       
-        <a href="/schools/school">
+        <a href={`/schools/${institution._id}`}>
           <div className="">
           <div
             key={institution.name}
@@ -17,7 +17,7 @@ export const SchoolsCard = ({institution}) => {
             <div>
               <img
                 className="mx-auto h-48 w-full flex-shrink-0 object-cover rounded-md"
-                src={institution.imageUrl}
+                src={'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYESPV6q_MWDslES3T3kQ7b0LKfuGdVT6kTw&usqp=CAU'}
                 alt=""
               />
             </div>
@@ -25,7 +25,7 @@ export const SchoolsCard = ({institution}) => {
               <h3 className="mt-2 text-base font-medium text-gray-900">
                 {institution.name}
               </h3>
-              <div className=" text-midnight text-sm">Nigeria</div>
+              <div className=" text-midnight text-sm">{institution.country}</div>
             
             </div>
        

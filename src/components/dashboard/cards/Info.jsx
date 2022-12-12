@@ -1,19 +1,21 @@
 import React from 'react'
 
-function Info({icon,number,title}) {
+function Info({icon,number,title,color,iconBg}) {
   return (
-    <div className=' w-full flex justify-between py-3 items-center px-4 bg-white text-black rounded-lg'>
-<div className=''>
-    <div className=' text-gray-500 uppercase'>
-      {title}
-    </div>
-    <div className=' font-semibold'>
-        {number}
-    </div>
-</div>
-      <div className='p-2 bg-blue-600 rounded-full'>
+    <div style={{backgroundColor:color}} className={` w-full flex  flex-col  justify-between items-start py-3  px-4  text-black rounded-lg`}>
+ <div style={{backgroundColor:iconBg}} className='p-3 rounded-md'>
      {icon}
       </div>
+      <div className=' pt-2 text-lg font-bold'>
+        {number}
+    </div>
+    <div className=' text-gray-600  text-sm uppercase'>
+
+      {title}
+    </div>
+    
+
+     
     </div>
   )
 }

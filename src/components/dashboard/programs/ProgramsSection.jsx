@@ -1,7 +1,11 @@
+import React, {useState,useEffect} from "react";
 import { EllipsisVerticalIcon } from "@heroicons/react/20/solid";
 import {GoLocation} from 'react-icons/go'
 import {AiOutlineArrowRight} from 'react-icons/ai'
-const projects = [
+import { getAllPrograms } from "../../../data/api/authenticatedRequests";
+import PageLoader  from "../../utils/PageLoader";
+import { Link } from "react-router-dom";
+const programss = [
   {
     name: "Design, Surveying and Planning for Construction",
     campus: "University of Toronto",
@@ -121,15 +125,27 @@ function classNames(...classes) {
 }
 
 export const ProgramsSection = () => {
+  const [programs,setPrograms]=useState();
+  const [loading,setLoading]=useState();
+  useEffect(()=>{
+const getPrograms=async ()=>{
+  setLoading(true);
+  const res = await getAllPrograms();
+  setLoading(false);
+  setPrograms(res.data)
+  console.log(res)
+}
+getPrograms();
+  },[])
   return (
-    <div>
+    <div className="grid grid-cols-10 gap-4">
   
-        {projects.map((project) => (
-          <div className="p-2 border text-left mb-4 border-gray-500 bg-gray-200 shadow-lg rounded-lg ">
-                <div className=" text-blue-600 font-semibold">{project.name}</div>
+        {!loading&&programs&&programs.map((program) => (
+          <div className="p-2 border text-left mb-4 col-span-5 border-gray-500 bg-gray-200 shadow-lg rounded-lg ">
+                <div className=" text-blue-600 font-semibold">{program.title}</div>
             <div className=" flex  justify-between items-center py-4">
             <div className="">
-            <div className=" ">{project.campus}</div>
+            <div className=" ">University of Toronto</div>
         
             </div>
             <div className="flex space-x-2  items-center">
@@ -137,7 +153,7 @@ export const ProgramsSection = () => {
                 <GoLocation className="" />
                 </div>
               <div className="">
-              {project.location}
+              Ellesmere Port, North West, GB
               </div>
           </div>
         
@@ -146,20 +162,22 @@ export const ProgramsSection = () => {
 <div className="">
   <div className=" text-gray-500">Tuition</div>
   <div className="">
-    {project.fees}
+  $14,250.00
   </div>
   </div>
   <div className="">
   <div className="text-gray-500">Application fees</div>
   <div className="">
-    {project.applicationFee}
+   0.00
   </div>
   </div>
           </div>
           <div className=" flex space-x-16 items-center pt-4">
+            <Link to={`/programs/${program._id}`}>
 <div className=" p-2 border cursor-pointer border-blue-600 rounded-lg hover:bg-blue-600 hover:text-white text-blue-600">
 Select Student
 </div>
+</Link>
 <div className=" flex  items-center space-x-2 cursor-pointer text-blue-600">
   <div className="">
     See Program Details
@@ -170,7 +188,7 @@ Select Student
 </div>
             </div>
           </div>
-        ))}
+        ))||<PageLoader />}
       
     </div>
   );

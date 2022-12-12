@@ -23,7 +23,7 @@ function Banner() {
            },[])
   return (
     <>
-    <div className=' w-full z-10 bg-black sticky top-0 pb-1 md:px-10 px-4 text-white '>
+    <div className=' w-full  bg-white shadow-sm  top-0 pb-1 md:px-10 px-4 text-black '>
 <div className=' flex flex-row md:flex-row-reverse justify-between items-center pb-2 pt-4'>
     <div className=" cursor-pointer md:hidden block p-2 rounded-full hover:bg-gray-200 hover:text-gray-900"
      onClick={()=>setShowDrawer(true)}>
@@ -38,7 +38,7 @@ function Banner() {
     <FaUserAlt className=' text-2xl' />
 </div>
 </div>
-<div className=" text-white hidden md:block capitalize font-semibold text-lg">Hello {user &&(user.firstName&&user.firstName|| user.email.split("@")[0])},</div>
+<div className=" text-black hidden md:block capitalize font-semibold text-lg">Hello {user &&(user.firstName&&user.firstName|| user.email.split("@")[0])},</div>
 </div>  
     </div>
     {showDrawer&&<Drawer setShowDrawer={setShowDrawer} />}

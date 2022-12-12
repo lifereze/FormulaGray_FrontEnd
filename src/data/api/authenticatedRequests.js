@@ -49,6 +49,46 @@ export const uploadStudent = async (data) => {
       return error.response;
     });
 };
+export const createApplication = async (data) => {
+  return await api
+    .post("/application/create", data)
+    .then((response) => response)
+    .catch((error) => {
+      return error.response;
+    });
+};
+export const getAllSchools = async () => {
+  return await api
+    .get("/school/schools")
+    .then((response) => response)
+    .catch((error) => {
+      return error.response;
+    });
+};
+export const getAllPrograms = async () => {
+  return await api
+    .get("/programme/programmes")
+    .then((response) => response)
+    .catch((error) => {
+      return error.response;
+    });
+};
+export const getSpecificProgram = async (id) => {
+  return await api
+    .get(`/programme/${id}`)
+    .then((response) => response)
+    .catch((error) => {
+      return error.response;
+    });
+};
+export const getSpecificSchool = async (id) => {
+  return await api
+    .get(`/school/${id}`)
+    .then((response) => response)
+    .catch((error) => {
+      return error.response;
+    });
+};
 export const getAllStudents = async () => {
   return await api
     .get("/student/students")

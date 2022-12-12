@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import Logo from "../../../constants/images/formulargray_03.png";
 import Campus1 from "../../../constants/images/uni.jpg";
 import Campus2 from "../../../constants/images/moi.jpg";
@@ -6,29 +6,52 @@ import SideBar from "../SideBar";
 import Banner from "../Banner";
 import ProgramsCard from '../programs/ProgramsCard';
 import {FaFlagUsa,FaDonate,FaRegCalendarAlt} from 'react-icons/fa'
-import {IoLocationSharp} from 'react-icons/io5'
-import {AiOutlineHome,AiOutlineDollar} from 'react-icons/ai'
+import {IoLocationSharp,IoSchoolSharp} from 'react-icons/io5'
+import {AiOutlineHome,AiOutlineDollar,AiOutlineRead} from 'react-icons/ai'
 import {GrDocumentText} from 'react-icons/gr'
 import {BsCheck2} from 'react-icons/bs'
-import {MdOutlineSchool} from 'react-icons/md'
+import {FaBookReader} from 'react-icons/fa'
 import {GiOpenBook} from 'react-icons/gi'
+import {TbWorldDownload} from 'react-icons/tb'
+import { getSpecificSchool } from '../../../data/api/authenticatedRequests';
+import { useParams } from 'react-router-dom';
+import PageLoader  from "../../utils/PageLoader";
 function School() {
+    const [loading,setLoading]=useState(false)
+    const [schoolInfo,setSchoolInfo]=useState()
+    const {id}=useParams()
+    useEffect(()=>{
+        const getSchool=async ()=>{
+            setLoading(true);
+            const res=await getSpecificSchool(id);
+            console.log(res);
+            setSchoolInfo(res.data)
+            setLoading(false)
+
+        }
+        getSchool();
+    },[])
   return (
     <div className=" grid grid-cols-12 ">
 
     <div className="md:col-span-2 hidden md:block h-screen overflow-y-hidden ">
     <SideBar />
     </div>
-    <div className="md:col-span-10 col-span-12 h-screen overflow-y-scroll w-full overflow-x-hidden">
+    <div className="md:col-span-10 bg-gray-300 col-span-12 h-screen overflow-y-scroll w-full overflow-x-hidden">
           <Banner />
-          <div className=' flex space-x-6 items-center pt-8 pb-8 px-20'>
+         {!loading&&schoolInfo&&<div>
+       <div className='mt-0 mb-2   relative'>
+
+        <img src={Campus1} style={{height:'450px'}} className=' w-full ' />
+        <div className='absolute  inset-0 bg-black opacity-70'>
+        <div className=' flex space-x-6 items-center pt-8 pb-8 px-20'>
             <img src={Logo} className=" w-40 object-cover h-20" />
             <div className=''>
-            <div className=' text-4xl font-semibold text-white'>Cheshire College South and West - Ellesmere Port</div>
+            <div className=' text-4xl font-semibold text-white'>{schoolInfo.name} - {schoolInfo.city}</div>
             <div className=' flex space-x-2 text-sm pt-2'>
                 <div className='flex items-center space-x-1 border-r text-gray-400 pr-2 border-gray-500'>
                     <FaFlagUsa className=' text-base mt-1'/>
-<div className=''>Ellesmere Port, North West, GB</div>
+<div className=''>{schoolInfo.street}</div>
                 </div>
                 <div className='flex items-center space-x-1  text-gray-400  '>
                     <IoLocationSharp className=' text-lg'/>
@@ -37,7 +60,10 @@ function School() {
             </div>
             </div>
           </div>
-          <div className='  grid grid-rows-2 h-80 px-10 grid-flow-col gap-4 '>
+        </div>
+       </div>
+       
+          {/* <div className='  grid grid-rows-2 h-80 px-10 grid-flow-col gap-4 '>
 <div className=' row-span-2'>
 <img src={Campus1} className=" h-full w-full rounded-lg" />
 </div>
@@ -53,11 +79,42 @@ function School() {
 <div className=' row-span-1 '>
 <img src={Campus2} className="h-full w-full rounded-lg" />
 </div>
-          </div>
-          <div className=' flex w-full space-x-10 mt-10 px-10 pb-10 bg-blue-100'>
-<div className=' w-2/3 px-2'>
+          </div> */}
+          <div className='flex pt-10 justify-evenly'>
+<div className=' flex  flex-col justify-center bg-[#E6F2E2] rounded-md py-2 px-12 shadow-lg items-center'>
+    <div className=''><FaBookReader className='  text-6xl' /></div>
+    <div className='font-semibold text-2xl'>112k</div>
+    <div className=' text-l '>Students</div>
+ 
+
+</div>
+<div className=' flex  flex-col justify-center bg-[#F9E8E8] rounded-md py-2 px-12 shadow-lg items-center'>
+    <div className=''><TbWorldDownload className='  text-6xl' /></div>
+    <div className='font-semibold text-black text-2xl'>88</div>
+    <div className=' text-l '>Nationalities</div>
+ 
+
+</div>
+<div className=' flex  flex-col justify-center bg-[#F8F0E7] rounded-md py-2 px-12 shadow-lg items-center'>
+    <div className=''><AiOutlineRead className='  text-6xl' /></div>
+    <div className='font-semibold text-2xl'>100</div>
+    <div className=' text-l '>Programs</div>
+ 
+
+</div>
+<div className=' flex  flex-col justify-center bg-[#EEF0F8] rounded-md py-2 px-12 shadow-lg items-center'>
+    <div className=''><IoSchoolSharp className='  text-6xl' /></div>
+    <div className='font-semibold text-2xl'>20</div>
+    <div className=' text-l '>Schools</div>
+ 
+
+</div>
+    </div>
+        <div className=' flex w-full space-x-10 mt-10 px-10 pb-10 bg-gray-100'>
+<div className='  px-2'>
+    
 <div className=' flex items-center py-4 space-x-4'>
-    <div className=' p-2 bg-blue-200 rounded-full'>
+    <div className=' p-2  rounded-full'>
 <AiOutlineHome className=' text-blue-600 text-2xl' />
 </div>
 <div className=' text-4xl font-semibold'>About</div>
@@ -160,7 +217,7 @@ Cheshire College – South & West offers exciting opportunities for their 11,000
     />
 </div>
 </div>
-<div className='w-1/3'>
+{/* <div className='w-1/3'>
    <div className=' py-2 text-lg'> Institution details</div>
    <div className=' bg-white text-gray-500 space-y-4 rounded-lg p-4'>
 <div className=' flex justify-between items-center'>
@@ -254,8 +311,9 @@ Cheshire College – South & West offers exciting opportunities for their 11,000
    <div className=''>Arts</div>
    <div className=''>Education</div>
    </div>
-</div>
+</div> */}
           </div>
+          </div>||<PageLoader />}
           </div>
           </div>
   )

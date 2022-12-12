@@ -9,7 +9,7 @@ const selected = "px-2 py-4 text-bloow-blue cursor-pointer";
 const notSelected = "py-4 px-2 text-white cursor-pointer hover:text-bloow-blue";
 function SideBar() {
   return (
-    <div className="w-full flex flex-col space-y-4 items-center bg-black text-white h-screen ">
+    <div className="w-full flex flex-col space-y-4 items-center bg-white text-black h-screen ">
       <div className=" pt-2">
         <img src={Logo} className="" />
       </div>

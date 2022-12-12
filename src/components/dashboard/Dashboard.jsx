@@ -11,7 +11,9 @@ import {userStore} from '../../stores'
 import { getAllStudents } from "../../data/api/authenticatedRequests";
 import StudentUpload from "../modals/StudentUpload";
 import {refreshSession} from '../../data/api/authenticatedRequests'
+import { getAllSchools } from "../../data/api/authenticatedRequests";
 import { SchoolsCard } from "./schools/SchoolsCard";
+import { Link } from "react-router-dom";
 export const Dashboard = () => {
   const institutions = [
     {
@@ -100,6 +102,9 @@ export const Dashboard = () => {
 
   const [studentUpload,setStudentUpload]=useState(false);
   const [studentCount,setStudentCount]=useState();
+  const [schools,setSchools]=useState();
+
+  const [loading,setLoading]=useState(false);
   useEffect(()=>{
     const getUser= async ()=>{
        const res=await refreshSession();
@@ -110,6 +115,17 @@ export const Dashboard = () => {
     
      getUser();
        },[])
+       useEffect(()=>{
+  
+        const fetchSchools=async ()=>{
+         setLoading(true);
+        const res=await getAllSchools();
+        setSchools(res.data)
+        setLoading(false)
+        console.log(schools);
+        }
+        fetchSchools();
+          },[])
        useEffect(()=>{
         const getStudents= async ()=>{
 const res=await getAllStudents();
@@ -134,52 +150,65 @@ console.log(res)
               <div className=" ">
 
   <Banner />
-  <div className=' flex  bg-blue-500 pt-5 md:px-10 px-4 justify-between items-center'>
-        <div className=' md:text-2xl font-semibold'>
-        {/* Welcome, {user && user.email && user.email.split("@")[0]} */}
-        </div>
-        <a href="/addStudent">
-<div className='p-2 bg-white text-black rounded-lg cursor-pointer' >
-    Add new student
-</div>
-</a>
+  <div className=' flex pt-5 md:px-10 px-4 justify-between items-center'>
+
       </div>
-<div className='grid bg-blue-500  md:px-10 px-4 pb-10 grid-cols-12 gap-x-4 gap-y-4 pt-10'>
-    <div className=' md:col-span-3 col-span-6'>
-    <Info icon={   <HiDocumentText className=' text-xl text-white' />}
+      <div className="md:px-10 px-4 m-6 bg-white pb-10 ">
+        <div className="pt-4  font-semibold">Applications report</div>
+<div className='grid    grid-cols-12 gap-x-4 gap-y-4 pt-4'>
+<div className=' md:col-span-3 col-span-6'>
+  <Link to='/applications'>
+    
+    <Info icon={   <HiDocumentText className=' text-4xl text-white' />}
     number={7}
     title='Applications'
+    color='#EEF0F8'
+    iconBg='#657CEE'
     />
+    
+    </Link>
     </div>
     <div className=' md:col-span-3 col-span-6'>
-    <Info icon={   <BsFillCheckSquareFill className=' text-xl text-white' />}
+    <Link to='/applications'>
+    <Info icon={   <BsFillCheckSquareFill className=' text-4xl text-white' />}
     number={0}
     title='Accepted'
+    color='#F8F0E7'
+    iconBg='#E6AB6B'
     />
+    </Link>
     </div>
     <div className=' md:col-span-3 col-span-6'>
-    <Info icon={   <MdCancelPresentation className=' text-xl text-white' />}
+    <Link to='/applications'>
+    <Info icon={   <MdCancelPresentation className=' text-4xl text-white' />}
     number={0}
     title='Rejected'
+    color='#F9E8E8'
+    iconBg='#DC7B7B'
     />
+    </Link>
     </div>
     <div className=' md:col-span-3 col-span-6'>
-    <Info icon={   <MdCastForEducation className=' text-xl text-white' />}
+    <Link to='/students'>
+    <Info icon={   <MdCastForEducation className=' text-4xl text-white' />}
     number={studentCount?studentCount:''}
     title='Students'
+    color='#E6F2E2'
+    iconBg='#92D268'
     />
+    </Link>
     </div>
-
+    </div>
 </div>
 
                
               </div>
               <div className="flex   pb-2 flex-col ml-4">
-                <div className="text-gray-200 text-lg mt-6">Featured Schools</div>
+                <div className="text-black font-semibold text-lg mt-6">Featured Schools</div>
               </div>
               
               <div className="grid  gap-x-4 gap-y-3 px-4 pb-20 grid-cols-4">
-                          {institutions.map((institution)=><SchoolsCard institution={institution}/>)}
+                          {!loading&&schools&&schools.map((institution)=><SchoolsCard institution={institution}/>)}
                    
                       
                         </div>

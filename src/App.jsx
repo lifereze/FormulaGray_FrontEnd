@@ -6,6 +6,7 @@ import { Signup } from "./components/Signup";
 import { Dashboard } from "./components/dashboard/Dashboard";
 import { Schools } from "./components/dashboard/schools/Schools";
 import School from "./components/dashboard/schools/School";
+import { ApplyStudents } from "./components/dashboard/programs/ApplyStudents";
 import { Applications } from "./components/dashboard/applications/Applications";
 import { Programs } from "./components/dashboard/programs/Programs";
 import { Students } from "./components/dashboard/students/Students";
@@ -18,7 +19,7 @@ import { RecruitmentPartnerRegister } from "./components/pages/recruitmentPartne
 import { VerifyEmail } from "./components/pages/VerifyEmail";
 function App() {
   return (
-    <div className=" bg-midnight">
+    <div className=" bg-gray-50 text-black">
       <Router>
         <Routes>
           <Route path="/" element={<LandingPage />} />{" "}
@@ -28,10 +29,11 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/applications" element={<Applications />} />
           <Route path="/programs" element={<Programs />} />
+          <Route path="/programs/:id" element={<ApplyStudents />} />
           <Route path="/students" element={<Students />} />
           <Route path="/student/edit/:id" element={<EditStudent />} />
           <Route path="/schools" element={<Schools />} />
-          <Route exact path="/schools/school" element={<School />} />
+          <Route exact path="/schools/:id" element={<School />} />
           <Route path="/visa" element={<Visa />} />
           <Route path="/addStudent" element={<AddStudent />} />
           <Route path="/viewStudent" element={<ViewEditStudent />} />

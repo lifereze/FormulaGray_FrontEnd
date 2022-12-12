@@ -1,10 +1,30 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 import { Navbar } from "../Navbar";
 import { SchoolsCard } from "./SchoolsCard";
 import SideBar from "../SideBar";
 import Banner from "../Banner";
 import Filter from "../../filter/Filter";
+import FilterModal from "../../filter/FilterModal";
+import {MdFilterListAlt} from 'react-icons/md'
+import { getAllSchools } from "../../../data/api/authenticatedRequests";
+import PageLoader  from "../../utils/PageLoader";
 export const Schools = () => {
+  const [filterModal,setFilterModal]=useState(false);
+  const [schools,setSchools]=useState();
+
+  const [loading,setLoading]=useState(false);
+
+  useEffect(()=>{
+  
+const fetchSchools=async ()=>{
+ setLoading(true);
+const res=await getAllSchools();
+setSchools(res.data)
+setLoading(false)
+console.log(schools);
+}
+fetchSchools();
+  },[])
   const institutions = [
     {
       name: "University of Toronto",
@@ -88,6 +108,7 @@ export const Schools = () => {
     },
   ];
   return (
+    <>
     <div className=" grid grid-cols-12">
 
     <div className="md:col-span-2 hidden md:block h-screen overflow-y-hidden ">
@@ -95,24 +116,50 @@ export const Schools = () => {
     </div>
     <div className="md:col-span-10 col-span-12 h-screen overflow-y-scroll w-full overflow-x-hidden">
           <Banner />
-        <div>
-          <div className="mx-auto  px-4 sm:px-6 lg:px-8 xl:grid  xl:grid-cols-3">
+     
+         {!loading&& <div className="mx-auto  px-4 sm:px-6 lg:px-8 xl:grid  xl:grid-cols-3">
             <div className="xl:col-span-5  ">
            
                 <div>
                   <div className="divide-y divide-gray-200">
                     <div className="pt-3 text-center">
-                      <div className="text-xl font-bold text-blue-600 mb-3 border-b p-2">
+                    <div className=" w-full my-4 flex justify-between">
+                      <div className="text-xl font-bold text-blue-500 ">
                         Schools
                       </div>
-                      <div className=" grid grid-cols-10">
-                        <div className=" col-span-4">
-                          <Filter />
+                        <div className=" flex gap-x-4">
+                        <div className="">
+                        <input
+                      onChange={() =>{}}
+                      type="text"
+                      name="Search"
+                      id="search"
+                      autoComplete="search"
+                      placeholder="Search"
+                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                    />
                         </div>
-                      <div className="col-span-6">
-                        <div className="grid  gap-3  grid-cols-2">
-                          {institutions.map((institution)=><SchoolsCard institution={institution}/>)}
-                   
+                    
+                    <div className=" bg-white flex rounded-md gap-x-2 cursor-pointer px-4 items-center
+                     " onClick={()=>setFilterModal(true)}>
+                      <div className="" >
+<MdFilterListAlt className="" />
+</div>
+<div className="">
+  Filter
+</div>
+                    </div>
+                        </div>
+
+                      </div>
+                      <div className=" grid grid-cols-10">
+                        {/* <div className=" col-span-4">
+                          <Filter />
+                        </div> */}
+                      <div className="col-span-10">
+                        <div className="grid  gap-3  grid-cols-3">
+
+                          {schools&&schools.length>0&&schools.map((school)=><SchoolsCard institution={school}/>)}
                       
                         </div>
                      
@@ -123,9 +170,11 @@ export const Schools = () => {
                 </div>
            
             </div>
-          </div>
-        </div>
+          </div>||<PageLoader />}
+        
       </div>
     </div>
+    {filterModal &&<FilterModal setFilterModal={setFilterModal} />}
+    </>
   );
 };
