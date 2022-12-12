@@ -23,7 +23,7 @@ function Banner() {
            },[])
   return (
     <>
-    <div className=' w-full  bg-white shadow-sm  top-0 pb-1 md:px-10 px-4 text-black '>
+    <div className=' w-full  bg-blue-200 shadow-sm  top-0 pb-1 md:px-10 px-4 text-black '>
 <div className=' flex flex-row md:flex-row-reverse justify-between items-center pb-2 pt-4'>
     <div className=" cursor-pointer md:hidden block p-2 rounded-full hover:bg-gray-200 hover:text-gray-900"
      onClick={()=>setShowDrawer(true)}>

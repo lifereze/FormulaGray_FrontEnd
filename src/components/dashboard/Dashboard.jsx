@@ -154,7 +154,7 @@ console.log(res)
 
       </div>
       <div className="md:px-10 px-4 m-6 bg-white pb-10 ">
-        <div className="pt-4  font-semibold">Applications report</div>
+        <div className="pt-4 text-lg font-semibold">Applications report</div>
 <div className='grid    grid-cols-12 gap-x-4 gap-y-4 pt-4'>
 <div className=' md:col-span-3 col-span-6'>
   <Link to='/applications'>
@@ -203,11 +203,11 @@ console.log(res)
 
                
               </div>
-              <div className="flex   pb-2 flex-col ml-4">
+              <div className="flex   pb-2 flex-col md:px-10 px-4 m-6">
                 <div className="text-black font-semibold text-lg mt-6">Featured Schools</div>
               </div>
               
-              <div className="grid  gap-x-4 gap-y-3 px-4 pb-20 grid-cols-4">
+              <div className="grid  gap-x-4 gap-y-3 md:px-10 px-4 m-6 pb-20 grid-cols-4">
                           {!loading&&schools&&schools.map((institution)=><SchoolsCard institution={institution}/>)}
                    
                       
