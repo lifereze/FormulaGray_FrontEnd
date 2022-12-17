@@ -1,13 +1,24 @@
-import React, { useLayoutEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { createApplication } from "../../../data/api/authenticatedRequests";
 import Spinner from "../../utils/Spinner";
+import {
+  getAllStudents,
+  getSpecificProgram,
+} from "../../../data/api/authenticatedRequests";
+import { useParams } from "react-router-dom";
 import ApplyButton from "../../buttons/ApplyButton";
+import PageLoader from "../../utils/PageLoader";
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export const Table = ({ students, program }) => {
+export const Table = () => {
   const [isLoading, setIsLoading] = useState();
+  const [students, setStudents] = useState();
+  const [loading, setLoading] = useState(false);
+  const [program, setProgram] = useState();
+  const [loadingProgram, setLoadingProgram] = useState(false);
+  const { id } = useParams();
   const onApply = async (id) => {
     setIsLoading(true);
     const res = await createApplication({
@@ -17,13 +28,36 @@ export const Table = ({ students, program }) => {
     console.log(res);
     setIsLoading(false);
   };
-
+  useEffect(() => {
+    const getProgram = async () => {
+      setLoadingProgram(true);
+      const res = await getSpecificProgram(id);
+      setLoadingProgram(false);
+      console.log(res);
+      setProgram(res.data);
+    };
+    getProgram();
+  }, []);
+  useEffect(() => {
+    const getStudents = async () => {
+      try {
+        setLoading(true);
+        const res = await getAllStudents();
+        setStudents(res.data.students);
+        setLoading(false);
+        console.log(res.data.students);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getStudents();
+  }, []);
   return (
     <div className="px-4 sm:px-6  mr-2 no-scrollbar ">
       <div className="flex items-center justify-between">
         <div className="">
           <h1 className="md:text-xl font-bold text-blue-500">
-            Students- <span className=" capitalize">{program.title}</span>
+            Students- <span className=" capitalize">{program?.title}</span>
           </h1>
         </div>
         <div className="mt-4 sm:mt-0 ">
@@ -112,56 +146,65 @@ export const Table = ({ students, program }) => {
                     </th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-200 bg-white">
-                  {students.map((student) => (
-                    <tr key={student.email}>
-                      <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
-                        {student.email}
-                      </td>
-                      <td
-                        className={classNames(
-                          "whitespace-nowrap py-4 px-3 text-left text-sm font-medium",
-                          "text-gray-900"
-                        )}
-                      >
-                        {student.firstName}
-                      </td>
-                      <td
-                        className={classNames(
-                          "whitespace-nowrap py-4 px-3 text-left text-sm font-medium",
-                          "text-gray-900"
-                        )}
-                      >
-                        {student.lastName}
-                      </td>
-                      <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
-                        {student.location.country}
-                      </td>
-                      <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
-                        FormularGray
-                      </td>
-                      <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
-                        Refferal
-                      </td>
-                      <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
-                        Bachelors
-                      </td>
-                      <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
-                        {student.previousApplications?.length}
-                      </td>
-                      <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
-                        Walk In
-                      </td>
-                      <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
-                        {(student.applicationDetails.status && "Complete") ||
-                          "Pending"}
-                      </td>
-                      <td className="whitespace-nowrap py-4 px-3  text-left text-sm font-medium sm:pr-6">
-                        <ApplyButton id={student._id} programId={program._id} />
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
+                {(!loading && (
+                  <tbody className="divide-y divide-gray-200 bg-white">
+                    {students &&
+                      students.map((student) => (
+                        <tr key={student.email}>
+                          <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
+                            {student.email}
+                          </td>
+                          <td
+                            className={classNames(
+                              "whitespace-nowrap py-4 px-3 text-left text-sm font-medium",
+                              "text-gray-900"
+                            )}
+                          >
+                            {student.firstName}
+                          </td>
+                          <td
+                            className={classNames(
+                              "whitespace-nowrap py-4 px-3 text-left text-sm font-medium",
+                              "text-gray-900"
+                            )}
+                          >
+                            {student.lastName}
+                          </td>
+                          <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
+                            {student.location.country}
+                          </td>
+                          <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
+                            FormularGray
+                          </td>
+                          <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
+                            Refferal
+                          </td>
+                          <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
+                            Bachelors
+                          </td>
+                          <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
+                            {student.previousApplications?.length}
+                          </td>
+                          <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
+                            Walk In
+                          </td>
+                          <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
+                            {(student.applicationDetails?.status &&
+                              "Complete") ||
+                              "Pending"}
+                          </td>
+                          <td className="whitespace-nowrap py-4 px-3  text-left text-sm font-medium sm:pr-6">
+                            <ApplyButton
+                              programId={program._id}
+                              students={students}
+                              student={student}
+                              setStudents={setStudents}
+                            />
+                          </td>
+                        </tr>
+                      ))}
+                  </tbody>
+                )) || <PageLoader />}
               </table>
             </div>
           </div>

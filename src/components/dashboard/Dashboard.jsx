@@ -14,6 +14,9 @@ import {refreshSession} from '../../data/api/authenticatedRequests'
 import { getAllSchools } from "../../data/api/authenticatedRequests";
 import { SchoolsCard } from "./schools/SchoolsCard";
 import { Link } from "react-router-dom";
+import { CountryDistribution } from "../charts/CountryDistribution";
+import TopSchools from "../featuredComponents/TopSchools";
+import TopPrograms from "../featuredComponents/TopPrograms";
 export const Dashboard = () => {
   const institutions = [
     {
@@ -150,20 +153,21 @@ console.log(res)
               <div className=" ">
 
   <Banner />
-  <div className=' flex pt-5 md:px-10 px-4 justify-between items-center'>
+  <div className=' flex md:px-10 px-4 justify-between items-center'>
 
       </div>
-      <div className="md:px-10 px-4 m-6 bg-white pb-10 ">
-        <div className="pt-4 text-lg font-semibold">Applications report</div>
-<div className='grid    grid-cols-12 gap-x-4 gap-y-4 pt-4'>
+      <div className="md:px-10 px-4   pb-10 ">
+        
+<div className='grid    grid-cols-12 gap-x-4 gap-y-2 '>
 <div className=' md:col-span-3 col-span-6'>
   <Link to='/applications'>
     
     <Info icon={   <HiDocumentText className=' text-4xl text-white' />}
     number={7}
     title='Applications'
-    color='#EEF0F8'
+    color='#123A5C'
     iconBg='#657CEE'
+    text='white'
     />
     
     </Link>
@@ -173,8 +177,8 @@ console.log(res)
     <Info icon={   <BsFillCheckSquareFill className=' text-4xl text-white' />}
     number={0}
     title='Accepted'
-    color='#F8F0E7'
-    iconBg='#E6AB6B'
+    color='#FFF'
+    iconBg='#00AF80'
     />
     </Link>
     </div>
@@ -183,7 +187,7 @@ console.log(res)
     <Info icon={   <MdCancelPresentation className=' text-4xl text-white' />}
     number={0}
     title='Rejected'
-    color='#F9E8E8'
+    color='#FFF'
     iconBg='#DC7B7B'
     />
     </Link>
@@ -193,14 +197,31 @@ console.log(res)
     <Info icon={   <MdCastForEducation className=' text-4xl text-white' />}
     number={studentCount?studentCount:''}
     title='Students'
-    color='#E6F2E2'
-    iconBg='#92D268'
+    color='#FFF'
+    iconBg='#657CEE'
     />
     </Link>
     </div>
     </div>
 </div>
-
+<div className=" grid grid-cols-12  gap-x-4 px-10 ">
+<div className="  col-span-4 bg-white rounded-lg shadow-md">
+<div className=" font-semibold p-2">
+    Top  Schools
+  </div>
+<TopSchools />
+</div>
+<div className="col-span-4 bg-white rounded-lg  shadow-lg">
+  <div className="font-semibold p-2">
+    Top Programs
+  </div>
+<TopPrograms />
+</div>
+<div className="col-span-4  bg-white rounded-lg shadow-md">
+<div className=" text-center py-1 font-semibold"> Country Application Distribution</div>
+<CountryDistribution />
+</div>
+</div>
                
               </div>
               <div className="flex   pb-2 flex-col md:px-10 px-4 m-6">

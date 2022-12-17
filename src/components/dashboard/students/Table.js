@@ -1,17 +1,41 @@
-import { useLayoutEffect, useRef, useState } from "react";
-
+import React, { useEffect, useState } from "react";
+import { GrFormEdit } from "react-icons/gr";
+import { AiOutlineDelete } from "react-icons/ai";
+import { getAllStudents } from "../../../data/api/authenticatedRequests";
+import { deleteStudent } from "../../../data/api/authenticatedRequests";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export const Table = ({ students }) => {
-  // useLayoutEffect(() => {
-  //   const isIndeterminate =
-  //     selectedPeople.length > 0 && selectedPeople.length < people.length;
-  //   setChecked(selectedPeople.length === people.length);
-  //   setIndeterminate(isIndeterminate);
-  //   checkbox.current.indeterminate = isIndeterminate;
-  // }, [selectedPeople]);
+export const Table = () => {
+  const [students, setStudents] = useState();
+  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    const getStudents = async () => {
+      try {
+        setLoading(true);
+        const res = await getAllStudents();
+        setStudents(res.data.students);
+        setLoading(false);
+        console.log(res.data.students);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getStudents();
+  }, []);
+  const deleteOneStudent = async (student) => {
+    setStudents((prev) => prev.filter((item) => item._id !== student._id));
+
+    const res = await deleteStudent(student._id);
+
+    console.log(res);
+    if (res && res.status == 200) {
+      toast("Student deleted successfully!");
+    }
+  };
 
   return (
     <div className="px-4 sm:px-6  mr-2 no-scrollbar ">
@@ -106,66 +130,79 @@ export const Table = ({ students }) => {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200 bg-white">
-                  {students.map((student) => (
-                    <tr key={student.email}>
-                      <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
-                        {student.email}
-                      </td>
-                      <td
-                        className={classNames(
-                          "whitespace-nowrap py-4 px-3 text-left text-sm font-medium",
-                          "text-gray-900"
-                        )}
-                      >
-                        {student.firstName}
-                      </td>
-                      <td
-                        className={classNames(
-                          "whitespace-nowrap py-4 px-3 text-left text-sm font-medium",
-                          "text-gray-900"
-                        )}
-                      >
-                        {student.lastName}
-                      </td>
-                      <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
-                        {student.location.country}
-                      </td>
-                      <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
-                        FormularGray
-                      </td>
-                      <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
-                        Refferal
-                      </td>
-                      <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
-                        Bachelors
-                      </td>
-                      <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
-                        {student.previousApplications?.length}
-                      </td>
-                      <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
-                        Walk In
-                      </td>
-                      <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
-                        {(student.applicationDetails.status && "Complete") ||
-                          "Pending"}
-                      </td>
-                      <td className="whitespace-nowrap py-4 px-3  text-left text-sm font-medium sm:pr-6">
-                        <a
-                          href={`/student/edit/${student._id}`}
-                          className="text-indigo-600 hover:text-indigo-900"
+                  {!loading &&
+                    students &&
+                    students.map((student) => (
+                      <tr key={student.email}>
+                        <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
+                          {student?.email}
+                        </td>
+                        <td
+                          className={classNames(
+                            "whitespace-nowrap py-4 px-3 text-left text-sm font-medium",
+                            "text-gray-900"
+                          )}
                         >
-                          Edit
-                          <span className="sr-only">, {student.firstName}</span>
-                        </a>
-                      </td>
-                    </tr>
-                  ))}
+                          {student?.firstName}
+                        </td>
+                        <td
+                          className={classNames(
+                            "whitespace-nowrap py-4 px-3 text-left text-sm font-medium",
+                            "text-gray-900"
+                          )}
+                        >
+                          {student?.lastName}
+                        </td>
+                        <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
+                          {student?.location?.country}
+                        </td>
+                        <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
+                          FormularGray
+                        </td>
+                        <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
+                          Refferal
+                        </td>
+                        <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
+                          Bachelors
+                        </td>
+                        <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
+                          {student?.previousApplications?.length}
+                        </td>
+                        <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
+                          Walk In
+                        </td>
+                        <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
+                          {(student?.applicationDetails?.status &&
+                            "Complete") ||
+                            "Pending"}
+                        </td>
+                        <td className="whitespace-nowrap py-4 px-2  text-left text-sm font-medium sm:pr-6">
+                          <div className=" flex space-x-2 items-center">
+                            <div className="p-1 hover:bg-gray-100 rounded-full">
+                              <a
+                                href={`/student/edit/${student?._id}`}
+                                className="text-indigo-600 hover:text-indigo-900"
+                              >
+                                <GrFormEdit className=" text-2xl" />
+                              </a>
+                            </div>
+                            <div
+                              className=" cursor-pointer p-1 hover:bg-gray-100 rounded-full "
+                              onClick={() => deleteOneStudent(student)}
+                            >
+                              <AiOutlineDelete className="text-xl text-red-500" />
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
                 </tbody>
               </table>
             </div>
           </div>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };

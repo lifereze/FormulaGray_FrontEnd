@@ -22,7 +22,7 @@ const [filterModal,setFilterModal]=useState(false);
             <div className="">
                     <div className="pt-2 ">
                       <div className=" w-full my-4 flex justify-between">
-                      <div className="text-xl font-bold text-blue-500 ">
+                      <div className="text-xl font-bold text-[#184061] ">
                         Programs
                       </div>
                         <div className=" flex gap-x-4">

@@ -6,8 +6,10 @@ import Banner from "../Banner";
 import Filter from "../../filter/Filter";
 import FilterModal from "../../filter/FilterModal";
 import {MdFilterListAlt} from 'react-icons/md'
+import {AiOutlineUpload} from 'react-icons/ai'
 import { getAllSchools } from "../../../data/api/authenticatedRequests";
 import PageLoader  from "../../utils/PageLoader";
+import { Link } from "react-router-dom";
 export const Schools = () => {
   const [filterModal,setFilterModal]=useState(false);
   const [schools,setSchools]=useState();
@@ -149,6 +151,17 @@ fetchSchools();
   Filter
 </div>
                     </div>
+                    <Link to={'/schools/addSchool'} className=" bg-white flex rounded-md gap-x-2 cursor-pointer px-4 items-center
+                     ">
+                  
+                      <div className="" >
+<AiOutlineUpload className="" />
+</div>
+<div className="">
+  Upload
+
+                    </div>
+                    </Link>
                         </div>
 
                       </div>

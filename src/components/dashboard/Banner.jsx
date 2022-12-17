@@ -23,22 +23,19 @@ function Banner() {
            },[])
   return (
     <>
-    <div className=' w-full  bg-blue-200 shadow-sm  top-0 pb-1 md:px-10 px-4 text-black '>
+    <div className=' w-full  bg-[#E6E9EF]   top-0 pb-1 md:px-10 px-4 text-black '>
 <div className=' flex flex-row md:flex-row-reverse justify-between items-center pb-2 pt-4'>
     <div className=" cursor-pointer md:hidden block p-2 rounded-full hover:bg-gray-200 hover:text-gray-900"
      onClick={()=>setShowDrawer(true)}>
 <GiHamburgerMenu className=" text-2xl" />
     </div>
     
-<div className=' flex space-x-6 items-center'>
-<div className=''> 
-    <IoNotificationsOutline className=' text-2xl' />
-</div>
-<div className=' bg-gray-100 p-2 rounded-full text-gray-600'>
-    <FaUserAlt className=' text-2xl' />
+<div className=' flex space-x-6 space-y-2 items-center'>
+    <div className="">
+<GiHamburgerMenu className=" text-2xl" />
 </div>
 </div>
-<div className=" text-black hidden md:block capitalize font-semibold text-lg">Hello {user &&(user.firstName&&user.firstName|| user.email.split("@")[0])},</div>
+<div className=" text-black hidden md:block capitalize font-semibold text-lg">Dashboard User</div>
 </div>  
     </div>
     {showDrawer&&<Drawer setShowDrawer={setShowDrawer} />}

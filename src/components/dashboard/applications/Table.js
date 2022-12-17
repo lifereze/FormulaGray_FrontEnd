@@ -1,17 +1,28 @@
-import { useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { getAllApplications } from "../../../data/api/authenticatedRequests";
+import PageLoader from "../../utils/PageLoader";
 import moment from "moment";
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
+import { AiOutlineDelete } from "react-icons/ai";
+export const Table = () => {
+  const [students, setStudents] = useState();
 
-export const Table = ({ students }) => {
-  // useLayoutEffect(() => {
-  //   const isIndeterminate =
-  //     selectedPeople.length > 0 && selectedPeople.length < people.length;
-  //   setChecked(selectedPeople.length === people.length);
-  //   setIndeterminate(isIndeterminate);
-  //   checkbox.current.indeterminate = isIndeterminate;
-  // }, [selectedPeople]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const getStudents = async () => {
+      try {
+        setLoading(true);
+        const res = await getAllApplications();
+
+        setLoading(false);
+        console.log("LOOK", res.data.applications);
+        setStudents(res.data.applications);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getStudents();
+  }, []);
 
   return (
     <div className="px-4 sm:px-6  mr-2 no-scrollbar">
@@ -123,70 +134,61 @@ export const Table = ({ students }) => {
                     </th>
                   </tr>
                 </thead>
+
                 <tbody className="divide-y divide-gray-200 bg-white">
-                  {students.map((student) => (
-                    <tr key={student.email}>
-                      <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
-                        {moment(student.createdAt).format("L")}
-                      </td>
-                      <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
-                        {student.email}
-                      </td>
-                      <td
-                        className={classNames(
-                          "whitespace-nowrap py-4 px-3 text-left text-sm font-medium",
-                          "text-gray-900"
-                        )}
-                      >
-                        {student.firstName}
-                      </td>
-                      <td
-                        className={classNames(
-                          "whitespace-nowrap py-4 px-3 text-left text-sm font-medium",
-                          "text-gray-900"
-                        )}
-                      >
-                        {student.lastName}
-                      </td>
-                      <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-blue-500">
-                        Master of Social Work (Field Practicum Option)
-                      </td>
-                      <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-blue-500">
-                        University of Regina
-                      </td>
-                      <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
-                        {student.location.country}
-                      </td>
-                      <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
-                        FormularGray
-                      </td>
-                      <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
-                        Refferal
-                      </td>
-                      <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
-                        Bachelors
-                      </td>
-                      <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
-                        {student.previousApplications?.length}
-                      </td>
-                      <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
-                        Walk In
-                      </td>
-                      <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
-                        {(student.applicationDetails.status && "Complete") ||
-                          "Pending"}
-                      </td>
-                      <td className="whitespace-nowrap py-4 px-3  text-left text-sm font-medium sm:pr-6">
-                        <a
-                          href={`/student/edit/${student._id}`}
-                          className="text-indigo-600 hover:text-indigo-900"
-                        >
-                          Edit
-                          <span className="sr-only">, {student.firstName}</span>
-                        </a>
-                      </td>
-                    </tr>
-                  ))}
+                  {!loading &&
+                    students &&
+                    students?.map((student) => (
+                      <tr>
+                        <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
+                          {moment(student?.createdAt).format("L")}
+                        </td>
+                        <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
+                          Peter@gmail.com
+                        </td>
+                        <td className="whitespace-nowrap py-4 px-3 text-left text-sm font-medium">
+                          Peter
+                        </td>
+                        <td className="whitespace-nowrap py-4 px-3 text-left text-sm font-medium">
+                          Mbiriri
+                        </td>
+                        <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-blue-500">
+                          Master of Social Work (Field Practicum Option)
+                        </td>
+                        <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-blue-500">
+                          University of Regina
+                        </td>
+                        <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
+                          {student?.location?.country}
+                        </td>
+                        <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
+                          FormularGray
+                        </td>
+                        <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
+                          Refferal
+                        </td>
+                        <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
+                          Bachelors
+                        </td>
+                        <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
+                          100
+                        </td>
+                        <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
+                          Walk In
+                        </td>
+                        <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
+                          Approved
+                        </td>
+                        <td className="whitespace-nowrap py-4 px-3  text-left text-sm font-medium sm:pr-6">
+                          <div
+                            className=" cursor-pointer p-1 hover:bg-gray-100 rounded-full "
+                            onClick={() => {}}
+                          >
+                            <AiOutlineDelete className="text-xl text-red-500" />
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
                 </tbody>
               </table>
             </div>

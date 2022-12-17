@@ -49,6 +49,15 @@ export const uploadStudent = async (data) => {
       return error.response;
     });
 };
+export const uploadSchool = async (data) => {
+  console.log(data);
+  return await api
+    .post("/school/create", data)
+    .then((response) => response)
+    .catch((error) => {
+      return error.response;
+    });
+};
 export const createApplication = async (data) => {
   return await api
     .post("/application/create", data)
@@ -73,6 +82,14 @@ export const getAllPrograms = async () => {
       return error.response;
     });
 };
+export const getAllApplications = async () => {
+  return await api
+    .post("/application/rectruitmentPartner/applications")
+    .then((response) => response)
+    .catch((error) => {
+      return error.response;
+    });
+};
 export const getSpecificProgram = async (id) => {
   return await api
     .get(`/programme/${id}`)
@@ -84,6 +101,14 @@ export const getSpecificProgram = async (id) => {
 export const getSpecificSchool = async (id) => {
   return await api
     .get(`/school/${id}`)
+    .then((response) => response)
+    .catch((error) => {
+      return error.response;
+    });
+};
+export const deleteStudent = async (id) => {
+  return await api
+    .delete(`/student/delete/${id}`)
     .then((response) => response)
     .catch((error) => {
       return error.response;

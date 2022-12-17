@@ -1,16 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { createApplication } from "../../data/api/authenticatedRequests";
 import Spinner from "../utils/Spinner";
-function ApplyButton({ id, programId }) {
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+function ApplyButton({ student, programId, setStudents }) {
   const [isLoading, setIsLoading] = useState();
   const onApply = async () => {
     setIsLoading(true);
     const res = await createApplication({
-      studentId: id,
+      studentId: student._id,
       programmeId: programId,
     });
     console.log(res);
     setIsLoading(false);
+    if (res && res.status == 200) {
+      toast("Application went through successfully!");
+      setStudents((prev) => prev.filter((item) => item._id !== student._id));
+    }
   };
   return (
     <div>
@@ -26,6 +33,7 @@ function ApplyButton({ id, programId }) {
           <Spinner />
         </button>
       )}
+      <ToastContainer />
     </div>
   );
 }

@@ -6,25 +6,7 @@ import Banner from "../Banner";
 import { getAllStudents } from "../../../data/api/authenticatedRequests";
 import PageLoader  from "../../utils/PageLoader";
 export const Students = () => {
-  const [students,setStudents]=useState();
-  const [loading,setLoading]=useState(false);
-  useEffect(()=>{
-const getStudents=async ()=>{
-try {
-  setLoading(true)
-  const res= await getAllStudents();
-  setStudents(res.data.students)
-  setLoading(false)
-console.log(res.data.students);
 
-} catch (error) {
- console.log(error) 
-}
-
-
-}
-getStudents();
-  },[])
   return (
     <div className=" grid grid-cols-12">
 
@@ -33,7 +15,7 @@ getStudents();
     </div>
     <div className="md:col-span-10 col-span-12 h-screen overflow-y-scroll w-full overflow-x-hidden">
           <Banner />
-        {!loading &&<div className=" flex-grow">
+        <div className=" flex-grow">
           <div className="ml-2 ">
               <section
                 aria-labelledby="activity-title"
@@ -43,20 +25,19 @@ getStudents();
                   <div className="divide-y divide-gray-200">
                     <div className=" text-center">
                       <div>
-                       { students&& <Table
+                        <Table
                    
-                          students={students}
                        
                           buttonLink="/addStudent"
                      
-                        />}
+                        />
                       </div>
                     </div>
                   </div>
                 </div>
               </section>
           </div>
-        </div>|| <PageLoader/>}
+        </div>
       </div>
     </div>
   );
