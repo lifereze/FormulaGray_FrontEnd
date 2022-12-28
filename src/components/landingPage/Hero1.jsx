@@ -5,7 +5,7 @@ export const Hero1 = () => {
     <div className="flex mt-20 justify-center">
       <div className="flex flex-col md:flex-row md:w-10/12 text-lg">
         <div className="flex  px-2  md:w-1/3">
-          <div className="flex flex-col items-center shadow p-4 m-3 border">
+          <div className="flex flex-col space-y-2 items-center shadow p-4 m-3 border">
             <div>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -13,7 +13,7 @@ export const Hero1 = () => {
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-                className="w-6 h-6"
+                className="w-10 h-10"
               >
                 <path
                   strokeLinecap="round"
@@ -23,7 +23,7 @@ export const Hero1 = () => {
               </svg>
             </div>
             <div className="font-bold">Students</div>
-            <div>
+            <div className="line-clamp-5">
               Wherever you are Geographically, we will help you connect with
               programs matching your dreams and hardwork. We are commited to
               ensure you get the best.
@@ -39,7 +39,7 @@ export const Hero1 = () => {
           </div>
         </div>
         <div className="flex px-2 md:w-1/3">
-          <div className="flex flex-col items-center shadow p-4 m-3 border">
+          <div className="flex flex-col space-y-2  items-center shadow p-4 m-3 border">
             <div>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -47,7 +47,7 @@ export const Hero1 = () => {
                 viewBox="0 0 24 24"
                 stroke-width="1.5"
                 stroke="currentColor"
-                class="w-6 h-6"
+                class="w-10 h-10"
               >
                 <path
                   stroke-linecap="round"
@@ -57,15 +57,15 @@ export const Hero1 = () => {
               </svg>
             </div>
             <div className="font-bold">Agency</div>
-            <div className="">
+            <div className=" line-clamp-5">
               Do you recruit prospective students who want to study in Canada ,
               the United States, the United Kingdom or Australia? Register to
               become an ApplyBoard Certified Recruitment Partner.
             </div>
             <div>
-              <button
+            <button
                 type="button"
-                className="inline-flex items-center m-4 px-3 py-1.5 border border-transparent text-xs font-medium rounded-full shadow-sm text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                className="inline-flex bg-indigo-500 items-center m-4 px-3 py-1.5 border border-transparent text-xs font-medium rounded-full shadow-sm text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               >
                 Learn more
               </button>
@@ -73,7 +73,7 @@ export const Hero1 = () => {
           </div>
         </div>
         <div className="flex px-2 md:w-1/3">
-          <div className="flex flex-col items-center shadow p-4 m-3 border">
+          <div className="flex flex-col space-y-2 items-center shadow p-4 m-3 border">
             <div>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -81,7 +81,7 @@ export const Hero1 = () => {
                 viewBox="0 0 24 24"
                 stroke-width="1.5"
                 stroke="currentColor"
-                class="w-6 h-6"
+                class="w-10 h-10"
               >
                 <path
                   stroke-linecap="round"
@@ -91,7 +91,7 @@ export const Hero1 = () => {
               </svg>
             </div>
             <div className="font-bold">Partner school</div>
-            <div className="">
+            <div className="line-clamp-5">
               When your institution joins Formula Gray Platform, you get
               international visibility from students all over the world, looking
               for enrolment.

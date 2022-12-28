@@ -28,3 +28,63 @@
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }
+.teach {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+
+}
+.hh {
+  text-align: center;
+  color: rgb(40, 13, 70);
+}
+.la{
+  width: 100vw;
+  text-align: center;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  background-color: rgb(227,235,246);
+  margin-bottom: 30px;
+}
+.la h2{
+  color: rgb(59, 63, 74);
+  font-size: 40px;
+  font-weight: bold;
+
+}
+.la p{
+  color: rgba(69, 89, 122, 0.6);
+  font-size: 22px;
+
+}
+.cc h4 {
+  font-family: "EB Garamond", serif;
+  color: antiquewhite;
+}
+
+.tt {
+  color: white;
+  width: 200px;
+  margin: auto;
+  font-style: italic;
+}
+.cc {
+  height: 400px;
+  width: 40vw;
+  margin: auto;
+  background-color: #6366F1;
+  padding: 30px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+}
+@media only screen and (max-width: 800px) {
+  .cc {
+    height: 300px;
+    width: 90vw;
+    padding: 15px;
+    border-radius: 5px;
+  }
+  .tt {
+    width: 70vw;
+  }
+}

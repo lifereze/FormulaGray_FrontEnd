@@ -6,7 +6,7 @@ import { Hero2 } from "./Hero2";
 import { Hero3 } from "./Hero3";
 import { Hero4 } from "./Hero4";
 import { Footer } from "./Footer";
-
+import Testimonials from "./Testimonials";
 export const LandingPage = () => {
   return (
     <div className=" bg-white">
@@ -15,6 +15,7 @@ export const LandingPage = () => {
       <Hero1 />
       <Hero3 />
       <Hero2 />
+      <Testimonials />
       {/* <Hero4 /> */}
       <Footer />
     </div>

@@ -21,70 +21,31 @@ import { ChevronDownIcon } from "@heroicons/react/20/solid";
 
 const features = [
   {
-    name: "Analytics",
+    name: "Schools",
     href: "#",
     description:
       "Get a better understanding of where your traffic is coming from.",
     icon: ChartBarIcon,
   },
   {
-    name: "Engagement",
+    name: "Agencies",
     href: "#",
     description: "Speak directly to your customers in a more meaningful way.",
     icon: CursorArrowRaysIcon,
   },
   {
-    name: "Security",
+    name: "About us",
     href: "#",
     description: "Your customers' data will be safe and secure.",
     icon: ShieldCheckIcon,
   },
-  {
-    name: "Integrations",
-    href: "#",
-    description: "Connect with third-party tools that you're already using.",
-    icon: Squares2X2Icon,
-  },
-  {
-    name: "Automations",
-    href: "#",
-    description:
-      "Build strategic funnels that will drive your customers to convert",
-    icon: ArrowPathIcon,
-  },
+
 ];
 const callsToAction = [
-  { name: "Watch Demo", href: "#", icon: PlayIcon },
-  { name: "Contact Sales", href: "#", icon: PhoneIcon },
+  
 ];
 const resources = [
-  {
-    name: "Help Center",
-    description:
-      "Get all of your questions answered in our forums or contact support.",
-    href: "#",
-    icon: LifebuoyIcon,
-  },
-  {
-    name: "Guides",
-    description:
-      "Learn how to maximize our platform to get the most out of it.",
-    href: "#",
-    icon: BookmarkSquareIcon,
-  },
-  {
-    name: "Events",
-    description:
-      "See what meet-ups and other events we might be planning near you.",
-    href: "#",
-    icon: CalendarIcon,
-  },
-  {
-    name: "Security",
-    description: "Understand how we take your privacy seriously.",
-    href: "#",
-    icon: ShieldCheckIcon,
-  },
+,
 ];
 const recentPosts = [
   { id: 1, name: "Boost your conversion rate", href: "#" },
@@ -138,21 +99,7 @@ export const Navbar = () => {
               <Popover className="relative">
                 {({ open }) => (
                   <>
-                    <Popover.Button
-                      className={classNames(
-                        open ? "text-gray-900" : "text-gray-500",
-                        "group inline-flex items-center rounded-md bg-white text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#07443f] focus:ring-offset-2"
-                      )}
-                    >
-                      <span>Services</span>
-                      <ChevronDownIcon
-                        className={classNames(
-                          open ? "text-gray-600" : "text-gray-400",
-                          "ml-2 h-5 w-5 group-hover:text-gray-500"
-                        )}
-                        aria-hidden="true"
-                      />
-                    </Popover.Button>
+                   
 
                     <Transition
                       as={Fragment}
@@ -232,21 +179,7 @@ export const Navbar = () => {
               <Popover className="relative">
                 {({ open }) => (
                   <>
-                    <Popover.Button
-                      className={classNames(
-                        open ? "text-gray-900" : "text-gray-500",
-                        "group inline-flex items-center rounded-md bg-white text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#07443f] focus:ring-offset-2"
-                      )}
-                    >
-                      <span>More</span>
-                      <ChevronDownIcon
-                        className={classNames(
-                          open ? "text-gray-600" : "text-gray-400",
-                          "ml-2 h-5 w-5 group-hover:text-gray-500"
-                        )}
-                        aria-hidden="true"
-                      />
-                    </Popover.Button>
+                
 
                     <Transition
                       as={Fragment}
@@ -333,7 +266,7 @@ export const Navbar = () => {
                 Sign up
               </a>
             </div>||
-            <div className=" font-semibold capitalize text-purple-900">
+            <div className="hidden md:block font-semibold capitalize text-purple-900">
               {user &&user.firstName && user.firstName|| user.email && user.email.split("@")[0]}
            
             </div>}
