@@ -49,6 +49,14 @@ export const uploadStudent = async (data) => {
       return error.response;
     });
 };
+export const logout = async () => {
+  return await api
+    .post("/auth/logout")
+    .then((response) => response)
+    .catch((error) => {
+      return error.response;
+    });
+};
 export const uploadSchool = async (data) => {
   console.log(data);
   return await api
