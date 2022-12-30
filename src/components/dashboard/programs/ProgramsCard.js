@@ -1,5 +1,6 @@
 import React from "react";
 import { IoSchoolOutline } from "react-icons/io5";
+import { Link } from "react-router-dom";
 function ProgramsCard({
   name,
   campus,
@@ -9,6 +10,7 @@ function ProgramsCard({
   fees,
   applicationFees,
   commision,
+  id,
 }) {
   return (
     <div className=" border bg-white border-gray-500 rounded-lg p-4">
@@ -45,9 +47,11 @@ function ProgramsCard({
               <div className="  ">{commision}</div>
             </div>
           </div>
-          <div className=" p-3 mt-4 border w-1/2 text-center cursor-pointer hover:bg-blue-300 border-blue-500 text-blue-500 hover:text-blue-600 rounded-lg">
-            Check Student Eligibility
-          </div>
+          <Link to={`/programs/${id}`}>
+            <div className=" p-3 mt-4 border w-1/2 text-center cursor-pointer hover:bg-blue-300 border-blue-500 text-blue-500 hover:text-blue-600 rounded-lg">
+              Check Student Eligibility
+            </div>
+          </Link>
         </div>
       </div>
     </div>

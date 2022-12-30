@@ -66,7 +66,7 @@ export const Signup = () => {
   return (
     <>
       {}
-      <div className="flex overflow-y-hidden h-screen text-white min-h-full">
+      <div className="flex overflow-y-hidden bg-white h-screen text-white min-h-full">
         <div>
           <Notification type={info.type} message={info.message} />
         </div>
@@ -94,7 +94,7 @@ export const Signup = () => {
                   <div>
                     <label
                       htmlFor="email"
-                      className="block text-sm font-medium text-gray-300"
+                      className="block text-sm font-medium text-gray-500"
                     >
                       Email address
                     </label>
@@ -111,7 +111,7 @@ export const Signup = () => {
                             [e.target.name]: e.target.value,
                           }));
                         }}
-                        className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                        className="block text-black w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                       />
                     </div>
                   </div>
@@ -139,7 +139,7 @@ export const Signup = () => {
                             />
                             <label
                               htmlFor={option.id}
-                              className="ml-3 block text-sm font-medium text-gray-300"
+                              className="ml-3 block text-sm font-medium text-gray-500"
                             >
                               {option.title}
                             </label>
@@ -152,7 +152,7 @@ export const Signup = () => {
                   <div className="space-y-1">
                     <label
                       htmlFor="password"
-                      className="block text-sm font-medium text-gray-300"
+                      className="block  text-sm font-medium text-gray-500"
                     >
                       Password
                     </label>
@@ -169,14 +169,14 @@ export const Signup = () => {
                             [e.target.name]: e.target.value,
                           }));
                         }}
-                        className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                        className="block w-full text-black appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                       />
                     </div>
                   </div>
                   <div className="space-y-1">
                     <label
                       htmlFor="password"
-                      className="block text-sm font-medium text-gray-300"
+                      className="block text-sm font-medium text-gray-500"
                     >
                       Confirm password
                     </label>
@@ -193,7 +193,7 @@ export const Signup = () => {
                             [e.target.name]: e.target.value,
                           }));
                         }}
-                        className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                        className="block text-black w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                       />
                     </div>
                   </div>

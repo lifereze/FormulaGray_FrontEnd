@@ -58,6 +58,14 @@ export const uploadSchool = async (data) => {
       return error.response;
     });
 };
+export const uploadProgram = async (data) => {
+  return await api
+    .post("/programme/create", data)
+    .then((response) => response)
+    .catch((error) => {
+      return error.response;
+    });
+};
 export const createApplication = async (data) => {
   return await api
     .post("/application/create", data)
@@ -90,6 +98,14 @@ export const getAllApplications = async () => {
       return error.response;
     });
 };
+export const adminGetAllApplications = async (data) => {
+  return await api
+    .get("/admin/get/applications", data)
+    .then((response) => response)
+    .catch((error) => {
+      return error.response;
+    });
+};
 export const getSpecificProgram = async (id) => {
   return await api
     .get(`/programme/${id}`)
@@ -100,7 +116,15 @@ export const getSpecificProgram = async (id) => {
 };
 export const getSpecificSchool = async (id) => {
   return await api
-    .get(`/school/${id}`)
+    .get(`/school/get/${id}`)
+    .then((response) => response)
+    .catch((error) => {
+      return error.response;
+    });
+};
+export const getSchoolPrograms = async (id) => {
+  return await api
+    .get(`/programme/schoolProgrammes/${id}`)
     .then((response) => response)
     .catch((error) => {
       return error.response;
@@ -114,9 +138,25 @@ export const deleteStudent = async (id) => {
       return error.response;
     });
 };
+export const deleteUser = async (id) => {
+  return await api
+    .delete(`/admin/delete/user/${id}`)
+    .then((response) => response)
+    .catch((error) => {
+      return error.response;
+    });
+};
 export const getAllStudents = async () => {
   return await api
     .get("/student/students")
+    .then((response) => response)
+    .catch((error) => {
+      return error.response;
+    });
+};
+export const getAllRecruitmentPartners = async (data) => {
+  return await api
+    .post("/admin/get/users", data)
     .then((response) => response)
     .catch((error) => {
       return error.response;
@@ -133,6 +173,14 @@ export const getStudent = async (id) => {
 export const updateStudent = async (data, id) => {
   return await api
     .patch(`/student/edit/${id}`, data)
+    .then((response) => response)
+    .catch((error) => {
+      return error.response;
+    });
+};
+export const updateApplication = async (id, data) => {
+  return await api
+    .patch(`/admin/edit/application/${id}`, data)
     .then((response) => response)
     .catch((error) => {
       return error.response;

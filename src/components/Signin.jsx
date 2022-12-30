@@ -31,9 +31,13 @@ export const Signin = () => {
       console.log(response)
       setLoading(false);
       setInfo({ message: response.message, type: response.status });
-      if (response.status === "success") {
+      if (response.status === "success"&& response.data.user.role=='recruitmentPartner') {
         storeUser(response.data.user);
-        navigate("/recruitmentPartner/register");
+        navigate("/dashboard");
+      }
+      if (response.status === "success"&& response.data.user.role=='admin'){
+        storeUser(response.data.user);
+        navigate("/adminDashboard");
       }
     });
   };
@@ -41,7 +45,7 @@ export const Signin = () => {
   return (
     <>
       {}
-      <div className="flex overflow-y-hidden text-white h-screen min-h-full">
+      <div className="flex overflow-y-hidden  bg-white h-screen min-h-full">
         <div>
           <Notification type={info.type} message={info.message} />
         </div>
@@ -58,7 +62,7 @@ export const Signin = () => {
               <a href="/">
                 <img className="h-12 w-auto" src={Logo} alt="Formular Gray" />
               </a>
-              <h2 className="mt-6 text-3xl font-bold tracking-tight text-gray-200">
+              <h2 className="mt-6 text-3xl font-bold tracking-tight text-gray-500">
                 Sign in to your account
               </h2>
             </div>
@@ -69,7 +73,7 @@ export const Signin = () => {
                   <div>
                     <label
                       htmlFor="email"
-                      className="block text-sm font-medium text-gray-400"
+                      className="block text-sm font-medium text-gray-500"
                     >
                       Email address
                     </label>
@@ -94,7 +98,7 @@ export const Signin = () => {
                   <div className="space-y-1">
                     <label
                       htmlFor="password"
-                      className="block text-sm font-medium text-gray-400"
+                      className="block text-sm font-medium text-gray-500"
                     >
                       Password
                     </label>

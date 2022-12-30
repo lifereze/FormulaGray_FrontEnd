@@ -1,6 +1,9 @@
-import React from "react";
+import React,{useState} from "react";
 
 export const Hero1 = () => {
+  const [students,setStudents]=useState(false)
+  const [agents,setAgents]=useState(false)
+  const [institutions,setInstitutions]=useState(false)
   return (
     <div className="flex mt-20 justify-center">
       <div className="flex flex-col md:flex-row md:w-10/12 text-lg">
@@ -23,18 +26,25 @@ export const Hero1 = () => {
               </svg>
             </div>
             <div className="font-bold">Students</div>
-            <div className="line-clamp-5">
-              Wherever you are Geographically, we will help you connect with
-              programs matching your dreams and hardwork. We are commited to
-              ensure you get the best.
+            <div className={!students?"line-clamp-5":''}>
+              <p>The journey of selecting, applying and transitioning to an institution abroad can be overwhelming. We have created an intuitive, user-friendly platform to make this process very simple for our students.</p>
+              <p>We are committed to supporting you through this journey from start to finish. We provide over 100,000 programmes from a network of universities across over 6 countries. Our team of experts are available to walk you through each process; course selection, application, visa processing, etc</p>
+              <p>We connect you to quality education, globally.
+</p>
+<a href="/signin" className="text-blue-500 hover:underline">Start your journey today</a>
             </div>
             <div>
-              <button
-                type="button"
+           {  !students&& <button
+                type="button" onClick={()=>setStudents(true)}
                 className="inline-flex bg-indigo-500 items-center m-4 px-3 py-1.5 border border-transparent text-xs font-medium rounded-full shadow-sm text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               >
-                Learn more
-              </button>
+                Show more
+              </button>||<button
+                type="button" onClick={()=>setStudents(false)}
+                className="inline-flex bg-indigo-500 items-center m-4 px-3 py-1.5 border border-transparent text-xs font-medium rounded-full shadow-sm text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              >
+               Show less
+              </button>}
             </div>
           </div>
         </div>
@@ -56,19 +66,25 @@ export const Hero1 = () => {
                 />
               </svg>
             </div>
-            <div className="font-bold">Agency</div>
-            <div className=" line-clamp-5">
-              Do you recruit prospective students who want to study in Canada ,
-              the United States, the United Kingdom or Australia? Register to
-              become an ApplyBoard Certified Recruitment Partner.
+            <div className="font-bold">Agents</div>
+            <div className={!agents?" line-clamp-5":''}>
+            <p>We have partnered with thousands of agents over the last decade, providing a platform to expand their reach and grow their businesses. We offer a fully-functional search feature, an easy-to-use interface and streamlined processes to allow you meet your business needs with easy to follow steps.</p>
+            <p>Our objective is to collaborate with you as you support your students through the process of making the right choices in order to fulfill their education goals and life aspirations. We aim to convert applications within 72 hours – the best within the industry.</p>
+            <p>We want you to consider us not just as a platform for submitting applications but a committed partner for growth.</p>
+            <a href="/signin" className="text-blue-500 hover:underline">Become a part of our community today.</a>
             </div>
             <div>
-            <button
-                type="button"
+            {  !agents&& <button
+                type="button" onClick={()=>setAgents(true)}
                 className="inline-flex bg-indigo-500 items-center m-4 px-3 py-1.5 border border-transparent text-xs font-medium rounded-full shadow-sm text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               >
-                Learn more
-              </button>
+                Show more
+              </button>||<button
+                type="button" onClick={()=>setAgents(false)}
+                className="inline-flex bg-indigo-500 items-center m-4 px-3 py-1.5 border border-transparent text-xs font-medium rounded-full shadow-sm text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              >
+               Show less
+              </button>}
             </div>
           </div>
         </div>
@@ -90,19 +106,25 @@ export const Hero1 = () => {
                 />
               </svg>
             </div>
-            <div className="font-bold">Partner school</div>
-            <div className="line-clamp-5">
-              When your institution joins Formula Gray Platform, you get
-              international visibility from students all over the world, looking
-              for enrolment.
+            <div className="font-bold">Institutions</div>
+            <div className={!institutions?"line-clamp-5":""}>
+            <p>Attracting quality students is a challenge many institutions face. With over 15,000 student applications processed through our system annually, we carefully screen each case. Our dedicated team of experts verify each application for correctness and completeness.</p>
+            <p>We work with verified agents who maintain a steady stream of recruitment channels.</p>
+            <p>Our platform will provide your institution access to thousands of potential students and you have the assurance that each application has been thoroughly scrutinized.</p>
+            <a href="/signin" className="text-blue-500 hover:underline">Partner with us today</a>
             </div>
             <div>
-              <button
-                type="button"
+            {  !institutions&& <button
+                type="button" onClick={()=>setInstitutions(true)}
                 className="inline-flex bg-indigo-500 items-center m-4 px-3 py-1.5 border border-transparent text-xs font-medium rounded-full shadow-sm text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               >
-                Learn more
-              </button>
+                Show more
+              </button>||<button
+                type="button" onClick={()=>setInstitutions(false)}
+                className="inline-flex bg-indigo-500 items-center m-4 px-3 py-1.5 border border-transparent text-xs font-medium rounded-full shadow-sm text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              >
+               Show less
+              </button>}
             </div>
           </div>
         </div>

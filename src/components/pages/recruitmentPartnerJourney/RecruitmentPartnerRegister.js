@@ -39,7 +39,7 @@ export const RecruitmentPartnerRegister = () => {
       <Steps />
       {loading && <Spinner />}
       {!loading && (
-        <div className="">
+        <div className=" min-h-screen">
           {recruiter.step == "contact" && <ContactInformation />}
           {recruiter.step == "business" && <BusinessInformationForm />}
           {recruiter.step == "recruitment-details" && <RecruitmentDetails />}

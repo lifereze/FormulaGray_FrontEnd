@@ -10,12 +10,13 @@ import {AiOutlineUpload} from 'react-icons/ai'
 import { getAllSchools } from "../../../data/api/authenticatedRequests";
 import PageLoader  from "../../utils/PageLoader";
 import { Link } from "react-router-dom";
+import { userStore } from "../../../stores";
 export const Schools = () => {
   const [filterModal,setFilterModal]=useState(false);
   const [schools,setSchools]=useState();
 
   const [loading,setLoading]=useState(false);
-
+  const user = userStore((state) => state.user);
   useEffect(()=>{
   
 const fetchSchools=async ()=>{
@@ -151,7 +152,7 @@ fetchSchools();
   Filter
 </div>
                     </div>
-                    <Link to={'/schools/addSchool'} className=" bg-white flex rounded-md gap-x-2 cursor-pointer px-4 items-center
+                   {user&& user.role=='admin' &&<Link to={'/schools/addSchool'} className=" bg-white flex rounded-md gap-x-2 cursor-pointer px-4 items-center
                      ">
                   
                       <div className="" >
@@ -161,7 +162,7 @@ fetchSchools();
   Upload
 
                     </div>
-                    </Link>
+                    </Link>}
                         </div>
 
                       </div>

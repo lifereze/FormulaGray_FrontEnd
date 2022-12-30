@@ -1,91 +1,51 @@
 import React, { useState, useEffect, useMemo } from "react";
-import FileUpload from "../../uploads/FileUpload";
-import { firebaseUploadImg, firebaseUploadDoc } from "../../../data/api/upload";
-import { getDownloadURL } from "firebase/storage";
+import { useParams } from "react-router-dom";
 import Spinner from "../../utils/Spinner";
-import { uploadSchool } from "../../../data/api/authenticatedRequests";
-import { useDropzone } from "react-dropzone";
-import UploadImage from "../../uploads/UploadImage";
+import { uploadProgram } from "../../../data/api/authenticatedRequests";
+
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 export const Form = (props) => {
   const initialize = {
-    name: "",
-    about: "",
+    title: "",
+    description: "",
     country: "",
-
-    city: "",
-    street: "",
-    images: [],
+    applicationFee: "",
+    tuitionFees: "",
   };
-  const [{ name, about, country, city, street }, setSchool] =
-    useState(initialize);
+  const { schoolId } = useParams();
+  const [
+    { title, description, country, applicationFees, tuitionFees },
+    setProgram,
+  ] = useState(initialize);
   const [isLoading, setIsLoading] = useState();
-  const [isImageLoading, setFileLoading] = useState();
-  const [imageUrl, setImageUrl] = useState("");
-  const [imagesArray, setImagesArray] = useState([]);
 
   const handleChange = (input) => {
-    setSchool((prevState) => ({
+    setProgram((prevState) => ({
       ...prevState,
       [input.target.name]: input.target.value,
     }));
-    console.log(name, about, country, city, street, imagesArray);
+    console.log(title, description, country, applicationFees, tuitionFees);
   };
   const onSubmitHandler = async () => {
     setIsLoading(true);
-    const res = await uploadSchool({
-      name,
-      about,
+    const res = await uploadProgram({
+      title,
+      description,
       country,
-      city,
-      street,
-      images: imagesArray,
+      applicationFees,
+      tuitionFees,
+      schoolId: schoolId,
+      currency: "USD",
     });
     setIsLoading(false);
     console.log(res);
     if (res && res.status == 200) {
-      toast("School uploaded  successfully!");
-      setSchool(initialize);
+      toast("Program uploaded  successfully!");
+      setProgram(initialize);
     }
   };
-  const uploadImage = (input) => {
-    const files = input.target.files || [];
-    if (files.length === 0) {
-      return false;
-    }
-    const reader = new FileReader();
 
-    reader.readAsDataURL(files[0]);
-
-    reader.onload = (e) => {
-      setFileLoading(true);
-      const uploadTask = firebaseUploadImg(files[0]);
-      uploadTask.on(
-        "state_changed",
-        (snapshot) => {
-          const prog = Math.round(
-            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-          );
-        },
-        (err) => {},
-        () => {
-          getDownloadURL(uploadTask.snapshot.ref).then((url) => {
-            setFileLoading(false);
-            setImageUrl(url);
-
-            setImagesArray((current) => [...current, url]);
-          });
-        }
-      );
-
-      return true;
-    };
-
-    reader.onprogress = function (e) {
-      //Loader
-    };
-  };
   return (
     <div className="">
       <div className="mt-10 sm:mt-0">
@@ -96,103 +56,76 @@ export const Form = (props) => {
               <div className="bg-white px-4 py-5 sm:p-6">
                 <div className="grid grid-cols-6 text-left gap-6">
                   <h3 className="text-lg font-semibold text-center leading-6 text-purple-900 col-span-6 ">
-                    School Details
+                    Program Details
                   </h3>
                   <div className="col-span-6 ">
                     <label
-                      htmlFor="name"
+                      htmlFor="title"
                       className="block text-sm font-medium text-gray-700"
                     >
-                      School name
+                      Program Title
                     </label>
                     <input
                       onChange={(e) => handleChange(e)}
                       type="text"
-                      name="name"
-                      id="name"
-                      value={name}
-                      autoComplete="name"
+                      name="title"
+                      id="title"
+                      value={title}
+                      autoComplete="title"
                       className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                     />
                   </div>
-                  <div className="col-span-6">
-                    <UploadImage
-                      uploadImage={uploadImage}
-                      isImageLoading={isImageLoading}
-                      imageUrl={imageUrl}
-                    />
-                  </div>
+
                   <div className="col-span-6 ">
                     <label
-                      htmlFor="about"
+                      htmlFor="description"
                       className="block text-sm font-medium text-gray-700"
                     >
-                      About School
+                      Program description
                     </label>
                     <textarea
                       onChange={(e) => handleChange(e)}
                       type="text"
-                      name="about"
-                      id="about"
-                      value={about}
+                      name="description"
+                      id="description"
+                      value={description}
                       rows="4"
-                      autoComplete="about"
+                      autoComplete="description"
+                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                    />
+                  </div>
+
+                  <div className="col-span-6">
+                    <label
+                      htmlFor="applicationFees"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Application Fee
+                    </label>
+                    <input
+                      onChange={(e) => handleChange(e)}
+                      type="number"
+                      name="applicationFees"
+                      id="applicationFees"
+                      value={applicationFees}
+                      autoComplete="applicationFees"
                       className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                     />
                   </div>
                   <div className="col-span-6">
                     <label
-                      htmlFor="country"
+                      htmlFor="tuitionFees"
                       className="block text-sm font-medium text-gray-700"
                     >
-                      Country
-                    </label>
-                    <select
-                      id="country"
-                      name="country"
-                      onChange={(e) => handleChange(e)}
-                      autoComplete="country-name"
-                      value={country}
-                      className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                    >
-                      <option>America</option>
-                      <option>Canada</option>
-                      <option>UK</option>
-                      <option>Europe</option>
-                      <option>Australia</option>
-                    </select>
-                  </div>
-                  <div className="col-span-6">
-                    <label
-                      htmlFor="city"
-                      className="block text-sm font-medium text-gray-700"
-                    >
-                      City
+                      Tuition Fee
                     </label>
                     <input
                       onChange={(e) => handleChange(e)}
-                      type="text"
-                      name="city"
-                      id="city"
-                      value={city}
-                      autoComplete="city"
-                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                    />
-                  </div>
-                  <div className="col-span-6">
-                    <label
-                      htmlFor="street"
-                      className="block text-sm font-medium text-gray-700"
-                    >
-                      Street
-                    </label>
-                    <input
-                      onChange={(e) => handleChange(e)}
-                      type="text"
-                      name="street"
-                      id="street"
-                      value={street}
-                      autoComplete="street"
+                      type="number"
+                      name="tuitionFees"
+                      id="tuitionFees"
+                      value={tuitionFees}
+                      autoComplete="tuitionFees"
                       className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                     />
                   </div>
