@@ -127,7 +127,7 @@ export const Table = () => {
                             >
                               <AiOutlineDelete className="text-xl text-red-500" />
                             </div>
-                            <ShowMenu />
+                            <ShowMenu id={partner?._id} />
                           </div>
                         </td>
                       </tr>

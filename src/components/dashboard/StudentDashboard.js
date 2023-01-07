@@ -11,7 +11,10 @@ import { userStore } from "../../stores";
 import { getAllStudents } from "../../data/api/authenticatedRequests";
 import StudentUpload from "../modals/StudentUpload";
 import { refreshSession } from "../../data/api/authenticatedRequests";
-import { getAllSchools } from "../../data/api/authenticatedRequests";
+import {
+  getAllSchools,
+  getStudentApplications,
+} from "../../data/api/authenticatedRequests";
 import { SchoolsCard } from "./schools/SchoolsCard";
 import { Link } from "react-router-dom";
 import { CountryDistribution } from "../charts/CountryDistribution";
@@ -26,6 +29,10 @@ export const StudentDashboard = () => {
   const [studentUpload, setStudentUpload] = useState(false);
   const [studentCount, setStudentCount] = useState();
   const [schools, setSchools] = useState();
+  const [applications, setApplications] = useState();
+  const [accepted, setAccepted] = useState();
+  const [pending, setPending] = useState();
+  const [rejected, setRejected] = useState();
 
   const [loading, setLoading] = useState(false);
   useEffect(() => {
@@ -36,6 +43,46 @@ export const StudentDashboard = () => {
     };
 
     getUser();
+  }, []);
+  useEffect(() => {
+    const getApplications = async () => {
+      const res = await getStudentApplications();
+      console.log(res);
+      if (res && res.status == 200) {
+        setApplications(res.data);
+      }
+    };
+    getApplications();
+  }, []);
+  useEffect(() => {
+    const getApplications = async () => {
+      const res = await getStudentApplications({ currentStage: "accepted" });
+      console.log(res);
+      if (res && res.status == 200) {
+        setAccepted(res.data);
+      }
+    };
+    getApplications();
+  }, []);
+  useEffect(() => {
+    const getApplications = async () => {
+      const res = await getStudentApplications({ currentStage: "pending" });
+      console.log(res);
+      if (res && res.status == 200) {
+        setPending(res.data);
+      }
+    };
+    getApplications();
+  }, []);
+  useEffect(() => {
+    const getApplications = async () => {
+      const res = await getStudentApplications({ currentStage: "rejected" });
+      console.log(res);
+      if (res && res.status == 200) {
+        setRejected(res.data);
+      }
+    };
+    getApplications();
   }, []);
   useEffect(() => {
     const fetchSchools = async () => {
@@ -77,7 +124,7 @@ export const StudentDashboard = () => {
                             icon={
                               <HiDocumentText className=" text-4xl text-white" />
                             }
-                            number={5}
+                            number={applications ? applications.length : 0}
                             title="Applications"
                             color="#123A5C"
                             iconBg="#657CEE"
@@ -91,7 +138,7 @@ export const StudentDashboard = () => {
                             icon={
                               <BsFillCheckSquareFill className=" text-4xl text-white" />
                             }
-                            number={1}
+                            number={accepted ? accepted.length : 0}
                             title="Accepted"
                             color="#FFF"
                             iconBg="#00AF80"
@@ -104,7 +151,7 @@ export const StudentDashboard = () => {
                             icon={
                               <MdCastForEducation className=" text-4xl text-white" />
                             }
-                            number={4}
+                            number={pending ? pending.length : 0}
                             title="Pending"
                             color="#FFF"
                             iconBg="#657CEE"
@@ -117,7 +164,7 @@ export const StudentDashboard = () => {
                             icon={
                               <MdCancelPresentation className=" text-4xl text-white" />
                             }
-                            number={0}
+                            number={rejected ? rejected.length : 0}
                             title="Rejected"
                             color="#FFF"
                             iconBg="#DC7B7B"
@@ -130,7 +177,10 @@ export const StudentDashboard = () => {
                     <div className=" font-semibold p-2 text-[#184061]">
                       Recent Applications
                     </div>
-                    <RecentApplications />
+                    <RecentApplications
+                      applications={applications}
+                      setApplications={setApplications}
+                    />
                   </div>
                   <div className=" grid grid-cols-12  gap-x-4 px-10 ">
                     <div className="  col-span-4 bg-white rounded-lg shadow-md">

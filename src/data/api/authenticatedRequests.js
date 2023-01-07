@@ -82,6 +82,14 @@ export const createApplication = async (data) => {
       return error.response;
     });
 };
+export const studentCreateApplication = async (data) => {
+  return await api
+    .post("/application/student/create", data)
+    .then((response) => response)
+    .catch((error) => {
+      return error.response;
+    });
+};
 export const getAllSchools = async () => {
   return await api
     .get("/school/schools")
@@ -146,6 +154,14 @@ export const deleteStudent = async (id) => {
       return error.response;
     });
 };
+export const deleteStudentApplication = async (id) => {
+  return await api
+    .delete(`/application/student/delete/${id}`)
+    .then((response) => response)
+    .catch((error) => {
+      return error.response;
+    });
+};
 export const deleteUser = async (id) => {
   return await api
     .delete(`/admin/delete/user/${id}`)
@@ -157,6 +173,14 @@ export const deleteUser = async (id) => {
 export const getAllStudents = async () => {
   return await api
     .get("/student/students")
+    .then((response) => response)
+    .catch((error) => {
+      return error.response;
+    });
+};
+export const getStudentApplications = async (data) => {
+  return await api
+    .post("/application/student/applications", data)
     .then((response) => response)
     .catch((error) => {
       return error.response;
@@ -189,6 +213,14 @@ export const updateStudent = async (data, id) => {
 export const updateApplication = async (id, data) => {
   return await api
     .patch(`/admin/edit/application/${id}`, data)
+    .then((response) => response)
+    .catch((error) => {
+      return error.response;
+    });
+};
+export const updateUser = async (id, data) => {
+  return await api
+    .patch(`/admin/edit/user/${id}`, data)
     .then((response) => response)
     .catch((error) => {
       return error.response;

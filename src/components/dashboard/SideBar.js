@@ -14,7 +14,7 @@ function SideBar() {
   const user = userStore((state) => state.user);
   const setUser = userStore((state) => state.storeUser);
   return (
-    <div className="w-full flex flex-col space-y-4 items-center bg-[#184061] text-gray-200 h-screen ">
+    <div className="w-full flex flex-col space-y-4 items-center bg-[#184061] text-gray-200 h-screen overflow-y-scroll pb-10 ">
       <div className=" p-2 mx-2 bg-white rounded-b-lg">
         <img src={Logo} className="" />
       </div>
@@ -32,7 +32,8 @@ function SideBar() {
         <Link
           to={
             (user?.role == "recruitmentPartner" && "/dashboard") ||
-            (user?.role == "admin" && "/adminDashboard")
+            (user?.role == "admin" && "/adminDashboard") ||
+            (user?.role == "student" && "/studentDashboard")
           }
           className=" flex space-x-2 cursor-pointer items-center p-2 pr-12 w-10/12 rounded-lg  text-gray-100"
         >
@@ -67,13 +68,15 @@ function SideBar() {
           <div className="">Partners</div>
         </Link>
       )}
-      <Link
-        to={"/students"}
-        className=" flex space-x-2 cursor-pointer items-center p-2 pr-12 w-10/12 rounded-lg  text-gray-100"
-      >
-        <HiOutlineUsers className="text-2xl" />
-        <div className="">Students</div>
-      </Link>
+      {user && user.role !== "student" && (
+        <Link
+          to={"/students"}
+          className=" flex space-x-2 cursor-pointer items-center p-2 pr-12 w-10/12 rounded-lg  text-gray-100"
+        >
+          <HiOutlineUsers className="text-2xl" />
+          <div className="">Students</div>
+        </Link>
+      )}
 
       <Link
         to={"/programs"}

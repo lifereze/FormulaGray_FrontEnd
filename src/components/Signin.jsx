@@ -39,6 +39,10 @@ export const Signin = () => {
         storeUser(response.data.user);
         navigate("/adminDashboard");
       }
+      if (response.status === "success"&& response.data.user.role=='student'){
+        storeUser(response.data.user);
+        navigate("/studentDashboard");
+      }
     });
   };
 
