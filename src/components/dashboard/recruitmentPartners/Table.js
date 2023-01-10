@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { GrFormEdit } from "react-icons/gr";
 import { AiOutlineDelete } from "react-icons/ai";
 import { getAllRecruitmentPartners } from "../../../data/api/authenticatedRequests";
@@ -6,11 +6,14 @@ import { deleteUser } from "../../../data/api/authenticatedRequests";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ShowMenu from "../../buttons/ShowMenu";
+import { DownloadTableExcel } from "react-export-table-to-excel";
+
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 export const Table = () => {
+  const tableRef = useRef(null);
   const [partners, setPartners] = useState();
   const [loading, setLoading] = useState(false);
   useEffect(() => {
@@ -32,14 +35,14 @@ export const Table = () => {
   const deleteOnePartner = async (partner) => {
     setPartners((prev) => prev.filter((item) => item._id !== partner._id));
     const confirmer = window.confirm(
-      "Are you sure you want to delete this song? You can not undo this action."
+      "Are you sure you want to delete this partner? You can not undo this action."
     );
     if (confirmer) {
       const res = await deleteUser(partner._id);
 
       console.log(res);
       if (res && res.status == 200) {
-        toast("partner deleted successfully!");
+        toast("Partner deleted successfully!");
       }
     }
   };
@@ -50,12 +53,26 @@ export const Table = () => {
         <div className="">
           <h1 className="md:text-xl font-bold text-blue-500">partners</h1>
         </div>
+        <div>
+          <DownloadTableExcel
+            filename="applications table"
+            sheet="applications"
+            currentTableRef={tableRef.current}
+          >
+            <div className="bg-white shadow-md rounded-md cursor-pointer px-2 py-1">
+              Generate report
+            </div>
+          </DownloadTableExcel>
+        </div>
       </div>
       <div className="mt-8 flex flex-col">
         <div className="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
             <div className="relative overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
-              <table className="min-w-full table-fixed divide-y divide-gray-300">
+              <table
+                className="min-w-full table-fixed divide-y divide-gray-300"
+                ref={tableRef}
+              >
                 <thead className="bg-gray-50">
                   <tr>
                     <th

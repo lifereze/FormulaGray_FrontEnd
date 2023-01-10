@@ -175,7 +175,7 @@ export const StudentDashboard = () => {
                   </div>
                   <div className="px-10">
                     <div className=" font-semibold p-2 text-[#184061]">
-                      Recent Applications
+                      User Applications
                     </div>
                     <RecentApplications
                       applications={applications}

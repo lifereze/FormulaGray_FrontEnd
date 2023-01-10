@@ -116,7 +116,7 @@ export const getAllApplications = async () => {
 };
 export const adminGetAllApplications = async (data) => {
   return await api
-    .get("/admin/get/applications", data)
+    .post("/admin/get/applications", data)
     .then((response) => response)
     .catch((error) => {
       return error.response;

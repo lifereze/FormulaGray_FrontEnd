@@ -4,6 +4,8 @@ import SideBar from "./SideBar";
 import Banner from "./Banner";
 import Spinner from '../utils/Spinner';
 import emailjs from "@emailjs/browser";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 export const Visa = () => {
   const initialize = {
     firstName:"",
@@ -65,7 +67,7 @@ const [isLoading,setIsLoading]=useState();
     .then(
       (result) => {
         setIsLoading(false);
-        window.location.href = "/";
+        toast("Details sent successfully!");
         console.log(result.text);
       },
       (error) => {
@@ -275,6 +277,7 @@ className="ml-3 mt-6 inline-flex justify-center rounded-md border border-transpa
        </div>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };
