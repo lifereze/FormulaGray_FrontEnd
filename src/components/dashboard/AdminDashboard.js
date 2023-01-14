@@ -29,6 +29,7 @@ export const AdminDashboard = () => {
   const [loading, setLoading] = useState(false);
   const [applications, setApplications] = useState();
   const [acceptedApplications, setAcceptedApplications] = useState();
+  const [rejectedApplications, setRejectedApplications] = useState();
 
   useEffect(() => {
     const getStudents = async () => {
@@ -50,6 +51,19 @@ export const AdminDashboard = () => {
 
         console.log("LOOK", res.data);
         setAcceptedApplications(res?.data?.length);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getStudents();
+  }, []);
+  useEffect(() => {
+    const getStudents = async () => {
+      try {
+        const res = await adminGetAllApplications({ currentStage: "rejected" });
+
+        console.log("LOOK", res.data);
+        setRejectedApplications(res?.data?.length);
       } catch (error) {
         console.log(error);
       }
@@ -100,7 +114,7 @@ export const AdminDashboard = () => {
                   <div className="md:px-10 px-4   pb-10 ">
                     <div className="grid    grid-cols-12 gap-x-4 gap-y-2 ">
                       <div className=" md:col-span-3 col-span-6">
-                        <Link to="/applications">
+                        <Link to="/adminApplications">
                           <Info
                             icon={
                               <HiDocumentText className=" text-4xl text-white" />
@@ -114,7 +128,7 @@ export const AdminDashboard = () => {
                         </Link>
                       </div>
                       <div className=" md:col-span-3 col-span-6">
-                        <Link to="/applications">
+                        <Link to="/adminApplications/accepted">
                           <Info
                             icon={
                               <BsFillCheckSquareFill className=" text-4xl text-white" />
@@ -129,12 +143,14 @@ export const AdminDashboard = () => {
                         </Link>
                       </div>
                       <div className=" md:col-span-3 col-span-6">
-                        <Link to="/applications">
+                        <Link to="/adminApplications/rejected">
                           <Info
                             icon={
                               <MdCancelPresentation className=" text-4xl text-white" />
                             }
-                            number={0}
+                            number={
+                              rejectedApplications ? rejectedApplications : 0
+                            }
                             title="Rejected"
                             color="#FFF"
                             iconBg="#DC7B7B"

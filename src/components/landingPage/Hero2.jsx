@@ -8,9 +8,9 @@ export const Hero2 = () => {
         <div className="w-full flex items-center justify-center bg-indigo-500">
           <div className="w-full md:w-1/2 flex flex-col items-center px-4 sm:px-6 py-16 lg:px-8 ">
             <div className="w-full flex flex-col items-center text-white font-bold tracking-tight text-3xl lg:text-5xl">
-              <span className="block">Want to study overseas?</span>
+              <span className="block">Want to study abroad?</span>
               <span className="text-xl md:text-2xl lg:text-3xl font-normal">
-                We make sure you're admitted
+              We guarantee a seamless admission process
               </span>
             </div>
             <div className="w-full text-[white] text-lg text-justify mx-auto mt-10 max-w-sm sm:flex sm:max-w-none sm:justify-center">
@@ -32,7 +32,7 @@ export const Hero2 = () => {
                       />
                     </svg>
                   </div>
-                  <div>We make sure your documents are right & up to date.</div>
+                  <div>We provide pre-application checks to ensure all the right documents are submitted.</div>
                 </div>
                 <div className="flex flex-row ">
                   <div className="mt-1.5 md:mt-0">
@@ -52,8 +52,7 @@ export const Hero2 = () => {
                     </svg>
                   </div>
                   <div>
-                    Our education experts will do the negotiation on your
-                    behalf.
+                  Our education experts do the negotiating on your behalf.
                   </div>
                 </div>
                 <div className="flex flex-row">
@@ -73,7 +72,7 @@ export const Hero2 = () => {
                       />
                     </svg>
                   </div>
-                  <div>We provide VISA application assistant.</div>
+                  <div>Visa application assistance.</div>
                 </div>
                 <div className="flex flex-row ">
                   <div className="mt-1.5 md:mt-0">
@@ -93,8 +92,7 @@ export const Hero2 = () => {
                     </svg>
                   </div>
                   <div>
-                    Give us your interests and our system will suggest the best
-                    program for you.
+                  Our automated platform suggests the best course fit for you based on your interests.
                   </div>
                 </div>
                 <div className="flex flex-row">
@@ -114,7 +112,7 @@ export const Hero2 = () => {
                       />
                     </svg>
                   </div>
-                  <div>Get matched with the best scholarship deals.</div>
+                  <div>Save cost with scholarship information and offers.</div>
                 </div>
                 <div className="flex flex-row">
                   <div className="mt-1.5 md:mt-0">
@@ -134,8 +132,7 @@ export const Hero2 = () => {
                     </svg>
                   </div>
                   <div>
-                    Our advisors will review your documents and give you expert
-                    advise before we submit your application.
+                  Qualifies Education counselors are available to guide you through the process and to help you make the right choices.
                   </div>
                 </div>
               </div>

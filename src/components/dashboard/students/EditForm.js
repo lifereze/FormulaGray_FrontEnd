@@ -284,7 +284,7 @@ export const EditForm = (props) => {
                     <select
                       id="country"
                       name="location.country"
-                      value={location.country}
+                      value={location?.country}
                       onChange={(e) => handleChange(e)}
                       autoComplete="country-name"
                       className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
@@ -329,7 +329,7 @@ export const EditForm = (props) => {
                       type="text"
                       name="location.city"
                       id="city"
-                      defaultValue={location.city}
+                      defaultValue={location?.city}
                       autoComplete="city"
                       className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                     />
@@ -346,7 +346,7 @@ export const EditForm = (props) => {
                       type="text"
                       name="location.state"
                       id="state"
-                      defaultValue={location.state}
+                      defaultValue={location?.state}
                       autoComplete="state"
                       className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                     />
@@ -362,7 +362,7 @@ export const EditForm = (props) => {
                       onChange={(e) => handleChange(e)}
                       type="text"
                       name="location.streetAddress"
-                      defaultValue={location.streetAddress}
+                      defaultValue={location?.streetAddress}
                       id="street-address"
                       autoComplete="street-address"
                       className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
@@ -379,7 +379,7 @@ export const EditForm = (props) => {
                       onChange={(e) => handleChange(e)}
                       type="text"
                       name="location.zipCode"
-                      defaultValue={location.zipCode}
+                      defaultValue={location?.zipCode}
                       id="zip-code"
                       autoComplete="zip-code"
                       className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"

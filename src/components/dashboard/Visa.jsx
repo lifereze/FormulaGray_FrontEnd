@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React,{useState,useMemo} from "react";
 import { Navbar } from "./Navbar";
 import SideBar from "./SideBar";
 import Banner from "./Banner";
@@ -6,6 +6,8 @@ import Spinner from '../utils/Spinner';
 import emailjs from "@emailjs/browser";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import countryList from "react-select-country-list";
+import Select from "react-select";
 export const Visa = () => {
   const initialize = {
     firstName:"",
@@ -13,6 +15,7 @@ export const Visa = () => {
     email: "",
     phoneNumber: "",
     country: "",
+    originCountry:"",
     city: "",
     state: "",
     streetAddress:"",
@@ -26,6 +29,7 @@ export const Visa = () => {
       email,
       phoneNumber,
       country,
+      originCountry,
       city,
       state,
       streetAddress,
@@ -34,6 +38,7 @@ export const Visa = () => {
     },
     setStudent,
   ] = useState(initialize);
+  const countries = useMemo(() => countryList().getData(), []);
 const [isLoading,setIsLoading]=useState();
   const handleChange = (input) => {
     setStudent((prevState) => ({
@@ -50,6 +55,7 @@ const [isLoading,setIsLoading]=useState();
       email,
       phoneNumber,
       country,
+      originCountry,
       city,
       state,
       streetAddress,
@@ -89,7 +95,7 @@ setIsLoading(false)
         <div>
        <div className=" text-center">
        <div className="text-2xl text-blue-700 font-bold">Visa</div>
-                      <div className=" text-sm">Please upload the following details for visa application.</div>
+                      <div className=" text-sm">Please complete the following details for visa application.</div>
        </div>
        <div className="">
        <div className="overflow-hidden shadow sm:rounded-md">
@@ -150,27 +156,10 @@ setIsLoading(false)
                     </div>
                     <div className="col-span-6 sm:col-span-3">
                       <label
-                        htmlFor="phoneNumber"
-                        className="block text-sm font-medium text-gray-700"
-                      >
-                        Phone Number
-                      </label>
-                      <input
- onChange={(e)=>handleChange(e)}                       
-  type="tel"
-                        name="phoneNumber"
-                        id="phone-number"
-                        autoComplete="phoneNumber"
-                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                      />
-                    </div>
-
-                    <div className="col-span-6 sm:col-span-3">
-                      <label
                         htmlFor="country"
                         className="block text-sm font-medium text-gray-700"
                       >
-                        Country
+                       Country sought for visa
                       </label>
                       <select
                         id="country"
@@ -186,6 +175,37 @@ setIsLoading(false)
                         <option>Australia</option>
                       </select>
                     </div>
+                    <div className="col-span-6 sm:col-span-3  ">
+        <div className=" pb-2 block text-sm font-medium text-gray-700">Country of origin</div>
+        <div className="">
+          <Select
+          
+            name="originCountry"
+            onChange={(e) => handleChange(e)}
+            options={countries}
+            className="basic-multi-select"
+            classNamePrefix="select"
+          />
+        </div>
+      </div>
+                    <div className="col-span-6 sm:col-span-3">
+                      <label
+                        htmlFor="phoneNumber"
+                        className="block text-sm font-medium text-gray-700"
+                      >
+                        Phone Number
+                      </label>
+                      <input
+ onChange={(e)=>handleChange(e)}                       
+  type="tel"
+                        name="phoneNumber"
+                        id="phone-number"
+                        autoComplete="phoneNumber"
+                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      />
+                    </div>
+
+                
 
                    
                     <div className="col-span-6 sm:col-span-3">

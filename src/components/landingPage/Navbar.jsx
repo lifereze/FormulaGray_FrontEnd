@@ -22,20 +22,20 @@ import { ChevronDownIcon } from "@heroicons/react/20/solid";
 const features = [
   {
     name: "Schools",
-    href: "#",
+    href: "/schools",
     description:
       "Get a better understanding of where your traffic is coming from.",
     icon: ChartBarIcon,
   },
   {
-    name: "Agencies",
-    href: "#",
+    name: "Programs",
+    href: "/programs",
     description: "Speak directly to your customers in a more meaningful way.",
     icon: CursorArrowRaysIcon,
   },
   {
-    name: "About us",
-    href: "#",
+    name: "Visa",
+    href: "/visa",
     description: "Your customers' data will be safe and secure.",
     icon: ShieldCheckIcon,
   },
@@ -158,22 +158,22 @@ export const Navbar = () => {
               </Popover>
 
               <a
-                href="#"
+                href="/schools"
                 className="text-base font-medium text-gray-500 hover:text-gray-900"
               >
                 Schools
               </a>
               <a
-                href="#"
+                href="/programs"
                 className="text-base font-medium text-gray-500 hover:text-gray-900"
               >
-                Agencies
+                Programs
               </a>
               <a
-                href="#"
+                href="/visa"
                 className="text-base font-medium text-gray-500 hover:text-gray-900"
               >
-                About us
+                Visa
               </a>
 
               <Popover className="relative">
@@ -266,10 +266,10 @@ export const Navbar = () => {
                 Sign up
               </a>
             </div>||
-            <div className="hidden md:block font-semibold capitalize text-purple-900">
+           <a href={user&&user?.role=='admin'?'/adminDashboard':user&&user?.role=='student'?'/studentDashboard':'/dashboard'}> <div className="hidden md:block cursor-pointer font-semibold capitalize text-purple-900">
               {user &&user.firstName && user.firstName|| user.email && user.email.split("@")[0]}
            
-            </div>}
+            </div></a>}
           </div>
         </div>
 

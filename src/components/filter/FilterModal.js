@@ -12,6 +12,7 @@ function FilterModal({ setFilterModal }) {
         className="fixed w-full inset-0 z-100 overflow-hidden flex justify-center items-end md:items-center animated fadeIn faster"
         style={{ background: "rgba(0,0,0,.6)" }}
       >
+        {console.log(countries)}
         <div className="shadow-xl modal-container bg-white text-black w-full md:w-3/5 lg:w-3/5 xl:w-1/3 mx-auto rounded-t-lg md:rounded-lg z-100 overflow-y-auto max-h-full">
           <div className="modal-content text-left">
             <div className="flex w-full justify-between ">
@@ -33,7 +34,13 @@ function FilterModal({ setFilterModal }) {
                     isMulti
                     onChange={(e) => {}}
                     name="country"
-                    options={countries}
+                    options={[
+                      { value: "America", label: "America" },
+                      { value: "Canada", label: "Canada" },
+                      { value: "Europe", label: "Europe" },
+                      { value: "Australia", label: "Australia" },
+                      { value: "UK", label: "UK" },
+                    ]}
                     className="basic-multi-select"
                     classNamePrefix="select"
                   />
@@ -72,6 +79,84 @@ function FilterModal({ setFilterModal }) {
                     className="basic-multi-select"
                     classNamePrefix="select"
                   />
+                </div>
+              </div>
+              <div className="pt-4">
+                <div className="pb-2">Application fees</div>
+                <div className="flex space-x-4">
+                  <div className="">
+                    <label
+                      htmlFor="LowestPrice"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Lowest
+                    </label>
+                    <input
+                      onChange={(e) => {}}
+                      type="number"
+                      defaultValue={0}
+                      name="application-fees"
+                      id="application-fees"
+                      autoComplete="application-fees"
+                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                    />
+                  </div>
+                  <div className="">
+                    <label
+                      htmlFor="LowestPrice"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Highest
+                    </label>
+                    <input
+                      onChange={(e) => {}}
+                      type="number"
+                      name="application-fees"
+                      defaultValue={1000000}
+                      id="application-fees"
+                      autoComplete="application-fees"
+                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="pt-4">
+                <div className="pb-2">Tuition fees</div>
+                <div className="flex space-x-4">
+                  <div className="">
+                    <label
+                      htmlFor="LowestPrice"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Lowest
+                    </label>
+                    <input
+                      onChange={(e) => {}}
+                      type="number"
+                      defaultValue={0}
+                      name="application-fees"
+                      id="application-fees"
+                      autoComplete="application-fees"
+                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                    />
+                  </div>
+                  <div className="">
+                    <label
+                      htmlFor="LowestPrice"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Highest
+                    </label>
+                    <input
+                      onChange={(e) => {}}
+                      type="number"
+                      name="application-fees"
+                      defaultValue={1000000}
+                      id="application-fees"
+                      autoComplete="application-fees"
+                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                    />
+                  </div>
                 </div>
               </div>
               <div className="pt-4   ">

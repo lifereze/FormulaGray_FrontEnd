@@ -37,6 +37,7 @@ function App() {
           <Route path="/studentDashboard" element={<StudentDashboard />} />
           <Route path="/applications" element={<Applications />} />
           <Route path="/adminApplications" element={<AdminApplications />} />
+          <Route path="/adminApplications/:currentStage" element={<AdminApplications />} />
           <Route path="/partners" element={<Partners />} />
           <Route path="/programs" element={<Programs />} />
           <Route path="/programs/:id" element={<ApplyStudents />} />

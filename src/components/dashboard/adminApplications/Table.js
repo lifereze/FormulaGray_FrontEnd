@@ -7,21 +7,31 @@ import ShowApplicationMenu from "../../buttons/ShowApplicationMenu";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { DownloadTableExcel } from "react-export-table-to-excel";
+import { useParams } from "react-router-dom";
 export const Table = () => {
   const tableRef = useRef(null);
   const [students, setStudents] = useState();
 
   const [loading, setLoading] = useState(false);
+  const { currentStage } = useParams();
 
   useEffect(() => {
     const getStudents = async () => {
       try {
         setLoading(true);
-        const res = await adminGetAllApplications();
+        if (currentStage) {
+          const res = await adminGetAllApplications({
+            currentStage: currentStage,
+          });
+          console.log("LOOK", res.data);
+          setStudents(res.data);
+        } else {
+          const res = await adminGetAllApplications();
+          console.log("LOOK", res.data);
+          setStudents(res.data);
+        }
 
         setLoading(false);
-        console.log("LOOK", res.data);
-        setStudents(res.data);
       } catch (error) {
         console.log(error);
       }
