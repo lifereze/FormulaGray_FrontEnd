@@ -106,6 +106,14 @@ export const getAllPrograms = async () => {
       return error.response;
     });
 };
+export const searchPrograms = async (data) => {
+  return await api
+    .post("/programme/search", data)
+    .then((response) => response)
+    .catch((error) => {
+      return error.response;
+    });
+};
 export const getAllApplications = async () => {
   return await api
     .post("/application/rectruitmentPartner/applications")

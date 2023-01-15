@@ -2,11 +2,12 @@ import React, {useState,useEffect,useRef} from "react";
 import { EllipsisVerticalIcon } from "@heroicons/react/20/solid";
 import {GoLocation} from 'react-icons/go'
 import {AiOutlineArrowRight} from 'react-icons/ai'
-import { getAllPrograms } from "../../../data/api/authenticatedRequests";
+import { getAllPrograms,searchPrograms } from "../../../data/api/authenticatedRequests";
 import PageLoader  from "../../utils/PageLoader";
 import { Link } from "react-router-dom";
 import { DownloadTableExcel } from "react-export-table-to-excel";
 import ProgramCard from "./ProgramCard";
+import { searchStore } from "../../../stores/index";
 const programss = [
   {
     name: "Design, Surveying and Planning for Construction",
@@ -130,22 +131,33 @@ export const ProgramsSection = () => {
   const tableRef=useRef(null);
   const [programs,setPrograms]=useState();
   const [loading,setLoading]=useState();
+  const search = searchStore((state) => state.search);
   const [items, setItems] = useState([
     "Bachelors",
     "Doctorate",
     "Masters",
     "Diploma",
   ]);
+  
   useEffect(()=>{
 const getPrograms=async ()=>{
   setLoading(true);
-  const res = await getAllPrograms();
+  if(search){
+    const res = await searchPrograms({query:search});
+    setPrograms(res.data)
+    console.log(res)
+  }
+  else{
+    const res = await getAllPrograms();
+    setPrograms(res.data)
+    console.log(res)
+  }
+  
   setLoading(false);
-  setPrograms(res.data)
-  console.log(res)
+ 
 }
 getPrograms();
-  },[])
+  },[search])
   return (
     <div className="">
       <div className=" flex flex-row-reverse mb-2">

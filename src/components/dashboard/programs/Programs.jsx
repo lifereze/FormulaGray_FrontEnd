@@ -1,12 +1,15 @@
-import React,{useState} from "react";
+import React,{useState,useEffect} from "react";
 import { Navbar } from "../Navbar";
 import { ProgramsSection } from "./ProgramsSection";
 import {MdFilterListAlt} from 'react-icons/md'
 import SideBar from "../SideBar";
 import Banner from "../Banner";
 import FilterModal from "../../filter/FilterModal";
+
+import Search from '../../inputs/Search'
 export const Programs = () => {
 const [filterModal,setFilterModal]=useState(false);
+
   return (
     <>
     <div className=" grid grid-cols-12">
@@ -27,15 +30,7 @@ const [filterModal,setFilterModal]=useState(false);
                       </div>
                         <div className=" flex gap-x-4">
                         <div className="">
-                        <input
-                      onChange={() =>{}}
-                      type="text"
-                      name="Search"
-                      id="search"
-                      autoComplete="search"
-                      placeholder="Search"
-                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                    />
+                       <Search/>
                         </div>
                     
                     <div className=" bg-white flex rounded-md gap-x-2 cursor-pointer px-4 items-center
