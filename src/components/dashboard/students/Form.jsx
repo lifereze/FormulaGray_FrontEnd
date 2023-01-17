@@ -53,6 +53,10 @@ const [resumeName,setResumeName]=useState();
 const [degreeUrl, setDegreeUrl] = useState("");
 const [degreeName,setDegreeName]=useState();
 
+  const [isOrdinaryLoading, setOrdinaryLoading] = useState();
+const [ordinaryUrl, setOrdinaryUrl] = useState("");
+const [ordinaryName,setOrdinaryName]=useState();
+
   const [isTranscriptLoading, setTranscriptLoading] = useState();
 const [transcriptUrl, setTranscriptUrl] = useState("");
 const [transcriptName,setTranscriptName]=useState();
@@ -411,11 +415,12 @@ console.log(res)
                     <h3 className="text-lg font-semibold leading-6 text-purple-900">
                 Document Uploads
               </h3>
-                    <FileUpload uploadDoc={uploadDoc} isDocLoading={isDegreeLoading} docName={degreeName} docUrl={degreeUrl} name='degree' title="Bachelors degree certificate"  />
-                <FileUpload uploadDoc={uploadDoc} isDocLoading={isTranscriptLoading} docName={transcriptName} docUrl={transcriptUrl} name='transcript' title="Bachelors degree transcript"  />
+                  <FileUpload uploadDoc={uploadDoc} isDocLoading={isOrdinaryLoading} docName={ordinaryName} docUrl={ordinaryUrl} name='ordinary' title="O level certificate"  />
+                    <FileUpload uploadDoc={uploadDoc} isDocLoading={isDegreeLoading} docName={degreeName} docUrl={degreeUrl} name='degree' title="Bachelors degree certificate(For postGraduate application only)"  />
+                <FileUpload uploadDoc={uploadDoc} isDocLoading={isTranscriptLoading} docName={transcriptName} docUrl={transcriptUrl} name='transcript' title="Bachelors degree transcript (For postGraduate application only)"  />
                 <FileUpload uploadDoc={uploadDoc} isDocLoading={isResumeLoading} docName={resumeName} docUrl={resumeUrl} name='resume' title="Resume"  />
                 <FileUpload uploadDoc={uploadDoc} isDocLoading={isRecommendationLoading} docName={recommendationName} docUrl={recommendationUrl} name='recommendation' title="Letter of recommendation"  />
-                <FileUpload uploadDoc={uploadDoc} isDocLoading={isStatementLoading} docName={statementName} docUrl={statementUrl} name='statement' title="Statement of purpose"  />
+                <FileUpload uploadDoc={uploadDoc} isDocLoading={isStatementLoading} docName={statementName} docUrl={statementUrl} name='statement' title="Statement of purpose(If required by country)"  />
                 <div className="mb-4 mt-10 text-left text-sm text-gray-600 font-semibold">
           Other Files
           </div>

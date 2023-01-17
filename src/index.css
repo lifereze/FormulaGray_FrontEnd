@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 ::-webkit-scrollbar {
-  width: 0px;
+  width: 10px;
 }
 
 /* Track */
@@ -21,12 +21,12 @@
 /* Handle on hover */
 
 .no-scrollbar::-webkit-scrollbar {
-  display: none;
+  /* display: none; */
 }
 
 .no-scrollbar {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  /* -ms-overflow-style: none;  
+  scrollbar-width: none;   */
 }
 .teach {
   width: 100px;
