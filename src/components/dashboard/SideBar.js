@@ -71,7 +71,9 @@ function SideBar() {
       )}
       {user && user.role !== "student" && (
         <Link
-          to={"/students"}
+          to={
+            user?.role == "recruitmentPartner" ? "/students" : "/adminStudents"
+          }
           className=" flex space-x-2 cursor-pointer items-center p-2 pr-12 w-10/12 rounded-lg  text-gray-100"
         >
           <HiOutlineUsers className="text-2xl" />

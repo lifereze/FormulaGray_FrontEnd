@@ -15,7 +15,6 @@ export const Form = (props) => {
     lastName: "",
     email: "",
     phoneNumber: "",
-    educationLevel:'',
     country: "",
     city: "",
     state: "",
@@ -33,7 +32,6 @@ export const Form = (props) => {
       lastName,
       email,
       phoneNumber,
-      educationLevel,
       country,
       city,
       state,
@@ -188,7 +186,7 @@ const [statementName,setStatementName]=useState();
 const res= await uploadStudent({
   firstName,
   lastName,
-  email,phoneNumber,country,city,educationLevel,
+  email,phoneNumber,country,city,
   state,streetAddress,zipCode,BACertificate:degreeUrl,BATranscript:transcriptUrl,resume:resumeUrl,recommendationLetter:recommendationUrl,statementOfPurpose:statementUrl
 })
 if(res.status==200){
@@ -281,28 +279,6 @@ console.log(res)
 
                     <div className="col-span-6 sm:col-span-3">
                       <label
-                        htmlFor="educationLevel"
-                        className="block text-sm font-medium text-gray-700"
-                      >
-                        Highest Level of Education
-                      </label>
-                      <select
-                        id="educationLevel"
-                        name="educationLevel"
-                        onChange={(e)=>handleChange(e)}
-                        autoComplete="educationLevel"
-                        className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                      >
-                        <option value="highSchool">High School</option>
-                        <option value="diploma">Diploma</option>
-                        <option value="bachelor">Bachelors</option>
-                        <option value="masters">Masters</option>
-                        <option value="phd">PHD</option>
-                      </select>
-                    </div>
-
-                    <div className="col-span-6 sm:col-span-3">
-                      <label
                         htmlFor="country"
                         className="block text-sm font-medium text-gray-700"
                       >
@@ -315,11 +291,11 @@ console.log(res)
                         autoComplete="country-name"
                         className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                       >
-                        <option value="America">America</option>
-                        <option value="Canada">Canada</option>
-                        <option value="UK">UK</option>
-                        <option value="Europe">Europe</option>
-                        <option value="Australia">Australia</option>
+                        <option>America</option>
+                        <option>Canada</option>
+                        <option>UK</option>
+                        <option>Europe</option>
+                        <option>Australia</option>
                       </select>
                     </div>
 

@@ -8,7 +8,7 @@ import { HiDocumentText } from "react-icons/hi";
 import { BsFillCheckSquareFill } from "react-icons/bs";
 import { MdCancelPresentation, MdCastForEducation } from "react-icons/md";
 import { userStore } from "../../stores";
-import { getAllStudents } from "../../data/api/authenticatedRequests";
+import { getAllRecruitmentPartners } from "../../data/api/authenticatedRequests";
 import { adminGetAllApplications } from "../../data/api/authenticatedRequests";
 import StudentUpload from "../modals/StudentUpload";
 import { refreshSession } from "../../data/api/authenticatedRequests";
@@ -91,9 +91,11 @@ export const AdminDashboard = () => {
   }, []);
   useEffect(() => {
     const getStudents = async () => {
-      const res = await getAllStudents();
-      setStudentCount(res?.data?.students?.length);
-      console.log(res);
+      const res = await getAllRecruitmentPartners({
+        role: "student",
+      });
+      setStudentCount(res?.data?.length);
+      console.log("students", res);
     };
     getStudents();
   }, []);
