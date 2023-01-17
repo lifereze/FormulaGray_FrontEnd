@@ -33,8 +33,8 @@ export const Table = () => {
       setLoadingProgram(true);
       const res = await getSpecificProgram(id);
       setLoadingProgram(false);
-      console.log(res);
-      setProgram(res.data);
+      console.log("program", res);
+      setProgram(res.data[0]);
     };
     getProgram();
   }, []);
@@ -102,23 +102,12 @@ export const Table = () => {
                     >
                       Nationality
                     </th>
+
                     <th
                       scope="col"
                       className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                     >
-                      Recruitment partner
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                    >
-                      Recruitment type
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                    >
-                      Education
+                      Highest Education
                     </th>
                     <th
                       scope="col"
@@ -126,18 +115,7 @@ export const Table = () => {
                     >
                       Applications
                     </th>
-                    <th
-                      scope="col"
-                      className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                    >
-                      Refferal source
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                    >
-                      Lead status
-                    </th>
+
                     <th
                       scope="col"
                       className="relative py-3.5 pl-3 pr-4 sm:pr-6"
@@ -173,29 +151,17 @@ export const Table = () => {
                           <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
                             {student.location.country}
                           </td>
-                          <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
-                            FormularGray
-                          </td>
-                          <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
-                            Refferal
-                          </td>
+
                           <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
                             Bachelors
                           </td>
                           <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
                             {student.previousApplications?.length}
                           </td>
-                          <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
-                            Walk In
-                          </td>
-                          <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
-                            {(student.applicationDetails?.status &&
-                              "Complete") ||
-                              "Pending"}
-                          </td>
+
                           <td className="whitespace-nowrap py-4 px-3  text-left text-sm font-medium sm:pr-6">
                             <ApplyButton
-                              programId={program._id}
+                              programId={id}
                               students={students}
                               student={student}
                               setStudents={setStudents}

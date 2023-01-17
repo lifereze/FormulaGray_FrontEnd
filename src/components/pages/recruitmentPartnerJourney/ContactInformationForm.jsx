@@ -48,6 +48,9 @@ if(e.target.name=='phone'){
       if(phone==''){
         setPhoneError('Phone cannot be empty')
       }
+      if(phone.length>1&&phone.length<12){
+        setPhoneError('Please use the appropriate phone format')
+      }
       return;
     }
     setLoading(true)
@@ -57,8 +60,9 @@ console.log(res)
 if(res.status==200){
   const updatedDetails=res.data.user
 storeUser({...user,updatedDetails})
+
 }
- return setRecruiter({step:'business'})
+return setRecruiter({step:'business'})
   
   }
   return (

@@ -5,9 +5,11 @@ import { getDownloadURL } from "firebase/storage";
 import Spinner from '../../utils/Spinner';
 import { uploadStudent } from '../../../data/api/authenticatedRequests';
 import {useDropzone} from 'react-dropzone';
-
+import { useNavigate } from "react-router-dom";
 
 export const Form = (props) => {
+  const navigate=useNavigate();
+
   const initialize = {
     firstName:"",
     lastName: "",
@@ -187,6 +189,9 @@ const res= await uploadStudent({
   email,phoneNumber,country,city,
   state,streetAddress,zipCode,BACertificate:degreeUrl,BATranscript:transcriptUrl,resume:resumeUrl,recommendationLetter:recommendationUrl,statementOfPurpose:statementUrl
 })
+if(res.status==200){
+  navigate('/students')
+}
 setIsLoading(false)
 console.log(res)
   }

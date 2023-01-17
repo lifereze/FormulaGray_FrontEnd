@@ -41,7 +41,8 @@ function SideBar() {
           <div className="">Dashboard</div>
         </Link>
       )}
-      {(user && user.role == "recruimentPartner" && (
+
+      {(user && user?.role == "recruitmentPartner" && (
         <Link
           to={"/applications"}
           className=" flex space-x-2 cursor-pointer items-center p-2 pr-12 w-10/12 rounded-lg  text-gray-100"
@@ -77,7 +78,6 @@ function SideBar() {
           <div className="">Students</div>
         </Link>
       )}
-
       <Link
         to={"/programs"}
         className=" flex space-x-2 cursor-pointer items-center p-2 pr-12  w-10/12 rounded-lg  text-gray-100"
@@ -85,7 +85,6 @@ function SideBar() {
         <BiFolder className="text-2xl" />
         <div className="">Programs</div>
       </Link>
-
       <Link
         to={"/schools"}
         className=" flex space-x-2 cursor-pointer items-center p-2 pr-12 w-10/12 rounded-lg  text-gray-100"
@@ -93,7 +92,6 @@ function SideBar() {
         <FaSchool className="text-2xl" />
         <div className="">Schools</div>
       </Link>
-
       <Link
         to={"/visa"}
         className=" flex space-x-2 cursor-pointer items-center p-2 pr-12 w-10/12 rounded-lg  text-gray-100"

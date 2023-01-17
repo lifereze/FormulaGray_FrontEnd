@@ -42,36 +42,27 @@ function ProgramDetails({ setViewProgram, program }) {
               <div className="text-left font-semibold pt-2 pb-1 text-[#184061]">
                 About
               </div>
-              <div className=" line-clamp-6 ">
-                This Higher National Certificate (HNC) aims to equip an
-                individual with knowledge and understanding and skills for
-                success in a range of positions in travel and tourism
-                management. Students will develop skills in leadership and
-                management, marketing, sustainable tourism, customer service as
-                well as carrying out a research project.
-              </div>
+              <div className=" line-clamp-6 ">{program?.description}</div>
               <div className="text-left font-semibold pt-2 pb-1 text-[#184061]">
                 Cost
               </div>
               <div className=" flex justify-between ">
                 <div className="w-1/2">
                   <div className=" text-sm text-gray-500">Tuition</div>
-                  <div className="">$14,250.00</div>
+                  <div className="">$ {program?.tuitionFees}</div>
                 </div>
                 <div className=" w-1/2">
                   <div className=" text-sm text-gray-500">Application Fees</div>
-                  <div className="">$250.00</div>
+                  <div className="">$ {program?.applicationFees}</div>
                 </div>
               </div>
               <div className="text-left font-semibold pt-2 pb-1 text-[#184061]">
-                Academic Requirements
+                Program Intakes
               </div>
-              <div className=" text-sm pt-2">
-                Minimum Level of Education Completed
-              </div>
-              <div className=" text-lg">1-Year Post-Secondary Certificate</div>
+              <div className=" text-sm pt-2">{program?.intakes}</div>
+              {/* <div className=" text-lg">1-Year Post-Secondary Certificate</div>
               <div className=" text-sm pt-2">Minimum GPA</div>
-              <div className=" text-lg">50.0%</div>
+              <div className=" text-lg">50.0%</div> */}
             </div>
           </div>
         </div>

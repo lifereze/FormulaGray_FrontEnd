@@ -3,20 +3,27 @@ import { getAllApplications } from "../../../data/api/authenticatedRequests";
 import PageLoader from "../../utils/PageLoader";
 import moment from "moment";
 import { AiOutlineDelete } from "react-icons/ai";
+import { useParams } from "react-router-dom";
 export const Table = () => {
   const [students, setStudents] = useState();
 
   const [loading, setLoading] = useState(false);
-
+  const { currentStage } = useParams();
   useEffect(() => {
     const getStudents = async () => {
       try {
         setLoading(true);
-        const res = await getAllApplications();
+        if (currentStage) {
+          const res = await getAllApplications({ currentStage: currentStage });
+          console.log("LOOK", res.data.applications);
+          setStudents(res.data.applications);
+        } else {
+          const res = await getAllApplications();
+          console.log("LOOK", res.data.applications);
+          setStudents(res.data.applications);
+        }
 
         setLoading(false);
-        console.log("LOOK", res.data.applications);
-        setStudents(res.data.applications);
       } catch (error) {
         console.log(error);
       }
@@ -84,51 +91,16 @@ export const Table = () => {
                     >
                       School
                     </th>
+
                     <th
                       scope="col"
                       className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                     >
-                      Nationality
+                      Application status
                     </th>
                     <th
                       scope="col"
                       className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                    >
-                      Recruitment partner
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                    >
-                      Recruitment type
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                    >
-                      Education
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                    >
-                      Applications
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                    >
-                      Refferal source
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                    >
-                      Lead status
-                    </th>
-                    <th
-                      scope="col"
-                      className="relative py-3.5 pl-3 pr-4 sm:pr-6"
                     >
                       <span className="sr-only">Edit</span>
                     </th>
@@ -144,40 +116,23 @@ export const Table = () => {
                           {moment(student?.createdAt).format("L")}
                         </td>
                         <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
-                          Peter@gmail.com
+                          {student.studentId.email}
                         </td>
                         <td className="whitespace-nowrap py-4 px-3 text-left text-sm font-medium">
-                          Peter
+                          {student.studentId.firstName}
                         </td>
                         <td className="whitespace-nowrap py-4 px-3 text-left text-sm font-medium">
-                          Mbiriri
+                          {student.studentId.lastName}
+                        </td>
+                        <td className="whitespace-nowrap px-3 capitalize text-left py-4 text-sm text-blue-500">
+                          {student?.programmeId?.title}
                         </td>
                         <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-blue-500">
-                          Master of Social Work (Field Practicum Option)
+                          {student?.programmeId?.schoolId?.name}
                         </td>
-                        <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-blue-500">
-                          University of Regina
-                        </td>
+
                         <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
-                          {student?.location?.country}
-                        </td>
-                        <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
-                          FormularGray
-                        </td>
-                        <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
-                          Refferal
-                        </td>
-                        <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
-                          Bachelors
-                        </td>
-                        <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
-                          100
-                        </td>
-                        <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
-                          Walk In
-                        </td>
-                        <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
-                          Approved
+                          {student?.currentStage}
                         </td>
                         <td className="whitespace-nowrap py-4 px-3  text-left text-sm font-medium sm:pr-6">
                           <div

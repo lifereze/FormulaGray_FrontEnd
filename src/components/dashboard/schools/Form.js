@@ -8,7 +8,11 @@ import { useDropzone } from "react-dropzone";
 import UploadImage from "../../uploads/UploadImage";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Select from "react-select";
+import { useNavigate } from "react-router-dom";
+
 export const Form = (props) => {
+  const navigate = useNavigate();
   const initialize = {
     name: "",
     about: "",
@@ -16,21 +20,37 @@ export const Form = (props) => {
 
     city: "",
     street: "",
+    numberOfStudents: 0,
+    nationalities: 0,
     images: [],
+    features: [],
   };
-  const [{ name, about, country, city, street }, setSchool] =
-    useState(initialize);
+  const [
+    { name, about, country, city, street, numberOfStudents, nationalities },
+    setSchool,
+  ] = useState(initialize);
   const [isLoading, setIsLoading] = useState();
   const [isImageLoading, setFileLoading] = useState();
   const [imageUrl, setImageUrl] = useState("");
   const [imagesArray, setImagesArray] = useState([]);
+  const [featuresArray, setFeaturesArray] = useState([]);
 
   const handleChange = (input) => {
     setSchool((prevState) => ({
       ...prevState,
       [input.target.name]: input.target.value,
     }));
-    console.log(name, about, country, city, street, imagesArray);
+    console.log(
+      name,
+      about,
+      country,
+      city,
+      street,
+      imagesArray,
+      featuresArray,
+      numberOfStudents,
+      nationalities
+    );
   };
   const onSubmitHandler = async () => {
     setIsLoading(true);
@@ -41,13 +61,24 @@ export const Form = (props) => {
       city,
       street,
       images: imagesArray,
+      features: featuresArray,
+      nationalities,
+      numberOfStudents,
     });
     setIsLoading(false);
     console.log(res);
     if (res && res.status == 200) {
       toast("School uploaded  successfully!");
       setSchool(initialize);
+      navigate("/adminDashboard");
     }
+  };
+  const setFeatures = (kFeatures) => {
+    const keyFeatures = [];
+    kFeatures.map((kFeature) => {
+      keyFeatures.push(kFeature.value);
+    });
+    setFeaturesArray(keyFeatures);
   };
   const uploadImage = (input) => {
     const files = input.target.files || [];
@@ -140,6 +171,73 @@ export const Form = (props) => {
                       className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                     />
                   </div>
+                  <div className="col-span-6 ">
+                    <label
+                      htmlFor="about"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Key Features
+                    </label>
+                    <div className="  ">
+                      <Select
+                        isMulti
+                        name="features"
+                        onChange={(e) => setFeatures(e)}
+                        options={[
+                          {
+                            value: "Co-op/Internship participation",
+                            label: "Co-op/Internship participation",
+                          },
+                          {
+                            value: "Work While Studying",
+                            label: "Work While Studying",
+                          },
+                          {
+                            value: "Conditional Offer letter",
+                            label: "Conditional Offer letter",
+                          },
+                          { value: "Accomoditions", label: "Accomoditions" },
+                        ]}
+                        className="basic-multi-select"
+                        classNamePrefix="select"
+                      />
+                    </div>
+                  </div>
+                  <div className="col-span-6">
+                    <label
+                      htmlFor="numberOfStudents"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Number of Students
+                    </label>
+                    <input
+                      onChange={(e) => handleChange(e)}
+                      type="number"
+                      name="numberOfStudents"
+                      id="numberOfStudents"
+                      value={numberOfStudents}
+                      autoComplete="numberOfStudents"
+                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                    />
+                  </div>
+                  <div className="col-span-6">
+                    <label
+                      htmlFor="nationalities"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Number of nationalities
+                    </label>
+                    <input
+                      onChange={(e) => handleChange(e)}
+                      type="number"
+                      name="nationalities"
+                      id="nationalities"
+                      value={nationalities}
+                      autoComplete="nationalities"
+                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                    />
+                  </div>
+
                   <div className="col-span-6">
                     <label
                       htmlFor="country"

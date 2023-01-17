@@ -33,13 +33,12 @@ export const Table = () => {
     getPartners();
   }, []);
   const deleteOnePartner = async (partner) => {
-    setPartners((prev) => prev.filter((item) => item._id !== partner._id));
     const confirmer = window.confirm(
       "Are you sure you want to delete this partner? You can not undo this action."
     );
     if (confirmer) {
       const res = await deleteUser(partner._id);
-
+      setPartners((prev) => prev.filter((item) => item._id !== partner._id));
       console.log(res);
       if (res && res.status == 200) {
         toast("Partner deleted successfully!");
@@ -93,6 +92,36 @@ export const Table = () => {
                     >
                       Last name
                     </th>
+                    <th
+                      scope="col"
+                      className="min-w-[12rem] py-3.5 pr-3 text-left text-sm font-semibold text-gray-900"
+                    >
+                      Country
+                    </th>
+                    <th
+                      scope="col"
+                      className="min-w-[12rem] py-3.5 pr-3 text-left text-sm font-semibold text-gray-900"
+                    >
+                      Average charge per student
+                    </th>
+                    <th
+                      scope="col"
+                      className="min-w-[12rem] py-3.5 pr-3 text-left text-sm font-semibold text-gray-900"
+                    >
+                      Average number of students annually
+                    </th>
+                    <th
+                      scope="col"
+                      className="min-w-[12rem] py-3.5 pr-3 text-left text-sm font-semibold text-gray-900"
+                    >
+                      Students To
+                    </th>
+                    <th
+                      scope="col"
+                      className="min-w-[12rem] py-3.5 pr-3 text-left text-sm font-semibold text-gray-900"
+                    >
+                      Identity Document
+                    </th>
 
                     <th
                       scope="col"
@@ -132,7 +161,53 @@ export const Table = () => {
                         >
                           {partner?.lastName}
                         </td>
+                        <td
+                          className={classNames(
+                            "whitespace-nowrap py-4 px-3 text-left  capitalize text-sm font-medium",
+                            "text-gray-900"
+                          )}
+                        >
+                          {partner?.business?.location?.country}
+                        </td>
+                        <td
+                          className={classNames(
+                            "whitespace-nowrap py-4 px-3 text-left  capitalize text-sm font-medium",
+                            "text-gray-900"
+                          )}
+                        >
+                          {partner?.recruitmentDetails?.averageCharge}
+                        </td>
+                        <td
+                          className={classNames(
+                            "whitespace-nowrap py-4 px-3 text-left  capitalize text-sm font-medium",
+                            "text-gray-900"
+                          )}
+                        >
+                          {partner?.recruitmentDetails?.averageStudentsAnnually}
+                        </td>
+                        <td
+                          className={classNames(
+                            "whitespace-nowrap py-4 px-3 text-left  capitalize text-sm font-medium",
+                            "text-gray-900"
+                          )}
+                        >
+                          {partner?.recruitmentDetails?.studentsTo.map(
+                            (country) => (
+                              <span>{country},</span>
+                            )
+                          )}
+                        </td>
 
+                        <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-blue-500">
+                          {partner?.identityDocument && (
+                            <a
+                              href={partner?.identityDocument}
+                              className="px-3 py-2"
+                            >
+                              View
+                            </a>
+                          )}
+                        </td>
                         <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
                           {partner?.approvalStatus}
                         </td>

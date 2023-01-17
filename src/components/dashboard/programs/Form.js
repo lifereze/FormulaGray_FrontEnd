@@ -2,10 +2,11 @@ import React, { useState, useEffect, useMemo } from "react";
 import { useParams } from "react-router-dom";
 import Spinner from "../../utils/Spinner";
 import { uploadProgram } from "../../../data/api/authenticatedRequests";
-
+import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 export const Form = (props) => {
+  const navigate = useNavigate();
   const initialize = {
     title: "",
     description: "",
@@ -19,6 +20,8 @@ export const Form = (props) => {
     setProgram,
   ] = useState(initialize);
   const [isLoading, setIsLoading] = useState();
+  const [intake, setIntake] = useState("");
+  const [level, setLevel] = useState("");
 
   const handleChange = (input) => {
     setProgram((prevState) => ({
@@ -37,12 +40,15 @@ export const Form = (props) => {
       tuitionFees,
       schoolId: schoolId,
       currency: "USD",
+      intakes: intake,
+      level,
     });
     setIsLoading(false);
     console.log(res);
     if (res && res.status == 200) {
       toast("Program uploaded  successfully!");
       setProgram(initialize);
+      navigate("/adminDashboard");
     }
   };
 
@@ -112,6 +118,7 @@ export const Form = (props) => {
                       className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                     />
                   </div>
+
                   <div className="col-span-6">
                     <label
                       htmlFor="tuitionFees"
@@ -128,6 +135,43 @@ export const Form = (props) => {
                       autoComplete="tuitionFees"
                       className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                     />
+                  </div>
+                  <div className="col-span-6">
+                    <div className=" my-1 text-left pb-1 text-sm font-medium text-gray-700">
+                      Program Intakes
+                    </div>
+                    <select
+                      name={"intake"}
+                      className="w-full rounded-md border focus:outline-none focus:ring-0 focus:border-bloow-blue"
+                      onChange={(e) => {
+                        setIntake(e.target.value);
+                      }}
+                    >
+                      {" "}
+                      <option value="winter">Winter</option>
+                      <option value="summer">Summer</option>
+                      <option value="autumn">Autumn</option>
+                      <option value="spring">Spring</option>
+                    </select>
+                  </div>
+                  <div className="col-span-6">
+                    <div className=" my-1 text-left pb-1 text-sm font-medium text-gray-700">
+                      Program Level
+                    </div>
+                    <select
+                      name={"level"}
+                      className="w-full rounded-md border focus:outline-none focus:ring-0 focus:border-bloow-blue"
+                      onChange={(e) => {
+                        setLevel(e.target.value);
+                      }}
+                    >
+                      {" "}
+                      <option value="highSchool">High School</option>
+                      <option value="diploma">Diploma</option>
+                      <option value="bachelor">Bachelor</option>
+                      <option value="masters">Masters</option>
+                      <option value="phd">PHD</option>
+                    </select>
                   </div>
                 </div>
               </div>

@@ -1,6 +1,7 @@
 import React,{useState,useEffect,useMemo} from 'react'
 import { useNavigate } from "react-router-dom";
 import { updateRecruitmentDetails } from '../../../data/api/authenticatedRequests';
+import { editUser } from "../../../data/api/authenticatedRequests";
 import Spinner from '../../utils/Spinner';
 import { useRecruiter } from "../../../stores";
 import Select from 'react-select';
@@ -47,8 +48,17 @@ function RecruitmentDetails() {
         const res=await updateRecruitmentDetails({'studentsFrom':studentsFrom,'studentsTo':studentsTo,'averageCharge':averageCharge,'averageStudentsAnnually':averageStudentsAnnually});
         console.log(res)
         setLoading(false);
+        if(res.status==200){
+          const data=await editUser({'onboarding':true})
+          console.log(data)
+          if(data.status==200){
 
-       navigate("/dashboard");
+navigate("/dashboard");
+          }
+
+        }
+
+      
       
 
     }

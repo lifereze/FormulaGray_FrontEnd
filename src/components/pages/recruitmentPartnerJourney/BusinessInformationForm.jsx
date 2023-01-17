@@ -138,7 +138,7 @@ console.log(options)
               return;
             }
             setLoading(true)
-            const res=await updateBusinessDetails({'name':businessName,'country':country,'city':city,'streetAddress':streetAddress})
+            const res=await updateBusinessDetails({'name':businessName,'country':country,'city':city,'streetAddress':streetAddress,'identityDocument':docUrl})
         setLoading(false)
          console.log(res);
          return setRecruiter({step:'recruitment-details'})
@@ -200,8 +200,12 @@ console.log(options)
                 </option>
       </select>
     </div>
+ 
+
+
             {entity=='individual'&&<ImageUpload uploadImage={uploadImage} isImageLoading={isImageLoading} imageUrl={imageUrl}  />}
 {   entity=='business'&&         <FileUpload uploadDoc={uploadDoc} isDocLoading={isDocLoading} docName={docName} docUrl={docUrl} title="Business Certificate"  />
+
 }            <div className="mt-3">
               <div 
                   className=" text-left pb-1 text-sm font-medium text-gray-700"

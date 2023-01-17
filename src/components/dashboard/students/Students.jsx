@@ -5,6 +5,7 @@ import SideBar from "../SideBar";
 import Banner from "../Banner";
 import { getAllStudents } from "../../../data/api/authenticatedRequests";
 import PageLoader  from "../../utils/PageLoader";
+import Search from "../../inputs/Search";
 export const Students = () => {
 
   return (
@@ -24,7 +25,25 @@ export const Students = () => {
                 <div>
                   <div className="divide-y divide-gray-200">
                     <div className=" text-center">
-                      <div>
+                      <div className="px-4 sm:px-6  mr-2 no-scrollbar ">
+                      <div className="flex items-center justify-between">
+        <div className="">
+          <h1 className="md:text-xl font-bold text-blue-500">Students</h1>
+        </div>
+        <div className="mt-4 sm:mt-0 flex space-x-4 ">
+          <div className="">
+            <Search/>
+          </div>
+          <a href="/addStudent">
+            <button
+              type="button"
+              className="inline-flex items-center justify-center rounded-md border border-transparent bg-blue-500 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto"
+            >
+              Add student
+            </button>
+          </a>
+        </div>
+      </div>
                         <Table
                    
                        

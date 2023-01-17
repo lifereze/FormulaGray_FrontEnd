@@ -21,7 +21,7 @@ function ProgramCard({ program }) {
   return (
     <div className="p-2 border text-left mb-4 col-span-5  bg-white shadow-lg rounded-lg ">
       <div className=" text-[#184061] font-semibold capitalize">
-        {program.title}
+        {program?.title}
       </div>
       <div className=" flex  justify-between items-center py-1">
         <div className=" w-1/2 ">
@@ -38,24 +38,15 @@ function ProgramCard({ program }) {
       <div className=" flex justify-between ">
         <div className="w-1/2">
           <div className=" text-sm text-gray-500">Tuition</div>
-          <div className="">$14,250.00</div>
+          <div className="">$ {program?.tuitionFees}</div>
         </div>
         <div className=" w-1/2">
           <div className=" text-sm text-gray-500">Application Fees</div>
-          <div className="">$250.00</div>
+          <div className="">$ {program?.applicationFees}</div>
         </div>
       </div>
       <div className=" flex  justify-between items-center pt-4">
-        {(!user?.role == "student" && (
-          <Link
-            to={`/programs/${program._id}`}
-            className="w-1/2 flex items-start justify-start"
-          >
-            <div className=" p-2 border cursor-pointer border-blue-600 rounded-lg hover:bg-blue-600 hover:text-white text-blue-600">
-              Select Student
-            </div>
-          </Link>
-        )) || (
+        {user?.role == "student" ? (
           <div className="w-1/2 flex items-start justify-start">
             <div
               className=" p-2 border cursor-pointer border-blue-600 rounded-lg hover:bg-blue-600 hover:text-white text-blue-600"
@@ -64,6 +55,15 @@ function ProgramCard({ program }) {
               {loading ? <Spinner /> : "Apply"}
             </div>
           </div>
+        ) : (
+          <Link
+            to={`/programs/${program._id}`}
+            className="w-1/2 flex items-start justify-start"
+          >
+            <div className=" p-2 border cursor-pointer border-blue-600 rounded-lg hover:bg-blue-600 hover:text-white text-blue-600">
+              Select Student
+            </div>
+          </Link>
         )}
         <div
           className=" flex  items-center w-1/2 space-x-2 cursor-pointer text-blue-600"

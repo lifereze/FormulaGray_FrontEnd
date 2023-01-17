@@ -32,8 +32,13 @@ export const Signin = () => {
       setLoading(false);
       setInfo({ message: response.message, type: response.status });
       if (response.status === "success"&& response.data.user.role=='recruitmentPartner') {
+        if(response.data.user.onboarding){
         storeUser(response.data.user);
         navigate("/dashboard");
+        }
+        else{
+          navigate('/recruitmentPartner/register');
+        }
       }
       if (response.status === "success"&& response.data.user.role=='admin'){
         storeUser(response.data.user);

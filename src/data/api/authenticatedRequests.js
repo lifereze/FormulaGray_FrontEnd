@@ -74,9 +74,17 @@ export const uploadProgram = async (data) => {
       return error.response;
     });
 };
+export const TopPrograms = async () => {
+  return await api
+    .get("/programme/topProgrammes")
+    .then((response) => response)
+    .catch((error) => {
+      return error.response;
+    });
+};
 export const createApplication = async (data) => {
   return await api
-    .post("/application/create", data)
+    .post("/application/recruitmentPartner/create", data)
     .then((response) => response)
     .catch((error) => {
       return error.response;
@@ -85,6 +93,22 @@ export const createApplication = async (data) => {
 export const studentCreateApplication = async (data) => {
   return await api
     .post("/application/student/create", data)
+    .then((response) => response)
+    .catch((error) => {
+      return error.response;
+    });
+};
+export const searchStudents = async (data) => {
+  return await api
+    .post("/student/search", data)
+    .then((response) => response)
+    .catch((error) => {
+      return error.response;
+    });
+};
+export const searchSchools = async (data) => {
+  return await api
+    .post("/school/search", data)
     .then((response) => response)
     .catch((error) => {
       return error.response;
@@ -132,7 +156,7 @@ export const adminGetAllApplications = async (data) => {
 };
 export const getSpecificProgram = async (id) => {
   return await api
-    .get(`/programme/${id}`)
+    .get(`/programme/get/${id}`)
     .then((response) => response)
     .catch((error) => {
       return error.response;

@@ -8,6 +8,7 @@ function ApplyButton({ student, programId, setStudents }) {
   const [isLoading, setIsLoading] = useState();
   const onApply = async () => {
     setIsLoading(true);
+    console.log(programId);
     const res = await createApplication({
       studentId: student._id,
       programmeId: programId,

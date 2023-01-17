@@ -1,6 +1,22 @@
-import React from "react";
-
+import { async } from "@firebase/util";
+import React, { useState, useEffect } from "react";
+import { TopPrograms } from "../../data/api/authenticatedRequests";
+import { Link } from "react-router-dom";
 function TopPrrograms() {
+  const [programs, setPrograms] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const fetchPrograms = async () => {
+      setLoading(true);
+      const res = await TopPrograms();
+      if (res.status == 200) {
+        setPrograms(res.data);
+        setLoading(false);
+      }
+    };
+    fetchPrograms();
+  }, []);
   return (
     <div className=" w-full overflow-x-scroll">
       <table className="w-full overflow-x-scroll divide-y divide-gray-300">
@@ -33,76 +49,29 @@ function TopPrrograms() {
           </tr>
         </thead>
         <tbody className="divide-y divide-gray-200 bg-white">
-          <tr>
-            <td className="whitespace-nowrap text-center px-3 py-4 text-sm text-gray-500">
-              001
-            </td>
-            <td className="whitespace-nowrap   text-left px-3 py-4 text-sm text-gray-500">
-              Electrical Engineering
-            </td>
-            <td className="whitespace-nowrap text-center px-3 py-4 text-sm text-gray-500">
-              106
-            </td>
-            <td className="whitespace-nowrap text-center text-indigo-600 hover:text-indigo-900 px-3 py-4 text-sm  cursor-pointer">
-              View
-            </td>
-          </tr>
-          <tr>
-            <td className="whitespace-nowrap text-center px-3 py-4 text-sm text-gray-500">
-              002
-            </td>
-            <td className="whitespace-nowrap   text-left px-3 py-4 text-sm text-gray-500">
-              Medicine And Surgery
-            </td>
-            <td className="whitespace-nowrap text-center px-3 py-4 text-sm text-gray-500">
-              54
-            </td>
-            <td className="whitespace-nowrap text-center text-indigo-600 hover:text-indigo-900 px-3 py-4 text-sm  cursor-pointer">
-              View
-            </td>
-          </tr>
-          <tr>
-            <td className="whitespace-nowrap text-center px-3 py-4 text-sm text-gray-500">
-              003
-            </td>
-            <td className="whitespace-nowrap    text-left px-3 py-4 text-sm text-gray-500">
-              Telecommunications
-            </td>
-            <td className="whitespace-nowrap text-center px-3 py-4 text-sm text-gray-500">
-              24
-            </td>
-            <td className="whitespace-nowrap text-center text-indigo-600 hover:text-indigo-900 px-3 py-4 text-sm  cursor-pointer">
-              View
-            </td>
-          </tr>
-          <tr>
-            <td className="whitespace-nowrap text-center px-3 py-4 text-sm text-gray-500">
-              004
-            </td>
-            <td className="whitespace-nowrap    text-left px-3 py-4 text-sm text-gray-500">
-              Software Engineering
-            </td>
-            <td className="whitespace-nowrap text-center px-3 py-4 text-sm text-gray-500">
-              106
-            </td>
-            <td className="whitespace-nowrap text-center text-indigo-600 hover:text-indigo-900 px-3 py-4 text-sm  cursor-pointer">
-              View
-            </td>
-          </tr>
-          <tr>
-            <td className="whitespace-nowrap text-center px-3 py-4 text-sm text-gray-500">
-              005
-            </td>
-            <td className="whitespace-nowrap    text-left px-3 py-4 text-sm text-gray-500">
-              Psychology
-            </td>
-            <td className="whitespace-nowrap text-center px-3 py-4 text-sm text-gray-500">
-              16
-            </td>
-            <td className="whitespace-nowrap text-center text-indigo-600 hover:text-indigo-900 px-3 py-4 text-sm  cursor-pointer">
-              View
-            </td>
-          </tr>
+          {!loading &&
+            programs &&
+            programs.map((program, index) => (
+              <tr>
+                <td className="whitespace-nowrap text-center px-3 py-4 text-sm text-gray-500">
+                  {index + 1}
+                </td>
+                <td className="whitespace-nowrap capitalize   text-left px-3 py-4 text-sm text-gray-500">
+                  {program?.programme[0].title}
+                </td>
+                <td className="whitespace-nowrap text-center px-3 py-4 text-sm text-gray-500">
+                  {program.count}
+                </td>
+                <td className="whitespace-nowrap text-center text-indigo-600 hover:text-indigo-900 px-3 py-4 text-sm  cursor-pointer">
+                  <Link
+                    to={`/programs/${program?.programme[0]._id}`}
+                    className="px-2 py-1"
+                  >
+                    Apply
+                  </Link>
+                </td>
+              </tr>
+            ))}
         </tbody>
       </table>
     </div>

@@ -1,11 +1,16 @@
 import React, { useEffect, useState, useRef } from "react";
 import { GrFormEdit } from "react-icons/gr";
 import { AiOutlineDelete } from "react-icons/ai";
-import { getAllStudents } from "../../../data/api/authenticatedRequests";
+import {
+  getAllStudents,
+  searchStudents,
+} from "../../../data/api/authenticatedRequests";
 import { deleteStudent } from "../../../data/api/authenticatedRequests";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { DownloadTableExcel } from "react-export-table-to-excel";
+import ShowFiles from "../../buttons/showFiles";
+import { searchStore } from "../../../stores/index";
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
@@ -13,6 +18,7 @@ function classNames(...classes) {
 export const Table = () => {
   const tableRef = useRef(null);
   const [students, setStudents] = useState();
+  const search = searchStore((state) => state.search);
   const [items, setItems] = useState([
     "Bachelors",
     "Doctorate",
@@ -24,16 +30,23 @@ export const Table = () => {
     const getStudents = async () => {
       try {
         setLoading(true);
-        const res = await getAllStudents();
-        setStudents(res.data.students);
+        if (search) {
+          const res = await searchStudents({ query: search });
+          setStudents(res.data.students);
+          console.log("Student data", res.data.students);
+        } else {
+          const res = await getAllStudents();
+          setStudents(res.data.students);
+          console.log("Student data", res.data.students);
+        }
+
         setLoading(false);
-        console.log(res.data.students);
       } catch (error) {
         console.log(error);
       }
     };
     getStudents();
-  }, []);
+  }, [search]);
   const deleteOneStudent = async (student) => {
     const confirmer = window.confirm(
       "Are you sure you want to delete this application? You can not undo this action."
@@ -51,22 +64,7 @@ export const Table = () => {
   };
 
   return (
-    <div className="px-4 sm:px-6  mr-2 no-scrollbar ">
-      <div className="flex items-center justify-between">
-        <div className="">
-          <h1 className="md:text-xl font-bold text-blue-500">Students</h1>
-        </div>
-        <div className="mt-4 sm:mt-0 ">
-          <a href="/addStudent">
-            <button
-              type="button"
-              className="inline-flex items-center justify-center rounded-md border border-transparent bg-blue-500 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto"
-            >
-              Add student
-            </button>
-          </a>
-        </div>
-      </div>
+    <div className="">
       <div className=" flex mt-2 flex-row-reverse">
         <div>
           <DownloadTableExcel
@@ -80,12 +78,12 @@ export const Table = () => {
           </DownloadTableExcel>
         </div>
       </div>
-      <div className="mt-8 flex flex-col">
-        <div className="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
-          <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
-            <div className="relative overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
+      <div className="mt-8 flex  flex-col">
+        <div className="-my-2 -mx-4  overflow-x-auto sm:-mx-6 lg:-mx-8">
+          <div className="inline-block  min-w-full py-2 align-middle md:px-6 lg:px-8">
+            <div className="relative z-0 overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
               <table
-                className="min-w-full table-fixed divide-y divide-gray-300"
+                className="min-w-full    -z-10 divide-y divide-gray-300"
                 ref={tableRef}
               >
                 <thead className="bg-gray-50">
@@ -114,12 +112,6 @@ export const Table = () => {
                     >
                       Nationality
                     </th>
-                    <th
-                      scope="col"
-                      className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                    >
-                      Recruitment partner
-                    </th>
 
                     <th
                       scope="col"
@@ -133,11 +125,12 @@ export const Table = () => {
                     >
                       Applications
                     </th>
+
                     <th
                       scope="col"
                       className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                     >
-                      Refferal source
+                      Documents
                     </th>
 
                     <th
@@ -148,7 +141,7 @@ export const Table = () => {
                     </th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-200 bg-white">
+                <tbody className="divide-y divide-gray-200 pb-64 bg-white">
                   {!loading &&
                     students &&
                     students.map((student) => (
@@ -175,9 +168,6 @@ export const Table = () => {
                         <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
                           {student?.location?.country || "Nigeria"}
                         </td>
-                        <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
-                          FormularGray
-                        </td>
 
                         <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
                           {items[Math.floor(Math.random() * items.length)]}
@@ -187,8 +177,8 @@ export const Table = () => {
                             Math.floor(Math.random() * 10)}
                         </td>
 
-                        <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
-                          Walk In
+                        <td className="whitespace-nowrap px-3 z-10 text-left py-4 text-sm text-gray-500">
+                          <ShowFiles docs={student?.documents} />
                         </td>
                         <td className="whitespace-nowrap py-4 px-2  text-left text-sm font-medium sm:pr-6">
                           <div className=" flex space-x-2 items-center">

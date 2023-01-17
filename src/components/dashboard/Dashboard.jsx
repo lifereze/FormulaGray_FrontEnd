@@ -11,7 +11,7 @@ import {userStore} from '../../stores'
 import { getAllStudents } from "../../data/api/authenticatedRequests";
 import StudentUpload from "../modals/StudentUpload";
 import {refreshSession} from '../../data/api/authenticatedRequests'
-import { getAllSchools } from "../../data/api/authenticatedRequests";
+import { getAllSchools,getAllApplications } from "../../data/api/authenticatedRequests";
 import { SchoolsCard } from "./schools/SchoolsCard";
 import { Link } from "react-router-dom";
 import { CountryDistribution } from "../charts/CountryDistribution";
@@ -106,7 +106,9 @@ export const Dashboard = () => {
   const [studentUpload,setStudentUpload]=useState(false);
   const [studentCount,setStudentCount]=useState();
   const [schools,setSchools]=useState();
-
+  const [applications, setApplications] = useState();
+  const [acceptedApplications, setAcceptedApplications] = useState();
+  const [rejectedApplications, setRejectedApplications] = useState();
   const [loading,setLoading]=useState(false);
   useEffect(()=>{
     const getUser= async ()=>{
@@ -118,6 +120,45 @@ export const Dashboard = () => {
     
      getUser();
        },[])
+       useEffect(() => {
+        const getStudents = async () => {
+          try {
+            const res = await getAllApplications();
+    
+            console.log("LOOK", res.data);
+            setApplications(res?.data?.length);
+          } catch (error) {
+            console.log(error);
+          }
+        };
+        getStudents();
+      }, []);
+       useEffect(() => {
+        const getStudents = async () => {
+          try {
+            const res = await getAllApplications({ currentStage: "accepted" });
+    
+            console.log("LOOK", res.data);
+            setAcceptedApplications(res?.data?.length);
+          } catch (error) {
+            console.log(error);
+          }
+        };
+        getStudents();
+      }, []);
+      useEffect(() => {
+        const getStudents = async () => {
+          try {
+            const res = await getAllApplications({ currentStage: "rejected" });
+    
+            console.log("LOOK", res.data);
+            setRejectedApplications(res?.data?.length);
+          } catch (error) {
+            console.log(error);
+          }
+        };
+        getStudents();
+      }, []);
        useEffect(()=>{
   
         const fetchSchools=async ()=>{
@@ -133,7 +174,7 @@ export const Dashboard = () => {
         const getStudents= async ()=>{
 const res=await getAllStudents();
 setStudentCount(res?.data?.students?.length)
-console.log(res)
+
         }
         getStudents();
 
@@ -163,7 +204,7 @@ console.log(res)
   <Link to='/applications'>
     
     <Info icon={   <HiDocumentText className=' text-4xl text-white' />}
-    number={7}
+    number={applications?applications:0}
     title='Applications'
     color='#123A5C'
     iconBg='#657CEE'
@@ -173,9 +214,9 @@ console.log(res)
     </Link>
     </div>
     <div className=' md:col-span-3 col-span-6'>
-    <Link to='/applications'>
+    <Link to='/applications/accepted'>
     <Info icon={   <BsFillCheckSquareFill className=' text-4xl text-white' />}
-    number={0}
+    number={acceptedApplications?acceptedApplications:0}
     title='Accepted'
     color='#FFF'
     iconBg='#00AF80'
@@ -183,9 +224,9 @@ console.log(res)
     </Link>
     </div>
     <div className=' md:col-span-3 col-span-6'>
-    <Link to='/applications'>
+    <Link to='/applications/rejected'>
     <Info icon={   <MdCancelPresentation className=' text-4xl text-white' />}
-    number={0}
+    number={rejectedApplications?rejectedApplications:0}
     title='Rejected'
     color='#FFF'
     iconBg='#DC7B7B'
@@ -194,8 +235,9 @@ console.log(res)
     </div>
     <div className=' md:col-span-3 col-span-6'>
     <Link to='/students'>
+     
     <Info icon={   <MdCastForEducation className=' text-4xl text-white' />}
-    number={studentCount?studentCount:''}
+    number={studentCount?studentCount:0}
     title='Students'
     color='#FFF'
     iconBg='#657CEE'
