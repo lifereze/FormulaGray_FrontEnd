@@ -19,7 +19,7 @@ function TopSection() {
             <Search />
           </div>
 
-          <div
+          {/* <div
             className=" bg-white flex rounded-md gap-x-2 cursor-pointer px-4 items-center
                      "
             onClick={() => setFilterModal(true)}
@@ -28,7 +28,7 @@ function TopSection() {
               <MdFilterListAlt className="" />
             </div>
             <div className="">Filter</div>
-          </div>
+          </div> */}
           {user && user.role == "admin" && (
             <Link
               to={"/schools/addSchool"}

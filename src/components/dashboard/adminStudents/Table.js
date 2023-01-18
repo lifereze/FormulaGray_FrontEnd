@@ -173,16 +173,18 @@ export const Table = () => {
                           {(student?.documents && (
                             <ShowFiles docs={student?.documents} />
                           )) || (
-                            <a href={`/student/edit/${student?._id}`}>
+                            <a href={`/adminStudent/edit/${student?._id}`}>
                               Upload Docs
                             </a>
-                          )} 
+                          )}
                         </td>
                         <td className="whitespace-nowrap py-4 px-2  text-left text-sm font-medium sm:pr-6">
                           <div className=" flex space-x-2 items-center">
-                            <div className="p-1 hover:bg-gray-100 rounded-full">
-                              <GrFormEdit className=" text-2xl" />
-                            </div>
+                            <a href={`/adminStudent/edit/${student?._id}`}>
+                              <div className="p-1 hover:bg-gray-100 rounded-full">
+                                <GrFormEdit className=" text-2xl" />
+                              </div>
+                            </a>
                             <div
                               className=" cursor-pointer p-1 hover:bg-gray-100 rounded-full "
                               onClick={() => deleteOneStudent(student)}

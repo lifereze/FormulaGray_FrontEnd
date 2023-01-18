@@ -234,6 +234,30 @@ export const getAllRecruitmentPartners = async (data) => {
       return error.response;
     });
 };
+export const adminGetSpecificStudent = async (id) => {
+  return await api
+    .post(`/admin/get/user/${id}`, { role: "student" })
+    .then((response) => response)
+    .catch((error) => {
+      return error.response;
+    });
+};
+export const adminEditSpecificStudent = async (id, data) => {
+  return await api
+    .patch(`/admin/edit/student/${id}`, data)
+    .then((response) => response)
+    .catch((error) => {
+      return error.response;
+    });
+};
+export const filterPrograms = async (data) => {
+  return await api
+    .post("/programme/filter", data)
+    .then((response) => response)
+    .catch((error) => {
+      return error.response;
+    });
+};
 export const getStudent = async (id) => {
   return await api
     .get(`/student/get/${id}`)

@@ -4,9 +4,7 @@ import { EditForm } from "./EditForm";
 import SideBar from "../SideBar";
 import Banner from "../Banner";
 
-export const EditStudent = (props) => {
-  
-
+export const EditAdminStudent = (props) => {
   return (
     <>
       <div className=" grid grid-cols-12">

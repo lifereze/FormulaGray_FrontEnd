@@ -4,8 +4,8 @@ import { firebaseUploadImg, firebaseUploadDoc } from "../../../data/api/upload";
 import { getDownloadURL } from "firebase/storage";
 import Spinner from "../../utils/Spinner";
 import {
-  updateStudent,
-  getStudent,
+  adminEditSpecificStudent,
+  adminGetSpecificStudent,
 } from "../../../data/api/authenticatedRequests";
 import { useParams, useNavigate } from "react-router-dom";
 export const EditForm = (props) => {
@@ -67,15 +67,15 @@ export const EditForm = (props) => {
     const getAStudent = async () => {
       console.log(id);
       try {
-        const res = await getStudent(id);
+        const res = await adminGetSpecificStudent(id);
         console.log(res);
 
-        setStudent(res.data?.student);
-        setResumeUrl(res.data?.student?.resume);
-        setDegreeUrl(res.data?.student?.BACertificate);
-        setTranscriptUrl(res.data?.student?.BATranscript);
-        setRecommendationUrl(res.data?.student?.recommendationLetter);
-        setStatementUrl(res.data?.student?.statementOfPurpose);
+        setStudent(res.data ? res.data : initialize);
+        setResumeUrl(res.data?.documents?.resume);
+        setDegreeUrl(res.data?.documents?.BACertificate);
+        setTranscriptUrl(res.data?.documents?.BATranscript);
+        setRecommendationUrl(res.data?.documents?.recommendationLetter);
+        setStatementUrl(res.data?.documents?.statementOfPurpose);
       } catch (error) {
         console.log(error);
       }
@@ -166,29 +166,26 @@ export const EditForm = (props) => {
   };
   const onSubmitHandler = async () => {
     setIsLoading(true);
-    const res = await updateStudent(
-      {
-        firstName,
-        lastName,
-        email,
-        phoneNumber,
-        country: location.country,
-        city: location.city,
-        state: location.state,
-        streetAddress: location.streetAddress,
-        zipCode: location.zipCode,
-        BACertificate: degreeUrl,
-        BATranscript: transcriptUrl,
-        resume: resumeUrl,
-        recommendationLetter: recommendationUrl,
-        statementOfPurpose: statementUrl,
-      },
-      id
-    );
+    const res = await adminEditSpecificStudent(id, {
+      firstName: firstName ? firstName : "",
+      lastName: lastName ? lastName : "",
+      email: email ? email : "",
+      phoneNumber: phoneNumber ? phoneNumber : "",
+      country: location?.country ? location?.country : "",
+      city: location?.city ? location?.city : "",
+      state: location?.state ? location?.state : "",
+      streetAddress: location?.streetAddress ? location?.streetAddress : "",
+      zipCode: location?.zipCode ? location?.zipCode : "",
+      BACertificate: degreeUrl ? degreeUrl : "",
+      BATranscript: transcriptUrl ? transcriptUrl : "",
+      resume: resumeUrl ? resumeUrl : "",
+      recommendationLetter: recommendationUrl ? recommendationUrl : "",
+      statementOfPurpose: statementUrl ? statementUrl : "",
+    });
     setIsLoading(false);
     console.log(res);
     if (res.status == 200) {
-      navigate("/students");
+      navigate("/adminStudents");
     }
   };
   return (

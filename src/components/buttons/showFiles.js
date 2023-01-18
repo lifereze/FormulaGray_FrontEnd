@@ -28,7 +28,7 @@ function ShowMenu({ docs }) {
       <div className=" relative  z-50 ">
         {showMenu && (
           <div className="   left-10  p-1 bg-[#184061] text-gray-200 rounded-md   text-center">
-            <div className="font-bold">Status</div>
+            <div className="font-bold">Files</div>
             {console.log("These docs", docs)}
             {docs?.BACertificate && (
               <a

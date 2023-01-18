@@ -27,7 +27,7 @@ export const ResetPassword = () => {
       if (res.status == 200) {
         navigate("/signin");
       } else {
-        const message = res?.data?.message;
+        const message = res?.data?.message; 
         toast(message);
       }
     }

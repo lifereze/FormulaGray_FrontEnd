@@ -5,6 +5,11 @@ export const userStore = create((set) => ({
   storeUser: (user) => set({ user: user }),
   removeUser: () => set({ user: null }),
 }));
+export const filterStore = create((set) => ({
+  filter: null,
+  storeFilter: (filter) => set({ filter: filter }),
+  removeFilter: () => set({ filter: null }),
+}));
 export const searchStore = create((set) => ({
   search: null,
   storeSearch: (search) => set({ search: search }),

@@ -1,11 +1,31 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { AiOutlineClose, AiOutlineArrowRight } from "react-icons/ai";
-import { userStore } from "../../stores";
+import { userStore, filterStore } from "../../stores";
 import countryList from "react-select-country-list";
 import Select from "react-select";
 function FilterModal({ setFilterModal }) {
+  const storeFilter = filterStore((state) => state.storeFilter);
   const user = userStore((state) => state.user);
   const countries = useMemo(() => countryList().getData(), []);
+  const [level, setLevel] = useState("");
+  const [intakes, setIntakes] = useState("");
+  const [applicationFeesFloor, setApplicationFeesFloor] = useState(0);
+  const [applicationFeesCeil, setApplicationFeesCeil] = useState(10000);
+  const [tiutionFeesFloor, settiutionFeesFloor] = useState(0);
+  const [tiutionFeesCeil, settiutionFeesCeil] = useState(10000);
+
+  const onSubmitHandler = () => {
+    storeFilter({
+      level: level,
+      intakes: intakes,
+      applicationFeesFloor: applicationFeesFloor,
+      applicationFeesCeil: applicationFeesCeil,
+      tiutionFeesFloor: tiutionFeesFloor,
+      tiutionFeesCeil: tiutionFeesCeil,
+    });
+    setFilterModal(false);
+  };
+
   return (
     <>
       <div
@@ -27,36 +47,18 @@ function FilterModal({ setFilterModal }) {
               </div>
             </div>
             <div className="px-6 pb-6">
-              <div className=" pt-4">
-                <div className=" pb-2">Country</div>
-                <div className=" ">
-                  <Select
-                    isMulti
-                    onChange={(e) => {}}
-                    name="country"
-                    options={[
-                      { value: "America", label: "America" },
-                      { value: "Canada", label: "Canada" },
-                      { value: "Europe", label: "Europe" },
-                      { value: "Australia", label: "Australia" },
-                      { value: "UK", label: "UK" },
-                    ]}
-                    className="basic-multi-select"
-                    classNamePrefix="select"
-                  />
-                </div>
-              </div>
-              <div className="pt-4 ">
-                <div className=" pb-2">Post-Secondary Discipline</div>
-
+              <div className=" pt-4 ">
+                <div className=" pb-2">Program Levels</div>
                 <div className="">
                   <Select
-                    isMulti
-                    name="country"
-                    onChange={(e) => {}}
+                    name="levels"
+                    onChange={(e) => setLevel(e.value)}
                     options={[
-                      { value: "America", label: "Engineering And Technology" },
-                      { value: "Europe", label: "Sciences" },
+                      { value: "highSchool", label: "High School" },
+                      { value: "diploma", label: "Diploma" },
+                      { value: "bachelor", label: "Bachelor" },
+                      { value: "masters", label: "Masters" },
+                      { value: "phd", label: "Doctoral/PHD" },
                     ]}
                     className="basic-multi-select"
                     classNamePrefix="select"
@@ -64,23 +66,23 @@ function FilterModal({ setFilterModal }) {
                 </div>
               </div>
               <div className=" pt-4 ">
-                <div className=" pb-2">Program Levels</div>
+                <div className=" pb-2">Program Intakes</div>
                 <div className="">
                   <Select
-                    isMulti
-                    name="country"
-                    onChange={(e) => {}}
+                    name="intakes"
+                    onChange={(e) => setIntakes(e.value)}
                     options={[
-                      { value: "America", label: "Bachelors Degree" },
-                      { value: "Europe", label: "Postgraduate Diploma" },
-                      { value: "Canada", label: "Masters Degree" },
-                      { value: "Australia", label: "Doctoral/PHD" },
+                      { value: "summer", label: "Summer" },
+                      { value: "winter", label: "Winter" },
+                      { value: "autumn", label: "Autumn" },
+                      { value: "spring", label: "Spring" },
                     ]}
                     className="basic-multi-select"
                     classNamePrefix="select"
                   />
                 </div>
               </div>
+
               <div className="pt-4">
                 <div className="pb-2">Application fees</div>
                 <div className="flex space-x-4">
@@ -92,9 +94,9 @@ function FilterModal({ setFilterModal }) {
                       Lowest
                     </label>
                     <input
-                      onChange={(e) => {}}
+                      onChange={(e) => setApplicationFeesFloor(e.target.value)}
                       type="number"
-                      defaultValue={0}
+                      value={applicationFeesFloor}
                       name="application-fees"
                       id="application-fees"
                       autoComplete="application-fees"
@@ -109,10 +111,10 @@ function FilterModal({ setFilterModal }) {
                       Highest
                     </label>
                     <input
-                      onChange={(e) => {}}
+                      onChange={(e) => setApplicationFeesCeil(e.target.value)}
                       type="number"
                       name="application-fees"
-                      defaultValue={1000000}
+                      value={applicationFeesCeil}
                       id="application-fees"
                       autoComplete="application-fees"
                       className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
@@ -131,9 +133,9 @@ function FilterModal({ setFilterModal }) {
                       Lowest
                     </label>
                     <input
-                      onChange={(e) => {}}
+                      onChange={(e) => settiutionFeesFloor(e.target.value)}
                       type="number"
-                      defaultValue={0}
+                      value={tiutionFeesFloor}
                       name="application-fees"
                       id="application-fees"
                       autoComplete="application-fees"
@@ -148,10 +150,10 @@ function FilterModal({ setFilterModal }) {
                       Highest
                     </label>
                     <input
-                      onChange={(e) => {}}
+                      onChange={(e) => settiutionFeesCeil(e.target.value)}
                       type="number"
                       name="application-fees"
-                      defaultValue={1000000}
+                      value={tiutionFeesCeil}
                       id="application-fees"
                       autoComplete="application-fees"
                       className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
@@ -159,24 +161,12 @@ function FilterModal({ setFilterModal }) {
                   </div>
                 </div>
               </div>
-              <div className="pt-4   ">
-                <div className=" pb-2">Intakes</div>
-                <div className="">
-                  <Select
-                    isMulti
-                    name="country"
-                    onChange={(e) => {}}
-                    options={[]}
-                    className="basic-multi-select"
-                    classNamePrefix="select"
-                  />
-                </div>
-              </div>
+
               <button
                 className=" bg-blue-800 text-white mt-4 w-full flex justify-between items-center rounded-md px-4 py-1"
-                onClick={() => setFilterModal(false)}
+                onClick={() => onSubmitHandler()}
               >
-                <div className="">Search</div>
+                <div className="">Apply</div>
                 <div className="">
                   <AiOutlineArrowRight className="" />
                 </div>
