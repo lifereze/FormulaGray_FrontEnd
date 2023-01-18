@@ -5,7 +5,7 @@ import {
   getAllRecruitmentPartners,
   searchStudents,
 } from "../../../data/api/authenticatedRequests";
-import { deleteStudent } from "../../../data/api/authenticatedRequests";
+import { adminDeleteStudent } from "../../../data/api/authenticatedRequests";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { DownloadTableExcel } from "react-export-table-to-excel";
@@ -54,7 +54,7 @@ export const Table = () => {
     if (confirmer) {
       setStudents((prev) => prev.filter((item) => item._id !== student._id));
 
-      const res = await deleteStudent(student._id);
+      const res = await adminDeleteStudent(student._id);
 
       console.log(res);
       if (res && res.status == 200) {

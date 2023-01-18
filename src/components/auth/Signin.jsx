@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Logo from "../constants/images/formulargray_03.png";
-import { userStore } from "../stores";
-import { Notification } from "../components/ui";
-import Spinner from "./utils/Spinner";
-import { validateSigninData } from "../validator";
-import { signin } from "../data/controller";
+import Logo from "../../constants/images/formulargray_03.png";
+import { userStore } from "../../stores";
+import { Notification } from "../ui";
+import Spinner from "../utils/Spinner";
+import { validateSigninData } from "../../validator";
+import { signin } from "../../data/controller";
 
 export const Signin = () => {
   const navigate = useNavigate();
@@ -147,7 +147,7 @@ export const Signin = () => {
 
                     <div className="text-sm">
                       <a
-                        href="/"
+                        href="/forgotPassword"
                         className="font-medium text-indigo-500 hover:text-indigo-700"
                       >
                         Forgot your password?

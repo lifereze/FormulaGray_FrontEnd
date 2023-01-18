@@ -54,14 +54,37 @@ if(e.target.name=='phone'){
       return;
     }
     setLoading(true)
-    const res=await editUser({'firstName':firstName,'lastName':lastName,'phone':phone})
-setLoading(false)
-console.log(res)
-if(res.status==200){
-  const updatedDetails=res.data.user
-storeUser({...user,updatedDetails})
+    if(user?.email==email&&user?.phone==phone){
+      const res=await editUser({'firstName':firstName,'lastName':lastName})
+      setLoading(false)
+      console.log(res)
+      if(res.status==200){
+        const updatedDetails=res.data.user
+      storeUser({...user,updatedDetails})
+      
+      }
+    }
+    if(user?.email==email&&user?.phone!=phone){
+      const res=await editUser({'firstName':firstName,'lastName':lastName,'phone':phone})
+      setLoading(false)
+      console.log(res)
+      if(res.status==200){
+        const updatedDetails=res.data.user
+      storeUser({...user,updatedDetails})
+      
+      }
+    }
+    if(user?.email!=email&&user?.phone==phone){
+      const res=await editUser({'firstName':firstName,'lastName':lastName,'email':email})
+      setLoading(false)
+      console.log(res)
+      if(res.status==200){
+        const updatedDetails=res.data.user
+      storeUser({...user,updatedDetails})
+      
+      }
+    }
 
-}
 return setRecruiter({step:'business'})
   
   }

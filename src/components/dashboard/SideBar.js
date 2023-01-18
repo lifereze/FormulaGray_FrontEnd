@@ -19,9 +19,32 @@ function SideBar() {
         <img src={Logo} className="" />
       </div>
       <div className=" flex flex-col items-center justify-center ">
-        <div className="p-3  bg-white rounded-full">
-          <FaUserAlt className=" text-5xl text-black" />
-        </div>
+        {user && user.role == "recruitmentPartner" && (
+          <Link to={"/recruitmentPartner/register"}>
+            <div className="p-3  bg-white rounded-full">
+              <FaUserAlt className=" text-5xl text-black" />
+            </div>
+          </Link>
+        )}
+        {user && user.role == "student" && (
+          <Link to={"/profile"}>
+            <div className="p-3  bg-white rounded-full">
+              <FaUserAlt className=" text-5xl text-black" />
+            </div>
+          </Link>
+        )}
+        {user && user.role == "admin" && (
+          <Link to={"/profile"}>
+            <div className="p-3  bg-white rounded-full">
+              <FaUserAlt className=" text-5xl text-black" />
+            </div>
+          </Link>
+        )}
+        {!user && (
+          <div className="p-3  bg-white rounded-full">
+            <FaUserAlt className=" text-5xl text-black" />
+          </div>
+        )}
         <div className=" pt-2 text-lg font-semibold uppercase text-white">
           {user && user.firstName && user.firstName}{" "}
           <span>{user && user.lastName && user.lastName}</span>

@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Notification } from "../components/ui";
-import { validateSignupData } from "../validator";
-import { signup, send_email_verification_link } from "../data/controller";
-import { userStore } from "../stores";
-import Logo from "../constants/images/formulargray_03.png";
-import Spinner from "./utils/Spinner";
+import { Notification } from "../ui";
+import { validateSignupData } from "../../validator";
+import { signup, send_email_verification_link } from "../../data/controller";
+import { userStore } from "../../stores";
+import Logo from "../../constants/images/formulargray_03.png";
+import Spinner from "../utils/Spinner";
 const signUpOptions = [
   { id: "student", title: "Student" },
   { id: "recruitmentPartner", title: "Recruitment partner" },

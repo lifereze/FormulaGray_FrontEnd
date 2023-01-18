@@ -1,9 +1,12 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { LandingPage } from "./components/landingPage/LandingPage";
-import { Signin } from "./components/Signin";
-import { Signup } from "./components/Signup";
+import { Signin } from "./components/auth/Signin";
+import { Signup } from "./components/auth/Signup";
+import { ForgotPassword } from "./components/auth/ForgotPassword";
+import { ResetPassword } from "./components/auth/ResetPassword";
 import { Dashboard } from "./components/dashboard/Dashboard";
+import { Profile } from "./components/dashboard/editProfile/Profile";
 import { AdminDashboard } from "./components/dashboard/AdminDashboard";
 import { StudentDashboard } from "./components/dashboard/StudentDashboard";
 import { Schools } from "./components/dashboard/schools/Schools";
@@ -33,7 +36,10 @@ function App() {
         
           <Route path="/signin" element={<Signin />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/forgotPassword" element={<ForgotPassword />} />
+          <Route path="/resetPassword/:resetLink" element={<ResetPassword />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/profile" element={<Profile />} />
           <Route path="/adminDashboard" element={<AdminDashboard />} />
           <Route path="/studentDashboard" element={<StudentDashboard />} />
           <Route path="/applications" element={<Applications />} />

@@ -6,12 +6,13 @@ import BusinessInformationForm from "./BusinessInformationForm";
 import RecruitmentDetails from "./RecruitmentDetails";
 import { useRecruiter, userStore } from "../../../stores";
 import { refreshSession } from "../../../data/api/authenticatedRequests";
+import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Spinner from "../../utils/Spinner";
 export const RecruitmentPartnerRegister = () => {
   const recruiter = useRecruiter((state) => state.recruiter);
   const storeUser = userStore((state) => state.storeUser);
-
+  const user = userStore((state) => state.user);
   const navigate = useNavigate();
   const [loading, setLoading] = useState();
   useEffect(() => {
@@ -40,6 +41,15 @@ export const RecruitmentPartnerRegister = () => {
       {loading && <Spinner />}
       {!loading && (
         <div className=" min-h-screen">
+          <div className=" flex flex-row-reverse mr-10">
+            {user?.onboarding && (
+              <Link to={"/dashboard"}>
+                <div className="p-1 cursor-pointer text-sm bg-white shadow-md rounded-md ">
+                  Back To Dashboard
+                </div>
+              </Link>
+            )}
+          </div>
           {recruiter.step == "contact" && <ContactInformation />}
           {recruiter.step == "business" && <BusinessInformationForm />}
           {recruiter.step == "recruitment-details" && <RecruitmentDetails />}

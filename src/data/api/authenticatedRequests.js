@@ -186,6 +186,14 @@ export const deleteStudent = async (id) => {
       return error.response;
     });
 };
+export const adminDeleteStudent = async (id) => {
+  return await api
+    .delete(`/admin/delete/user/${id}`)
+    .then((response) => response)
+    .catch((error) => {
+      return error.response;
+    });
+};
 export const deleteStudentApplication = async (id) => {
   return await api
     .delete(`/application/student/delete/${id}`)
