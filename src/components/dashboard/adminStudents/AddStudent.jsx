@@ -3,7 +3,11 @@ import { Navbar } from "../Navbar";
 import {Form} from "./Form";
 import SideBar from "../SideBar";
 import Banner from "../Banner";
+import { useNavigate } from "react-router-dom";
 export const AddStudent = (props) => {
+  
+  const navigate=useNavigate();
+  
   return (
     <>
     <div className=" grid grid-cols-12">
@@ -19,6 +23,11 @@ export const AddStudent = (props) => {
              
                 className="mt-2 xl:mt-4"
               >
+                <div className="flex justify-start">
+                <div className=" bg-white py-0.5 cursor-pointer px-3 rounded-md" onClick={()=>navigate(-1)}>
+                       Back
+                      </div>
+                </div>
                 <div>
                   <div className="divide-y divide-gray-200">
                     <div className="pt-6 text-center">

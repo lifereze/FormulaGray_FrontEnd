@@ -77,7 +77,7 @@ export const Profile = () => {
         return toast(message);
       }
     }
-    if (user?.email == email && user?.phone != phone) {
+    if (user?.email == email && user?.phone !== phone) {
       const res = await editUser({
         firstName: firstName,
         lastName: lastName,
@@ -99,7 +99,7 @@ export const Profile = () => {
         return toast(message);
       }
     }
-    if (user?.email != email && user?.phone == phone) {
+    if (user?.email !== email && user?.phone == phone) {
       const res = await editUser({
         firstName: firstName,
         lastName: lastName,

@@ -266,3 +266,19 @@ export const updateUser = async (id, data) => {
       return error.response;
     });
 };
+export const forgotPassword = async (data) => {
+  return await api
+    .patch(`/auth/forgotPassword`, data)
+    .then((response) => response)
+    .catch((error) => {
+      return error.response;
+    });
+};
+export const resetPassword = async (data) => {
+  return await api
+    .patch(`/auth/resetPassword`, data)
+    .then((response) => response)
+    .catch((error) => {
+      return error.response;
+    });
+};

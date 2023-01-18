@@ -3,11 +3,13 @@ import { useNavigate } from "react-router-dom";
 import { updateRecruitmentDetails } from '../../../data/api/authenticatedRequests';
 import { editUser } from "../../../data/api/authenticatedRequests";
 import Spinner from '../../utils/Spinner';
-import { useRecruiter } from "../../../stores";
+import { useRecruiter,userStore } from "../../../stores";
 import Select from 'react-select';
 import countryList from 'react-select-country-list'
 function RecruitmentDetails() {
     const navigate = useNavigate();
+    const user = userStore((state) => state.user);
+  const storeUser = userStore((state) => state.storeUser);
     const [studentsFrom,setStudentsFrom]=useState([]);
     const [studentsTo,setStudentsTo]=useState([]);
     const [averageCharge,setAverageCharge]=useState()
@@ -15,6 +17,12 @@ function RecruitmentDetails() {
     const [loading,setLoading]=useState(false);
     const setRecruiter = useRecruiter((state) => state.storeRecruiter);
     const countries = useMemo(() => countryList().getData(), [])
+    useEffect(()=>{
+      setStudentsFrom(user?.recruitmentDetails?.studentsFrom)
+      setStudentsTo(user?.recruitmentDetails?.studentsTo)
+      setAverageCharge(user?.recruitmentDetails?.averageCharge)
+      setAverageStudentsAnnually(user?.recruitmentDetails?.averageStudentsAnnually)
+        },[user])
     const onChangeHandler=(e)=>{
         if(e.target.name=='charge'){
           setAverageCharge(e.target.value)

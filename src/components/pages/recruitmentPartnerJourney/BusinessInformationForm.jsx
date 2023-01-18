@@ -1,5 +1,5 @@
 import React,{useState,useEffect, useMemo} from 'react'
-import { useRecruiter } from "../../../stores";
+import { useRecruiter, userStore } from "../../../stores";
 import { updateBusinessDetails } from "../../../data/api/authenticatedRequests";
 import Spinner from "../../utils/Spinner";
 import ImageUpload from '../../uploads/ImageUpload';
@@ -9,6 +9,8 @@ import { getDownloadURL } from "firebase/storage";
 import Select from 'react-select';
 import countryList from 'react-select-country-list'
 function BusinessInformationForm() {
+  const user = userStore((state) => state.user);
+  const storeUser = userStore((state) => state.storeUser);
     const [businessName,setBusinessName]=useState('');
 const [businessNameError,setBusinessNameError]=useState('');
     const [country,setCountry]=useState('');
@@ -29,6 +31,14 @@ const [entity,setEntity]=useState('');
     useEffect(()=>{
 console.log(options)
     },[options])
+    useEffect(()=>{
+      setBusinessName(user?.business?.name)
+      setCountry(user?.business?.location?.country)
+      setCity(user?.business?.location?.city)
+      setStreetAddress(user?.business?.location?.streetAddress)
+      setImageUrl(user?.business?.image)
+      setDocUrl(user?.business?.businessCertificate)
+        },[user])
     const uploadImage = (input) => {
         const files = input.target.files || [];
         if (files.length === 0) {
@@ -138,7 +148,7 @@ console.log(options)
               return;
             }
             setLoading(true)
-            const res=await updateBusinessDetails({'name':businessName,'country':country,'city':city,'streetAddress':streetAddress,'identityDocument':docUrl})
+            const res=await updateBusinessDetails({'name':businessName,'country':country,'city':city,'streetAddress':streetAddress,'identityDocument':docUrl,'businessCertificate':imageUrl})
         setLoading(false)
          console.log(res);
          return setRecruiter({step:'recruitment-details'})

@@ -4,23 +4,32 @@ import Logo from "../../constants/images/formulargray_03.png";
 import { userStore } from "../../stores";
 import { Notification } from "../ui";
 import Spinner from "../utils/Spinner";
-
+import { forgotPassword } from "../../data/api/authenticatedRequests";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { signin } from "../../data/controller";
 
 export const ForgotPassword = () => {
   const navigate = useNavigate();
   const storeUser = userStore((state) => state.storeUser);
 
-  const [userDetails, setUserDetails] = useState({
-    email: "",
-    password: "",
-  });
+  const [email, setEmail] = useState();
   const [loading, setLoading] = useState(false);
   const [info, setInfo] = useState({ message: "", type: "" });
 
   const handleSubmit = async () => {
-    setInfo({ message: "", type: "" });
     setLoading(true);
+    if (email) {
+      const res = await forgotPassword({ email: email });
+      if (res.status == 200) {
+        toast("Please check your email to verify account.");
+      } else {
+        const message = res?.data?.error;
+        toast(message);
+      }
+    }
+    setInfo({ message: "", type: "" });
+    setLoading(false);
   };
 
   return (
@@ -64,13 +73,9 @@ export const ForgotPassword = () => {
                         name="email"
                         type="email"
                         autoComplete="email"
+                        value={email}
                         required
-                        onChange={(e) => {
-                          setUserDetails((prevState) => ({
-                            ...prevState,
-                            [e.target.name]: e.target.value,
-                          }));
-                        }}
+                        onChange={(e) => setEmail(e.target.value)}
                         className="block text-black w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                       />
                     </div>
@@ -84,7 +89,7 @@ export const ForgotPassword = () => {
                     )) || (
                       <button
                         type="submit"
-                        onClick={() => navigate("/resetPassword/kfkf")}
+                        onClick={() => handleSubmit()}
                         className="flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                       >
                         Send Email
@@ -97,6 +102,7 @@ export const ForgotPassword = () => {
           </div>
         </div>
       </div>
+      <ToastContainer />
     </>
   );
 };

@@ -6,7 +6,8 @@ import Spinner from '../../utils/Spinner';
 import { uploadStudent } from '../../../data/api/authenticatedRequests';
 import {useDropzone} from 'react-dropzone';
 import { useNavigate } from "react-router-dom";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 export const Form = (props) => {
   const navigate=useNavigate();
 
@@ -196,7 +197,13 @@ const res= await uploadStudent({
   state,streetAddress,zipCode,BACertificate:degreeUrl,BATranscript:transcriptUrl,resume:resumeUrl,recommendationLetter:recommendationUrl,statementOfPurpose:statementUrl
 })
 if(res.status==200){
+  toast("Student uploaded successfully!");
   navigate('/students')
+}
+else{
+  
+  const message=res.data.message;
+  toast(message);
 }
 setIsLoading(false)
 console.log(res)
@@ -470,7 +477,7 @@ className="ml-3 mt-6 inline-flex justify-center rounded-md border border-transpa
           <div className="border-t border-gray-200" />
         </div>
       </div>
-
+      <ToastContainer />
     </div>
   );
 };

@@ -1,26 +1,37 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Logo from "../../constants/images/formulargray_03.png";
 import { userStore } from "../../stores";
 import { Notification } from "../ui";
 import Spinner from "../utils/Spinner";
-
+import { resetPassword } from "../../data/api/authenticatedRequests";
 import { signin } from "../../data/controller";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 export const ResetPassword = () => {
   const navigate = useNavigate();
+  const { resetLink } = useParams();
   const storeUser = userStore((state) => state.storeUser);
 
-  const [userDetails, setUserDetails] = useState({
-    email: "",
-    password: "",
-  });
+  const [password, setPassword] = useState();
   const [loading, setLoading] = useState(false);
   const [info, setInfo] = useState({ message: "", type: "" });
 
   const handleSubmit = async () => {
-    setInfo({ message: "", type: "" });
     setLoading(true);
+    if (password) {
+      const res = await resetPassword({
+        newPassword: password,
+        resetLink: resetLink,
+      });
+      if (res.status == 200) {
+        navigate("/signin");
+      } else {
+        const message = res?.data?.message;
+        toast(message);
+      }
+    }
+    setLoading(false);
   };
 
   return (
@@ -64,40 +75,12 @@ export const ResetPassword = () => {
                       type="password"
                       autoComplete="current-password"
                       required
-                      onChange={(e) => {
-                        setUserDetails((prevState) => ({
-                          ...prevState,
-                          [e.target.name]: e.target.value,
-                        }));
-                      }}
+                      onChange={(e) => setPassword(e.target.value)}
                       className="block w-full text-black appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                     />
                   </div>
                 </div>
-                <div className="space-y-1">
-                  <label
-                    htmlFor="password"
-                    className="block text-sm font-medium text-gray-500"
-                  >
-                    Confirm password
-                  </label>
-                  <div className="mt-1">
-                    <input
-                      id="confirmPassword"
-                      name="confirmPassword"
-                      type="password"
-                      autoComplete="current-password"
-                      required
-                      onChange={(e) => {
-                        setUserDetails((prevState) => ({
-                          ...prevState,
-                          [e.target.name]: e.target.value,
-                        }));
-                      }}
-                      className="block text-black w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                    />
-                  </div>
-                </div>
+
                 <div className="mt-6">
                   {(loading && (
                     <button className="flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
@@ -106,7 +89,7 @@ export const ResetPassword = () => {
                   )) || (
                     <button
                       type="submit"
-                      onClick={() => navigate("/")}
+                      onClick={() => handleSubmit()}
                       className="flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                     >
                       Reset Password
@@ -118,6 +101,7 @@ export const ResetPassword = () => {
           </div>
         </div>
       </div>
+      <ToastContainer />
     </>
   );
 };

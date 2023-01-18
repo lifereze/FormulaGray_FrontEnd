@@ -119,12 +119,6 @@ export const Table = () => {
                     >
                       Level of Education
                     </th>
-                    <th
-                      scope="col"
-                      className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                    >
-                      Applications
-                    </th>
 
                     <th
                       scope="col"
@@ -170,15 +164,19 @@ export const Table = () => {
                         </td>
 
                         <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
-                          {items[Math.floor(Math.random() * items.length)]}
-                        </td>
-                        <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
-                          {student?.previousApplications?.length ||
-                            Math.floor(Math.random() * 10)}
+                          {student?.educationLevel
+                            ? student?.educationLevel
+                            : items[Math.floor(Math.random() * items.length)]}
                         </td>
 
                         <td className="whitespace-nowrap px-3 z-10 text-left py-4 text-sm text-gray-500">
-                          <ShowFiles docs={student?.documents} />
+                          {(Object.keys(student?.documents).length > 0 && (
+                            <ShowFiles docs={student?.documents} />
+                          )) || (
+                            <a href={`/student/edit/${student?._id}`}>
+                              Upload Docs
+                            </a>
+                          )}
                         </td>
                         <td className="whitespace-nowrap py-4 px-2  text-left text-sm font-medium sm:pr-6">
                           <div className=" flex space-x-2 items-center">
