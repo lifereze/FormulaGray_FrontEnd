@@ -19,7 +19,7 @@ function ProgramCard({ program }) {
     setLoading(false);
   };
   return (
-    <div className="p-2 border text-left mb-4 col-span-5  bg-white shadow-lg rounded-lg ">
+    <div className="p-2 border text-left mb-4 md:col-span-5 col-span-10 bg-white shadow-lg rounded-lg ">
       <div className=" text-[#184061] font-semibold capitalize">
         {program?.title}
       </div>

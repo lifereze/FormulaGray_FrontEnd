@@ -24,7 +24,7 @@ const [filterModal,setFilterModal]=useState(false);
             <div className="xl:col-span-5 ">
             <div className="">
                     <div className="pt-2 ">
-                      <div className=" w-full my-4 flex justify-between">
+                      <div className=" w-full my-4 flex justify-between items-center gap-x-2">
                       <div className="text-xl font-bold text-[#184061] ">
                         Programs
                       </div>

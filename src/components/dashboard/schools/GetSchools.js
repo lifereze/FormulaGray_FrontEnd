@@ -27,7 +27,7 @@ function GetSchools() {
   }, [search]);
   return (
     <div className="col-span-10">
-      <div className="grid  gap-3  grid-cols-3">
+      <div className="grid  gap-3  md:grid-cols-3 grid-cols-1">
         {!loading &&
           schools &&
           schools.length > 0 &&

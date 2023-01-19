@@ -182,16 +182,16 @@ export const StudentDashboard = () => {
                       setApplications={setApplications}
                     />
                   </div>
-                  <div className=" grid grid-cols-12  gap-x-4 px-10 ">
-                    <div className="  col-span-4 bg-white rounded-lg shadow-md">
+                  <div className=" grid grid-cols-12  gap-x-4 gap-y-2 px-4 md:px-10">
+                    <div className="  col-span-12 md:col-span-4 bg-white rounded-lg shadow-md">
                       <div className=" font-semibold p-2">Top Schools</div>
                       <TopSchools />
                     </div>
-                    <div className="col-span-4 bg-white rounded-lg  shadow-lg">
+                    <div className="col-span-12 md:col-span-4 bg-white rounded-lg  shadow-lg">
                       <div className="font-semibold p-2">Top Programs</div>
                       <TopPrograms />
                     </div>
-                    <div className="col-span-4  bg-white rounded-lg shadow-md">
+                    <div className="col-span-12 md:col-span-4  bg-white rounded-lg shadow-md">
                       <div className=" text-center py-1 font-semibold">
                         {" "}
                         Country Application Distribution
@@ -206,7 +206,7 @@ export const StudentDashboard = () => {
                   </div>
                 </div>
 
-                <div className="grid  gap-x-4 gap-y-3 md:px-10 px-4 m-6 pb-20 grid-cols-4">
+                <div className="grid  gap-x-4 gap-y-3 md:px-10 px-4 m-6 pb-20 grid-cols-2 md:grid-cols-4">
                   {!loading &&
                     schools &&
                     schools.map((institution) => (

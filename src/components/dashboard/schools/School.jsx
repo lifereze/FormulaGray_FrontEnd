@@ -64,7 +64,7 @@ function School() {
         <img                 src={schoolInfo?.images[0]&&schoolInfo.images[0]||Campus1}
  style={{height:'450px'}} className=' w-full ' />
         <div className='absolute  inset-0 bg-black opacity-70'>
-        <div className=' flex space-x-6 items-center pt-8 pb-8 px-20'>
+        <div className=' flex space-x-6 items-center flex-wrap pt-8 pb-8 px-20'>
             <img src={Logo} className=" w-40 object-cover h-20" />
             <div className=''>
             <div className=' text-4xl font-semibold text-white'>{schoolInfo.name} - {schoolInfo.city}</div>
@@ -100,7 +100,7 @@ function School() {
 <img src={Campus2} className="h-full w-full rounded-lg" />
 </div>
           </div> */}
-          <div className='flex pt-10 justify-evenly'>
+          <div className='flex pt-10 justify-evenly flex-wrap gap-2'>
 <div className=' flex  flex-col justify-center bg-[#E6F2E2] rounded-md py-2 px-12 shadow-lg items-center'>
     <div className=''><FaBookReader className='  text-6xl' /></div>
     <div className='font-semibold text-2xl'>{schoolInfo?.numberOfStudents?schoolInfo?.numberOfStudents:0}</div>
@@ -212,7 +212,7 @@ function School() {
                     </Link>}
 </div>
 </div>
-<div className=' space-y-6 w-2/3'>
+<div className=' space-y-6 md:w-2/3 w-full'>
     {programs&&programs.length>0&&!loadingPrograms&&programs.map((program)=>  <ProgramCard 
     program={program}
     />)}
