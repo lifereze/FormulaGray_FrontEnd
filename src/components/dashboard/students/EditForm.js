@@ -16,12 +16,14 @@ export const EditForm = (props) => {
     lastName: "",
     email: "",
     phoneNumber: "",
-
+    educationLevel: "",
+    countryOfInterest: "",
     BACertificate: "",
     BATranscript: "",
     resume: "",
     recommendationLetter: "",
     statementOfPurpose: "",
+    OlevelCertificate: "",
     location: {
       country: "",
       city: "",
@@ -36,7 +38,8 @@ export const EditForm = (props) => {
       lastName,
       email,
       phoneNumber,
-
+      educationLevel,
+      countryOfInterest,
       location,
     },
     setStudent,
@@ -60,6 +63,10 @@ export const EditForm = (props) => {
   const [recommendationUrl, setRecommendationUrl] = useState("");
   const [recommendationName, setRecommendationName] = useState();
 
+  const [isOrdinaryLoading, setOrdinaryLoading] = useState();
+  const [ordinaryUrl, setOrdinaryUrl] = useState("");
+  const [ordinaryName, setOrdinaryName] = useState();
+
   const [isStatementLoading, setStatementLoading] = useState();
   const [statementUrl, setStatementUrl] = useState("");
   const [statementName, setStatementName] = useState();
@@ -72,6 +79,7 @@ export const EditForm = (props) => {
 
         setStudent(res.data?.student);
         setResumeUrl(res.data?.student?.resume);
+        setOrdinaryUrl(res.data?.student?.OlevelCertificate);
         setDegreeUrl(res.data?.student?.BACertificate);
         setTranscriptUrl(res.data?.student?.BATranscript);
         setRecommendationUrl(res.data?.student?.recommendationLetter);
@@ -96,6 +104,9 @@ export const EditForm = (props) => {
       console.log(e);
       if (input.target.name == "degree") {
         setDegreeLoading(true);
+      }
+      if (input.target.name == "ordinary") {
+        setOrdinaryLoading(true);
       }
       if (input.target.name == "resume") {
         setResumeLoading(true);
@@ -125,6 +136,11 @@ export const EditForm = (props) => {
               setDegreeName(input.target.files[0].name);
               setDegreeLoading(false);
               setDegreeUrl(url);
+            }
+            if (input.target.name == "ordinary") {
+              setOrdinaryName(input.target.files[0].name);
+              setOrdinaryLoading(false);
+              setOrdinaryUrl(url);
             }
             if (input.target.name == "resume") {
               setResumeName(input.target.files[0].name);
@@ -172,6 +188,8 @@ export const EditForm = (props) => {
         lastName,
         email,
         phoneNumber,
+        countryOfInterest,
+        educationLevel,
         country: location.country,
         city: location.city,
         state: location.state,
@@ -179,6 +197,7 @@ export const EditForm = (props) => {
         zipCode: location.zipCode,
         BACertificate: degreeUrl,
         BATranscript: transcriptUrl,
+        OlevelCertificate: ordinaryUrl,
         resume: resumeUrl,
         recommendationLetter: recommendationUrl,
         statementOfPurpose: statementUrl,
@@ -276,25 +295,65 @@ export const EditForm = (props) => {
 
                   <div className="col-span-6 sm:col-span-3">
                     <label
+                      htmlFor="countryOfInterest"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Country of Interest
+                    </label>
+                    <select
+                      id="countryOfInterest"
+                      name="countryOfInterest"
+                      onChange={(e) => handleChange(e)}
+                      value={countryOfInterest}
+                      autoComplete="countryOfInterest"
+                      className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                    >
+                      <option value="America">America</option>
+                      <option value="Canada">Canada</option>
+                      <option value="UK">UK</option>
+                      <option value="Europe">Europe</option>
+                      <option value="Australia">Australia</option>
+                    </select>
+                  </div>
+                  <div className="col-span-6 sm:col-span-3">
+                    <label
+                      htmlFor="educationLevel"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Highest Level of Education
+                    </label>
+                    <select
+                      id="educationLevel"
+                      name="educationLevel"
+                      onChange={(e) => handleChange(e)}
+                      value={educationLevel}
+                      autoComplete="educationLevel"
+                      className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                    >
+                      <option value="highSchool">High School</option>
+                      <option value="diploma">Diploma</option>
+                      <option value="bachelor">Bachelors</option>
+                      <option value="masters">Masters</option>
+                      <option value="phd">PHD</option>
+                    </select>
+                  </div>
+
+                  <div className="col-span-6 sm:col-span-3">
+                    <label
                       htmlFor="country"
                       className="block text-sm font-medium text-gray-700"
                     >
                       Country
                     </label>
-                    <select
-                      id="country"
-                      name="location.country"
-                      value={location?.country}
+                    <input
                       onChange={(e) => handleChange(e)}
-                      autoComplete="country-name"
-                      className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                    >
-                      <option>America</option>
-                      <option>Canada</option>
-                      <option>UK</option>
-                      <option>Europe</option>
-                      <option>Australia</option>
-                    </select>
+                      type="text"
+                      value={location.country}
+                      name="country"
+                      id="country"
+                      autoComplete="country"
+                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                    />
                   </div>
 
                   {/* <div className="col-span-6 sm:col-span-3">
@@ -389,6 +448,14 @@ export const EditForm = (props) => {
                     <h3 className="text-lg font-semibold leading-6 text-purple-900">
                       Document Uploads
                     </h3>
+                    <FileUpload
+                      uploadDoc={uploadDoc}
+                      isDocLoading={isOrdinaryLoading}
+                      docName={ordinaryName}
+                      docUrl={ordinaryUrl}
+                      name="ordinary"
+                      title="O-level  certificate"
+                    />
                     <FileUpload
                       uploadDoc={uploadDoc}
                       isDocLoading={isDegreeLoading}

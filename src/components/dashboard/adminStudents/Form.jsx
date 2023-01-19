@@ -15,6 +15,8 @@ export const Form = (props) => {
     lastName: "",
     email: "",
     phoneNumber: "",
+    educationLevel:'',
+    countryOfInterest: "",
     country: "",
     city: "",
     state: "",
@@ -32,6 +34,8 @@ export const Form = (props) => {
       lastName,
       email,
       phoneNumber,
+      educationLevel,
+      countryOfInterest,
       country,
       city,
       state,
@@ -51,6 +55,11 @@ const [resumeName,setResumeName]=useState();
 const [degreeUrl, setDegreeUrl] = useState("");
 const [degreeName,setDegreeName]=useState();
 
+
+const [isOrdinaryLoading, setOrdinaryLoading] = useState();
+const [ordinaryUrl, setOrdinaryUrl] = useState("");
+const [ordinaryName,setOrdinaryName]=useState();
+
   const [isTranscriptLoading, setTranscriptLoading] = useState();
 const [transcriptUrl, setTranscriptUrl] = useState("");
 const [transcriptName,setTranscriptName]=useState();
@@ -64,85 +73,94 @@ const [statementUrl, setStatementUrl] = useState("");
 const [statementName,setStatementName]=useState();
 
 
-  const uploadDoc = (input) => {
-    const files = input.target.files || [];
- 
-    
+const uploadDoc = (input) => {
+  const files = input.target.files || [];
+
   
-    if (files.length === 0) {
-      return false;
-    }
-    const reader = new FileReader();
 
-    reader.readAsDataURL(files[0]);
+  if (files.length === 0) {
+    return false;
+  }
+  const reader = new FileReader();
 
-    reader.onload = (e) => {
-        console.log(e)
-        if(input.target.name=='degree'){
-         
-          setDegreeLoading(true);
-        }
-        if(input.target.name=='resume'){
-          setResumeLoading(true);
-        }
-        if(input.target.name=='transcript'){
-          setTranscriptLoading(true);
-        }
-        if(input.target.name=='recommendation'){
-          setRecommendationLoading(true);
-        }
-        if(input.target.name=='statement'){
-          setStatementLoading(true);
-        }
+  reader.readAsDataURL(files[0]);
+
+  reader.onload = (e) => {
+      console.log(e)
+      if(input.target.name=='degree'){
        
-      const uploadTask = firebaseUploadDoc(files[0]);
-      uploadTask.on(
-        "state_changed",
-        (snapshot) => {
-          const prog = Math.round(
-            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-          );
-        },
-        (err) => {},
-        () => {
-          getDownloadURL(uploadTask.snapshot.ref).then((url) => {
-            if(input.target.name=='degree'){
-              setDegreeName(input.target.files[0].name)
-              setDegreeLoading(false);
-              setDegreeUrl(url);
-            }
-            if(input.target.name=='resume'){
-              setResumeName(input.target.files[0].name)
-              setResumeLoading(false);
-              setResumeUrl(url);
-            }
-            if(input.target.name=='transcript'){
-              setTranscriptName(input.target.files[0].name)
-              setTranscriptLoading(false);
-              setTranscriptUrl(url);
-            }
-            if(input.target.name=='recommendation'){
-              setRecommendationName(input.target.files[0].name)
-              setRecommendationLoading(false);
-              setRecommendationUrl(url);
-            }
-            if(input.target.name=='statement'){
-              setStatementName(input.target.files[0].name)
-              setStatementLoading(false);
-              setStatementUrl(url);
-            }
-           
-          });
-        }
-      );
+        setDegreeLoading(true);
+      }
+      if(input.target.name=='ordinary'){
+       
+        setOrdinaryLoading(true);
+      }
+      if(input.target.name=='resume'){
+        setResumeLoading(true);
+      }
+      if(input.target.name=='transcript'){
+        setTranscriptLoading(true);
+      }
+      if(input.target.name=='recommendation'){
+        setRecommendationLoading(true);
+      }
+      if(input.target.name=='statement'){
+        setStatementLoading(true);
+      }
+     
+    const uploadTask = firebaseUploadDoc(files[0]);
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const prog = Math.round(
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        );
+      },
+      (err) => {},
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+          if(input.target.name=='degree'){
+            setDegreeName(input.target.files[0].name)
+            setDegreeLoading(false);
+            setDegreeUrl(url);
+          }
+          if(input.target.name=='ordinary'){
+            setOrdinaryName(input.target.files[0].name)
+            setOrdinaryLoading(false);
+            setOrdinaryUrl(url);
+          }
+          if(input.target.name=='resume'){
+            setResumeName(input.target.files[0].name)
+            setResumeLoading(false);
+            setResumeUrl(url);
+          }
+          if(input.target.name=='transcript'){
+            setTranscriptName(input.target.files[0].name)
+            setTranscriptLoading(false);
+            setTranscriptUrl(url);
+          }
+          if(input.target.name=='recommendation'){
+            setRecommendationName(input.target.files[0].name)
+            setRecommendationLoading(false);
+            setRecommendationUrl(url);
+          }
+          if(input.target.name=='statement'){
+            setStatementName(input.target.files[0].name)
+            setStatementLoading(false);
+            setStatementUrl(url);
+          }
+         
+        });
+      }
+    );
 
-      return true;
-    };
-
-    reader.onprogress = function (e) {
-      //Loader
-    };
+    return true;
   };
+
+  reader.onprogress = function (e) {
+    //Loader
+  };
+};
  
     const {getRootProps, getInputProps, open, acceptedFiles} = useDropzone({
       // Disable click and keydown behavior
@@ -186,8 +204,8 @@ const [statementName,setStatementName]=useState();
 const res= await uploadStudent({
   firstName,
   lastName,
-  email,phoneNumber,country,city,
-  state,streetAddress,zipCode,BACertificate:degreeUrl,BATranscript:transcriptUrl,resume:resumeUrl,recommendationLetter:recommendationUrl,statementOfPurpose:statementUrl
+  email,phoneNumber,country,city,countryOfInterest,educationLevel,
+  state,streetAddress,zipCode,BACertificate:degreeUrl,BATranscript:transcriptUrl,resume:resumeUrl,recommendationLetter:recommendationUrl,statementOfPurpose:statementUrl,OLevelCertificate:ordinaryUrl
 })
 if(res.status==200){
   navigate('/students')
@@ -276,6 +294,48 @@ console.log(res)
                         className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                       />
                     </div>
+                    <div className="col-span-6 sm:col-span-3">
+                      <label
+                        htmlFor="countryOfInterest"
+                        className="block text-sm font-medium text-gray-700"
+                      >
+                        Country of Interest
+                      </label>
+                      <select
+                        id="countryOfInterest"
+                        name="countryOfInterest"
+                        onChange={(e)=>handleChange(e)}
+                        autoComplete="countryOfInterest"
+                        className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                      >
+                        <option value="America">America</option>
+                        <option value="Canada">Canada</option>
+                        <option value="UK">UK</option>
+                        <option value="Europe">Europe</option>
+                        <option value="Australia">Australia</option>
+                      </select>
+                    </div>
+                    <div className="col-span-6 sm:col-span-3">
+                      <label
+                        htmlFor="educationLevel"
+                        className="block text-sm font-medium text-gray-700"
+                      >
+                        Highest Level of Education
+                      </label>
+                      <select
+                        id="educationLevel"
+                        name="educationLevel"
+                        onChange={(e)=>handleChange(e)}
+                        autoComplete="educationLevel"
+                        className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                      >
+                        <option value="highSchool">High School</option>
+                        <option value="diploma">Diploma</option>
+                        <option value="bachelor">Bachelors</option>
+                        <option value="masters">Masters</option>
+                        <option value="phd">PHD</option>
+                      </select>
+                    </div>
 
                     <div className="col-span-6 sm:col-span-3">
                       <label
@@ -284,19 +344,14 @@ console.log(res)
                       >
                         Country
                       </label>
-                      <select
-                        id="country"
+                      <input
+ onChange={(e)=>handleChange(e)}                       
+  type="text"
                         name="country"
-                        onChange={(e)=>handleChange(e)}
-                        autoComplete="country-name"
-                        className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                      >
-                        <option>America</option>
-                        <option>Canada</option>
-                        <option>UK</option>
-                        <option>Europe</option>
-                        <option>Australia</option>
-                      </select>
+                        id="country"
+                        autoComplete="country"
+                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      />
                     </div>
 
                     {/* <div className="col-span-6 sm:col-span-3">
@@ -387,6 +442,7 @@ console.log(res)
                     <h3 className="text-lg font-semibold leading-6 text-purple-900">
                 Document Uploads
               </h3>
+              <FileUpload uploadDoc={uploadDoc} isDocLoading={isOrdinaryLoading} docName={ordinaryName} docUrl={ordinaryUrl} name='ordinary' title="O level certificate"  />
                     <FileUpload uploadDoc={uploadDoc} isDocLoading={isDegreeLoading} docName={degreeName} docUrl={degreeUrl} name='degree' title="Bachelors degree certificate"  />
                 <FileUpload uploadDoc={uploadDoc} isDocLoading={isTranscriptLoading} docName={transcriptName} docUrl={transcriptUrl} name='transcript' title="Bachelors degree transcript"  />
                 <FileUpload uploadDoc={uploadDoc} isDocLoading={isResumeLoading} docName={resumeName} docUrl={resumeUrl} name='resume' title="Resume"  />
