@@ -85,6 +85,17 @@ function ShowMenu({ docs }) {
                 <div className="font-normal ">Statement Of Purpose</div>
               </a>
             )}
+            {docs?.OLevelCertificate && (
+              <a
+                className=" flex items-center py-1 space-x-2 px-2 hover:bg-gray-200 cursor-pointer rounded-sm hover:text-[#184061]"
+                href={docs?.OLevelCertificate}
+              >
+                <div className="">
+                  <BsClockHistory className="" />
+                </div>
+                <div className="font-normal ">O Level certificate</div>
+              </a>
+            )}
           </div>
         )}
       </div>

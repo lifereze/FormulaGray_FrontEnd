@@ -14,6 +14,7 @@ import School from "./components/dashboard/schools/School";
 import { ApplyStudents } from "./components/dashboard/programs/ApplyStudents";
 import { Applications } from "./components/dashboard/applications/Applications";
 import { AdminApplications } from "./components/dashboard/adminApplications/AdminApplications";
+import { EditSchool } from "./components/dashboard/schools/EditSchool";
 import { AdminStudents } from "./components/dashboard/adminStudents/Students";
 import { Programs } from "./components/dashboard/programs/Programs";
 import { Students } from "./components/dashboard/students/Students";
@@ -56,6 +57,7 @@ function App() {
           <Route path="/adminStudent/edit/:id" element={<EditAdminStudent />} />
           <Route path="/schools" element={<Schools />} />
           <Route exact path="/schools/addSchool" element={<AddSchool />} />
+          <Route exact path="/schools/editSchool/:id" element={<EditSchool />} />
           <Route exact path="/schools/:id" element={<School />} />
           <Route exact path="/schools/:schoolId/addProgram" element={<AddProgram />} />
           <Route path="/visa" element={<Visa />} />

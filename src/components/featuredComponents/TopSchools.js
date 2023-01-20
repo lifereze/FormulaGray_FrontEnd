@@ -1,6 +1,22 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { TopSchools } from "../../data/api/authenticatedRequests";
+import { Link } from "react-router-dom";
 
-function TopSchools() {
+function Topschools() {
+  const [schools, setSchools] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const fetchPrograms = async () => {
+      setLoading(true);
+      const res = await TopSchools();
+      if (res.status == 200) {
+        setSchools(res.data);
+      }
+      setLoading(false);
+    };
+    fetchPrograms();
+  }, []);
   return (
     <div className=" w-full overflow-x-scroll">
       <table className="w-full overflow-x-scroll divide-y divide-gray-300">
@@ -33,80 +49,34 @@ function TopSchools() {
           </tr>
         </thead>
         <tbody className="divide-y divide-gray-200 bg-white">
-          <tr>
-            <td className="whitespace-nowrap text-center px-3 py-4 text-sm text-gray-500">
-              001
-            </td>
-            <td className="whitespace-nowrap   text-left px-3 py-4 text-sm text-gray-500">
-              University of Cambrige
-            </td>
-            <td className="whitespace-nowrap text-center px-3 py-4 text-sm text-gray-500">
-              106
-            </td>
-            <td className="whitespace-nowrap text-center text-indigo-600 hover:text-indigo-900 px-3 py-4 text-sm  cursor-pointer">
-              View
-            </td>
-          </tr>
-          <tr>
-            <td className="whitespace-nowrap text-center px-3 py-4 text-sm text-gray-500">
-              002
-            </td>
-            <td className="whitespace-nowrap   text-left px-3 py-4 text-sm text-gray-500">
-              University of Oxford
-            </td>
-            <td className="whitespace-nowrap text-center px-3 py-4 text-sm text-gray-500">
-              54
-            </td>
-            <td className="whitespace-nowrap text-center text-indigo-600 hover:text-indigo-900 px-3 py-4 text-sm  cursor-pointer">
-              View
-            </td>
-          </tr>
-          <tr>
-            <td className="whitespace-nowrap text-center px-3 py-4 text-sm text-gray-500">
-              003
-            </td>
-            <td className="whitespace-nowrap    text-left px-3 py-4 text-sm text-gray-500">
-              Imperial College
-            </td>
-            <td className="whitespace-nowrap text-center px-3 py-4 text-sm text-gray-500">
-              24
-            </td>
-            <td className="whitespace-nowrap text-center text-indigo-600 hover:text-indigo-900 px-3 py-4 text-sm  cursor-pointer">
-              View
-            </td>
-          </tr>
-          <tr>
-            <td className="whitespace-nowrap text-center px-3 py-4 text-sm text-gray-500">
-              004
-            </td>
-            <td className="whitespace-nowrap    text-left px-3 py-4 text-sm text-gray-500">
-              The University of Manchester
-            </td>
-            <td className="whitespace-nowrap text-center px-3 py-4 text-sm text-gray-500">
-              106
-            </td>
-            <td className="whitespace-nowrap text-center text-indigo-600 hover:text-indigo-900 px-3 py-4 text-sm  cursor-pointer">
-              View
-            </td>
-          </tr>
-          <tr>
-            <td className="whitespace-nowrap text-center px-3 py-4 text-sm text-gray-500">
-              005
-            </td>
-            <td className="whitespace-nowrap    text-left px-3 py-4 text-sm text-gray-500">
-              Durham University
-            </td>
-            <td className="whitespace-nowrap text-center px-3 py-4 text-sm text-gray-500">
-              16
-            </td>
-            <td className="whitespace-nowrap text-center text-indigo-600 hover:text-indigo-900 px-3 py-4 text-sm  cursor-pointer">
-              View
-            </td>
-          </tr>
+          {!loading &&
+            schools &&
+            schools.length > 1 &&
+            schools.map((school, index) => (
+              <tr>
+                <td className="whitespace-nowrap text-center px-3 py-4 text-sm text-gray-500">
+                  {index}
+                </td>
+                <td className="whitespace-nowrap   text-left px-3 py-4 text-sm text-gray-500">
+                  {school?._id?.name}
+                </td>
+                <td className="whitespace-nowrap text-center px-3 py-4 text-sm text-gray-500">
+                  {school?.count}
+                </td>
+                <td className="whitespace-nowrap text-center text-indigo-600 hover:text-indigo-900 px-3 py-4 text-sm  cursor-pointer">
+                  <Link
+                    to={`/schools/${school?._id?._id}`}
+                    className="px-2 py-1"
+                  >
+                    View
+                  </Link>
+                </td>
+              </tr>
+            ))}
         </tbody>
       </table>
     </div>
   );
 }
 
-export default TopSchools;
+export default Topschools;

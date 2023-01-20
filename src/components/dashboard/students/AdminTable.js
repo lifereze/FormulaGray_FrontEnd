@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { GrFormEdit } from "react-icons/gr";
 import { AiOutlineDelete } from "react-icons/ai";
 import {
-  getAllStudents,
+  getAllRecruitmentPartners,
   searchStudents,
 } from "../../../data/api/authenticatedRequests";
 import { deleteStudent } from "../../../data/api/authenticatedRequests";
@@ -15,7 +15,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export const Table = () => {
+export const AdminTable = () => {
   const tableRef = useRef(null);
   const [students, setStudents] = useState();
   const search = searchStore((state) => state.search);
@@ -35,9 +35,11 @@ export const Table = () => {
           setStudents(res?.data ? res?.data : []);
           console.log("Student data", res?.data);
         } else {
-          const res = await getAllStudents();
-          setStudents(res.data.students);
-          console.log("Student data", res.data.students);
+          const res = await getAllRecruitmentPartners({
+            role: "student",
+          });
+          setStudents(res.data);
+          console.log("Student data", res.data);
         }
 
         setLoading(false);
@@ -166,7 +168,9 @@ export const Table = () => {
                         </td>
 
                         <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
-                          {student?.educationLevel}
+                          {student?.educationLevel
+                            ? student?.educationLevel
+                            : items[Math.floor(Math.random() * items.length)]}
                         </td>
 
                         <td className="whitespace-nowrap px-3 z-10 text-left py-4 text-sm text-gray-500">

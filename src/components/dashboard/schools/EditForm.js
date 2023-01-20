@@ -3,16 +3,20 @@ import FileUpload from "../../uploads/FileUpload";
 import { firebaseUploadImg, firebaseUploadDoc } from "../../../data/api/upload";
 import { getDownloadURL } from "firebase/storage";
 import Spinner from "../../utils/Spinner";
-import { uploadSchool } from "../../../data/api/authenticatedRequests";
+import {
+  adminEditSpecificSchool,
+  getSpecificSchool,
+} from "../../../data/api/authenticatedRequests";
 import { useDropzone } from "react-dropzone";
 import UploadImage from "../../uploads/UploadImage";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Select from "react-select";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
-export const Form = (props) => {
+export const EditForm = (props) => {
   const navigate = useNavigate();
+  const { id } = useParams();
   const initialize = {
     name: "",
     about: "",
@@ -34,7 +38,15 @@ export const Form = (props) => {
   const [imageUrl, setImageUrl] = useState("");
   const [imagesArray, setImagesArray] = useState([]);
   const [featuresArray, setFeaturesArray] = useState([]);
-
+  useEffect(() => {
+    const getSchool = async () => {
+      const res = await getSpecificSchool(id);
+      console.log(res);
+      setSchool(res.data);
+      console.log("School", res.data);
+    };
+    getSchool();
+  }, []);
   const handleChange = (input) => {
     setSchool((prevState) => ({
       ...prevState,
@@ -54,7 +66,7 @@ export const Form = (props) => {
   };
   const onSubmitHandler = async () => {
     setIsLoading(true);
-    const res = await uploadSchool({
+    const res = await adminEditSpecificSchool(id, {
       name,
       about,
       country,
@@ -68,7 +80,7 @@ export const Form = (props) => {
     setIsLoading(false);
     console.log(res);
     if (res && res.status == 200) {
-      toast("School uploaded  successfully!");
+      toast("School edited  successfully!");
       setSchool(initialize);
       navigate("/adminDashboard");
     }

@@ -12,8 +12,8 @@ function TopPrrograms() {
       const res = await TopPrograms();
       if (res.status == 200) {
         setPrograms(res.data);
-        setLoading(false);
       }
+      setLoading(false);
     };
     fetchPrograms();
   }, []);

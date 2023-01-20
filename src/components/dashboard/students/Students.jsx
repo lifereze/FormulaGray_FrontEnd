@@ -1,12 +1,15 @@
 import React,{useEffect,useState} from "react";
 import { Navbar } from "../Navbar";
 import { Table } from "./Table";
+import { AdminTable } from "./AdminTable";
 import SideBar from "../SideBar";
 import Banner from "../Banner";
 import { getAllStudents } from "../../../data/api/authenticatedRequests";
 import PageLoader  from "../../utils/PageLoader";
 import Search from "../../inputs/Search";
+import { userStore } from "../../../stores";
 export const Students = () => {
+   const user = userStore((state) => state.user);
 
   return (
     <div className=" grid grid-cols-12">

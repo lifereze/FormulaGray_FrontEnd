@@ -126,7 +126,7 @@ export const Dashboard = () => {
             const res = await getAllApplications();
     
             console.log("LOOK", res.data);
-            setApplications(res?.data?.length);
+            setApplications(res?.data?.applications?.length);
           } catch (error) {
             console.log(error);
           }
@@ -138,8 +138,8 @@ export const Dashboard = () => {
           try {
             const res = await getAllApplications({ currentStage: "accepted" });
     
-            console.log("LOOK", res.data);
-            setAcceptedApplications(res?.data?.length);
+            console.log("LOOK accepted", res.data);
+            setAcceptedApplications(res?.data?.applications?.length);
           } catch (error) {
             console.log(error);
           }
@@ -151,8 +151,8 @@ export const Dashboard = () => {
           try {
             const res = await getAllApplications({ currentStage: "rejected" });
     
-            console.log("LOOK", res.data);
-            setRejectedApplications(res?.data?.length);
+            console.log("LOOK rejected", res.data);
+            setRejectedApplications(res?.data?.applications?.length);
           } catch (error) {
             console.log(error);
           }

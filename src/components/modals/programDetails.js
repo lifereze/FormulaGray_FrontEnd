@@ -60,6 +60,10 @@ function ProgramDetails({ setViewProgram, program }) {
                 Program Intakes
               </div>
               <div className=" text-sm pt-2">{program?.intakes}</div>
+              <div className="text-left font-semibold pt-2 pb-1 text-[#184061]">
+                Program Level
+              </div>
+              <div className=" text-sm pt-2">{program?.level}</div>
               {/* <div className=" text-lg">1-Year Post-Secondary Certificate</div>
               <div className=" text-sm pt-2">Minimum GPA</div>
               <div className=" text-lg">50.0%</div> */}

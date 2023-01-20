@@ -1,23 +1,40 @@
 import React, { useState, useEffect } from "react";
-import { createApplication } from "../../data/api/authenticatedRequests";
+import {
+  createApplication,
+  adminCreateApplication,
+} from "../../data/api/authenticatedRequests";
 import Spinner from "../utils/Spinner";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import { userStore } from "../../stores";
 function ApplyButton({ student, programId, setStudents }) {
+  const user = userStore((state) => state.user);
   const [isLoading, setIsLoading] = useState();
   const onApply = async () => {
     setIsLoading(true);
     console.log(programId);
-    const res = await createApplication({
-      studentId: student._id,
-      programmeId: programId,
-    });
-    console.log(res);
-    setIsLoading(false);
-    if (res && res.status == 200) {
-      toast("Application went through successfully!");
-      setStudents((prev) => prev.filter((item) => item._id !== student._id));
+    if (user?.role == "admin") {
+      const res = await adminCreateApplication({
+        studentId: student._id,
+        programmeId: programId,
+      });
+      console.log(res);
+      setIsLoading(false);
+      if (res && res.status == 200) {
+        toast("Application went through successfully!");
+        setStudents((prev) => prev.filter((item) => item._id !== student._id));
+      }
+    } else if (user?.role == "recruitmentPartner") {
+      const res = await createApplication({
+        studentId: student._id,
+        programmeId: programId,
+      });
+      console.log(res);
+      setIsLoading(false);
+      if (res && res.status == 200) {
+        toast("Application went through successfully!");
+        setStudents((prev) => prev.filter((item) => item._id !== student._id));
+      }
     }
   };
   return (

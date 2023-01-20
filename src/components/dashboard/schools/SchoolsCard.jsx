@@ -1,18 +1,19 @@
 import { EnvelopeIcon, PhoneIcon } from "@heroicons/react/20/solid";
 import {AiOutlineArrowRight} from 'react-icons/ai'
-
+import { userStore } from "../../../stores";
 
 export const SchoolsCard = ({institution}) => {
+  const user = userStore((state) => state.user);
   return (
     <div
-      className=""
+      className="bg-white shadow"
     >
       
         <a href={`/schools/${institution._id}`}>
           <div className="">
           <div
             key={institution.name}
-            className=" flex flex-col rounded-lg bg-white text-center shadow"
+            className=" flex flex-col rounded-lg bg-white text-center "
           >
             <div>
               <img
@@ -28,13 +29,19 @@ export const SchoolsCard = ({institution}) => {
               <div className=" text-midnight text-sm">{institution.country}</div>
             
             </div>
-       
+    
           </div>
          
           </div>
 
         </a>
-    
+       { user.role=="admin"&&<div className="w-full flex flex-row-reverse ">
+        <a href={`/schools/editSchool/${institution._id}`}>
+        <div className=" text-blue-500 text-sm px-4 py-2">
+        Edit
+        </div>
+       </a>
+       </div>}
     </div>
   );
 }

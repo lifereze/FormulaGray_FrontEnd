@@ -82,9 +82,25 @@ export const TopPrograms = async () => {
       return error.response;
     });
 };
+export const TopSchools = async () => {
+  return await api
+    .get("/school/topSchools")
+    .then((response) => response)
+    .catch((error) => {
+      return error.response;
+    });
+};
 export const createApplication = async (data) => {
   return await api
     .post("/application/recruitmentPartner/create", data)
+    .then((response) => response)
+    .catch((error) => {
+      return error.response;
+    });
+};
+export const adminCreateApplication = async (data) => {
+  return await api
+    .post("/admin/application/create", data)
     .then((response) => response)
     .catch((error) => {
       return error.response;
@@ -138,9 +154,9 @@ export const searchPrograms = async (data) => {
       return error.response;
     });
 };
-export const getAllApplications = async () => {
+export const getAllApplications = async (data) => {
   return await api
-    .post("/application/rectruitmentPartner/applications")
+    .post("/application/rectruitmentPartner/applications", data)
     .then((response) => response)
     .catch((error) => {
       return error.response;
@@ -189,6 +205,14 @@ export const deleteStudent = async (id) => {
 export const adminDeleteStudent = async (id) => {
   return await api
     .delete(`/admin/delete/user/${id}`)
+    .then((response) => response)
+    .catch((error) => {
+      return error.response;
+    });
+};
+export const adminDeleteApplication = async (id) => {
+  return await api
+    .delete(`admin/delete/application/${id}`)
     .then((response) => response)
     .catch((error) => {
       return error.response;
@@ -245,6 +269,14 @@ export const adminGetSpecificStudent = async (id) => {
 export const adminEditSpecificStudent = async (id, data) => {
   return await api
     .patch(`/admin/edit/student/${id}`, data)
+    .then((response) => response)
+    .catch((error) => {
+      return error.response;
+    });
+};
+export const adminEditSpecificSchool = async (id, data) => {
+  return await api
+    .patch(`/admin/edit/school/${id}`, data)
     .then((response) => response)
     .catch((error) => {
       return error.response;

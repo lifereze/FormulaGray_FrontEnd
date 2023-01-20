@@ -164,9 +164,7 @@ export const Table = () => {
                         </td>
 
                         <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
-                          {student?.educationLevel
-                            ? student?.educationLevel
-                            : items[Math.floor(Math.random() * items.length)]}
+                          {student?.educationLevel}
                         </td>
 
                         <td className="whitespace-nowrap px-3 z-10 text-left py-4 text-sm text-gray-500">

@@ -126,7 +126,7 @@ classNamePrefix="select"
             </div>
             </div>
             <div className=' mt-3'>
-<div className=' text-sm text-left py-1 text-gray-700 font-medium'>What is the average charge per student?</div>
+<div className=' text-sm text-left py-1 text-gray-700 font-medium'>Do you charge for your service, if so, how much?</div>
 <div className=''>
 <input
                       type="number"

@@ -1,5 +1,8 @@
 import { useEffect, useRef, useState } from "react";
-import { adminGetAllApplications } from "../../../data/api/authenticatedRequests";
+import {
+  adminGetAllApplications,
+  adminDeleteApplication,
+} from "../../../data/api/authenticatedRequests";
 import PageLoader from "../../utils/PageLoader";
 import moment from "moment";
 import { AiOutlineDelete } from "react-icons/ai";
@@ -11,7 +14,7 @@ import { useParams } from "react-router-dom";
 export const Table = () => {
   const tableRef = useRef(null);
   const [students, setStudents] = useState();
-
+  const [status, setStatus] = useState();
   const [loading, setLoading] = useState(false);
   const { currentStage } = useParams();
 
@@ -38,13 +41,29 @@ export const Table = () => {
     };
     getStudents();
   }, []);
+  const handleChange = async (e) => {
+    setLoading(true);
+    try {
+      const res = await adminGetAllApplications({
+        currentStage: e.target.value,
+      });
+      console.log("LOOK", res.data);
+      setStudents(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+    setLoading(false);
+  };
   const deleteOneApplication = async (student) => {
     const confirmer = window.confirm(
       "Are you sure you want to delete this application? You can not undo this action."
     );
     if (confirmer) {
-      setStudents((prev) => prev.filter((item) => item._id !== student._id));
-      toast("Application deleted successfully!");
+      const res = await adminDeleteApplication(student._id);
+      if (res.status == 200) {
+        setStudents((prev) => prev.filter((item) => item._id !== student._id));
+        toast("Application deleted successfully!");
+      }
     }
   };
   return (
@@ -53,16 +72,35 @@ export const Table = () => {
         <div className="">
           <h1 className="md:text-xl font-bold text-blue-500">Applications</h1>
         </div>
-        <div>
-          <DownloadTableExcel
-            filename="applications table"
-            sheet="applications"
-            currentTableRef={tableRef.current}
-          >
-            <div className="bg-white shadow-md rounded-md cursor-pointer px-2 py-1">
-              Generate report
+        <div className="flex space-x-4 items-center">
+          <div className="">
+            <div className="col-span-6 sm:col-span-3">
+              <select
+                id="status"
+                name="status"
+                value={status}
+                onChange={(e) => handleChange(e)}
+                autoComplete="status"
+                className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+              >
+                <option value="">All Applications</option>
+                <option value="accepted">Accepted</option>
+                <option value="rejected">Rejected</option>
+                <option value="pending">Pending</option>
+              </select>
             </div>
-          </DownloadTableExcel>
+          </div>
+          <div>
+            <DownloadTableExcel
+              filename="applications table"
+              sheet="applications"
+              currentTableRef={tableRef.current}
+            >
+              <div className="bg-white shadow-md rounded-md cursor-pointer px-2 py-1">
+                Generate report
+              </div>
+            </DownloadTableExcel>
+          </div>
         </div>
       </div>
       <div className="mt-8 flex flex-col">

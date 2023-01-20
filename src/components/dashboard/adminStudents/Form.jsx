@@ -208,7 +208,7 @@ const res= await uploadStudent({
   state,streetAddress,zipCode,BACertificate:degreeUrl,BATranscript:transcriptUrl,resume:resumeUrl,recommendationLetter:recommendationUrl,statementOfPurpose:statementUrl,OLevelCertificate:ordinaryUrl
 })
 if(res.status==200){
-  navigate('/students')
+  navigate('/adminStudents')
 }
 setIsLoading(false)
 console.log(res)

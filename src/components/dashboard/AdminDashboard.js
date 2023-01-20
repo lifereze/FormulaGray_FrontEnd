@@ -160,7 +160,7 @@ export const AdminDashboard = () => {
                         </Link>
                       </div>
                       <div className=" md:col-span-3 col-span-6">
-                        <Link to="/students">
+                        <Link to="/adminStudents">
                           <Info
                             icon={
                               <MdCastForEducation className=" text-4xl text-white" />

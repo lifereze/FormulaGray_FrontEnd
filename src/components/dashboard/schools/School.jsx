@@ -122,13 +122,13 @@ function School() {
  
 
 </div>
-<div className=' flex  flex-col justify-center bg-[#EEF0F8] rounded-md py-2 px-12 shadow-lg items-center'>
+{/* <div className=' flex  flex-col justify-center bg-[#EEF0F8] rounded-md py-2 px-12 shadow-lg items-center'>
     <div className=''><IoSchoolSharp className='  text-6xl' /></div>
     <div className='font-semibold text-2xl'>20</div>
     <div className=' text-l '>Schools</div>
  
 
-</div>
+</div> */}
     </div>
         <div className='  w-full space-x-10 mt-10 px-10 pb-10 bg-gray-100'>
 <div className='  px-2'>
@@ -158,33 +158,7 @@ function School() {
     </div>
 
 </div>))}
-<div className='flex space-x-3 px-6 py-4 items-center border-b border-gray-400'>
-    <div className=' p-2 rounded-full bg-green-200 text-green-800 '>
-        <BsCheck2 className=' font-semibold text-lg' />
-    </div>
-    <div className=' text-lg font-semibold'>
-        Work While Studying
-    </div>
 
-</div>
-<div className='flex space-x-3 px-6 py-4 items-center border-b border-gray-400'>
-    <div className=' p-2 rounded-full bg-green-200 text-green-800 '>
-        <BsCheck2 className=' font-semibold text-lg' />
-    </div>
-    <div className=' text-lg font-semibold'>
-        Conditional Offer letter
-    </div>
-
-</div>
-<div className='flex space-x-3 px-6 py-4 items-center border-b border-gray-400'>
-    <div className=' p-2 rounded-full bg-green-200 text-green-800 '>
-        <BsCheck2 className=' font-semibold text-lg' />
-    </div>
-    <div className=' text-lg font-semibold'>
-       Accomoditions
-    </div>
-
-</div>
 </div>
 <div className=' flex justify-between items-center'>
 <div className=' flex items-center py-4 space-x-4'>

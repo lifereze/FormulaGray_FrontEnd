@@ -84,6 +84,16 @@ const [isLoading,setIsLoading]=useState();
 setIsLoading(false)
 
   }
+  const setCountry =(country)=>{
+    
+    setStudent((prevState) => ({
+      ...prevState,
+      originCountry: country.label,
+    }));
+   
+  
+
+}
   return (
     <div className=" grid bg-white grid-cols-12">
 
@@ -181,7 +191,7 @@ setIsLoading(false)
           <Select
           
             name="originCountry"
-            onChange={(e) => handleChange(e)}
+            onChange={(e) => setCountry(e)}
             options={countries}
             className="basic-multi-select"
             classNamePrefix="select"
