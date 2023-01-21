@@ -54,6 +54,7 @@ function TopPrrograms() {
             programs.map((program, index) => (
               <tr>
                 <td className="whitespace-nowrap text-center px-3 py-4 text-sm text-gray-500">
+                  {"00"}
                   {index + 1}
                 </td>
                 <td className="whitespace-nowrap capitalize   text-left px-3 py-4 text-sm text-gray-500">

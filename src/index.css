@@ -64,12 +64,12 @@
 
 .tt {
   color: white;
-  width: 200px;
+
   margin: auto;
   font-style: italic;
 }
 .cc {
-  height: 400px;
+  min-height: 400px;
   width: 40vw;
   margin: auto;
   background-color: #6366F1;

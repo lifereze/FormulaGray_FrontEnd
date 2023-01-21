@@ -1,7 +1,7 @@
 import React from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from "react-responsive-carousel";
-
+import { FaUser } from "react-icons/fa";
 function Testimonials() {
   return (
     <div>
@@ -19,17 +19,19 @@ function Testimonials() {
           <div className="w-full  flex flex-col items-center ">
             <div className=" w-40 h-40">
               <img
-                src="https://images.unsplash.com/photo-1603468620905-8de7d86b781e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=876&q=80"
+                src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
                 alt="d,d,,"
                 className=" rounded-full w-40 h-40"
               />
             </div>
           </div>
-          <div className="text-lg font-semibold text-white ">Mr. Owori</div>
+          <div className="text-lg font-semibold text-white ">Ngozi Okereke</div>
+          <div className=" text-[skyblue] ">UCW MBA Student</div>
 
           <div className="tt">
-            I really enjoyed the services I got from here.I will definitely come
-            back.
+            Formula Gray helped me apply and all I did was supply some
+            documents. My visa was approved after 3 months of application and
+            right now I am in UCW.
           </div>
         </div>
 
@@ -37,17 +39,24 @@ function Testimonials() {
           <div className="w-full  flex flex-col items-center ">
             <div className=" w-40 h-40">
               <img
-                src="https://images.unsplash.com/photo-1603468620905-8de7d86b781e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=876&q=80"
+                src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
                 alt="d,d,,"
                 className=" rounded-full w-40 h-40"
               />
             </div>
           </div>
-          <div className="text-lg font-semibold text-white ">Mr. Owori</div>
+          <div className="text-lg font-semibold text-white ">Mrs Amasi </div>
+          <div className=" text-[skyblue] ">
+            University of Canada West MBA Student
+          </div>
 
           <div className="tt">
-            I really enjoyed the services I got from here.I will definitely come
-            back.
+            I wanted to travel with my daughter and FG helped me with both my
+            visa application and that of my daughter. I left for Canada in
+            January 2022.They walked me through every step, and I was delighted
+            when the immigration requested my passport.Now I am settling in
+            Canada and started my studies with University of Canada West and my
+            Daughter is enrolled into a High school in Vancouver.
           </div>
         </div>
       </Carousel>

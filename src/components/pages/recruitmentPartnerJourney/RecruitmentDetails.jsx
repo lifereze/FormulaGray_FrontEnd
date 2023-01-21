@@ -126,7 +126,7 @@ classNamePrefix="select"
             </div>
             </div>
             <div className=' mt-3'>
-<div className=' text-sm text-left py-1 text-gray-700 font-medium'>Do you charge for your service, if so, how much?</div>
+<div className=' text-sm text-left py-1 text-gray-700 font-medium'>.How much do you charge students/services?</div>
 <div className=''>
 <input
                       type="number"
@@ -141,7 +141,7 @@ classNamePrefix="select"
 </div>
             </div>
             <div className=' mt-3'>
-<div className=' text-sm text-left py-1 text-gray-700 font-medium'>What is the average number of students you get anually?</div>
+<div className=' text-sm text-left py-1 text-gray-700 font-medium'>Average number of students you support with enrollment annually?</div>
 <div className=''>
 <input
                       type="number"
