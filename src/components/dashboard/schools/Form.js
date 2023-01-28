@@ -70,7 +70,9 @@ export const Form = (props) => {
     if (res && res.status == 200) {
       toast("School uploaded  successfully!");
       setSchool(initialize);
-      navigate("/adminDashboard");
+      setTimeout(() => {
+        navigate("/adminDashboard");
+      }, 1000);
     }
   };
   const setFeatures = (kFeatures) => {
@@ -200,7 +202,7 @@ export const Form = (props) => {
                             value: "Conditional Offer letter",
                             label: "Conditional Offer letter",
                           },
-                          { value: "Accomoditions", label: "Accomoditions" },
+                          { value: "Accommodations", label: "Accommodations" },
                         ]}
                         className="basic-multi-select"
                         classNamePrefix="select"

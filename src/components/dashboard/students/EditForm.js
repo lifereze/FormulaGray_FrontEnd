@@ -462,7 +462,7 @@ export const EditForm = (props) => {
                       docName={degreeName}
                       docUrl={degreeUrl}
                       name="degree"
-                      title="Bachelors degree certificate"
+                      title="Bachelors degree certificate (For postGraduate application only)"
                     />
                     <FileUpload
                       uploadDoc={uploadDoc}
@@ -470,7 +470,7 @@ export const EditForm = (props) => {
                       docName={transcriptName}
                       docUrl={transcriptUrl}
                       name="transcript"
-                      title="Bachelors degree transcript"
+                      title="Bachelors degree transcript (For postGraduate application only)"
                     />
                     <FileUpload
                       uploadDoc={uploadDoc}
@@ -486,7 +486,7 @@ export const EditForm = (props) => {
                       docName={recommendationName}
                       docUrl={recommendationUrl}
                       name="recommendation"
-                      title="Letter of recommendation"
+                      title="Letter of recommendation (If required)"
                     />
                     <FileUpload
                       uploadDoc={uploadDoc}
@@ -494,7 +494,7 @@ export const EditForm = (props) => {
                       docName={statementName}
                       docUrl={statementUrl}
                       name="statement"
-                      title="Statement of purpose"
+                      title="Statement of purpose (If required by country)"
                     />
                     {(!isLoading && (
                       <button
