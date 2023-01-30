@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { HiOutlineUsers } from "react-icons/hi";
 import { BiFolder } from "react-icons/bi";
 import { GiNetworkBars } from "react-icons/gi";
+import { FiEdit2 } from "react-icons/fi";
 
 import { FaUserAlt, FaSchool, FaUserTie } from "react-icons/fa";
 import { userStore } from "../../stores";
@@ -21,23 +22,36 @@ function SideBar() {
       <div className=" flex flex-col items-center justify-center ">
         {user && user.role == "recruitmentPartner" && (
           <Link to={"/recruitmentPartner/register"}>
-            <div className="p-3  bg-white rounded-full">
+            <div className="p-3 relative bg-white rounded-full">
+              <div className=" absolute bg-white p-1 rounded-lg top-0 right-0">
+                <FiEdit2 className="text-black text-md" />
+              </div>
               <FaUserAlt className=" text-5xl text-black" />
             </div>
           </Link>
         )}
         {user && user.role == "student" && (
           <Link to={"/profile"}>
-            <div className="p-3  bg-white rounded-full">
+            <div className="p-3 relative bg-white rounded-full">
+              <div className=" absolute bg-white p-1 rounded-lg top-0 right-0">
+                <FiEdit2 className="text-black text-md" />
+              </div>
               <FaUserAlt className=" text-5xl text-black" />
             </div>
           </Link>
         )}
         {user && user.role == "admin" && (
           <Link to={"/profile"}>
-            <div className="p-3  bg-white rounded-full">
+            <div className="p-3 relative bg-white rounded-full">
+              <div className=" absolute bg-white p-1 rounded-lg top-0 right-0">
+                <FiEdit2 className="text-black text-md" />
+              </div>
               <FaUserAlt className=" text-5xl text-black" />
             </div>
+            {/* <div className=" flex space-x-2 items-center  pt-2 text-center ">
+              <div className=" text-center text-blue-100 text-base">Edit</div>
+              <FiEdit2 className="text-blue-100 " />
+            </div> */}
           </Link>
         )}
         {!user && (
