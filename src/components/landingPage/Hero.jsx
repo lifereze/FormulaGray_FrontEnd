@@ -14,13 +14,12 @@ export const Hero = () => {
             </span>
           </h1>
           <p className="mx-auto mt-3 max-w-md text-lg sm:text-xl md:mt-5 md:max-w-3xl ">
-            Get matched with and apply to quality Higher Education programs
-            across the world
+            Get matched and apply to quality  Education institutions globally.
           </p>
           <div className="mt-10 sm:flex sm:justify-center lg:justify-start">
             <div className="mt-3 rounded-md shadow sm:mt-0 sm:ml-3">
               <a
-                href="#"
+                href="/signin"
                 className="flex w-full items-center text-indigo-500 justify-center rounded-md border border-transparent bg-white px-8 py-3 text-base font-medium hover:bg-gray-250 md:py-4 md:px-10 md:text-lg"
               >
                 Get started

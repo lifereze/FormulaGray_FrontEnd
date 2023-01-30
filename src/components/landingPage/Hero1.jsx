@@ -1,7 +1,8 @@
 import React,{useState} from "react";
-
+import SchoolDetails from "../modals/SchoolDetails";
 export const Hero1 = () => {
   const [students,setStudents]=useState(false)
+  const [schoolUpload,setSchoolUpload]=useState(false)
   const [agents,setAgents]=useState(false)
   const [institutions,setInstitutions]=useState(false)
   return (
@@ -111,7 +112,9 @@ export const Hero1 = () => {
             <p>Attracting quality students is a challenge many institutions face. With over 15,000 student applications processed through our system annually, we carefully screen each case. Our dedicated team of experts verify each application for correctness and completeness.</p>
             <p>We work with verified agents who maintain a steady stream of recruitment channels.</p>
             <p>Our platform will provide your institution access to thousands of potential students and you have the assurance that each application has been thoroughly scrutinized.</p>
-            <a href="/signin" className="text-blue-500 hover:underline">Partner with us today</a>
+            <div className="text-blue-500 hover:underline hover:cursor-pointer"
+            onClick={()=>setSchoolUpload(true)}
+            >Partner with us today</div>
             </div>
             <div>
             {  !institutions&& <button
@@ -129,6 +132,7 @@ export const Hero1 = () => {
           </div>
         </div>
       </div>
+      {schoolUpload&&<SchoolDetails setSchoolUpload={setSchoolUpload}/>}
     </div>
   );
 };

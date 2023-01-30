@@ -68,9 +68,15 @@ export const Signin = () => {
         <div className="flex h-full  flex-1 flex-col justify-center py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
           <div className="mx-auto w-full max-w-sm lg:w-96">
             <div>
+              <div className=" flex justify-between items-center">
               <a href="/">
                 <img className="h-12 w-auto" src={Logo} alt="Formular Gray" />
               </a>
+              <a href="/" className=" text-blue-600  cursor-pointer">
+Home
+              </a>
+              </div>
+             
               <h2 className="mt-6 text-3xl font-bold tracking-tight text-gray-500">
                 Sign in to your account
               </h2>
