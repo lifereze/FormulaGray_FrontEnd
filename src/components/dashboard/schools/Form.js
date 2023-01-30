@@ -73,6 +73,8 @@ export const Form = (props) => {
       setTimeout(() => {
         navigate("/adminDashboard");
       }, 1000);
+    } else if (res && res.status !== 200) {
+      toast("Something went wrong!");
     }
   };
   const setFeatures = (kFeatures) => {

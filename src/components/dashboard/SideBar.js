@@ -104,14 +104,14 @@ function SideBar() {
         </Link>
       )}
       <Link
-        to={"/programs"}
+        to={(user?.role && "/programs") || "/signin"}
         className=" flex space-x-2 cursor-pointer items-center p-2 pr-12  w-10/12 rounded-lg  text-gray-100"
       >
         <BiFolder className="text-2xl" />
         <div className="">Programs</div>
       </Link>
       <Link
-        to={"/schools"}
+        to={(user?.role && "/schools") || "/signin"}
         className=" flex space-x-2 cursor-pointer items-center p-2 pr-12 w-10/12 rounded-lg  text-gray-100"
       >
         <FaSchool className="text-2xl" />

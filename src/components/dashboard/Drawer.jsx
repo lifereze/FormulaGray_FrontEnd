@@ -106,12 +106,12 @@ function Drawer({setShowDrawer}) {
         </Link>
       )}
       <Link onClick={()=>setShowDrawer(false)}
-        to={"/programs"} className=" flex space-x-2 cursor-pointer items-center p-2 pr-12 w-10/12 rounded-lg  ">
+         to={(user?.role && "/programs") || "/signin"} className=" flex space-x-2 cursor-pointer items-center p-2 pr-12 w-10/12 rounded-lg  ">
         <BiFolder className="text-2xl" />
         <div className="">Programs</div>
       </Link>
       <Link onClick={()=>setShowDrawer(false)}
-        to={"/schools"} className=" flex space-x-2 cursor-pointer items-center p-2 pr-12 w-10/12 rounded-lg  ">
+         to={(user?.role && "/schools") || "/signin"} className=" flex space-x-2 cursor-pointer items-center p-2 pr-12 w-10/12 rounded-lg  ">
         <HiOutlineUsers className="text-2xl" />
         <div className="">Schools</div>
       </Link>
@@ -120,11 +120,11 @@ function Drawer({setShowDrawer}) {
         <GiNetworkBars className="text-2xl" />
         <div className="">Visa</div>
       </Link>
-      <div onClick={()=>{setShowDrawer(false);LogOut();}}
+     {user?.role&& <div onClick={()=>{setShowDrawer(false);LogOut();}}
         className=" flex space-x-2 cursor-pointer items-center p-2 pr-12 w-10/12 rounded-lg  ">
         <AiOutlineLogout className="text-2xl" />
         <div className="">Logout</div>
-      </div>
+      </div>}
     </div>
     </div>
   );

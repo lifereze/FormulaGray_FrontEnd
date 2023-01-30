@@ -38,7 +38,7 @@ window.location.href = "/signin";
     </div>
     
 <div className=' flex space-x-6 space-y-2 items-center'>
-    <div className=" cursor-pointer hidden md:block">
+{  user?.role&&  <div className=" cursor-pointer hidden md:block">
 <GiHamburgerMenu className=" text-2xl" onClick={()=>setShowLogout(!showLogout)} />
 {showLogout&&<div ref={ref} onClick={()=>LogOut()} className="mt-2 bg-white p-2 cursor-pointer flex items-center  space-x-2 ">
 <div className="">
@@ -48,7 +48,7 @@ window.location.href = "/signin";
   Logout
 </div>
 </div>}
-</div>
+</div>}
 </div>
 <div className=" text-black block capitalize font-semibold text-lg">Dashboard User</div>
 </div>  
