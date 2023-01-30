@@ -122,7 +122,7 @@ Home
                   </div>
                   <div>
                     <label className="text-base font-medium text-gray-500">
-                      Sign up as:
+                      Sign up as :
                     </label>
                     <fieldset className="mt-3">
                       <legend className="sr-only">Sign up as</legend>
