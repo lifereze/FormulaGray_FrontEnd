@@ -29,6 +29,8 @@ import { ViewEditStudent } from "./components/dashboard/ViewEditStudent";
 import { Countdown } from "./components/countdown/Countdown";
 import { RecruitmentPartnerRegister } from "./components/pages/recruitmentPartnerJourney/RecruitmentPartnerRegister";
 import { VerifyEmail } from "./components/pages/VerifyEmail";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 function App() {
   return (
     <div className=" bg-[#E6E9EF] text-black">
@@ -76,6 +78,7 @@ function App() {
        
         </Routes>
       </Router>
+      <ToastContainer/>
     </div>
   );
 }

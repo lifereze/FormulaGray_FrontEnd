@@ -1,10 +1,75 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { AiOutlineClose, AiOutlineArrowRight } from "react-icons/ai";
 import { userStore } from "../../stores";
-
+import emailjs from "@emailjs/browser";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import countryList from "react-select-country-list";
+import Select from "react-select";
 function SchoolDetails({ setSchoolUpload }) {
   const user = userStore((state) => state.user);
+  const initialize = {
+    nameOfSchool: "",
+    country: "",
+    email: "",
+    phoneNumber: "",
+    city: "",
+    name: "",
+  };
+  const [
+    { nameOfSchool, country, email, phoneNumber, city, name },
+    setStudent,
+  ] = useState(initialize);
+  const countries = useMemo(() => countryList().getData(), []);
+  const [isLoading, setIsLoading] = useState();
+  const handleChange = (input) => {
+    setStudent((prevState) => ({
+      ...prevState,
+      [input.target.name]: input.target.value,
+    }));
+    console.log(nameOfSchool, country, country);
+  };
+  const onSubmitHandler = async () => {
+    console.log("hello");
+    let templateParams = {
+      nameOfSchool,
+      country,
+      email,
+      phoneNumber,
+      city,
+      name,
+    };
+    setIsLoading(true);
 
+    emailjs
+      .send(
+        "service_ap5n63g",
+        "template_9xzhi9c",
+        templateParams,
+        "WUFJJafY5Dbr4DClw"
+      )
+      .then(
+        (result) => {
+          setIsLoading(false);
+          toast("Details sent successfully!");
+          console.log(result.text);
+          setSchoolUpload(false);
+          setIsLoading(false);
+        },
+        (error) => {
+          setIsLoading(false);
+          console.log(error.text);
+          setSchoolUpload(false);
+          setIsLoading(false);
+        }
+      );
+  };
+  const setCountry = (country) => {
+    setStudent((prevState) => ({
+      ...prevState,
+      country: country.label,
+    }));
+  };
   return (
     <>
       <div
@@ -28,7 +93,7 @@ function SchoolDetails({ setSchoolUpload }) {
 
               <div className="py-1">
                 <label
-                  htmlFor="name-of-school"
+                  htmlFor="nameOfSchool"
                   className="text-xs 
          "
                 >
@@ -36,7 +101,8 @@ function SchoolDetails({ setSchoolUpload }) {
                 </label>
                 <input
                   type="text"
-                  name="name-of-school"
+                  name="nameOfSchool"
+                  onChange={(e) => handleChange(e)}
                   className="w-full rounded-md text-black bg-transparent placeholder-white text-sm border focus:outline-none focus:ring-0 focus:border-bloow-blue "
                   placeholder="Enter the School's Name"
                   required
@@ -50,13 +116,15 @@ function SchoolDetails({ setSchoolUpload }) {
                 >
                   Country
                 </label>
-                <input
-                  type="text"
-                  name="country"
-                  className="w-full rounded-md text-black bg-transparent placeholder-white text-sm border focus:outline-none focus:ring-0 focus:border-bloow-blue "
-                  placeholder="Country"
-                  required
-                />
+                <div className="">
+                  <Select
+                    name="country"
+                    onChange={(e) => setCountry(e)}
+                    options={countries}
+                    className="basic-multi-select"
+                    classNamePrefix="select"
+                  />
+                </div>
               </div>
 
               <div className="py-1">
@@ -70,6 +138,7 @@ function SchoolDetails({ setSchoolUpload }) {
                 <input
                   type="text"
                   name="city"
+                  onChange={(e) => handleChange(e)}
                   className="w-full rounded-md text-black border placeholder-white text-sm  focus:outline-none focus:ring-0 focus:border-bloow-blue bg-transparent"
                   placeholder="City"
                   required
@@ -89,6 +158,7 @@ function SchoolDetails({ setSchoolUpload }) {
                 <input
                   type="text"
                   name="name"
+                  onChange={(e) => handleChange(e)}
                   className="w-full rounded-md text-black border placeholder-white text-sm  focus:outline-none focus:ring-0 focus:border-bloow-blue bg-transparent"
                   placeholder="Enter Name"
                   required
@@ -96,7 +166,7 @@ function SchoolDetails({ setSchoolUpload }) {
               </div>
               <div className="py-1">
                 <label
-                  htmlFor="phone-number"
+                  htmlFor="phoneNumber"
                   className="text-xs 
          "
                 >
@@ -104,7 +174,8 @@ function SchoolDetails({ setSchoolUpload }) {
                 </label>
                 <input
                   type="tel"
-                  name="phone-number"
+                  name="phoneNumber"
+                  onChange={(e) => handleChange(e)}
                   className="w-full rounded-md text-black border placeholder-white text-sm  focus:outline-none focus:ring-0 focus:border-bloow-blue bg-transparent"
                   placeholder="Enter Phone"
                   required
@@ -121,6 +192,7 @@ function SchoolDetails({ setSchoolUpload }) {
                 <input
                   type="email"
                   name="email"
+                  onChange={(e) => handleChange(e)}
                   className="w-full rounded-md text-black border placeholder-white text-sm  focus:outline-none focus:ring-0 focus:border-bloow-blue bg-transparent"
                   placeholder="Enter Email"
                   required
@@ -129,9 +201,9 @@ function SchoolDetails({ setSchoolUpload }) {
 
               <button
                 className=" bg-blue-500 text-white mt-4 w-full flex justify-between items-center rounded-md px-4 py-1"
-                onClick={() => setSchoolUpload(false)}
+                onClick={() => onSubmitHandler()}
               >
-                <div className="">Submit</div>
+                <div className="">{isLoading ? "Loading" : "Submit"}</div>
                 <div className="">
                   <AiOutlineArrowRight className="" />
                 </div>
@@ -140,6 +212,7 @@ function SchoolDetails({ setSchoolUpload }) {
           </div>
         </div>
       </div>
+      <ToastContainer />
     </>
   );
 }

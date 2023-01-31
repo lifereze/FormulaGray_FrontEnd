@@ -65,10 +65,10 @@ const [isLoading,setIsLoading]=useState();
 
     emailjs
     .send(
-      "service_qma93p2",
-      "template_kxr5ihm",
+      "service_ap5n63g",
+      "template_ekvqfoe",
       templateParams,
-      "nmjPxXXXXjhlOfznK"
+      "WUFJJafY5Dbr4DClw"
     )
     .then(
       (result) => {
@@ -178,6 +178,7 @@ setIsLoading(false)
                         autoComplete="country-name"
                         className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                       >
+                        <option value="">Select country</option>
                         <option>America</option>
                         <option>Canada</option>
                         <option>UK</option>
