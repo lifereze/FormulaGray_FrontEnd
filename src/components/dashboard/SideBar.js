@@ -16,9 +16,9 @@ function SideBar() {
   const setUser = userStore((state) => state.storeUser);
   return (
     <div className="w-full flex flex-col space-y-4 items-center bg-[#184061] text-gray-200 h-screen overflow-y-scroll pb-10 ">
-      <div className=" p-2 mx-2 bg-white rounded-b-lg">
+      <Link to="/" className=" p-2 mx-2 bg-white rounded-b-lg">
         <img src={Logo} className="" />
-      </div>
+      </Link>
       <div className=" flex flex-col items-center justify-center ">
         {user && user.role == "recruitmentPartner" && (
           <Link to={"/recruitmentPartner/register"}>

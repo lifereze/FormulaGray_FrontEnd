@@ -5,6 +5,7 @@ import { uploadProgram } from "../../../data/api/authenticatedRequests";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Select from "react-select";
 export const Form = (props) => {
   const navigate = useNavigate();
   const initialize = {
@@ -20,7 +21,7 @@ export const Form = (props) => {
     setProgram,
   ] = useState(initialize);
   const [isLoading, setIsLoading] = useState();
-  const [intake, setIntake] = useState("");
+  const [intakesArray, setIntakesArray] = useState("");
   const [level, setLevel] = useState("");
 
   const handleChange = (input) => {
@@ -40,7 +41,7 @@ export const Form = (props) => {
       tuitionFees,
       schoolId: schoolId,
       currency: "USD",
-      intakes: intake,
+      intakes: intakesArray,
       level,
     });
     setIsLoading(false);
@@ -51,15 +52,21 @@ export const Form = (props) => {
       navigate("/adminDashboard");
     }
   };
-
+  const setIntakes = (kIntakes) => {
+    const keyIntakes = [];
+    kIntakes.map((kIntake) => {
+      keyIntakes.push(kIntake.value);
+    });
+    setIntakesArray(keyIntakes);
+  };
   return (
     <div className="">
-      <div className="mt-10 sm:mt-0">
+      <div className="mt-10  sm:mt-0">
         <div className="md:grid md:grid-cols-6 md:gap-6">
           <div className="md:col-span-1"></div>
           <div className="mt-5 md:col-span-4 md:mt-0">
-            <div className="overflow-hidden shadow sm:rounded-md">
-              <div className="bg-white px-4 py-5 sm:p-6">
+            <div className=" shadow sm:rounded-md">
+              <div className="bg-white pb-10  px-4 py-5 sm:p-6">
                 <div className="grid grid-cols-6 text-left gap-6">
                   <h3 className="text-lg font-semibold text-center leading-6 text-purple-900 col-span-6 ">
                     Program Details
@@ -140,19 +147,31 @@ export const Form = (props) => {
                     <div className=" my-1 text-left pb-1 text-sm font-medium text-gray-700">
                       Program Intakes
                     </div>
-                    <select
-                      name={"intake"}
-                      className="w-full rounded-md border focus:outline-none focus:ring-0 focus:border-bloow-blue"
-                      onChange={(e) => {
-                        setIntake(e.target.value);
-                      }}
-                    >
-                      {" "}
-                      <option value="winter">Winter</option>
-                      <option value="summer">Summer</option>
-                      <option value="autumn">Autumn</option>
-                      <option value="spring">Spring</option>
-                    </select>
+                    <Select
+                      isMulti
+                      name="intakes"
+                      onChange={(e) => setIntakes(e)}
+                      options={[
+                        {
+                          value: "winter",
+                          label: "winter",
+                        },
+                        {
+                          value: "summer",
+                          label: "summer",
+                        },
+                        {
+                          value: "autumn",
+                          label: "autumn",
+                        },
+                        {
+                          value: "spring",
+                          label: "spring",
+                        },
+                      ]}
+                      className="basic-multi-select"
+                      classNamePrefix="select"
+                    />
                   </div>
                   <div className="col-span-6">
                     <div className=" my-1 text-left pb-1 text-sm font-medium text-gray-700">
@@ -166,6 +185,7 @@ export const Form = (props) => {
                       }}
                     >
                       {" "}
+                      <option value="">Select Level</option>
                       <option value="highSchool">High School</option>
                       <option value="diploma">Diploma</option>
                       <option value="bachelor">Bachelor</option>

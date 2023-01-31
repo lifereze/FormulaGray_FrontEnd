@@ -25,7 +25,7 @@ function ShowApplicationMenu({ id, setApplications, student }) {
       </div>
       <div className=" relative  ">
         {showMenu && (
-          <div className=" absolute -top-4 -left-24 p-1 bg-[#184061] text-gray-200 rounded-md   text-center">
+          <div className=" left-10   p-1 bg-[#184061] text-gray-200 rounded-md   text-center">
             <div className="font-bold">Status</div>
             <div
               className=" flex items-center py-1 space-x-2 px-2 hover:bg-gray-200 cursor-pointer rounded-sm hover:text-[#184061]"
