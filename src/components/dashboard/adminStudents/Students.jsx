@@ -58,6 +58,7 @@ export const AdminStudents = () => {
           </div>
         </div>
       </div>
+      
     </div>
   );
 };

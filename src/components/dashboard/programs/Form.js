@@ -21,7 +21,7 @@ export const Form = (props) => {
     setProgram,
   ] = useState(initialize);
   const [isLoading, setIsLoading] = useState();
-  const [intakesArray, setIntakesArray] = useState("");
+  const [intakesArray, setIntakesArray] = useState([]);
   const [level, setLevel] = useState("");
 
   const handleChange = (input) => {

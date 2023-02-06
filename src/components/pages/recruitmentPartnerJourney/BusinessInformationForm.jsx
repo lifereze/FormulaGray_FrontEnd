@@ -202,7 +202,12 @@ console.log(options)
         name={'entity'}
         className="w-full rounded-md border focus:outline-none focus:ring-0 focus:border-bloow-blue"
         onChange={(e)=>{setEntity(e.target.value)}}
-      >   <option value="business">
+      > 
+        <option value="">
+               Choose Entity
+                </option>
+      
+        <option value="business">
                Company
                 </option>
                 <option value="individual">

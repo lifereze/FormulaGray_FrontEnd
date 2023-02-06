@@ -6,11 +6,13 @@ import SideBar from "../SideBar";
 import Banner from "../Banner";
 import { getAllStudents } from "../../../data/api/authenticatedRequests";
 import PageLoader  from "../../utils/PageLoader";
+import Approval from "../../modals/Approval";
 import Search from "../../inputs/Search";
 import { userStore } from "../../../stores";
 export const Students = () => {
+  const [showApproval,setShowApproval]=useState(false)
    const user = userStore((state) => state.user);
-
+console.log(user)
   return (
     <div className=" grid grid-cols-12">
 
@@ -37,14 +39,19 @@ export const Students = () => {
           <div className="">
             <Search/>
           </div>
-          <a href="/addStudent">
+         {user?.approvalStatus!=='pending'&& user?.role!=='admin'&& <a href="/addStudent">
             <button
               type="button"
               className="inline-flex items-center justify-center rounded-md border border-transparent bg-blue-500 px-2 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto"
             >
               Add student
             </button>
-          </a>
+          </a>|| <button
+              type="button"  onClick={()=>setShowApproval(true)}
+              className="inline-flex items-center justify-center rounded-md border border-transparent bg-blue-500 px-2 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto"
+            >
+              Add student
+            </button>}
         </div>
       </div>
                         <Table
@@ -61,6 +68,7 @@ export const Students = () => {
           </div>
         </div>
       </div>
+      {showApproval&&<Approval setShowApproval={setShowApproval}/>}
     </div>
   );
 };

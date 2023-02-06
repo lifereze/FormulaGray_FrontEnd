@@ -8,9 +8,12 @@ import {useDropzone} from 'react-dropzone';
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { userStore } from "../../../stores";
+import Approval from '../../modals/Approval';
 export const Form = (props) => {
   const navigate=useNavigate();
-
+  const user = userStore((state) => state.user);
+  const [showApproval,setShowApproval]=useState(false)
   const initialize = {
     firstName:"",
     lastName: "",
@@ -200,24 +203,31 @@ const [statementName,setStatementName]=useState();
     console.log(firstName,lastName,country)
   };
   const onSubmitHandler= async ()=>{
-    setIsLoading(true);
-const res= await uploadStudent({
-  firstName,
-  lastName,
-  email,phoneNumber,countryOfInterest,country,city,educationLevel,
-  state,streetAddress,zipCode,BACertificate:degreeUrl,BATranscript:transcriptUrl,resume:resumeUrl,recommendationLetter:recommendationUrl,statementOfPurpose:statementUrl,OLevelCertificate:ordinaryUrl
-})
-if(res.status==200){
-  toast("Student uploaded successfully!");
-  navigate('/students')
-}
+    if(user?.approvalStatus!=='pending'){
+      setIsLoading(true);
+
+      const res= await uploadStudent({
+        firstName,
+        lastName,
+        email,phoneNumber,countryOfInterest,country,city,educationLevel,
+        state,streetAddress,zipCode,BACertificate:degreeUrl,BATranscript:transcriptUrl,resume:resumeUrl,recommendationLetter:recommendationUrl,statementOfPurpose:statementUrl,OLevelCertificate:ordinaryUrl
+      })
+      if(res.status==200){
+        toast("Student uploaded successfully!");
+        navigate('/students')
+      }
+      else{
+        
+        const message=res.data.message;
+        toast(message);
+      }
+      setIsLoading(false)
+      console.log(res)
+    }
 else{
-  
-  const message=res.data.message;
-  toast(message);
+setShowApproval(true)
 }
-setIsLoading(false)
-console.log(res)
+
   }
   return (
     <div className="">
@@ -504,6 +514,7 @@ className="ml-3 mt-6 inline-flex justify-center rounded-md border border-transpa
         </div>
       </div>
       <ToastContainer />
+      {showApproval&&<Approval setShowApproval={setShowApproval}/>}
     </div>
   );
 };
