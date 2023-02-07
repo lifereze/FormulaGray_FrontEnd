@@ -26,7 +26,8 @@ function ProgramCard({ program }) {
       <div className=" flex  justify-between items-center py-1">
         <div className=" w-1/2 ">
           <div className=" text-sm text-gray-500">School</div>
-          <div className=" ">University of Toronto</div>
+          <div className=" ">{program?.schoolId?.name}</div>
+          {console.log(program)}
         </div>
         <div className=" w-1/2">
           <div className=" text-sm  text-gray-500">Location</div>

@@ -4,6 +4,7 @@ import { userStore } from "../../stores";
 
 function ProgramDetails({ setViewProgram, program }) {
   const user = userStore((state) => state.user);
+  const [show, setShow] = useState(false);
 
   return (
     <>
@@ -11,7 +12,7 @@ function ProgramDetails({ setViewProgram, program }) {
         className="fixed w-full inset-0 z-75 overflow-hidden flex justify-center items-end md:items-center animated fadeIn faster"
         style={{ background: "rgba(0,0,0,.6)" }}
       >
-        <div className="shadow-xl modal-container bg-white text-black w-full md:w-3/5 lg:w-3/5 xl:w-1/3 mx-auto rounded-t-lg md:rounded-lg z-100 overflow-y-auto max-h-full">
+        <div className="shadow-xl modal-container bg-white overflow-y-scroll text-black w-full md:w-2/3 lg:w-2/3 xl:w-3/5 mx-auto rounded-t-lg md:rounded-lg z-100  max-h-full">
           <div className="modal-content text-left">
             <div className="flex w-full flex-row-reverse">
               <div
@@ -42,7 +43,26 @@ function ProgramDetails({ setViewProgram, program }) {
               <div className="text-left font-semibold pt-2 pb-1 text-[#184061]">
                 About
               </div>
-              <div className=" line-clamp-6 ">{program?.description}</div>
+              {(show && (
+                <div className=" line-clamp-none  ">{program?.description}</div>
+              )) || (
+                <div className=" line-clamp-6  ">{program?.description}</div>
+              )}
+              {(show && (
+                <div
+                  className="text-right text-sm text-blue-600 cursor-pointer"
+                  onClick={() => setShow(!show)}
+                >
+                  Show Less
+                </div>
+              )) || (
+                <div
+                  className="text-right text-sm text-blue-600 cursor-pointer"
+                  onClick={() => setShow(!show)}
+                >
+                  Show more
+                </div>
+              )}
               <div className="text-left font-semibold pt-2 pb-1 text-[#184061]">
                 Cost
               </div>
@@ -59,11 +79,15 @@ function ProgramDetails({ setViewProgram, program }) {
               <div className="text-left font-semibold pt-2 pb-1 text-[#184061]">
                 Program Intakes
               </div>
-              <div className=" text-sm pt-2">{program?.intakes}</div>
+              <div className=" flex space-x-2">
+                {program?.intakes?.map((intake) => (
+                  <div className=" text-sm   capitalize pt-2">{intake}</div>
+                ))}
+              </div>
               <div className="text-left font-semibold pt-2 pb-1 text-[#184061]">
                 Program Level
               </div>
-              <div className=" text-sm pt-2">{program?.level}</div>
+              <div className=" text-sm capitalize pt-2">{program?.level}</div>
               {/* <div className=" text-lg">1-Year Post-Secondary Certificate</div>
               <div className=" text-sm pt-2">Minimum GPA</div>
               <div className=" text-lg">50.0%</div> */}

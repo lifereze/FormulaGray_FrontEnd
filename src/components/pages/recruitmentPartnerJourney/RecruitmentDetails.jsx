@@ -38,7 +38,7 @@ function RecruitmentDetails() {
     const getStudentsFrom =(students)=>{
         const countries=[];
         students.map((student)=>{
-            countries.push(student.value);
+            countries.push(student.label);
         })
         setStudentsFrom(countries)
 
@@ -126,7 +126,7 @@ classNamePrefix="select"
             </div>
             </div>
             <div className=' mt-3'>
-<div className=' text-sm text-left py-1 text-gray-700 font-medium'>.How much do you charge students/services?</div>
+<div className=' text-sm text-left py-1 text-gray-700 font-medium'>.How much do you charge students/services?($USD)</div>
 <div className=''>
 <input
                       type="number"
@@ -135,7 +135,7 @@ classNamePrefix="select"
                       value={averageCharge}
                       onChange={(e)=>onChangeHandler(e)}
                       autoComplete="given-name"
-                      placeholder="Charge per student"
+                      placeholder="Charge per student in $USD"
                       className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                     />
 </div>

@@ -65,7 +65,7 @@ function School() {
  style={{height:'450px'}} className=' w-full ' />
         <div className='absolute  inset-0 bg-black opacity-70'>
         <div className=' flex space-x-6 items-center flex-wrap pt-8 pb-8 px-20'>
-            <img src={Logo} className=" w-40 object-cover h-20" />
+            {/* <img src={Logo} className=" w-40 object-cover h-20" /> */}
             <div className=''>
             <div className=' text-4xl font-semibold text-white'>{schoolInfo.name} - {schoolInfo.city}</div>
             <div className=' flex space-x-2 text-sm pt-2'>
@@ -74,8 +74,8 @@ function School() {
 <div className=''>{schoolInfo.street}</div>
                 </div>
                 <div className='flex items-center space-x-1  text-gray-400  '>
-                    <IoLocationSharp className=' text-lg'/>
-<div className=''>Off Sutton Way</div>
+                    {/* <IoLocationSharp className=' text-lg'/>
+<div className=''>Off Sutton Way</div> */}
                 </div>
             </div>
             </div>
