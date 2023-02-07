@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import { GoLocation } from "react-icons/go";
+import { FiEdit2 } from "react-icons/fi";
 import { Link } from "react-router-dom";
-import { AiOutlineArrowRight } from "react-icons/ai";
+import { AiOutlineArrowRight, AiFillDelete } from "react-icons/ai";
 import ProgramDetails from "../../modals/programDetails";
-import { studentCreateApplication } from "../../../data/api/authenticatedRequests";
+import {
+  studentCreateApplication,
+  deleteProgram,
+} from "../../../data/api/authenticatedRequests";
 import { userStore } from "../../../stores";
 import Spinner from "../../utils/BlueSpinner";
 function ProgramCard({ program }) {
@@ -15,14 +19,48 @@ function ProgramCard({ program }) {
     setLoading(true);
     const res = await studentCreateApplication({ programmeId: program._id });
 
-    console.log("Applicaation response :", res);
+    console.log("Application response :", res);
     setLoading(false);
+  };
+  const delete_program = async () => {
+    try {
+      const confirmer = window.confirm(
+        "Are you sure you want to delete this Program? You cannot undo this action."
+      );
+      if (confirmer) {
+        const res = await deleteProgram(program._id);
+
+        console.log(res);
+        if (res && res.status == 200) {
+          window.location.reload();
+        }
+      }
+    } catch (error) {}
   };
   return (
     <div className="p-2 border text-left mb-4 md:col-span-5 col-span-10 bg-white shadow-lg rounded-lg ">
-      <div className=" text-[#184061] font-semibold capitalize">
-        {program?.title}
+      <div className=" flex items-center space-x-2">
+        <div className=" text-[#184061] font-semibold  flex-grow capitalize">
+          {program?.title}
+        </div>
+        {user?.role == "admin" && (
+          <div className=" flex items-center space-x-2">
+            <Link
+              to={`/programs/edit/${program._id}`}
+              className=" p-2 cursor-pointer rounded-full hover:bg-gray-200"
+            >
+              <FiEdit2 className="" />
+            </Link>
+            <div
+              className=" p-2 cursor-pointer text-red-500 rounded-full hover:bg-gray-200"
+              onClick={delete_program}
+            >
+              <AiFillDelete className=" text-xl" />
+            </div>
+          </div>
+        )}
       </div>
+
       <div className=" flex  justify-between items-center py-1">
         <div className=" w-1/2 ">
           <div className=" text-sm text-gray-500">School</div>

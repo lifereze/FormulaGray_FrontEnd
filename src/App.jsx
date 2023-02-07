@@ -24,6 +24,7 @@ import { Visa } from "./components/dashboard/Visa";
 import { AddStudent } from "./components/dashboard/students/AddStudent";
 import { AddSchool } from "./components/dashboard/schools/AddSchool";
 import { AddProgram } from "./components/dashboard/programs/AddProgram";
+import { EditProgram } from "./components/dashboard/programs/EditProgram";
 import { EditStudent } from "./components/dashboard/students/EditStudent";
 import { ViewEditStudent } from "./components/dashboard/ViewEditStudent";
 import { Countdown } from "./components/countdown/Countdown";
@@ -53,6 +54,7 @@ function App() {
           <Route path="/partners" element={<Partners />} />
           <Route path="/programs" element={<Programs />} />
           <Route path="/programs/:id" element={<ApplyStudents />} />
+          <Route path="/programs/edit/:id" element={<EditProgram />} />
           <Route path="/students" element={<Students />} />
           <Route path="/adminStudents" element={<AdminStudents />} />
           <Route path="/student/edit/:id" element={<EditStudent />} />

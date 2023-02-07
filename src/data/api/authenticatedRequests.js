@@ -178,6 +178,14 @@ export const getSpecificProgram = async (id) => {
       return error.response;
     });
 };
+export const editProgram = async (data, id) => {
+  return await api
+    .patch(`/programme/edit/${id}`, data)
+    .then((response) => response)
+    .catch((error) => {
+      return error.response;
+    });
+};
 export const getSpecificSchool = async (id) => {
   return await api
     .get(`/school/get/${id}`)
@@ -197,6 +205,22 @@ export const getSchoolPrograms = async (id) => {
 export const deleteStudent = async (id) => {
   return await api
     .delete(`/student/delete/${id}`)
+    .then((response) => response)
+    .catch((error) => {
+      return error.response;
+    });
+};
+export const deleteProgram = async (id) => {
+  return await api
+    .delete(`/programme/delete/${id}`)
+    .then((response) => response)
+    .catch((error) => {
+      return error.response;
+    });
+};
+export const deleteSchool = async (id) => {
+  return await api
+    .delete(`/school/delete/${id}`)
     .then((response) => response)
     .catch((error) => {
       return error.response;
