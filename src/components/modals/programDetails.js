@@ -29,13 +29,13 @@ function ProgramDetails({ setViewProgram, program }) {
               <div className=" flex justify-between">
                 <div className=" w-1/2 ">
                   <div className=" text-sm text-gray-500">School</div>
-                  <div className="line-clamp-1 ">University of Toronto</div>
+                  <div className="line-clamp-1 ">{program?.schoolId?.name}</div>
                 </div>
                 <div className=" w-1/2">
                   <div className=" text-sm  text-gray-500">Location</div>
                   <div className="flex space-x-1  items-center">
                     <div className=" line-clamp-1">
-                      Ellesmere Port, North West, GB
+                      {program?.schoolId?.city}, {program?.schoolId?.country}
                     </div>
                   </div>
                 </div>

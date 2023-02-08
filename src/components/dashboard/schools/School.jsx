@@ -117,7 +117,7 @@ function School() {
 </div>
 <div className=' flex  flex-col justify-center bg-[#F8F0E7] rounded-md py-2 px-12 shadow-lg items-center'>
     <div className=''><AiOutlineRead className='  text-6xl' /></div>
-    <div className='font-semibold text-2xl'>{schoolInfo?.programmeIds?.length}</div>
+    <div className='font-semibold text-2xl'>{programs?.length}</div>
     <div className=' text-l '>Programs</div>
  
 

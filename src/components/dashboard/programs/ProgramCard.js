@@ -65,12 +65,13 @@ function ProgramCard({ program }) {
         <div className=" w-1/2 ">
           <div className=" text-sm text-gray-500">School</div>
           <div className=" ">{program?.schoolId?.name}</div>
-          {console.log(program)}
         </div>
         <div className=" w-1/2">
           <div className=" text-sm  text-gray-500">Location</div>
           <div className="flex space-x-1  items-center">
-            <div className="">Ellesmere Port, North West, GB</div>
+            <div className="">
+              {program?.schoolId?.city}, {program?.schoolId?.country}
+            </div>
           </div>
         </div>
       </div>
