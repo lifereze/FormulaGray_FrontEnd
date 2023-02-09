@@ -169,9 +169,11 @@ function School() {
 </div>
 <div className=' w-2/3 flex items-center space-x-2'>
 <div className=' mr-4  text-blue-600 p-2 cursor-pointer'>
-    <a href='/programs'>
-    View All
-    </a>
+ <Link to={`/school/programs/${id}`}>
+ View All
+ </Link>
+    
+    
 </div>
 {user&& user.role=='admin' &&<Link to={`/schools/${id}/addProgram`} className=" bg-white text-blue-600 flex rounded-md gap-x-2 cursor-pointer px-4 items-center
                      ">

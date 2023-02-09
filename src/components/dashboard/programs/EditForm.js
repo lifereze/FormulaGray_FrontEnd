@@ -14,18 +14,15 @@ export const EditForm = (props) => {
   const initialize = {
     title: "",
     description: "",
-    country: "",
-    applicationFee: "",
-    tuitionFees: "",
   };
   const { id } = useParams();
-  const [
-    { title, description, country, applicationFees, tuitionFees },
-    setProgram,
-  ] = useState(initialize);
+  const [{ title, description }, setProgram] = useState(initialize);
   const [isLoading, setIsLoading] = useState();
   const [intakesArray, setIntakesArray] = useState([]);
   const [level, setLevel] = useState("");
+  const [applicationFees, setApplicationFees] = useState(0);
+  const [tuitionFees, setTuitionFees] = useState(0);
+
   useEffect(() => {
     const getProgram = async () => {
       const res = await getSpecificProgram(id);
@@ -35,9 +32,9 @@ export const EditForm = (props) => {
           ...prevState,
           title: res.data[0].title,
           description: res.data[0].description,
-          applicationFees: res.data[0].applicationFees,
-          tuitionFees: res.data[0].tuitionFees,
         }));
+        setApplicationFees(res.data[0].applicationFees);
+        setTuitionFees(res.data[0].tuitionFees);
         setLevel(res.data[0].level);
         setIntakesArray(res.data[0].intakes);
       }
@@ -50,7 +47,6 @@ export const EditForm = (props) => {
       ...prevState,
       [input.target.name]: input.target.value,
     }));
-    console.log(title, description, country, applicationFees, tuitionFees);
   };
   const onSubmitHandler = async () => {
     setIsLoading(true);
@@ -58,7 +54,7 @@ export const EditForm = (props) => {
       {
         title,
         description,
-        country,
+
         applicationFees,
         tuitionFees,
         currency: "USD",
@@ -132,37 +128,31 @@ export const EditForm = (props) => {
                   </div>
 
                   <div className="col-span-6">
-                    <label
-                      htmlFor="applicationFees"
-                      className="block text-sm font-medium text-gray-700"
-                    >
+                    <label className="block text-sm font-medium text-gray-700">
                       Application Fee
                     </label>
                     <input
-                      onChange={(e) => handleChange(e)}
-                      type="number"
-                      name="applicationFees"
-                      id="applicationFees"
                       value={applicationFees}
-                      autoComplete="applicationFees"
+                      onChange={(e) => {
+                        setApplicationFees(e.target.value);
+                        console.log(e.target.value);
+                      }}
+                      type="number"
                       className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                     />
                   </div>
 
                   <div className="col-span-6">
-                    <label
-                      htmlFor="tuitionFees"
-                      className="block text-sm font-medium text-gray-700"
-                    >
+                    <label className="block text-sm font-medium text-gray-700">
                       Tuition Fee
                     </label>
                     <input
-                      onChange={(e) => handleChange(e)}
-                      type="number"
-                      name="tuitionFees"
-                      id="tuitionFees"
                       value={tuitionFees}
-                      autoComplete="tuitionFees"
+                      onChange={(e) => {
+                        setTuitionFees(e.target.value);
+                        console.log(e.target.value);
+                      }}
+                      type="number"
                       className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                     />
                   </div>

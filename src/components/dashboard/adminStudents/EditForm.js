@@ -345,7 +345,7 @@ export const EditForm = (props) => {
                     <input
                       onChange={(e) => handleChange(e)}
                       type="text"
-                      value={location.country}
+                      value={location?.country}
                       name="country"
                       id="country"
                       autoComplete="country"

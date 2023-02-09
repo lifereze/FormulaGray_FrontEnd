@@ -149,7 +149,7 @@ export const Table = () => {
                             "text-gray-900"
                           )}
                         >
-                          {student?.firstName || "Peter"}
+                          {student?.firstName}
                         </td>
                         <td
                           className={classNames(
@@ -157,7 +157,7 @@ export const Table = () => {
                             "text-gray-900"
                           )}
                         >
-                          {student?.lastName || "Mbiriri"}
+                          {student?.lastName}
                         </td>
                         <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
                           {student?.location?.country || "Nigeria"}

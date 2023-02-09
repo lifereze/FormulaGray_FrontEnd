@@ -30,7 +30,16 @@ export const EditForm = (props) => {
     features: [],
   };
   const [
-    { name, about, country, city, street, numberOfStudents, nationalities },
+    {
+      name,
+      about,
+      country,
+      images,
+      city,
+      street,
+      numberOfStudents,
+      nationalities,
+    },
     setSchool,
   ] = useState(initialize);
   const [isLoading, setIsLoading] = useState();
@@ -117,7 +126,7 @@ export const EditForm = (props) => {
             setFileLoading(false);
             setImageUrl(url);
 
-            setImagesArray((current) => [...current, url]);
+            setImagesArray([url]);
           });
         }
       );
@@ -162,7 +171,9 @@ export const EditForm = (props) => {
                     <UploadImage
                       uploadImage={uploadImage}
                       isImageLoading={isImageLoading}
-                      imageUrl={imageUrl}
+                      imageUrl={
+                        imageUrl ? imageUrl : images[0] ? images[0] : imageUrl
+                      }
                     />
                   </div>
                   <div className="col-span-6 ">

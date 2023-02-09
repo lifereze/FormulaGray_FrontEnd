@@ -17,6 +17,7 @@ import { AdminApplications } from "./components/dashboard/adminApplications/Admi
 import { EditSchool } from "./components/dashboard/schools/EditSchool";
 import { AdminStudents } from "./components/dashboard/adminStudents/Students";
 import { Programs } from "./components/dashboard/programs/Programs";
+import { SchoolPrograms } from "./components/dashboard/programs/SchoolPrograms";
 import { Students } from "./components/dashboard/students/Students";
 import { EditAdminStudent } from "./components/dashboard/adminStudents/EditStudent";
 import { Partners } from "./components/dashboard/recruitmentPartners/Partners";
@@ -53,6 +54,7 @@ function App() {
           <Route path="/adminApplications/:currentStage" element={<AdminApplications />} />
           <Route path="/partners" element={<Partners />} />
           <Route path="/programs" element={<Programs />} />
+          <Route path="/school/programs/:schoolId" element={<SchoolPrograms />} />
           <Route path="/programs/:id" element={<ApplyStudents />} />
           <Route path="/programs/edit/:id" element={<EditProgram />} />
           <Route path="/students" element={<Students />} />

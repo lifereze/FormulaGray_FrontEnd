@@ -32,6 +32,7 @@ export const SchoolsCard = ({institution}) => {
             className=" flex flex-col rounded-lg bg-white text-center "
           >
             <div>
+              {console.log(institution)}
               <img
                 className="mx-auto h-48 w-full flex-shrink-0 object-cover rounded-md"
                 src={institution?.images[0]&&institution.images[0]||'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYESPV6q_MWDslES3T3kQ7b0LKfuGdVT6kTw&usqp=CAU'}
