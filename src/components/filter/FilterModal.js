@@ -11,8 +11,8 @@ function FilterModal({ setFilterModal }) {
   const [intakes, setIntakes] = useState("");
   const [applicationFeesFloor, setApplicationFeesFloor] = useState(0);
   const [applicationFeesCeil, setApplicationFeesCeil] = useState(10000);
-  const [tiutionFeesFloor, settiutionFeesFloor] = useState(0);
-  const [tiutionFeesCeil, settiutionFeesCeil] = useState(10000);
+  const [tuitionFeesFloor, settuitionFeesFloor] = useState(0);
+  const [tuitionFeesCeil, settuitionFeesCeil] = useState(10000);
 
   const onSubmitHandler = () => {
     storeFilter({
@@ -20,8 +20,8 @@ function FilterModal({ setFilterModal }) {
       intakes: intakes,
       applicationFeesFloor: applicationFeesFloor,
       applicationFeesCeil: applicationFeesCeil,
-      tiutionFeesFloor: tiutionFeesFloor,
-      tiutionFeesCeil: tiutionFeesCeil,
+      tuitionFeesFloor: tuitionFeesFloor,
+      tuitionFeesCeil: tuitionFeesCeil,
     });
     setFilterModal(false);
   };
@@ -133,9 +133,9 @@ function FilterModal({ setFilterModal }) {
                       Lowest
                     </label>
                     <input
-                      onChange={(e) => settiutionFeesFloor(e.target.value)}
+                      onChange={(e) => settuitionFeesFloor(e.target.value)}
                       type="number"
-                      value={tiutionFeesFloor}
+                      value={tuitionFeesFloor}
                       name="application-fees"
                       id="application-fees"
                       autoComplete="application-fees"
@@ -150,10 +150,10 @@ function FilterModal({ setFilterModal }) {
                       Highest
                     </label>
                     <input
-                      onChange={(e) => settiutionFeesCeil(e.target.value)}
+                      onChange={(e) => settuitionFeesCeil(e.target.value)}
                       type="number"
                       name="application-fees"
-                      value={tiutionFeesCeil}
+                      value={tuitionFeesCeil}
                       id="application-fees"
                       autoComplete="application-fees"
                       className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
