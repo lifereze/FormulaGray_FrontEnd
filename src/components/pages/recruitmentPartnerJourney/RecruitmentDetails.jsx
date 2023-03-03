@@ -54,11 +54,10 @@ function RecruitmentDetails() {
     const onSubmitHandler=async ()=>{
         setLoading(true);
         const res=await updateRecruitmentDetails({'studentsFrom':studentsFrom,'studentsTo':studentsTo,'averageCharge':averageCharge,'averageStudentsAnnually':averageStudentsAnnually});
-        console.log(res)
+        
         setLoading(false);
         if(res.status==200){
           const data=await editUser({'onboarding':true})
-          console.log(data)
           if(data.status==200){
 
 navigate("/dashboard");

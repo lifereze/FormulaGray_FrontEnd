@@ -3,18 +3,15 @@ import { createApplication } from "../../../data/api/authenticatedRequests";
 import Spinner from "../../utils/Spinner";
 
 function TableCard(student, program) {
-  useEffect(() => {
-    console.log(student);
-  }, []);
+  useEffect(() => {}, []);
   const [isLoading, setIsLoading] = useState();
-  const [currentStudent,setCurentStudent]=useState(student)
+  const [currentStudent, setCurentStudent] = useState(student);
   const onApply = async (id) => {
     setIsLoading(true);
     const res = await createApplication({
       studentId: id,
       programmeId: program._id,
     });
-    console.log(res);
     setIsLoading(false);
   };
   return (
@@ -51,9 +48,7 @@ function TableCard(student, program) {
           <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
             {(student.applicationDetails.status && "Complete") || "Pending"}
           </td>
-          <td className="whitespace-nowrap py-4 px-3  text-left text-sm font-medium sm:pr-6">
-           
-          </td>
+          <td className="whitespace-nowrap py-4 px-3  text-left text-sm font-medium sm:pr-6"></td>
         </tr>
       )}
     </div>

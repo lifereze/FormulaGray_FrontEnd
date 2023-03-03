@@ -31,9 +31,8 @@ function School() {
         const getSchool=async ()=>{
             setLoading(true);
             const res=await getSpecificSchool(id);
-            console.log(res);
+            ;
             setSchoolInfo(res.data)
-            console.log('School',res.data)
             setLoading(false)
 
         }
@@ -43,7 +42,7 @@ function School() {
         const getPrograms=async ()=>{
             setLoadingPrograms(true);
             const res=await getSchoolPrograms(id);
-            console.log(res);
+            ;
             setPrograms(res.data)
             setLoadingPrograms(false)
 

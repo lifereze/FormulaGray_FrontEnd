@@ -4,6 +4,7 @@ import {GoLocation} from 'react-icons/go'
 import {AiOutlineArrowRight} from 'react-icons/ai'
 import { getAllPrograms,searchPrograms,filterPrograms } from "../../../data/api/authenticatedRequests";
 import PageLoader  from "../../utils/PageLoader";
+import Spinner from "../../utils/BlueSpinner";
 import { Link } from "react-router-dom";
 import { DownloadTableExcel } from "react-export-table-to-excel";
 import ProgramCard from "./ProgramCard";
@@ -145,14 +146,14 @@ const getPrograms=async ()=>{
   setLoading(true);
   if(search){
     const res = await searchPrograms({query:search});
-    console.log(res)
+    
     setLoading(false);
    return  setPrograms(res.data)
     
   }
   if(filter){
     const res = await filterPrograms(filter);
-    console.log(res)
+    
     setLoading(false);
    return  setPrograms(res.data) 
   }
@@ -160,7 +161,7 @@ const getPrograms=async ()=>{
     const res = await getAllPrograms();
     setPrograms(res.data)
     setLoading(false);
-    console.log(res)
+    
   }
   
  
@@ -170,16 +171,19 @@ getPrograms();
   },[search,filter])
   return (
     <div className="">
-      <div className=" flex flex-row-reverse mb-2">
+      <div className=" flex justify-between items-center mb-2">
+        <div className="  text-[#184061]">
+          {programs?.length} Programs Available
+        </div>
       <div>
           <DownloadTableExcel
             filename="programs table"
             sheet="programs"
             currentTableRef={tableRef.current}
           >
-            <div className="bg-white shadow-md rounded-md cursor-pointer px-2 py-1">
-              Generate report
-            </div>
+             <div className="bg-white shadow-md rounded-md text-[#184061] cursor-pointer px-2 py-1.5 ">
+                Generate report
+              </div>
           </DownloadTableExcel>
         </div> 
       </div>
@@ -187,7 +191,7 @@ getPrograms();
 
         {!loading&&programs&&programs.map((program) => (
         <ProgramCard program={program} />
-        ))||<PageLoader />}
+        ))||<Spinner />}
       
     </div>
     {!loading&&programs&&  <table

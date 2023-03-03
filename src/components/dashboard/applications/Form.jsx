@@ -71,7 +71,6 @@ const [statementName,setStatementName]=useState();
     reader.readAsDataURL(files[0]);
 
     reader.onload = (e) => {
-        console.log(e)
         if(input.target.name=='degree'){
          
           setDegreeLoading(true);
@@ -142,7 +141,6 @@ const [statementName,setStatementName]=useState();
       ...prevState,
       [input.target.name]: input.target.value,
     }));
-    console.log(firstName,lastName,country)
   };
   const onSubmitHandler= async ()=>{
     setIsLoading(true);
@@ -153,7 +151,7 @@ const res= await uploadStudent({
   state,streetAddress,zipCode,BACertificate:degreeUrl,BATranscript:transcriptUrl,resume:resumeUrl,recommendationLetter:recommendationUrl,statementOfPurpose:statementUrl
 })
 setIsLoading(false)
-console.log(res)
+
   }
   return (
     <div className="">

@@ -73,11 +73,8 @@ export const EditForm = (props) => {
 
   useEffect(() => {
     const getAStudent = async () => {
-      console.log(id);
       try {
         const res = await adminGetSpecificStudent(id);
-        console.log(res);
-
         setStudent(res.data ? res.data : initialize);
         setResumeUrl(res.data?.documents?.resume);
         setOrdinaryUrl(res.data?.student?.OlevelCertificate);
@@ -102,7 +99,6 @@ export const EditForm = (props) => {
     reader.readAsDataURL(files[0]);
 
     reader.onload = (e) => {
-      console.log(e);
       if (input.target.name == "degree") {
         setDegreeLoading(true);
       }
@@ -179,7 +175,6 @@ export const EditForm = (props) => {
       ...prevState,
       [input.target.name]: input.target.value,
     }));
-    console.log(firstName, lastName, location.country);
   };
   const onSubmitHandler = async () => {
     setIsLoading(true);
@@ -202,7 +197,6 @@ export const EditForm = (props) => {
       statementOfPurpose: statementUrl ? statementUrl : "",
     });
     setIsLoading(false);
-    console.log(res);
     if (res.status == 200) {
       navigate("/adminStudents");
     }

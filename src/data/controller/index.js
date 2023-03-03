@@ -8,8 +8,7 @@ import { refreshSession } from "../api/authenticatedRequests";
 
 export const signin = async (userDetails) => {
   const response = await signinUser(userDetails);
-  console.log("UserDetails in signin", userDetails);
-  console.log("Response in sign in", response);
+
   return _returnResponse(response);
 };
 
@@ -33,8 +32,6 @@ export const refresh = async () => {
 };
 
 const _returnResponse = (response) => {
-  console.log("RESPONSE", response);
-
   switch (true) {
     case response?.status === 200:
       return {

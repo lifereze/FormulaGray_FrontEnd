@@ -9,10 +9,10 @@ function ShowApplicationMenu({ id, setApplications, student }) {
   const ref = useRef();
   UseOnClickOutside(ref, () => setShowMenu(false));
   const editApplication = async (data) => {
-    console.log("hello");
+   
     try {
       const res = await updateApplication(id, data);
-      console.log(res);
+
       if (res && res.status === 200) {
         window.location.reload();
       }

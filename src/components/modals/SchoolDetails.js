@@ -27,10 +27,8 @@ function SchoolDetails({ setSchoolUpload }) {
       ...prevState,
       [input.target.name]: input.target.value,
     }));
-    console.log(nameOfSchool, country, country);
   };
   const onSubmitHandler = async () => {
-    console.log("hello");
     let templateParams = {
       nameOfSchool,
       country,
@@ -52,13 +50,11 @@ function SchoolDetails({ setSchoolUpload }) {
         (result) => {
           setIsLoading(false);
           toast("Details sent successfully!");
-          console.log(result.text);
           setSchoolUpload(false);
           setIsLoading(false);
         },
         (error) => {
           setIsLoading(false);
-          console.log(error.text);
           setSchoolUpload(false);
           setIsLoading(false);
         }

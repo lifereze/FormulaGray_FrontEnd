@@ -9,9 +9,7 @@ function ShowMenu({ docs }) {
   const [showMenu, setShowMenu] = useState(false);
   const ref = useRef();
   const editUser = async (data) => {
-    console.log("We are hee");
     const res = await updateUser(data);
-    console.log(res);
     if (res && res.status == 200) {
       window.location.reload();
     }
@@ -29,7 +27,6 @@ function ShowMenu({ docs }) {
         {showMenu && (
           <div className="   left-10  p-1 bg-[#184061] text-gray-200 rounded-md   text-center">
             <div className="font-bold">Files</div>
-            {console.log("These docs", docs)}
             {docs?.BACertificate && (
               <a
                 className=" flex items-center py-1 space-x-2 px-2 hover:bg-gray-200 cursor-pointer rounded-sm hover:text-[#184061]"

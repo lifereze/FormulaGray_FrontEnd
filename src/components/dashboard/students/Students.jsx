@@ -12,7 +12,6 @@ import { userStore } from "../../../stores";
 export const Students = () => {
   const [showApproval,setShowApproval]=useState(false)
    const user = userStore((state) => state.user);
-console.log(user)
   return (
     <div className=" grid grid-cols-12">
 

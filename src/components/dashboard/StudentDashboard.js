@@ -38,7 +38,6 @@ export const StudentDashboard = () => {
   useEffect(() => {
     const getUser = async () => {
       const res = await refreshSession();
-      console.log(res);
       setUser(res.data.user);
     };
 
@@ -47,7 +46,6 @@ export const StudentDashboard = () => {
   useEffect(() => {
     const getApplications = async () => {
       const res = await getStudentApplications();
-      console.log(res);
       if (res && res.status == 200) {
         setApplications(res.data);
       }
@@ -57,7 +55,6 @@ export const StudentDashboard = () => {
   useEffect(() => {
     const getApplications = async () => {
       const res = await getStudentApplications({ currentStage: "accepted" });
-      console.log(res);
       if (res && res.status == 200) {
         setAccepted(res.data);
       }
@@ -67,7 +64,6 @@ export const StudentDashboard = () => {
   useEffect(() => {
     const getApplications = async () => {
       const res = await getStudentApplications({ currentStage: "pending" });
-      console.log(res);
       if (res && res.status == 200) {
         setPending(res.data);
       }
@@ -77,7 +73,6 @@ export const StudentDashboard = () => {
   useEffect(() => {
     const getApplications = async () => {
       const res = await getStudentApplications({ currentStage: "rejected" });
-      console.log(res);
       if (res && res.status == 200) {
         setRejected(res.data);
       }
@@ -90,7 +85,6 @@ export const StudentDashboard = () => {
       const res = await getAllSchools();
       setSchools(res.data);
       setLoading(false);
-      console.log(schools);
     };
     fetchSchools();
   }, []);
@@ -98,7 +92,6 @@ export const StudentDashboard = () => {
     const getStudents = async () => {
       const res = await getAllStudents();
       setStudentCount(res?.data?.students?.length);
-      console.log(res);
     };
     getStudents();
   }, []);

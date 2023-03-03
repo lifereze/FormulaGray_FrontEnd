@@ -36,7 +36,6 @@ export const AdminDashboard = () => {
       try {
         const res = await adminGetAllApplications();
 
-        console.log("LOOK", res.data);
         setApplications(res?.data?.length);
       } catch (error) {
         console.log(error);
@@ -49,7 +48,6 @@ export const AdminDashboard = () => {
       try {
         const res = await adminGetAllApplications({ currentStage: "accepted" });
 
-        console.log("LOOK", res.data);
         setAcceptedApplications(res?.data?.length);
       } catch (error) {
         console.log(error);
@@ -62,7 +60,6 @@ export const AdminDashboard = () => {
       try {
         const res = await adminGetAllApplications({ currentStage: "rejected" });
 
-        console.log("LOOK", res.data);
         setRejectedApplications(res?.data?.length);
       } catch (error) {
         console.log(error);
@@ -73,7 +70,6 @@ export const AdminDashboard = () => {
   useEffect(() => {
     const getUser = async () => {
       const res = await refreshSession();
-      console.log(res);
       setUser(res.data.user);
     };
 
@@ -85,7 +81,6 @@ export const AdminDashboard = () => {
       const res = await getAllSchools();
       setSchools(res.data);
       setLoading(false);
-      console.log(schools);
     };
     fetchSchools();
   }, []);
@@ -95,7 +90,6 @@ export const AdminDashboard = () => {
         role: "student",
       });
       setStudentCount(res?.data?.length);
-      console.log("students", res);
     };
     getStudents();
   }, []);
@@ -198,7 +192,7 @@ export const AdminDashboard = () => {
                   </div>
                 </div>
 
-                <div className="grid  gap-x-4 gap-y-3 md:px-10 px-4 m-6 pb-20 grid-cols-2 md:grid-cols-4">
+                <div className="grid  gap-x-4 gap-y-3 md:px-10 px-4 m-6 pb-20 grid-cols-1 md:grid-cols-3">
                   {!loading &&
                     schools &&
                     schools.map((institution) => (

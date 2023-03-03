@@ -66,13 +66,13 @@ export const Navbar = () => {
   useEffect(()=>{
    const getUser= async ()=>{
       const res=await refreshSession();
-      console.log(res)
+      
       setUser(res.data.user)
     
     }
    
     getUser();
-  console.log(user)
+
       },[])
   return (
     <div className="relative bg-gray-50">

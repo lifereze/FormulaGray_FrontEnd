@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Navbar } from "../../landingPage/Navbar";
+import Banner from "../../dashboard/Banner";
+import SideBar from "../../dashboard/SideBar";
 import { Steps } from "../../Steps";
 import { ContactInformation } from "./ContactInformationForm";
 import BusinessInformationForm from "./BusinessInformationForm";
@@ -20,7 +22,6 @@ export const RecruitmentPartnerRegister = () => {
       try {
         setLoading(true);
         const res = await refreshSession();
-        console.log(res);
         if (res && res.status !== 200) {
           setLoading(false);
           return navigate("/signin");
@@ -36,25 +37,34 @@ export const RecruitmentPartnerRegister = () => {
   }, []);
   return (
     <div>
-      <Navbar />
-      <Steps />
-      {loading && <Spinner />}
-      {!loading && (
-        <div className=" min-h-screen">
-          <div className=" flex flex-row-reverse mr-10">
-            {user?.onboarding && (
-              <Link to={"/dashboard"}>
-                <div className="p-1 cursor-pointer text-sm bg-white shadow-md rounded-md ">
-                  Back To Dashboard
-                </div>
-              </Link>
-            )}
-          </div>
-          {recruiter.step == "contact" && <ContactInformation />}
-          {recruiter.step == "business" && <BusinessInformationForm />}
-          {recruiter.step == "recruitment-details" && <RecruitmentDetails />}
+      <div className=" grid grid-cols-12">
+        <div className="md:col-span-2 hidden md:block h-screen overflow-y-hidden ">
+          <SideBar />
         </div>
-      )}
+        <div className="md:col-span-10 col-span-12 h-screen overflow-y-scroll w-full overflow-x-hidden">
+          <Banner />
+          <Steps />
+          {loading && <Spinner />}
+          {!loading && (
+            <div className=" min-h-screen">
+              <div className=" flex flex-row-reverse mr-10">
+                {user?.onboarding && (
+                  <Link to={"/dashboard"}>
+                    <div className="p-1 cursor-pointer text-sm bg-white shadow-md rounded-md ">
+                      Back To Dashboard
+                    </div>
+                  </Link>
+                )}
+              </div>
+              {recruiter.step == "contact" && <ContactInformation />}
+              {recruiter.step == "business" && <BusinessInformationForm />}
+              {recruiter.step == "recruitment-details" && (
+                <RecruitmentDetails />
+              )}
+            </div>
+          )}
+        </div>
+      </div>
     </div>
   );
 };

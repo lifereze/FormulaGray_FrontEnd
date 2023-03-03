@@ -13,7 +13,6 @@ function RecentApplications({ applications, setApplications }) {
       setApplications((prev) =>
         prev.filter((item) => item._id !== application._id)
       );
-      console.log(res);
       if (res && res.status == 200) {
         toast("Student deleted successfully!");
       }

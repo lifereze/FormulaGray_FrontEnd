@@ -9,9 +9,7 @@ function ShowMenu({ id }) {
   const [showMenu, setShowMenu] = useState(false);
   const ref = useRef();
   const editUser = async (data) => {
-    console.log("We are hee");
     const res = await updateUser(id, data);
-    console.log(res);
     if (res && res.status == 200) {
       window.location.reload();
     }

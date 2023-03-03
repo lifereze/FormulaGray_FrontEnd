@@ -113,7 +113,7 @@ export const Dashboard = () => {
   useEffect(()=>{
     const getUser= async ()=>{
        const res=await refreshSession();
-       console.log(res)
+       
        setUser(res.data.user)
      
      }
@@ -125,7 +125,6 @@ export const Dashboard = () => {
           try {
             const res = await getAllApplications();
     
-            console.log("LOOK", res.data);
             setApplications(res?.data?.applications?.length);
           } catch (error) {
             console.log(error);
@@ -138,7 +137,6 @@ export const Dashboard = () => {
           try {
             const res = await getAllApplications({ currentStage: "accepted" });
     
-            console.log("LOOK accepted", res.data);
             setAcceptedApplications(res?.data?.applications?.length);
           } catch (error) {
             console.log(error);
@@ -151,7 +149,6 @@ export const Dashboard = () => {
           try {
             const res = await getAllApplications({ currentStage: "rejected" });
     
-            console.log("LOOK rejected", res.data);
             setRejectedApplications(res?.data?.applications?.length);
           } catch (error) {
             console.log(error);
@@ -166,7 +163,6 @@ export const Dashboard = () => {
         const res=await getAllSchools();
         setSchools(res.data)
         setLoading(false)
-        console.log(schools);
         }
         fetchSchools();
           },[])
@@ -270,7 +266,7 @@ setStudentCount(res?.data?.students?.length)
                 <div className="text-black font-semibold text-lg mt-6">Featured Schools</div>
               </div>
               
-              <div className="grid  gap-x-4 gap-y-3 md:px-10 px-4 m-6 pb-20 grid-cols-2 md:grid-cols-4">
+              <div className="grid  gap-x-4 gap-y-3 md:px-10 px-4 m-6 pb-20 grid-cols-1 md:grid-cols-3">
                           {!loading&&schools&&schools.map((institution)=><SchoolsCard institution={institution}/>)}
                    
                       

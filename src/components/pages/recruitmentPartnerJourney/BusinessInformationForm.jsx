@@ -29,7 +29,6 @@ const [entity,setEntity]=useState('');
     const setRecruiter = useRecruiter((state) => state.storeRecruiter);
     const options = useMemo(() => countryList().getData(), [])
     useEffect(()=>{
-console.log(options)
     },[options])
     useEffect(()=>{
       setBusinessName(user?.business?.name)
@@ -85,7 +84,6 @@ console.log(options)
         reader.readAsDataURL(files[0]);
     
         reader.onload = (e) => {
-            console.log(e)
             setDocLoading(true);
           const uploadTask = firebaseUploadDoc(files[0]);
           uploadTask.on(
@@ -150,7 +148,7 @@ console.log(options)
             setLoading(true)
             const res=await updateBusinessDetails({'name':businessName,'country':country,'city':city,'streetAddress':streetAddress,'identityDocument':docUrl,'businessCertificate':imageUrl})
         setLoading(false)
-         console.log(res);
+         ;
          return setRecruiter({step:'recruitment-details'})
 
           }

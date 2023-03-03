@@ -33,11 +33,9 @@ export const Table = () => {
         if (search) {
           const res = await searchStudents({ query: search });
           setStudents(res.data);
-          console.log("Student data", res.data);
         } else {
           const res = await getAllRecruitmentPartners({ role: "student" });
           setStudents(res.data);
-          console.log("Student data", res.data);
         }
 
         setLoading(false);
@@ -56,7 +54,6 @@ export const Table = () => {
 
       const res = await adminDeleteStudent(student._id);
 
-      console.log(res);
       if (res && res.status == 200) {
         toast("Student deleted successfully!");
       }
@@ -72,7 +69,7 @@ export const Table = () => {
             sheet="applications"
             currentTableRef={tableRef.current}
           >
-            <div className="bg-white shadow-md rounded-md cursor-pointer px-2 py-1">
+            <div className="bg-white shadow-md rounded-md text-[#184061] cursor-pointer px-2 py-1.5 ">
               Generate report
             </div>
           </DownloadTableExcel>

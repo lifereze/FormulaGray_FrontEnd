@@ -28,7 +28,7 @@ export const Signin = () => {
     setInfo({ message: "", type: "" });
     setLoading(true);
     signin(userDetails).then((response) => {
-      console.log(response)
+     
       setLoading(false);
       setInfo({ message: response.message, type: response.status });
       if (response.status === "success"&& response.data.user.role=='recruitmentPartner') {

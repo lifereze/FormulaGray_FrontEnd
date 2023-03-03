@@ -29,7 +29,6 @@ export const Form = (props) => {
       ...prevState,
       [input.target.name]: input.target.value,
     }));
-    console.log(title, description, country, applicationFees, tuitionFees);
   };
   const onSubmitHandler = async () => {
     setIsLoading(true);
@@ -45,7 +44,6 @@ export const Form = (props) => {
       level,
     });
     setIsLoading(false);
-    console.log(res);
     if (res && res.status == 200) {
       toast("Program uploaded  successfully!");
       setProgram(initialize);

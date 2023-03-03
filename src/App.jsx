@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
 import { LandingPage } from "./components/landingPage/LandingPage";
 import { Signin } from "./components/auth/Signin";
 import { Signup } from "./components/auth/Signup";
@@ -33,6 +34,7 @@ import { RecruitmentPartnerRegister } from "./components/pages/recruitmentPartne
 import { VerifyEmail } from "./components/pages/VerifyEmail";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { DuplicateProgram } from "./components/dashboard/programs/DuplicateProgram";
 function App() {
   return (
     <div className=" bg-[#E6E9EF] text-black">
@@ -57,6 +59,7 @@ function App() {
           <Route path="/school/programs/:schoolId" element={<SchoolPrograms />} />
           <Route path="/programs/:id" element={<ApplyStudents />} />
           <Route path="/programs/edit/:id" element={<EditProgram />} />
+          <Route path="/programs/duplicate/:id" element={<DuplicateProgram />} />
           <Route path="/students" element={<Students />} />
           <Route path="/adminStudents" element={<AdminStudents />} />
           <Route path="/student/edit/:id" element={<EditStudent />} />

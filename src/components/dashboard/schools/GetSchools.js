@@ -21,7 +21,6 @@ function GetSchools() {
       }
 
       setLoading(false);
-      console.log(schools);
     };
     fetchSchools();
   }, [search]);

@@ -89,7 +89,6 @@ const [statementName,setStatementName]=useState();
     reader.readAsDataURL(files[0]);
 
     reader.onload = (e) => {
-        console.log(e)
         if(input.target.name=='degree'){
          
           setDegreeLoading(true);
@@ -185,8 +184,7 @@ const [statementName,setStatementName]=useState();
         getDownloadURL(uploadTask.snapshot.ref).then((url) => {
          
           
-          console.log(url)})})
-  console.log(acceptedFiles)
+          })})
 
    }
   
@@ -200,7 +198,6 @@ const [statementName,setStatementName]=useState();
       ...prevState,
       [input.target.name]: input.target.value,
     }));
-    console.log(firstName,lastName,country)
   };
   const onSubmitHandler= async ()=>{
     if(user?.approvalStatus!=='pending'){
@@ -222,7 +219,7 @@ const [statementName,setStatementName]=useState();
         toast(message);
       }
       setIsLoading(false)
-      console.log(res)
+      
     }
 else{
 setShowApproval(true)

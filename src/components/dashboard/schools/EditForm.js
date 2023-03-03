@@ -50,9 +50,7 @@ export const EditForm = (props) => {
   useEffect(() => {
     const getSchool = async () => {
       const res = await getSpecificSchool(id);
-      console.log(res);
       setSchool(res.data);
-      console.log("School", res.data);
     };
     getSchool();
   }, []);
@@ -61,17 +59,6 @@ export const EditForm = (props) => {
       ...prevState,
       [input.target.name]: input.target.value,
     }));
-    console.log(
-      name,
-      about,
-      country,
-      city,
-      street,
-      imagesArray,
-      featuresArray,
-      numberOfStudents,
-      nationalities
-    );
   };
   const onSubmitHandler = async () => {
     setIsLoading(true);
@@ -87,7 +74,6 @@ export const EditForm = (props) => {
       numberOfStudents,
     });
     setIsLoading(false);
-    console.log(res);
     if (res && res.status == 200) {
       toast("School edited  successfully!");
       setSchool(initialize);

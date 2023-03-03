@@ -3,7 +3,8 @@ import {
   adminGetAllApplications,
   adminDeleteApplication,
 } from "../../../data/api/authenticatedRequests";
-import PageLoader from "../../utils/PageLoader";
+
+import PageLoader from "../../loaders/PageLoader";
 import moment from "moment";
 import { AiOutlineDelete } from "react-icons/ai";
 import ShowApplicationMenu from "../../buttons/ShowApplicationMenu";
@@ -26,11 +27,9 @@ export const Table = () => {
           const res = await adminGetAllApplications({
             currentStage: currentStage,
           });
-          console.log("LOOK", res.data);
           setStudents(res.data);
         } else {
           const res = await adminGetAllApplications();
-          console.log("LOOK", res.data);
           setStudents(res.data);
         }
 
@@ -47,7 +46,6 @@ export const Table = () => {
       const res = await adminGetAllApplications({
         currentStage: e.target.value,
       });
-      console.log("LOOK", res.data);
       setStudents(res.data);
     } catch (error) {
       console.log(error);
@@ -81,7 +79,7 @@ export const Table = () => {
                 value={status}
                 onChange={(e) => handleChange(e)}
                 autoComplete="status"
-                className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                className="mt-1 block w-full rounded-md border text-[#184061] border-gray-300 bg-white  shadow-sm focus:border-indigo-500 focus:outline-none cursor-pointer focus:ring-indigo-500 sm:text-sm"
               >
                 <option value="">All Applications</option>
                 <option value="accepted">Accepted</option>
@@ -96,7 +94,7 @@ export const Table = () => {
               sheet="applications"
               currentTableRef={tableRef.current}
             >
-              <div className="bg-white shadow-md rounded-md cursor-pointer px-2 py-1">
+              <div className="bg-white shadow-md rounded-md text-[#184061] cursor-pointer px-2 py-1.5 ">
                 Generate report
               </div>
             </DownloadTableExcel>
@@ -165,7 +163,7 @@ export const Table = () => {
                   </tr>
                 </thead>
 
-                <tbody className="divide-y divide-gray-200 bg-white">
+                <tbody className="divide-y divide-gray-200  bg-white">
                   {!loading &&
                     students &&
                     students?.map((student) => (
@@ -211,6 +209,7 @@ export const Table = () => {
                       </tr>
                     ))}
                 </tbody>
+                {loading && <div className=" text-lg p-2">Loading</div>}
               </table>
             </div>
           </div>

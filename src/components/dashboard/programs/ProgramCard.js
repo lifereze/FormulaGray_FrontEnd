@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { GoLocation } from "react-icons/go";
 import { FiEdit2 } from "react-icons/fi";
 import { Link } from "react-router-dom";
-import { AiOutlineArrowRight, AiFillDelete } from "react-icons/ai";
+import { AiOutlineArrowRight, AiFillDelete, AiFillCopy } from "react-icons/ai";
 import ProgramDetails from "../../modals/programDetails";
 import {
   studentCreateApplication,
@@ -19,7 +19,6 @@ function ProgramCard({ program }) {
     setLoading(true);
     const res = await studentCreateApplication({ programmeId: program._id });
 
-    console.log("Application response :", res);
     setLoading(false);
   };
   const delete_program = async () => {
@@ -30,7 +29,6 @@ function ProgramCard({ program }) {
       if (confirmer) {
         const res = await deleteProgram(program._id);
 
-        console.log(res);
         if (res && res.status == 200) {
           window.location.reload();
         }
@@ -45,6 +43,12 @@ function ProgramCard({ program }) {
         </div>
         {user?.role == "admin" && (
           <div className=" flex items-center space-x-2">
+            <Link
+              to={`/programs/duplicate/${program._id}`}
+              className=" p-2 cursor-pointer rounded-full hover:bg-gray-200"
+            >
+              <AiFillCopy className="" />
+            </Link>
             <Link
               to={`/programs/edit/${program._id}`}
               className=" p-2 cursor-pointer rounded-full hover:bg-gray-200"

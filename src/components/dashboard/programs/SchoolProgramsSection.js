@@ -151,20 +151,17 @@ export const SchoolProgramsSection = () => {
       setLoading(true);
       if (search) {
         const res = await searchPrograms({ query: search });
-        console.log(res);
         setLoading(false);
         return setPrograms(res.data);
       }
       if (filter) {
         const res = await filterPrograms(filter);
-        console.log(res);
         setLoading(false);
         return setPrograms(res.data);
       } else {
         const res = await getSchoolPrograms(schoolId);
         setPrograms(res.data);
         setLoading(false);
-        console.log(res);
       }
     };
     getPrograms();

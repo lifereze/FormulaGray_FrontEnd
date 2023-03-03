@@ -61,7 +61,6 @@ export const Profile = () => {
     if (user?.email == email && user?.phone == phone) {
       const res = await editUser({ firstName: firstName, lastName: lastName });
       setLoading(false);
-      console.log(res);
       if (res.status == 200) {
         const updatedDetails = res.data.user;
         toast("Detailed updated successfully!");
@@ -84,7 +83,6 @@ export const Profile = () => {
         phone: phone,
       });
       setLoading(false);
-      console.log(res);
       if (res.status == 200) {
         const updatedDetails = res.data.user;
         storeUser({ ...user, updatedDetails });
@@ -106,7 +104,6 @@ export const Profile = () => {
         email: email,
       });
       setLoading(false);
-      console.log(res);
       if (res.status == 200) {
         const updatedDetails = res.data.user;
         storeUser({ ...user, updatedDetails });

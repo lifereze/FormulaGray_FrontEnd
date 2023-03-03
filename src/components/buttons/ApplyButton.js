@@ -12,13 +12,13 @@ function ApplyButton({ student, programId, setStudents }) {
   const [isLoading, setIsLoading] = useState();
   const onApply = async () => {
     setIsLoading(true);
-    console.log(programId);
+
     if (user?.role == "admin") {
       const res = await adminCreateApplication({
         studentId: student._id,
         programmeId: programId,
       });
-      console.log(res);
+   
       setIsLoading(false);
       if (res && res.status == 200) {
         toast("Application went through successfully!");
@@ -29,7 +29,7 @@ function ApplyButton({ student, programId, setStudents }) {
         studentId: student._id,
         programmeId: programId,
       });
-      console.log(res);
+     
       setIsLoading(false);
       if (res && res.status == 200) {
         toast("Application went through successfully!");

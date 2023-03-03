@@ -32,7 +32,6 @@ function FilterModal({ setFilterModal }) {
         className="fixed w-full inset-0 z-100 overflow-hidden flex justify-center items-end md:items-center animated fadeIn faster"
         style={{ background: "rgba(0,0,0,.6)" }}
       >
-        {console.log(countries)}
         <div className="shadow-xl modal-container bg-white text-black w-full md:w-3/5 lg:w-3/5 xl:w-1/3 mx-auto rounded-t-lg md:rounded-lg z-100 overflow-y-auto max-h-full">
           <div className="modal-content text-left">
             <div className="flex w-full justify-between ">

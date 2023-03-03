@@ -37,8 +37,8 @@ export const Navbar = () => {
 
 //   useEffect(async ()=>{
 // const res=await refreshSession();
-// console.log(res)
-// console.log('heello')
+// 
+
 
 //   },[])
   const user = userStore((state) => state.user);

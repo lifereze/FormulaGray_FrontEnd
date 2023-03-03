@@ -13,7 +13,7 @@ export const SchoolsCard = ({institution}) => {
       if (confirmer) {
         const res = await deleteSchool(institution._id);
 
-        console.log(res);
+        ;
         if (res && res.status == 200) {
           window.location.reload();
         }
@@ -22,7 +22,7 @@ export const SchoolsCard = ({institution}) => {
   };
   return (
     <div
-      className="bg-white shadow"
+      className="bg-white rounded-md shadow"
     >
       
         <a href={`/schools/${institution._id}`}>
@@ -32,7 +32,7 @@ export const SchoolsCard = ({institution}) => {
             className=" flex flex-col rounded-lg bg-white text-center "
           >
             <div>
-              {console.log(institution)}
+           
               <img
                 className="mx-auto h-48 w-full flex-shrink-0 object-cover rounded-md"
                 src={institution?.images[0]&&institution.images[0]||'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYESPV6q_MWDslES3T3kQ7b0LKfuGdVT6kTw&usqp=CAU'}

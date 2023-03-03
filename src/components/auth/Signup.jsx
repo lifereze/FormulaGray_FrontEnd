@@ -34,10 +34,10 @@ export const Signup = () => {
     setInfo({ message: "", type: "" });
     setLoading(true);
     signup(userDetails).then((response) => {
-      console.log("Response------", response);
+  
       setLoading(false);
       setInfo({ message: response.message, type: response.status });
-      console.log(response);
+    
       if (response.status === "success") {
         storeUser(response.data.user);
         send_email_verification_link({ email: userDetails.email }).then(

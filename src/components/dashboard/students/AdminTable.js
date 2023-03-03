@@ -33,13 +33,11 @@ export const AdminTable = () => {
         if (search) {
           const res = await searchStudents({ query: search });
           setStudents(res?.data ? res?.data : []);
-          console.log("Student data", res?.data);
         } else {
           const res = await getAllRecruitmentPartners({
             role: "student",
           });
           setStudents(res.data);
-          console.log("Student data", res.data);
         }
 
         setLoading(false);
@@ -58,7 +56,6 @@ export const AdminTable = () => {
 
       const res = await deleteStudent(student._id);
 
-      console.log(res);
       if (res && res.status == 200) {
         toast("Student deleted successfully!");
       }

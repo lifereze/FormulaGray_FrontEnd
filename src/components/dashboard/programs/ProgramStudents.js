@@ -29,7 +29,6 @@ function ProgramStudents() {
       studentId: id,
       programmeId: program._id,
     });
-    console.log(res);
     setIsLoading(false);
   };
   useEffect(() => {
@@ -37,7 +36,6 @@ function ProgramStudents() {
       setLoadingProgram(true);
       const res = await getSpecificProgram(id);
       setLoadingProgram(false);
-      console.log("program", res);
       setProgram(res.data[0]);
     };
     getProgram();
@@ -50,7 +48,6 @@ function ProgramStudents() {
           const res = await searchStudents({ query: search });
           setStudents(res.data);
           setLoading(false);
-          console.log("Students info", res);
         } catch (error) {
           console.log(error);
         }
@@ -60,7 +57,6 @@ function ProgramStudents() {
           const res = await getAllStudents();
           setStudents(res.data.students);
           setLoading(false);
-          console.log(res.data.students);
         } catch (error) {
           console.log(error);
         }
@@ -70,7 +66,6 @@ function ProgramStudents() {
           const res = await getAllRecruitmentPartners({ role: "student" });
           setStudents(res.data);
           setLoading(false);
-          console.log(res.data);
         } catch (error) {
           console.log(error);
         }

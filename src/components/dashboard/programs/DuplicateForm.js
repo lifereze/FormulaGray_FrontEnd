@@ -2,14 +2,14 @@ import React, { useState, useEffect, useMemo } from "react";
 import { useParams } from "react-router-dom";
 import Spinner from "../../utils/Spinner";
 import {
-  editProgram,
+  uploadProgram,
   getSpecificProgram,
 } from "../../../data/api/authenticatedRequests";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Select from "react-select";
-export const EditForm = (props) => {
+export const DuplicateForm = (props) => {
   const navigate = useNavigate();
   const initialize = {
     title: "",
@@ -22,7 +22,7 @@ export const EditForm = (props) => {
   const [level, setLevel] = useState("");
   const [applicationFees, setApplicationFees] = useState(0);
   const [tuitionFees, setTuitionFees] = useState(0);
-
+  const [school, setSchool] = useState();
   useEffect(() => {
     const getProgram = async () => {
       const res = await getSpecificProgram(id);
@@ -32,6 +32,7 @@ export const EditForm = (props) => {
           title: res.data[0].title,
           description: res.data[0].description,
         }));
+        setSchool(res.data[0].schoolId._id);
         setApplicationFees(res.data[0].applicationFees);
         setTuitionFees(res.data[0].tuitionFees);
         setLevel(res.data[0].level);
@@ -49,19 +50,18 @@ export const EditForm = (props) => {
   };
   const onSubmitHandler = async () => {
     setIsLoading(true);
-    const res = await editProgram(
-      {
-        title,
-        description,
+    const res = await uploadProgram({
+      title,
+      description,
 
-        applicationFees,
-        tuitionFees,
-        currency: "USD",
-        intakes: intakesArray,
-        level,
-      },
-      id
-    );
+      applicationFees,
+      tuitionFees,
+      schoolId: school,
+      currency: "USD",
+      intakes: intakesArray,
+      level,
+    });
+
     setIsLoading(false);
     if (res && res.status == 200) {
       toast("Program edited  successfully!");

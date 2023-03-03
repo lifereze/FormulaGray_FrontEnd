@@ -40,17 +40,6 @@ export const Form = (props) => {
       ...prevState,
       [input.target.name]: input.target.value,
     }));
-    console.log(
-      name,
-      about,
-      country,
-      city,
-      street,
-      imagesArray,
-      featuresArray,
-      numberOfStudents,
-      nationalities
-    );
   };
   const onSubmitHandler = async () => {
     setIsLoading(true);
@@ -66,7 +55,6 @@ export const Form = (props) => {
       numberOfStudents,
     });
     setIsLoading(false);
-    console.log(res);
     if (res && res.status == 200) {
       toast("School uploaded  successfully!");
       setSchool(initialize);

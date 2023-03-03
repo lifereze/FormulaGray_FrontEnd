@@ -15,11 +15,9 @@ export const Table = () => {
         setLoading(true);
         if (currentStage) {
           const res = await getAllApplications({ currentStage: currentStage });
-          console.log("LOOK", res.data.applications);
           setStudents(res.data.applications);
         } else {
           const res = await getAllApplications();
-          console.log("LOOK", res.data.applications);
           setStudents(res.data.applications);
         }
 
@@ -36,7 +34,7 @@ export const Table = () => {
       const res = await getAllApplications({
         currentStage: e.target.value,
       });
-      console.log("LOOK", res.data);
+
       setStudents(res.data.applications);
     } catch (error) {
       console.log(error);

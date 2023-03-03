@@ -58,7 +58,6 @@ export const logout = async () => {
     });
 };
 export const uploadSchool = async (data) => {
-  console.log(data);
   return await api
     .post("/school/create", data)
     .then((response) => response)

@@ -17,7 +17,7 @@ function Banner() {
     useEffect(()=>{
         const getUser= async ()=>{
            const res=await refreshSession();
-           console.log(res)
+           
            setUser(res.data.user)
          
          }
@@ -39,15 +39,15 @@ window.location.href = "/signin";
     
 <div className=' flex space-x-6 space-y-2 items-center'>
 {  user?.role&&  <div className=" cursor-pointer hidden md:block">
-<GiHamburgerMenu className=" text-2xl" onClick={()=>setShowLogout(!showLogout)} />
-{showLogout&&<div ref={ref} onClick={()=>LogOut()} className="mt-2 bg-white p-2 cursor-pointer flex items-center  space-x-2 ">
+{/* <GiHamburgerMenu className=" text-2xl" onClick={()=>setShowLogout(!showLogout)} /> */}
+<div ref={ref} onClick={()=>LogOut()} className="mt-2  text-red-500 font-semibold  p-2 cursor-pointer flex items-center  space-x-2 ">
 <div className="">
   <AiOutlineLogout className="" />
 </div>
 <div className="">
   Logout
 </div>
-</div>}
+</div>
 </div>}
 </div>
 <div className=" text-black block capitalize font-semibold text-lg">Dashboard User</div>

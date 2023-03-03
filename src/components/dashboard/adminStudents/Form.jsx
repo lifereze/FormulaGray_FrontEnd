@@ -86,7 +86,6 @@ const uploadDoc = (input) => {
   reader.readAsDataURL(files[0]);
 
   reader.onload = (e) => {
-      console.log(e)
       if(input.target.name=='degree'){
        
         setDegreeLoading(true);
@@ -182,8 +181,7 @@ const uploadDoc = (input) => {
         getDownloadURL(uploadTask.snapshot.ref).then((url) => {
          
           
-          console.log(url)})})
-  console.log(acceptedFiles)
+        })})
 
    }
   
@@ -197,7 +195,6 @@ const uploadDoc = (input) => {
       ...prevState,
       [input.target.name]: input.target.value,
     }));
-    console.log(firstName,lastName,country)
   };
   const onSubmitHandler= async ()=>{
     setIsLoading(true);
@@ -211,7 +208,7 @@ if(res.status==200){
   navigate('/adminStudents')
 }
 setIsLoading(false)
-console.log(res)
+
   }
   return (
     <div className="">

@@ -65,11 +65,8 @@ export const EditForm = (props) => {
   const [statementName, setStatementName] = useState();
   useEffect(() => {
     const getAStudent = async () => {
-      console.log(id);
       try {
         const res = await getStudent(id);
-        console.log(res);
-
         setStudent(res.data?.student);
         setResumeUrl(res.data?.student?.resume);
         setDegreeUrl(res.data?.student?.BACertificate);
@@ -93,7 +90,6 @@ export const EditForm = (props) => {
     reader.readAsDataURL(files[0]);
 
     reader.onload = (e) => {
-      console.log(e);
       if (input.target.name == "degree") {
         setDegreeLoading(true);
       }
@@ -162,7 +158,6 @@ export const EditForm = (props) => {
       ...prevState,
       [input.target.name]: input.target.value,
     }));
-    console.log(firstName, lastName, location.country);
   };
   const onSubmitHandler = async () => {
     setIsLoading(true);
@@ -186,7 +181,6 @@ export const EditForm = (props) => {
       id
     );
     setIsLoading(false);
-    console.log(res);
     if (res.status == 200) {
       navigate("/students");
     }

@@ -45,10 +45,8 @@ const [isLoading,setIsLoading]=useState();
       ...prevState,
       [input.target.name]: input.target.value,
     }));
-    console.log(firstName,lastName,country)
   };
   const onSubmitHandler= async ()=>{
-    console.log('hello')
     let templateParams={
       firstName,
       lastName,
@@ -74,7 +72,6 @@ const [isLoading,setIsLoading]=useState();
       (result) => {
         setIsLoading(false);
         toast("Details sent successfully!");
-        console.log(result.text);
       },
       (error) => {
         setIsLoading(false);

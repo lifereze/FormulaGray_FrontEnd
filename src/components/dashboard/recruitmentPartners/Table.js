@@ -25,7 +25,6 @@ export const Table = () => {
         });
         setPartners(res.data);
         setLoading(false);
-        console.log(res.data);
       } catch (error) {
         console.log(error);
       }
@@ -39,7 +38,6 @@ export const Table = () => {
     if (confirmer) {
       const res = await deleteUser(partner._id);
       setPartners((prev) => prev.filter((item) => item._id !== partner._id));
-      console.log(res);
       if (res && res.status == 200) {
         toast("Partner deleted successfully!");
       }
@@ -50,7 +48,7 @@ export const Table = () => {
     <div className="px-4 sm:px-6  mr-2 no-scrollbar ">
       <div className="flex items-center justify-between">
         <div className="">
-          <h1 className="md:text-xl font-bold text-blue-500">partners</h1>
+          <h1 className="md:text-xl font-bold text-blue-500">Partners</h1>
         </div>
         <div>
           <DownloadTableExcel
@@ -58,7 +56,7 @@ export const Table = () => {
             sheet="applications"
             currentTableRef={tableRef.current}
           >
-            <div className="bg-white shadow-md rounded-md cursor-pointer px-2 py-1">
+            <div className="bg-white shadow-md rounded-md text-[#184061] cursor-pointer px-2 py-1.5 ">
               Generate report
             </div>
           </DownloadTableExcel>

@@ -1,48 +1,47 @@
 import React, { useState, useEffect, useRef } from "react";
 import MusicLoader from "../loaders/MusicLoader";
 import { AiFillFilePdf } from "react-icons/ai";
-import { firebaseUploadImg,firebaseUploadDoc } from "../../data/api/upload";
+import { firebaseUploadImg, firebaseUploadDoc } from "../../data/api/upload";
 import { getDownloadURL } from "firebase/storage";
 function FileUpload({ setDocUrl, docUrl, title, name }) {
-    const [docName,setDocName]=useState();
-    const [isDocLoading, setDocLoading] = useState();
-    const uploadDoc = (input) => {
-        const files = input.target.files || [];
-        setDocName(input.target.files[0].name)
-        if (files.length === 0) {
-          return false;
-        }
-        const reader = new FileReader();
-    
-        reader.readAsDataURL(files[0]);
-    
-        reader.onload = (e) => {
-            console.log(e)
-            setDocLoading(true);
-          const uploadTask = firebaseUploadDoc(files[0]);
-          uploadTask.on(
-            "state_changed",
-            (snapshot) => {
-              const prog = Math.round(
-                (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-              );
-            },
-            (err) => {},
-            () => {
-              getDownloadURL(uploadTask.snapshot.ref).then((url) => {
-                setDocLoading(false);
-                setDocUrl(url);
-              });
-            }
+  const [docName, setDocName] = useState();
+  const [isDocLoading, setDocLoading] = useState();
+  const uploadDoc = (input) => {
+    const files = input.target.files || [];
+    setDocName(input.target.files[0].name);
+    if (files.length === 0) {
+      return false;
+    }
+    const reader = new FileReader();
+
+    reader.readAsDataURL(files[0]);
+
+    reader.onload = (e) => {
+      setDocLoading(true);
+      const uploadTask = firebaseUploadDoc(files[0]);
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          const prog = Math.round(
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
           );
-    
-          return true;
-        };
-    
-        reader.onprogress = function (e) {
-          //Loader
-        };
-      };
+        },
+        (err) => {},
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+            setDocLoading(false);
+            setDocUrl(url);
+          });
+        }
+      );
+
+      return true;
+    };
+
+    reader.onprogress = function (e) {
+      //Loader
+    };
+  };
   const fileRef = useRef(null);
 
   const thumbnailUpload = () => {
