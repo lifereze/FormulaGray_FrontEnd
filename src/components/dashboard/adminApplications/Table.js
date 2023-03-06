@@ -70,6 +70,7 @@ export const Table = () => {
         <div className="">
           <h1 className="md:text-xl font-bold text-blue-500">Applications</h1>
         </div>
+        {console.log(students)}
         <div className="flex space-x-4 items-center">
           <div className="">
             <div className="col-span-6 sm:col-span-3">
@@ -139,6 +140,12 @@ export const Table = () => {
                       scope="col"
                       className="min-w-[12rem] py-3.5 pr-3 text-left text-sm font-semibold text-gray-900"
                     >
+                      Recruitment Partner
+                    </th>
+                    <th
+                      scope="col"
+                      className="min-w-[12rem] py-3.5 pr-3 text-left text-sm font-semibold text-gray-900"
+                    >
                       Program
                     </th>
                     <th
@@ -179,6 +186,9 @@ export const Table = () => {
                         </td>
                         <td className="whitespace-nowrap py-4 px-3 text-left text-sm font-medium">
                           {student?.studentId?.lastName}
+                        </td>
+                        <td className="whitespace-nowrap py-4 px-3 text-left text-sm font-medium">
+                          {student?.recruitmentPartnerId?.email}
                         </td>
                         <td className="whitespace-nowrap capitalize px-3 text-left py-4 text-sm text-blue-500">
                           {student?.programmeId?.title}

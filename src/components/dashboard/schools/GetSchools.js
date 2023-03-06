@@ -4,11 +4,12 @@ import {
   getAllSchools,
   searchSchools,
 } from "../../../data/api/authenticatedRequests";
-import { searchStore } from "../../../stores/index";
+import { searchStore, schoolsStore } from "../../../stores/index";
 function GetSchools() {
-  const [schools, setSchools] = useState();
   const [loading, setLoading] = useState(false);
   const search = searchStore((state) => state.search);
+  const schools = schoolsStore((state) => state.schools);
+  const setSchools = schoolsStore((state) => state.storeSchools);
   useEffect(() => {
     const fetchSchools = async () => {
       setLoading(true);
@@ -22,8 +23,10 @@ function GetSchools() {
 
       setLoading(false);
     };
-    fetchSchools();
-  }, [search]);
+    if (!schools) {
+      fetchSchools();
+    }
+  }, [search, schools]);
   return (
     <div className="col-span-10">
       <div className="grid  gap-3  md:grid-cols-3 grid-cols-1">

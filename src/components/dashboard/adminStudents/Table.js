@@ -10,15 +10,16 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { DownloadTableExcel } from "react-export-table-to-excel";
 import ShowFiles from "../../buttons/showFiles";
-import { searchStore } from "../../../stores/index";
+import { searchStore, studentsStore } from "../../../stores/index";
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 export const Table = () => {
   const tableRef = useRef(null);
-  const [students, setStudents] = useState();
   const search = searchStore((state) => state.search);
+  const students = studentsStore((state) => state.students);
+  const setStudents = studentsStore((state) => state.storeStudents);
   const [items, setItems] = useState([
     "Bachelors",
     "Doctorate",
@@ -43,7 +44,9 @@ export const Table = () => {
         console.log(error);
       }
     };
-    getStudents();
+    if (!students) {
+      getStudents();
+    }
   }, [search]);
   const deleteOneStudent = async (student) => {
     const confirmer = window.confirm(

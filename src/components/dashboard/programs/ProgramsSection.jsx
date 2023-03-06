@@ -8,7 +8,8 @@ import Spinner from "../../utils/BlueSpinner";
 import { Link } from "react-router-dom";
 import { DownloadTableExcel } from "react-export-table-to-excel";
 import ProgramCard from "./ProgramCard";
-import { searchStore,filterStore } from "../../../stores/index";
+import CardLoader from "../../utils/CardLoader";
+import { searchStore,filterStore,programsStore } from "../../../stores/index";
 const programss = [
   {
     name: "Design, Surveying and Planning for Construction",
@@ -130,10 +131,12 @@ function classNames(...classes) {
 
 export const ProgramsSection = () => {
   const tableRef=useRef(null);
-  const [programs,setPrograms]=useState();
   const [loading,setLoading]=useState();
   const search = searchStore((state) => state.search);
   const filter = filterStore((state) => state.filter);
+  // const programs = programsStore((state) => state.programs);
+  // const setPrograms = programsStore((state) => state.storePrograms);
+  const [programs,setPrograms]=useState()
   const [items, setItems] = useState([
     "Bachelors",
     "Doctorate",
@@ -143,28 +146,31 @@ export const ProgramsSection = () => {
   
   useEffect(()=>{
 const getPrograms=async ()=>{
-  setLoading(true);
+  
   if(search){
+    setLoading(true);
     const res = await searchPrograms({query:search});
-    
     setLoading(false);
    return  setPrograms(res.data)
     
   }
   if(filter){
+    setLoading(true);
     const res = await filterPrograms(filter);
-    
+     
     setLoading(false);
    return  setPrograms(res.data) 
   }
-  else{
+  // if((!programs&&!search&&!filter)||programs.length==0){
+    else{
+    setLoading(true);
     const res = await getAllPrograms();
     setPrograms(res.data)
     setLoading(false);
     
   }
   
- 
+ return setLoading(false);
  
 }
 getPrograms();
@@ -173,7 +179,7 @@ getPrograms();
     <div className="">
       <div className=" flex justify-between items-center mb-2">
         <div className="  text-[#184061]">
-          {programs?.length} Programs Available
+          {/* {programs?.length} Programs Available */}
         </div>
       <div>
           <DownloadTableExcel
@@ -189,9 +195,10 @@ getPrograms();
       </div>
     <div className="grid grid-cols-10 gap-4">
 
-        {!loading&&programs&&programs.map((program) => (
+         {!loading&&programs&&programs.map((program) => (
         <ProgramCard program={program} />
-        ))||<Spinner />}
+        ))||
+        <CardLoader />}
       
     </div>
     {!loading&&programs&&  <table

@@ -7,7 +7,7 @@ import Info from "./cards/Info";
 import { HiDocumentText } from "react-icons/hi";
 import { BsFillCheckSquareFill } from "react-icons/bs";
 import { MdCancelPresentation, MdCastForEducation } from "react-icons/md";
-import { userStore } from "../../stores";
+import { userStore, schoolsStore, studentsStore } from "../../stores";
 import { getAllRecruitmentPartners } from "../../data/api/authenticatedRequests";
 import { adminGetAllApplications } from "../../data/api/authenticatedRequests";
 import StudentUpload from "../modals/StudentUpload";
@@ -21,10 +21,12 @@ import TopPrograms from "../featuredComponents/TopPrograms";
 export const AdminDashboard = () => {
   const user = userStore((state) => state.user);
   const setUser = userStore((state) => state.storeUser);
-
+  const schools = schoolsStore((state) => state.schools);
+  const setSchools = schoolsStore((state) => state.storeSchools);
+  const students = studentsStore((state) => state.students);
+  const setStudents = studentsStore((state) => state.storeStudents);
   const [studentUpload, setStudentUpload] = useState(false);
   const [studentCount, setStudentCount] = useState();
-  const [schools, setSchools] = useState();
 
   const [loading, setLoading] = useState(false);
   const [applications, setApplications] = useState();
@@ -82,16 +84,20 @@ export const AdminDashboard = () => {
       setSchools(res.data);
       setLoading(false);
     };
-    fetchSchools();
-  }, []);
+    if (!schools) {
+      fetchSchools();
+    }
+  }, [schools]);
   useEffect(() => {
     const getStudents = async () => {
       const res = await getAllRecruitmentPartners({
         role: "student",
       });
-      setStudentCount(res?.data?.length);
+      setStudents(res?.data);
     };
-    getStudents();
+    if (!students) {
+      getStudents();
+    }
   }, []);
   return (
     <>
@@ -159,7 +165,7 @@ export const AdminDashboard = () => {
                             icon={
                               <MdCastForEducation className=" text-4xl text-white" />
                             }
-                            number={studentCount ? studentCount : 0}
+                            number={students?.length ? students.length : 0}
                             title="Students"
                             color="#FFF"
                             iconBg="#657CEE"
