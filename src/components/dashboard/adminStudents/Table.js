@@ -69,7 +69,7 @@ export const Table = () => {
         <div>
           <DownloadTableExcel
             filename="students table"
-            sheet="applications"
+            sheet="Admin Students"
             currentTableRef={tableRef.current}
           >
             <div className="bg-white shadow-md rounded-md text-[#184061] cursor-pointer px-2 py-1.5 ">

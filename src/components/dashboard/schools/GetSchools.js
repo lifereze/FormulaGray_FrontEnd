@@ -23,10 +23,8 @@ function GetSchools() {
 
       setLoading(false);
     };
-    if (!schools) {
-      fetchSchools();
-    }
-  }, [search, schools]);
+    fetchSchools();
+  }, [search]);
   return (
     <div className="col-span-10">
       <div className="grid  gap-3  md:grid-cols-3 grid-cols-1">
