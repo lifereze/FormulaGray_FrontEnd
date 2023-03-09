@@ -1,5 +1,7 @@
 import React from "react";
-
+import team from '../../assets/teamwork.jpg'
+import institution from '../../assets/institution.jpg'
+import commission from '../../assets/commission.jpg'
 export const Hero3 = () => {
   return (
     <div className="items-center mt-10">
@@ -12,7 +14,7 @@ export const Hero3 = () => {
 
             <img
               className="w-full h-auto md:w-1/2 rounded-lg object-cover"
-              src="https://plus.unsplash.com/premium_photo-1663047716627-e0b6c878761e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+              src={team}
               alt="Image"
             />
          
@@ -30,7 +32,7 @@ export const Hero3 = () => {
             <div className="text-indigo-500 text-2xl font-semibold text-center">World Class Institution Partnerships</div>
             <img
               className="w-full h-auto md:hidden block md:w-1/2 rounded-lg object-cover"
-              src="https://plus.unsplash.com/premium_photo-1661717876697-1c47186f54fd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+              src={institution}
                 alt="Image"
               />
           <div className="pt-4 md:px-6">
@@ -42,8 +44,7 @@ Our coverage includes: United Kingdom, Canada, United States, Australia, New Zea
            </div>
               <img
               className="w-full h-auto hidden md:block md:w-1/2 rounded-lg object-cover"
-              src="https://plus.unsplash.com/premium_photo-1661717876697-1c47186f54fd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
-                alt="Image"
+              src={institution}                alt="Image"
               />
            
         </div>
@@ -53,7 +54,7 @@ Our coverage includes: United Kingdom, Canada, United States, Australia, New Zea
           
             <img
               className="w-full h-auto hidden md:block md:w-1/2 rounded-lg object-cover"
-              src="https://images.unsplash.com/photo-1603468620905-8de7d86b781e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=876&q=80"
+              src={commission}
               alt="Image"
             />
         
@@ -62,7 +63,7 @@ Our coverage includes: United Kingdom, Canada, United States, Australia, New Zea
             <div className="text-indigo-500 text-2xl font-semibold text-center">Commissions for Agents and Students</div>
             <img
               className="w-full h-auto md:hidden block md:w-1/2 rounded-lg object-cover"
-              src="https://images.unsplash.com/photo-1603468620905-8de7d86b781e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=876&q=80"
+              src={commission}
               alt="Image"
             />
           <div className="pt-4 md:px-6">

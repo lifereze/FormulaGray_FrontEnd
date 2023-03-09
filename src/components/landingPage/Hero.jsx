@@ -1,5 +1,8 @@
 import React from "react";
-
+import students from '../../assets/students.jpg'
+import studentsPhone from '../../assets/student-cellphone.jpg'
+import smilingStudents from '../../assets/smiling-students.jpg'
+import happyStudents from '../../assets/happy-students.jpg'
 export const Hero = () => {
   return (
     <main className="lg:relative bg-indigo-500">
@@ -17,10 +20,10 @@ export const Hero = () => {
             Get matched and apply to quality  Education institutions globally.
           </p>
           <div className="mt-10 sm:flex sm:justify-center lg:justify-start">
-            <div className="mt-3 rounded-md shadow sm:mt-0 sm:ml-3">
+            <div className="mt-3 rounded-md sm:mt-0 sm:ml-3">
               <a
                 href="/signin"
-                className="flex w-full items-center text-indigo-500 justify-center rounded-md border border-transparent bg-white px-8 py-3 text-base font-medium hover:bg-gray-250 md:py-4 md:px-10 md:text-lg"
+                className="flex w-full items-center  text-indigo-500 justify-center rounded-md  bg-white px-8 py-3 text-base font-medium hover:bg-gray-200 md:py-4 md:px-10 md:text-lg"
               >
                 Get started
               </a>
@@ -31,7 +34,7 @@ export const Hero = () => {
       <div className="relative h-64 w-full sm:h-72 md:h-96 lg:absolute lg:inset-y-0 lg:right-0 lg:h-full lg:w-1/2">
         <img
           className="absolute inset-0 h-full w-full object-cover"
-          src="https://images.unsplash.com/photo-1520333789090-1afc82db536a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2102&q=80"
+          src={smilingStudents}
           alt=""
         />
       </div>

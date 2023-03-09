@@ -1,5 +1,5 @@
 import React from "react";
-import { Navbar } from "./Navbar";
+import  Navbar  from "./MobileNavbar";
 import { Hero } from "./Hero";
 import { Hero1 } from "./Hero1";
 import { Hero2 } from "./Hero2";
