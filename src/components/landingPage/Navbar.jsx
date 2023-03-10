@@ -259,10 +259,6 @@ export const Navbar = () => {
                 className="ml-8 inline-flex items-center bg-indigo-500 justify-center whitespace-nowrap rounded-md border border-transparent px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
               >
                 Sign up
-
-
-
-              
               </a>
             </div>||
            <a href={user&&user?.role=='admin'?'/adminDashboard':user&&user?.role=='student'?'/studentDashboard':'/dashboard'}> <div className="hidden md:block cursor-pointer font-semibold capitalize text-purple-900">
