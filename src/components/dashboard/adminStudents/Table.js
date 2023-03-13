@@ -44,9 +44,8 @@ export const Table = () => {
         console.log(error);
       }
     };
-    if (!students) {
-      getStudents();
-    }
+
+    getStudents();
   }, [search]);
   const deleteOneStudent = async (student) => {
     const confirmer = window.confirm(
@@ -68,7 +67,7 @@ export const Table = () => {
       <div className=" flex mt-2 flex-row-reverse">
         <div>
           <DownloadTableExcel
-            filename="students table"
+            filename="Admin students table"
             sheet="Admin Students"
             currentTableRef={tableRef.current}
           >

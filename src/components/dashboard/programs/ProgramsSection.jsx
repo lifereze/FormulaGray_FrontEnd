@@ -183,8 +183,8 @@ getPrograms();
         </div>
       <div>
           <DownloadTableExcel
-            filename="programs table"
-            sheet="programs"
+            filename="Admin programs table"
+            sheet="Adminprograms"
             currentTableRef={tableRef.current}
           >
              <div className="bg-white shadow-md rounded-md text-[#184061] cursor-pointer px-2 py-1.5 ">
