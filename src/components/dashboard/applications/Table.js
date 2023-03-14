@@ -135,13 +135,13 @@ export const Table = () => {
                           {moment(student?.createdAt).format("L")}
                         </td>
                         <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
-                          {student.studentId.email}
+                          {student?.studentId?.email}
                         </td>
                         <td className="whitespace-nowrap py-4 px-3 text-left text-sm font-medium">
-                          {student.studentId.firstName}
+                          {student?.studentId?.firstName}
                         </td>
                         <td className="whitespace-nowrap py-4 px-3 text-left text-sm font-medium">
-                          {student.studentId.lastName}
+                          {student?.studentId?.lastName}
                         </td>
                         <td className="whitespace-nowrap px-3 capitalize text-left py-4 text-sm text-blue-500">
                           {student?.programmeId?.title}
