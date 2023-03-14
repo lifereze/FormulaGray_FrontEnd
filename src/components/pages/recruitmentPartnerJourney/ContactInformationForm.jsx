@@ -18,8 +18,8 @@ const [loading,setLoading]=useState(false);
   useEffect(()=>{
 setEmail(user?.email)
 setPhone(user?.phone)
-setFirstName(user?.firstName)
-setLastName(user?.lastName)
+setFirstName(user?.firstName?user?.firstName:"")
+setLastName(user?.lastName?user?.lastName:"")
   },[user])
   const onChangeHandler=(e)=>{
 if(e.target.name=='firstName'){
@@ -64,7 +64,7 @@ if(e.target.name=='phone'){
       
       }
     }
-    if(user?.email==email&&user?.phone!=phone){
+    if(user?.email==email&&user?.phone!==phone){
       const res=await editUser({'firstName':firstName,'lastName':lastName,'phone':phone})
       setLoading(false)
       
@@ -74,7 +74,7 @@ if(e.target.name=='phone'){
       
       }
     }
-    if(user?.email!=email&&user?.phone==phone){
+    if(user?.email!==email){
       const res=await editUser({'firstName':firstName,'lastName':lastName,'email':email})
       setLoading(false)
       
