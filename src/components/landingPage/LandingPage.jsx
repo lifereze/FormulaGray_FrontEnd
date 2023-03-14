@@ -13,7 +13,7 @@ export const LandingPage = () => {
     <Navbar />
     </div>
 
-    <div className=" bg-white ">
+    <div className=" bg-white h-screen overflow-y-scroll ">
    
       <Hero />
       <Hero1 />

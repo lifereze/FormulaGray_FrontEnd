@@ -5,16 +5,16 @@ import smilingStudents from '../../assets/blur.png'
 import happyStudents from '../../assets/happy-students.jpg'
 export const Hero = () => {
   return (
-    <div className="relative bg-indigo-500 md:pb-0 pb-10">
+    <div className="relative bg-indigo-500 lg:h-auto  md:h-3/4   h-3/5" >
     
-      <div className="    ">
+      <div className="  md:pt-4 pt-16  ">
         <img
           className="  h-full w-full object-cover"
           src={smilingStudents}
           alt=""
         />
       </div>
-      <div className="mx-auto w-full absolute top-0  max-w-7xl pt-28 md:pt-16 pb-20 text-center lg:py-48 lg:text-left text-white">
+      <div className="mx-auto w-full  absolute top-0   max-w-7xl pt-28 md:pt-16 pb-20 text-center lg:py-48 lg:text-left text-white">
         <div className="px-4 sm:px-8 lg:w-1/2 xl:pr-16">
           <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text7xl lg:text-5xl xl:text-7xl">
             <span className="block xl:inline ">
