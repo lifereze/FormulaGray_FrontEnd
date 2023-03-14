@@ -9,7 +9,7 @@ import { Footer } from "./Footer";
 import Testimonials from "./Testimonials";
 export const LandingPage = () => {
   return (<div className="bg-white">
-    <div className=" fixed w-full  z-50 ">
+    <div className=" fixed w-full pt-4 z-50 ">
     <Navbar />
     </div>
 
