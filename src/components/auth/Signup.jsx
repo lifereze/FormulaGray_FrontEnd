@@ -5,6 +5,7 @@ import { validateSignupData } from "../../validator";
 import { signup, send_email_verification_link } from "../../data/controller";
 import { userStore } from "../../stores";
 import Logo from "../../constants/images/formulargray_03.png";
+import regPic from '../../assets/nobg-register.png'
 import Spinner from "../utils/Spinner";
 const signUpOptions = [
   { id: "student", title: "Student" },
@@ -73,7 +74,7 @@ export const Signup = () => {
         <div className="relative hidden w-0 flex-1 lg:block">
           <img
             className="absolute inset-0 h-full w-full object-cover"
-            src="https://img.freepik.com/free-photo/overhead-portrait-international-students-waiting-test-college-group-university-mates-sitting-floor-with-books-laptops-doing-homework_197531-3819.jpg?w=2000"
+            src={regPic}
             alt="image"
           />
         </div>

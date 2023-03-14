@@ -4,6 +4,7 @@ import Logo from "../../constants/images/formulargray_03.png";
 import { userStore } from "../../stores";
 import { Notification } from "../ui";
 import Spinner from "../utils/Spinner";
+import loginPic from '../../assets/nobg-register.png'
 import { validateSigninData } from "../../validator";
 import { signin } from "../../data/controller";
 
@@ -61,7 +62,7 @@ export const Signin = () => {
         <div className="relative hidden w-0 flex-1 lg:block">
           <img
             className="absolute inset-0 h-full w-full object-cover"
-            src="https://media.istockphoto.com/photos/multiethnic-group-of-latin-american-college-students-smiling-picture-id1349297974?b=1&k=20&m=1349297974&s=170667a&w=0&h=HXhZJOkouT4BWGa-or0-AriJlmXJHZdCZBQqGwu6yvs="
+            src={loginPic}
             alt=""
           />
         </div>

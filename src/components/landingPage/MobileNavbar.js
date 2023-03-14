@@ -32,7 +32,7 @@ function Navbar() {
   }, []);
   return (
     <>
-      <div className="bg-white pb-2  shadow-sm w-11/12 mx-auto rounded-2xl h-16 px-4 md:flex md:items-center items-center justify-between">
+      <div className="bg-white pb-2  z-10 shadow-sm w-11/12 mx-auto rounded-2xl h-16 px-4 md:flex md:items-center items-center justify-between">
         <div
           onClick={() => setOpen(!open)}
           className="text-3xl absolute cursor-pointer md:hidden block pt-3 z-10"

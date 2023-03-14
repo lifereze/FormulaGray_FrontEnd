@@ -8,9 +8,13 @@ import { Hero4 } from "./Hero4";
 import { Footer } from "./Footer";
 import Testimonials from "./Testimonials";
 export const LandingPage = () => {
-  return (
-    <div className=" bg-white">
-      <Navbar />
+  return (<div className="bg-white">
+    <div className=" fixed w-full  z-50 ">
+    <Navbar />
+    </div>
+
+    <div className=" bg-white ">
+   
       <Hero />
       <Hero1 />
       <Hero3 />
@@ -18,6 +22,7 @@ export const LandingPage = () => {
       <Testimonials />
       {/* <Hero4 /> */}
       <Footer />
+    </div>
     </div>
   );
 };
