@@ -54,7 +54,7 @@ if(e.target.name=='phone'){
       return;
     }
     setLoading(true)
-    if(user?.email==email&&user?.phone==phone){
+    if(user?.email==email){
       const res=await editUser({'firstName':firstName,'lastName':lastName})
       setLoading(false)
       
