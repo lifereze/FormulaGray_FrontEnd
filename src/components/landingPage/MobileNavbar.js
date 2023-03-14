@@ -114,7 +114,7 @@ function Navbar() {
           <div className="ml-8  ">{/* <Search /> */}</div>
         </ul>
 
-        <div className="flex items-center justify-end pt-4 md:pt-2">
+        <div className=" hidden md:flex items-center justify-end pt-4 md:pt-2">
           {!user && (
             <Link
               className="no-underline text-black font-semibold mb-3 md:mr-2 cursor-pointer "

@@ -14,7 +14,7 @@ export const Hero1 = () => {
         <div className="flex  px-2  md:w-1/3">
           <div className="flex flex-col space-y-10 items-center  shadow p-4 m-3 bg-[#DBDEFF] rounded-3xl ">
             <div className=" rounded-full p-6 bg-[#5956E9]">
-           <IoSchool className=" text-7xl text-gray-100"/>
+           <IoSchool className=" text-5xl md:text-7xl text-gray-100"/>
             </div>
             <div className=" bg-white rounded-xl p-2">
             <div className="font-semibold text-2xl text-left pb-2">Students</div>
@@ -46,7 +46,7 @@ export const Hero1 = () => {
         <div className="flex  px-2  md:w-1/3">
           <div className="flex flex-col space-y-10 items-center  shadow p-4 m-3 bg-[#DBF8FF]  rounded-3xl ">
             <div className=" rounded-full p-6 bg-[#5956E9]">
-           <HiOutlineUsers className=" text-7xl text-white"/>
+           <HiOutlineUsers className=" text-5xl md:text-7xl text-white"/>
             </div>
             <div className=" bg-white rounded-xl p-2">
             <div className="font-semibold text-2xl text-left pb-2">Agents</div>
@@ -77,7 +77,7 @@ export const Hero1 = () => {
         <div className="flex  px-2  md:w-1/3">
           <div className="flex flex-col space-y-10 items-center  shadow p-4 m-3 bg-[#FFEDDC] rounded-3xl ">
             <div className=" rounded-full p-6 bg-[#5956E9]">
-           <FaSchool className=" text-7xl text-white"/>
+           <FaSchool className=" text-5xl md:text-7xl text-white"/>
             </div>
             <div className=" bg-white rounded-xl p-2">
             <div className="font-semibold text-2xl text-left pb-2">Institutions</div>
