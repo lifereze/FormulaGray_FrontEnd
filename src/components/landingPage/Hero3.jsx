@@ -1,7 +1,7 @@
 import React from "react";
 import team from '../../assets/no-bg-students.png'
 import institution from '../../assets/institution.jpg'
-import commission from '../../assets/nobg-money.png'
+import commission from '../../assets/commission.jpg'
 export const Hero3 = () => {
   return (
     <div className="items-center mt-10">
