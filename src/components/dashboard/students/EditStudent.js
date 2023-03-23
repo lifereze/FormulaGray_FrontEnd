@@ -26,9 +26,7 @@ export const EditStudent = (props) => {
                       {(user && user?.role == "recruitmentPartner" && (
                         <EditForm />
                       )) ||
-                        (user?.role == "recruitmentPartner" && (
-                          <AdminEditForm />
-                        ))}
+                        (user?.role == "admin" && <AdminEditForm />)}
                     </div>
                   </div>
                 </div>

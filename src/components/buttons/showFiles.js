@@ -93,6 +93,22 @@ function ShowMenu({ docs }) {
                 <div className="font-normal ">O Level certificate</div>
               </a>
             )}
+            {docs?.otherDocuments?.length && docs.otherDocuments.length > 0 && (
+              <div>
+                <div className="font-bold px-4 py-1 ">Other Files</div>
+                {docs?.otherDocuments?.map((doc, index) => (
+                  <a
+                    className=" flex items-center py-1 space-x-2 px-2 hover:bg-gray-200 cursor-pointer rounded-sm hover:text-[#184061]"
+                    href={doc}
+                  >
+                    <div className="">
+                      <BsClockHistory className="" />
+                    </div>
+                    <div className="font-normal ">File - {index + 1}</div>
+                  </a>
+                ))}
+              </div>
+            )}
           </div>
         )}
       </div>

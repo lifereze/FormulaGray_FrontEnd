@@ -53,16 +53,15 @@ export const AdminTable = () => {
   }, [search]);
   const deleteOneStudent = async (student) => {
     const confirmer = window.confirm(
-      "Are you sure you want to delete this application? You can not undo this action."
+      "Are you sure you want to delete this student? You can not undo this action."
     );
     if (confirmer) {
-      setStudents((prev) => prev.filter((item) => item._id !== student._id));
-
-      const res = await deleteStudent(student._id);
+      const res = await deleteStudent(student?._id);
 
       if (res && res.status == 200) {
         toast("Student deleted successfully!");
       }
+      window.location.reload(false);
     }
   };
 
@@ -143,8 +142,8 @@ export const AdminTable = () => {
                     students &&
                     students?.length &&
                     students?.length > 0 &&
-                    students.map((student) => (
-                      <tr key={student.email}>
+                    students?.map((student) => (
+                      <tr key={student?.email}>
                         <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
                           {student?.email}
                         </td>

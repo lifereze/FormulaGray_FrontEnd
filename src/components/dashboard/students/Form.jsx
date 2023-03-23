@@ -50,6 +50,7 @@ export const Form = (props) => {
     setStudent,
   ] = useState(initialize);
 const [isLoading,setIsLoading]=useState();
+const [loading,setLoading]=useState();
 
   const [isResumeLoading, setResumeLoading] = useState();
 const [resumeUrl, setResumeUrl] = useState("");
@@ -74,6 +75,8 @@ const [recommendationName,setRecommendationName]=useState();
   const [isStatementLoading, setStatementLoading] = useState();
 const [statementUrl, setStatementUrl] = useState("");
 const [statementName,setStatementName]=useState();
+const [otherFiles,setOtherFiles] = useState([]);
+const [otherFilesUrls,setOtherFilesUrls] = useState([]);
 
 
   const uploadDoc = (input) => {
@@ -167,30 +170,45 @@ const [statementName,setStatementName]=useState();
     const {getRootProps, getInputProps, open, acceptedFiles} = useDropzone({
       // Disable click and keydown behavior
       noClick: true,
-      noKeyboard: true
+      noKeyboard: true,
+      multiple:true
     });
+      useEffect(  ()=>{
+        if(acceptedFiles.length>0){
+         setLoading(true)
+          const uploadTask = acceptedFiles.map((acceptedFile,index)=>{
+           const uploadFile= firebaseUploadDoc(acceptedFile)
+         uploadFile.on(
+            "state_changed",
+            (snapshot) => {
+              const prog = Math.round(
+                (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+              );
+            },
+            (err) => {},
+            () => {
+              getDownloadURL(uploadFile.snapshot.ref).then((url) => {
+                setOtherFilesUrls(current=>[...current,url])
+               console.log(url)
+               if(index==acceptedFiles.length-1){
+                setLoading(false)
+                setOtherFiles(current=>[...current,...acceptedFiles]);
+               }
+                
+                })})
+          })
+       
+           
+              
       
-   if(acceptedFiles.length>0){
-    const uploadTask = firebaseUploadDoc(acceptedFiles[0]);
-    uploadTask.on(
-      "state_changed",
-      (snapshot) => {
-        const prog = Math.round(
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-        );
-      },
-      (err) => {},
-      () => {
-        getDownloadURL(uploadTask.snapshot.ref).then((url) => {
-         
-          
-          })})
+         }
+      },[acceptedFiles])
+      
 
-   }
-  
-    const files = acceptedFiles.map(file => (
+    const files = otherFiles?.map(file => (
       <li key={file.path}>
-        {file.path} - {file.size} bytes
+        {console.log('These are other files',otherFilesUrls)}
+        {file.path} 
       </li>
     ))
   const handleChange = (input) => {
@@ -207,11 +225,17 @@ const [statementName,setStatementName]=useState();
         firstName,
         lastName,
         email,phoneNumber,countryOfInterest,country,city,educationLevel,
-        state,streetAddress,zipCode,BACertificate:degreeUrl,BATranscript:transcriptUrl,resume:resumeUrl,recommendationLetter:recommendationUrl,statementOfPurpose:statementUrl,OLevelCertificate:ordinaryUrl
+        state,streetAddress,zipCode,BACertificate:degreeUrl,BATranscript:transcriptUrl,resume:resumeUrl,recommendationLetter:recommendationUrl,statementOfPurpose:statementUrl,OLevelCertificate:ordinaryUrl,otherDocuments:otherFilesUrls
       })
       if(res.status==200){
         toast("Student uploaded successfully!");
+      if ( user.role=='admin'){
+        navigate('/adminStudents')
+      }
+      else{
         navigate('/students')
+      }
+        
       }
       else{
         
@@ -470,7 +494,7 @@ setShowApproval(true)
         <input {...getInputProps()} />
         <p>Drag 'n' drop some files here</p>
         <button type="button" className='bg-midnight text-white rounded-full py-2 px-6'  >
-          Other Files
+          {loading?<Spinner/>:'Other Files'}
         </button>
       </div>
       <aside>
@@ -479,7 +503,7 @@ setShowApproval(true)
       </aside>
     </div>
     </div>
-                { !isLoading&& <button
+                {!loading&& !isLoading&& <button
 
 onClick={onSubmitHandler}
 className="ml-3 mt-6  inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-6 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
