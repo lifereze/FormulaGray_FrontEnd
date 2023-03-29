@@ -13,9 +13,9 @@ export const Hero3 = () => {
         <div className="text-black md:hidden block pb-2 text-2xl font-semibold text-center">Accessible support team</div>
         <div className=" text-black md:hidden block  md:pl-4">
             <div className="text-black hidden md:block text-3xl  font-semibold text-center">Accessible support team</div>
-          <div className="pt-2 md:px-10 text-xl md:text-lg   text-gray-500">
+          <div className="pt-2 md:px-10 text-lg   text-gray-500">
           Our in-country team are always available to support you. We have made sure that all enquiries are responded to within 24hrs and all applications submitted within 72hrs.           </div>
-          <div className="pt-1 md:px-10 text-xl md:text-lg pb-4   text-gray-500 ">
+          <div className="pt-1 md:px-10 text-lg pb-4   text-gray-500 ">
           Our team will help with your training, application process, delivering offers and continually ensuring your business growth OR as a student, making sure all the steps pre and post admission is well supported.             </div>
           </div>
             <img
@@ -26,9 +26,9 @@ export const Hero3 = () => {
          
           <div className=" text-black hidden md:block  md:pl-4">
             <div className="text-black hidden md:block text-3xl  font-semibold text-center">Accessible support team</div>
-          <div className="pt-4 md:px-10 text-xl md:text-lg   text-gray-500">
+          <div className="pt-4 md:px-10 text-lg   text-gray-500">
           Our in-country team are always available to support you. We have made sure that all enquiries are responded to within 24hrs and all applications submitted within 72hrs.           </div>
-          <div className="pt-4 md:px-10 text-xl md:text-lg   text-gray-500">
+          <div className="pt-4 md:px-10 text-lg   text-gray-500">
           Our team will help with your training, application process, delivering offers and continually ensuring your business growth OR as a student, making sure all the steps pre and post admission is well supported.             </div>
           </div>
         </div>
@@ -37,11 +37,11 @@ export const Hero3 = () => {
           <div className=" text-black  text-base pr-4">
             <div className="text-black text-2xl  md:text-3xl  font-semibold text-center py-2 md:py-4">World Class Institution Partnerships</div>
           
-          <div className="  pt-2 md:pt-4 md:px-10 text-xl md:text-lg   text-gray-500">
+          <div className="  pt-2 md:pt-4 md:px-10 text-lg   text-gray-500">
           We have carefully chosen our partners to allow access to the best qualifications/programs in the diverse countries we have our coverage.
 Our platform allows you access to over 100,000 programs from over 10 countries globally.
 Our coverage includes: United Kingdom, Canada, United States, Australia, New Zealand, France, Germany, Netherlands, Spain, Poland, Italy, Ireland and many more.          </div>
-          <div className=" pt-2 md:pt-4 md:px-10 text-xl md:text-lg pb-4   text-gray-500"> 
+          <div className=" pt-2 md:pt-4 md:px-10 text-lg pb-4   text-gray-500"> 
           With this plethora of programs; you would definitely find any program you desire.          </div>
            </div>
               <img
@@ -60,12 +60,12 @@ Our coverage includes: United Kingdom, Canada, United States, Australia, New Zea
         <div className="text-black md:hidden block pb-2 text-2xl font-semibold text-center">Commissions for Agents and Students</div>
         <div className=" text-black md:hidden block  md:pl-4">
             <div className="text-black hidden md:block text-3xl  font-semibold text-center">Commissions for Agents and Students</div>
-          <div className="pt-2 md:px-10 text-xl md:text-lg   text-gray-500">
+          <div className="pt-2 md:px-10 text-lg   text-gray-500">
           <p>Yes, you read right!</p>
             <p>We offer one of the best commissions in the industry. Agencies get exclusive discounts, commissions and incentives.</p>
 
 </div>
-          <div className="pt-1 md:px-10 text-xl md:text-lg pb-4    text-gray-500">
+          <div className="pt-1 md:px-10 text-lg pb-4    text-gray-500">
           <p>As a student, you aren’t left out too – we give students who apply through the platform a commission JUST because they used the platform for their application.
 We understand that it takes sometime and effort to walk this journey and we reward your effort.
 So, what are you waiting for – lets get started!</p>
@@ -79,12 +79,12 @@ So, what are you waiting for – lets get started!</p>
          
           <div className=" text-black hidden md:block  md:pl-4">
             <div className="text-black hidden md:block text-3xl  font-semibold text-center">Commissions for Agents and Students</div>
-          <div className="pt-4 md:px-10 text-xl md:text-lg   text-gray-500">
+          <div className="pt-4 md:px-10 text-lg   text-gray-500">
           <p>Yes, you read right!</p>
             <p>We offer one of the best commissions in the industry. Agencies get exclusive discounts, commissions and incentives.</p>
 
 </div>
-          <div className="pt-4 md:px-10 text-xl md:text-lg   text-gray-500 ">
+          <div className="pt-4 md:px-10 text-lg   text-gray-500 ">
           <p>As a student, you aren’t left out too – we give students who apply through the platform a commission JUST because they used the platform for their application.
 We understand that it takes sometime and effort to walk this journey and we reward your effort.
 So, what are you waiting for – lets get started!</p>
