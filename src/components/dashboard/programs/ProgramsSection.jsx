@@ -1,12 +1,14 @@
 import React, {useState,useEffect,useRef} from "react";
 import { EllipsisVerticalIcon } from "@heroicons/react/20/solid";
 import {GoLocation} from 'react-icons/go'
-import {AiOutlineArrowRight} from 'react-icons/ai'
+import {AiOutlineRight,AiOutlineLeft} from 'react-icons/ai'
 import { getAllPrograms,searchPrograms,filterPrograms } from "../../../data/api/authenticatedRequests";
 import PageLoader  from "../../utils/PageLoader";
-import Spinner from "../../utils/BlueSpinner";
+import Spinner from "../../utils/Spinner";
 import { Link } from "react-router-dom";
 import { DownloadTableExcel } from "react-export-table-to-excel";
+import { useQuery } from "react-query";
+import { useInView } from 'react-intersection-observer';
 import ProgramCard from "./ProgramCard";
 import CardLoader from "../../utils/CardLoader";
 import { searchStore,filterStore,programsStore } from "../../../stores/index";
@@ -132,6 +134,9 @@ function classNames(...classes) {
 export const ProgramsSection = () => {
   const tableRef=useRef(null);
   const [loading,setLoading]=useState();
+  const [loadingMore,setLoadingMore]=useState();
+  const [page, setPage] = useState(1);
+  const [count,setCount]=useState()
   const search = searchStore((state) => state.search);
   const filter = filterStore((state) => state.filter);
   // const programs = programsStore((state) => state.programs);
@@ -143,38 +148,61 @@ export const ProgramsSection = () => {
     "Masters",
     "Diploma",
   ]);
+  const getPrograms=async ()=>{
   
-  useEffect(()=>{
-const getPrograms=async ()=>{
-  
-  if(search){
-    setLoading(true);
-    const res = await searchPrograms({query:search});
-    setLoading(false);
-   return  setPrograms(res.data)
+    if(search){
+      setLoading(true);
+      const res = await searchPrograms({query:search});
+      console.log(res)
+      setLoading(false);
+     return  setPrograms(res.data)
+      
+    }
+    if(filter){
+      setLoading(true);
+      const res = await filterPrograms(filter);
+       
+      setLoading(false);
+     return  setPrograms(res.data) 
+    }
+else{
+
+  if(programs?.length>0){
+    setLoadingMore(true);
+    const res = await getAllPrograms(page);
+    console.log(page)
+    setPrograms((programs)=>[...programs,...res.data.programmes])
     
   }
-  if(filter){
+  else{
     setLoading(true);
-    const res = await filterPrograms(filter);
-     
-    setLoading(false);
-   return  setPrograms(res.data) 
-  }
-  // if((!programs&&!search&&!filter)||programs.length==0){
-    else{
-    setLoading(true);
-    const res = await getAllPrograms();
-    setPrograms(res.data)
-    setLoading(false);
-    
+    const res = await getAllPrograms(page);
+    setCount(res.data.count)
+    console.log('hello')
+    setPrograms((programs)=>[...res.data.programmes])
   }
   
- return setLoading(false);
+  setLoadingMore(false)
+  setLoading(false);
+}
+setLoadingMore(false)
+return setLoading(false);
+      
  
 }
-getPrograms();
-  },[search,filter])
+
+useEffect(()=>{
+  getPrograms()
+},[page,search,filter])
+// const {
+//   isLoading,
+//   isError,
+//   error,
+//   data,
+//   isFetching,
+//   isPreviousData
+// } = useQuery(['programmes', page], () => getPrograms(), { keepPreviousData: true });
+
   return (
     <div className="">
       <div className=" flex justify-between items-center mb-2">
@@ -193,15 +221,50 @@ getPrograms();
           </DownloadTableExcel>
         </div> 
       </div>
-    <div className="grid grid-cols-10 gap-4">
-
-         {!loading&&programs&&programs.map((program) => (
+    <div className=" ">
+{/* {isPreviousData&&data?.data?.programmes?.map((program) => (
         <ProgramCard program={program} />
-        ))||
-        <CardLoader />}
+        ))} */}
+         {!loading&&programs&&
+         <div className="">
+         <div className="grid grid-cols-10 gap-4">
+       {  programs?.map((program) => (
+        <ProgramCard program={program} />
+        ))||programs?.map((program) => (
+          <ProgramCard program={program} />
+          ))
+        
+        }
+        </div>
+        <div className=" w-full flex items-center justify-between  mb-10" >
+       <div className=""> {page*10} of {count} programs</div>
+      {!filter&&!search&& <div className="flex items-center">
+        {/* <div className="bg-blue-600 items-center px-2.5 flex rounded-md text-white cursor-pointer  py-1  mr-2" onClick={()=>setPage(page=>page>1?page-1:page)}>
+        <AiOutlineLeft className="  "/>
+        <div className=""> Prev</div>
+         
+          
+          </div> */}
+          <div className=" bg-blue-600 px-2 rounded-md flex items-center cursor-pointer text-white  py-1 ml-2" onClick={()=>setPage(page=>page+1)}>
+        <div className="">{loadingMore?<Spinner/>:'Show more'}</div>
+         {!loadingMore&& <AiOutlineRight className=" "/>}
+        
+          
+        </div>
+        </div>}
+          </div>
+        </div>
+        ||
+        <div className="grid grid-cols-10 gap-4">
+        <CardLoader />
+        </div>
+        }
       
     </div>
-    {!loading&&programs&&  <table
+    {!loading&&programs&& 
+
+      
+     <table
                 className="min-w-full hidden table-fixed divide-y divide-gray-300"
                 ref={tableRef}
               >
@@ -248,7 +311,7 @@ getPrograms();
                 <tbody className="divide-y divide-gray-200 bg-white">
                   {!loading &&
                     programs &&
-                    programs.map((program) => (
+                    programs?.programmes?.map((program) => (
                       <tr key={program.email}>
                         <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
                           {program?.title}
@@ -283,7 +346,10 @@ getPrograms();
                       </tr>
                     ))}
                 </tbody>
-              </table>}
+              </table>
+            
+              
+              }
     </div>
   );
 };

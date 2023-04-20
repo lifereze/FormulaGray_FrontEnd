@@ -137,9 +137,10 @@ export const getAllSchools = async () => {
       return error.response;
     });
 };
-export const getAllPrograms = async () => {
+export const getAllPrograms = async ( page ) => {
+  console.log(page);
   return await api
-    .get("/programme/programmes")
+    .get(`/programme/programmes?pageNum=${page}&pageSize=10`)
     .then((response) => response)
     .catch((error) => {
       return error.response;
