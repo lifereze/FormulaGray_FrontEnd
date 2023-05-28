@@ -1,13 +1,18 @@
 import React, { useEffect, useState, useRef } from "react";
 import { GrFormEdit } from "react-icons/gr";
 import { AiOutlineDelete } from "react-icons/ai";
-import { getAllRecruitmentPartners } from "../../../data/api/authenticatedRequests";
+import { useParams, useNavigate } from "react-router-dom";
+import {
+  getAllRecruitmentPartners,
+  updateUser,
+} from "../../../data/api/authenticatedRequests";
 import { deleteUser } from "../../../data/api/authenticatedRequests";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ShowMenu from "../../buttons/ShowMenu";
 import { DownloadTableExcel } from "react-export-table-to-excel";
 import { userStore } from "../../../stores";
+import Spinner from "../../utils/Spinner";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -18,6 +23,11 @@ export const Table = () => {
   const user = userStore((state) => state.user);
   const [partners, setPartners] = useState();
   const [loading, setLoading] = useState(false);
+  const [assignedPartners, setAssignedPartners] = useState([]);
+  const [loadingAssignPartner, setLoadingAssignPartner] = useState();
+  const navigate = useNavigate();
+
+  const { counsellorId } = useParams();
   useEffect(() => {
     const getPartners = async () => {
       try {
@@ -26,7 +36,7 @@ export const Table = () => {
         const res = await getAllRecruitmentPartners({
           role: "recruitmentPartner",
         });
-        setPartners(res?.data?.recruitmentPartners);
+        setPartners(res.data);
 
         setLoading(false);
       } catch (error) {
@@ -35,6 +45,21 @@ export const Table = () => {
     };
     getPartners();
   }, []);
+  const assignPartners = async () => {
+    setLoadingAssignPartner(true);
+    try {
+      const res = await updateUser(counsellorId, {
+        assignedRecruitmentPartners: assignedPartners,
+      });
+      toast("Partners assigned successfully!");
+      navigate("/counsellors");
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
+
+    setLoadingAssignPartner(false);
+  };
   const deleteOnePartner = async (partner) => {
     const confirmer = window.confirm(
       "Are you sure you want to delete this partner? You can not undo this action."
@@ -55,15 +80,16 @@ export const Table = () => {
           <h1 className="md:text-xl font-bold text-blue-500">Partners</h1>
         </div>
         <div>
-          <DownloadTableExcel
-            filename="Partners table"
-            sheet="Partners"
-            currentTableRef={tableRef.current}
+          <div
+            className={
+              (assignedPartners.length === 0 &&
+                "bg-white shadow-md rounded-md text-[#184061] cursor-pointer px-2 py-1.5 ") ||
+              "bg-blue-500 shadow-md rounded-md text-white cursor-pointer px-2 py-1.5 "
+            }
+            onClick={assignedPartners.length > 0 ? assignPartners : () => {}}
           >
-            <div className="bg-white shadow-md rounded-md text-[#184061] cursor-pointer px-2 py-1.5 ">
-              Generate report
-            </div>
-          </DownloadTableExcel>
+            {loadingAssignPartner ? <Spinner /> : "Assign Partners"}
+          </div>
         </div>
       </div>
       <div className="mt-8 flex flex-col">
@@ -76,6 +102,10 @@ export const Table = () => {
               >
                 <thead className="bg-gray-50">
                   <tr>
+                    <th
+                      scope="col"
+                      className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                    ></th>
                     <th
                       scope="col"
                       className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
@@ -118,12 +148,6 @@ export const Table = () => {
                     >
                       Students To
                     </th>
-                    <th
-                      scope="col"
-                      className="min-w-[12rem] py-3.5 pr-3 text-left text-sm font-semibold text-gray-900"
-                    >
-                      Identity Document
-                    </th>
 
                     <th
                       scope="col"
@@ -144,6 +168,22 @@ export const Table = () => {
                     partners &&
                     partners.map((partner) => (
                       <tr key={partner.email}>
+                        <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500 ">
+                          <input
+                            type="checkbox"
+                            className=" cursor-pointer"
+                            id="partner"
+                            name="partner"
+                            onChange={(e) => {
+                              setAssignedPartners([
+                                ...assignedPartners,
+                                e.target.value,
+                              ]);
+                              console.log(assignedPartners);
+                            }}
+                            value={partner?._id}
+                          />
+                        </td>
                         <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
                           {partner?.email}
                         </td>
@@ -200,16 +240,6 @@ export const Table = () => {
                           )}
                         </td>
 
-                        <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-blue-500">
-                          {partner?.identityDocument && (
-                            <a
-                              href={partner?.identityDocument}
-                              className="px-3 py-2"
-                            >
-                              View
-                            </a>
-                          )}
-                        </td>
                         <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
                           {partner?.approvalStatus}
                         </td>

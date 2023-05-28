@@ -36,7 +36,7 @@ export const Table = () => {
           setStudents(res.data);
         } else {
           const res = await getAllRecruitmentPartners({ role: "student" });
-          setStudents(res.data);
+          setStudents(res.data.students);
         }
 
         setLoading(false);

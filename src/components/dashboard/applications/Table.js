@@ -4,8 +4,10 @@ import PageLoader from "../../utils/PageLoader";
 import moment from "moment";
 import { AiOutlineDelete } from "react-icons/ai";
 import { useParams } from "react-router-dom";
+import { userStore } from "../../../stores";
 export const Table = () => {
   const [students, setStudents] = useState();
+  const user = userStore((state) => state.user);
 
   const [loading, setLoading] = useState(false);
   const { currentStage } = useParams();
@@ -13,8 +15,11 @@ export const Table = () => {
     const getStudents = async () => {
       try {
         setLoading(true);
+
         if (currentStage) {
-          const res = await getAllApplications({ currentStage: currentStage });
+          const res = await getAllApplications({
+            currentStage: currentStage,
+          });
           setStudents(res.data.applications);
         } else {
           const res = await getAllApplications();

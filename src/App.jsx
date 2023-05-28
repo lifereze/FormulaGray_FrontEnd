@@ -7,21 +7,27 @@ import { Signup } from "./components/auth/Signup";
 import { ForgotPassword } from "./components/auth/ForgotPassword";
 import { ResetPassword } from "./components/auth/ResetPassword";
 import { Dashboard } from "./components/dashboard/Dashboard";
-import { Profile } from "./components/dashboard/editProfile/Profile";
+import  EditProfile  from "./components/dashboard/editProfile/EditProfile";
 import { AdminDashboard } from "./components/dashboard/AdminDashboard";
+import { CounsellorDashboard } from "./components/dashboard/CounsellorDashboard";
 import { StudentDashboard } from "./components/dashboard/StudentDashboard";
 import { Schools } from "./components/dashboard/schools/Schools";
 import School from "./components/dashboard/schools/School";
 import { ApplyStudents } from "./components/dashboard/programs/ApplyStudents";
 import { Applications } from "./components/dashboard/applications/Applications";
 import { AdminApplications } from "./components/dashboard/adminApplications/AdminApplications";
+import { CounsellorApplications } from "./components/dashboard/counsellorApplications/CounsellorApplications";
 import { EditSchool } from "./components/dashboard/schools/EditSchool";
 import { AdminStudents } from "./components/dashboard/adminStudents/Students";
 import { Programs } from "./components/dashboard/programs/Programs";
 import { SchoolPrograms } from "./components/dashboard/programs/SchoolPrograms";
 import { Students } from "./components/dashboard/students/Students";
+import { CounsellorStudents } from "./components/dashboard/students/CounsellorStudents";
 import { EditAdminStudent } from "./components/dashboard/adminStudents/EditStudent";
 import { Partners } from "./components/dashboard/recruitmentPartners/Partners";
+import { AssignPartners } from "./components/dashboard/assignPartners/AssignPartners";
+import { CounsellorPartners } from "./components/dashboard/counsellorPartners/counsellorPartners";
+import { Counsellors } from "./components/dashboard/counsellors/Counsellors";
 import { Visa } from "./components/dashboard/Visa";
 import { AddStudent } from "./components/dashboard/students/AddStudent";
 import { AddSchool } from "./components/dashboard/schools/AddSchool";
@@ -47,20 +53,31 @@ function App() {
           <Route path="/forgotPassword" element={<ForgotPassword />} />
           <Route path="/resetPassword/:resetLink" element={<ResetPassword />} />
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/profile" element={<EditProfile/>} />
           <Route path="/adminDashboard" element={<AdminDashboard />} />
+          <Route path="/counsellorDashboard" element={<CounsellorDashboard />} />
           <Route path="/studentDashboard" element={<StudentDashboard />} />
           <Route path="/applications" element={<Applications />} />
           <Route path="/applications/:currentStage" element={<Applications />} />
           <Route path="/adminApplications" element={<AdminApplications />} />
           <Route path="/adminApplications/:currentStage" element={<AdminApplications />} />
+          <Route exact path="/counsellorapplications" element={<CounsellorApplications />} />
+          <Route exact  path="/counsellorapplications/:currentStage" element={<CounsellorApplications />} />
+
+          <Route exact path="/counsellorapplications/:currentStage/:partnerId" element={<CounsellorApplications />} />
+
           <Route path="/partners" element={<Partners />} />
+          <Route exact path="/assignPartners/:counsellorId" element={<AssignPartners />} />
+          <Route path="/counsellorPartners" element={<CounsellorPartners />} />
+          <Route path="/counsellors" element={<Counsellors />} />
           <Route path="/programs" element={<Programs />} />
           <Route path="/school/programs/:schoolId" element={<SchoolPrograms />} />
           <Route path="/programs/:id" element={<ApplyStudents />} />
           <Route path="/programs/edit/:id" element={<EditProgram />} />
           <Route path="/programs/duplicate/:id" element={<DuplicateProgram />} />
           <Route path="/students" element={<Students />} />
+          <Route exact path="/counsellorStudents" element={<CounsellorStudents />} />
+          <Route exact path="/counsellorStudents/:partnerId" element={<CounsellorStudents />} />
           <Route path="/adminStudents" element={<AdminStudents />} />
           <Route path="/student/edit/:id" element={<EditStudent />} />
           <Route path="/adminStudent/edit/:id" element={<EditAdminStudent />} />

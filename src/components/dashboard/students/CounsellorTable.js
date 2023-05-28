@@ -2,10 +2,11 @@ import React, { useEffect, useState, useRef } from "react";
 import { GrFormEdit } from "react-icons/gr";
 import { AiOutlineDelete } from "react-icons/ai";
 import {
-  getAllStudents,
   searchStudents,
   counsellorGetAllStudents,
+  counsellorGetPartnerStudents,
 } from "../../../data/api/authenticatedRequests";
+import { useParams } from "react-router-dom";
 import { deleteStudent } from "../../../data/api/authenticatedRequests";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -16,11 +17,11 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export const Table = () => {
+export const CounsellorTable = () => {
   const tableRef = useRef(null);
+  const { partnerId } = useParams();
   const search = searchStore((state) => state.search);
-  const students = studentsStore((state) => state.students);
-  const setStudents = studentsStore((state) => state.storeStudents);
+  const [students, setStudents] = useState();
   const user = userStore((state) => state.user);
   const [items, setItems] = useState([
     "Bachelors",
@@ -36,17 +37,13 @@ export const Table = () => {
         if (search) {
           const res = await searchStudents({ query: search });
           setStudents(res?.data ? res?.data : []);
+        } else if (partnerId) {
+          const res = await counsellorGetPartnerStudents(partnerId);
+          console.log(res);
+          setStudents(res.data.students);
         } else {
-          if (user?.role == "counselor") {
-            const res = await counsellorGetAllStudents();
-            setStudents(res.data.students);
-          }
-          if (user?.role !== "counselor") {
-            console.log(user.role);
-
-            const res = await getAllStudents();
-            setStudents(res.data.students);
-          }
+          const res = await counsellorGetAllStudents();
+          setStudents(res.data.students);
         }
 
         setLoading(false);
@@ -57,7 +54,7 @@ export const Table = () => {
     if (!students && user) {
       getStudents();
     }
-  }, [search, user]);
+  }, [search, user, partnerId]);
   const deleteOneStudent = async (student) => {
     const confirmer = window.confirm(
       "Are you sure you want to delete this student? You can not undo this action."

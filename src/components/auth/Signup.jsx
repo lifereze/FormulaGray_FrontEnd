@@ -10,6 +10,7 @@ import Spinner from "../utils/Spinner";
 const signUpOptions = [
   { id: "student", title: "Student" },
   { id: "recruitmentPartner", title: "Recruitment partner" },
+
 ];
 
 export const Signup = () => {

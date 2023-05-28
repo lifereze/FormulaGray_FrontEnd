@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { userStore } from "../../../stores";
 import { editUser } from "../../../data/api/authenticatedRequests";
 import Spinner from "../../utils/Spinner";
-import { Navbar } from "../../landingPage/Navbar";
+import Navbar from "../../landingPage/MobileNavbar";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";

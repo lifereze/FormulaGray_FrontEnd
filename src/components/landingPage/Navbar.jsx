@@ -81,8 +81,8 @@ export const Navbar = () => {
           <div className="flex items-center justify-between py-6 md:justify-start md:space-x-10">
             <div className=" lg:w-0 lg:flex-1  text-gray-500 ">
 
-              <img className="h-12 w-auto" src={Logo} alt="Your Company" />
-              <div className=" text-purple-900 text-lg   pr-2 ">Connecting you to quality education, globally</div>
+              {/* <img className="h-12 w-auto" src={Logo} alt="Your Company" /> */}
+              {/* <div className=" text-purple-900 text-lg   pr-2 ">Connecting you to quality education, globally</div> */}
             </div>
             <div className="-my-2 -mr-2 md:hidden">
               <Popover.Button className="inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-[#07443f]">

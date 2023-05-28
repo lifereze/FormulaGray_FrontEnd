@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { HiOutlineUsers } from "react-icons/hi";
 import { BiFolder } from "react-icons/bi";
 import { GiNetworkBars } from "react-icons/gi";
+import { ImUsers } from "react-icons/im";
 import { FiEdit2 } from "react-icons/fi";
 import { useLocation } from "react-router-dom";
 import { FaUserAlt, FaSchool, FaUserTie } from "react-icons/fa";
@@ -39,6 +40,9 @@ function SideBar() {
     }
     if (currentPath.includes("visa")) {
       setCurrentRoute("visa");
+    }
+    if (currentPath.includes("counsellors")) {
+      setCurrentRoute("counsellors");
     }
   }, [location]);
   return (
@@ -75,10 +79,16 @@ function SideBar() {
               </div>
               <FaUserAlt className=" text-5xl text-black" />
             </div>
-            {/* <div className=" flex space-x-2 items-center  pt-2 text-center ">
-              <div className=" text-center text-blue-100 text-base">Edit</div>
-              <FiEdit2 className="text-blue-100 " />
-            </div> */}
+          </Link>
+        )}
+        {user && user.role == "counselor" && (
+          <Link to={"/profile"}>
+            <div className="p-3 relative bg-white rounded-full">
+              <div className=" absolute bg-white p-1 rounded-lg top-0 right-0">
+                <FiEdit2 className="text-black text-md" />
+              </div>
+              <FaUserAlt className=" text-5xl text-black" />
+            </div>
           </Link>
         )}
         {!user && (
@@ -96,6 +106,7 @@ function SideBar() {
         <Link
           to={
             (user?.role == "recruitmentPartner" && "/dashboard") ||
+            (user?.role == "counselor" && "/counsellorDashboard") ||
             (user?.role == "admin" && "/adminDashboard") ||
             (user?.role == "student" && "/studentDashboard")
           }
@@ -110,7 +121,7 @@ function SideBar() {
         </Link>
       )}
 
-      {(user && user?.role == "recruitmentPartner" && (
+      {user && user?.role == "recruitmentPartner" && (
         <Link
           to={"/applications"}
           className={
@@ -122,21 +133,47 @@ function SideBar() {
           <AiOutlineInbox className="text-2xl" />
           <div className="">Applications</div>
         </Link>
-      )) ||
-        (user && user.role == "admin" && (
-          <Link
-            to={"/adminapplications"}
-            className={
-              currentRoute == "applications"
-                ? "flex space-x-2 cursor-pointer items-center p-2 pr-12 w-10/12 rounded-lg  bg-gray-100 text-[#184061] font-normal  "
-                : " flex space-x-2 cursor-pointer items-center p-2 pr-12 w-10/12 rounded-lg transition  text-gray-100 hover:bg-gray-100 hover:text-[#184061]"
-            }
-          >
-            <AiOutlineInbox className="text-2xl" />
-            <div className="">Applications</div>
-          </Link>
-        ))}
+      )}
       {user && user.role == "admin" && (
+        <Link
+          to={"/adminapplications"}
+          className={
+            currentRoute == "applications"
+              ? "flex space-x-2 cursor-pointer items-center p-2 pr-12 w-10/12 rounded-lg  bg-gray-100 text-[#184061] font-normal  "
+              : " flex space-x-2 cursor-pointer items-center p-2 pr-12 w-10/12 rounded-lg transition  text-gray-100 hover:bg-gray-100 hover:text-[#184061]"
+          }
+        >
+          <AiOutlineInbox className="text-2xl" />
+          <div className="">Applications</div>
+        </Link>
+      )}
+      {user && user.role == "counselor" && (
+        <Link
+          to={"/counsellorapplications"}
+          className={
+            currentRoute == "applications"
+              ? "flex space-x-2 cursor-pointer items-center p-2 pr-12 w-10/12 rounded-lg  bg-gray-100 text-[#184061] font-normal  "
+              : " flex space-x-2 cursor-pointer items-center p-2 pr-12 w-10/12 rounded-lg transition  text-gray-100 hover:bg-gray-100 hover:text-[#184061]"
+          }
+        >
+          <AiOutlineInbox className="text-2xl" />
+          <div className="">Applications</div>
+        </Link>
+      )}
+      {user && user.role == "admin" && (
+        <Link
+          to={"/counsellors"}
+          className={
+            currentRoute == "counsellors"
+              ? "flex space-x-2 cursor-pointer items-center p-2 pr-12 w-10/12 rounded-lg  bg-gray-100 text-[#184061] font-normal  "
+              : " flex space-x-2 cursor-pointer items-center p-2 pr-12 w-10/12 rounded-lg transition  text-gray-100 hover:bg-gray-100 hover:text-[#184061]"
+          }
+        >
+          <ImUsers className="text-2xl " />
+          <div className="">Counsellors</div>
+        </Link>
+      )}
+      {user && user?.role == "admin" && (
         <Link
           to={"/partners"}
           className={
@@ -149,11 +186,38 @@ function SideBar() {
           <div className="">Partners</div>
         </Link>
       )}
-      {user && user.role !== "student" && (
+      {user && user?.role == "counselor" && (
+        <Link
+          to={"/counsellorPartners"}
+          className={
+            currentRoute == "partners"
+              ? "flex space-x-2 cursor-pointer items-center p-2 pr-12 w-10/12 rounded-lg  bg-gray-100 text-[#184061] font-normal  "
+              : " flex space-x-2 cursor-pointer items-center p-2 pr-12 w-10/12 rounded-lg transition  text-gray-100 hover:bg-gray-100 hover:text-[#184061]"
+          }
+        >
+          <FaUserTie className="text-2xl " />
+          <div className="">Partners</div>
+        </Link>
+      )}
+      {user && user?.role !== "counselor" && (
         <Link
           to={
-            user?.role == "recruitmentPartner" ? "/students" : "/adminStudents"
+            (user?.role == "recruitmentPartner" && "/students") ||
+            (user?.role == "admin" && "/adminStudents")
           }
+          className={
+            currentRoute == "students"
+              ? "flex space-x-2 cursor-pointer items-center p-2 pr-12 w-10/12 rounded-lg  bg-gray-100 text-[#184061] font-normal  "
+              : " flex space-x-2 cursor-pointer items-center p-2 pr-12 w-10/12 rounded-lg transition  text-gray-100 hover:bg-gray-100 hover:text-[#184061]"
+          }
+        >
+          <HiOutlineUsers className="text-2xl" />
+          <div className="">Students</div>
+        </Link>
+      )}
+      {user?.role == "counselor" && (
+        <Link
+          to={"/counsellorStudents"}
           className={
             currentRoute == "students"
               ? "flex space-x-2 cursor-pointer items-center p-2 pr-12 w-10/12 rounded-lg  bg-gray-100 text-[#184061] font-normal  "

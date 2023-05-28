@@ -1,13 +1,14 @@
 import React, { useEffect, useState, useRef } from "react";
 import { GrFormEdit } from "react-icons/gr";
 import { AiOutlineDelete } from "react-icons/ai";
-import { getAllRecruitmentPartners } from "../../../data/api/authenticatedRequests";
+import { counsellorGetAllRecruitmentPartners } from "../../../data/api/authenticatedRequests";
 import { deleteUser } from "../../../data/api/authenticatedRequests";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ShowMenu from "../../buttons/ShowMenu";
 import { DownloadTableExcel } from "react-export-table-to-excel";
 import { userStore } from "../../../stores";
+import { Link } from "react-router-dom";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -23,10 +24,8 @@ export const Table = () => {
       try {
         setLoading(true);
 
-        const res = await getAllRecruitmentPartners({
-          role: "recruitmentPartner",
-        });
-        setPartners(res?.data?.recruitmentPartners);
+        const res = await counsellorGetAllRecruitmentPartners();
+        setPartners(res?.data?.assignedRecruitmentPartners);
 
         setLoading(false);
       } catch (error) {
@@ -103,40 +102,11 @@ export const Table = () => {
                     <th
                       scope="col"
                       className="min-w-[12rem] py-3.5 pr-3 text-left text-sm font-semibold text-gray-900"
-                    >
-                      Average charge per student
-                    </th>
+                    ></th>
                     <th
                       scope="col"
                       className="min-w-[12rem] py-3.5 pr-3 text-left text-sm font-semibold text-gray-900"
-                    >
-                      Average number of students annually
-                    </th>
-                    <th
-                      scope="col"
-                      className="min-w-[12rem] py-3.5 pr-3 text-left text-sm font-semibold text-gray-900"
-                    >
-                      Students To
-                    </th>
-                    <th
-                      scope="col"
-                      className="min-w-[12rem] py-3.5 pr-3 text-left text-sm font-semibold text-gray-900"
-                    >
-                      Identity Document
-                    </th>
-
-                    <th
-                      scope="col"
-                      className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                    >
-                      Approval status
-                    </th>
-                    <th
-                      scope="col"
-                      className="relative py-3.5 pl-3 pr-4 sm:pr-6"
-                    >
-                      <span className="sr-only">Edit</span>
-                    </th>
+                    ></th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200 bg-white">
@@ -177,7 +147,12 @@ export const Table = () => {
                             "text-gray-900"
                           )}
                         >
-                          {partner?.recruitmentDetails?.averageCharge}
+                          <Link
+                            to={`/counsellorStudents/${partner?._id}`}
+                            className="bg-blue-500 shadow-md rounded-md text-white cursor-pointer px-2 py-1.5 "
+                          >
+                            View Students
+                          </Link>
                         </td>
                         <td
                           className={classNames(
@@ -185,44 +160,12 @@ export const Table = () => {
                             "text-gray-900"
                           )}
                         >
-                          {partner?.recruitmentDetails?.averageStudentsAnnually}
-                        </td>
-                        <td
-                          className={classNames(
-                            "whitespace-nowrap py-4 px-3 text-left  capitalize text-sm font-medium",
-                            "text-gray-900"
-                          )}
-                        >
-                          {partner?.recruitmentDetails?.studentsTo.map(
-                            (country) => (
-                              <span>{country},</span>
-                            )
-                          )}
-                        </td>
-
-                        <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-blue-500">
-                          {partner?.identityDocument && (
-                            <a
-                              href={partner?.identityDocument}
-                              className="px-3 py-2"
-                            >
-                              View
-                            </a>
-                          )}
-                        </td>
-                        <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
-                          {partner?.approvalStatus}
-                        </td>
-                        <td className="whitespace-nowrap py-4 px-2  text-left text-sm font-medium sm:pr-6">
-                          <div className=" flex space-x-2 items-center">
-                            <div
-                              className=" cursor-pointer p-1 hover:bg-gray-100 rounded-full "
-                              onClick={() => deleteOnePartner(partner)}
-                            >
-                              <AiOutlineDelete className="text-xl text-red-500" />
-                            </div>
-                            <ShowMenu id={partner?._id} />
-                          </div>
+                          <Link
+                            to={`/counsellorapplications/stage/${partner?._id}`}
+                            className="bg-blue-500 shadow-md rounded-md text-white cursor-pointer px-2 py-1.5 "
+                          >
+                            View Applications
+                          </Link>
                         </td>
                       </tr>
                     ))}

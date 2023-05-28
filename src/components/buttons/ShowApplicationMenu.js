@@ -3,18 +3,31 @@ import { IoEllipsisVertical } from "react-icons/io5";
 import { BsClockHistory } from "react-icons/bs";
 import { MdCancel } from "react-icons/md";
 import { AiOutlineCheckCircle } from "react-icons/ai";
-import { updateApplication } from "../../data/api/authenticatedRequests";
-function ShowApplicationMenu({ id, setApplications, student }) {
+import {
+  updateApplication,
+  counsellorUpdateApplication,
+} from "../../data/api/authenticatedRequests";
+function ShowApplicationMenu({ id, setApplications, student, role }) {
   const [showMenu, setShowMenu] = useState(false);
   const ref = useRef();
   UseOnClickOutside(ref, () => setShowMenu(false));
   const editApplication = async (data) => {
-   
     try {
-      const res = await updateApplication(id, data);
+      if (role === "counsellor") {
+        const res = await counsellorUpdateApplication(id, {
+          updatedFields: { currentStage: data.currentStage },
+        });
+        console.log(res);
+        if (res && res.status === 200) {
+          window.location.reload();
+        }
+      } else {
+        const res = await updateApplication(id, data);
+        console.log(res);
 
-      if (res && res.status === 200) {
-        window.location.reload();
+        if (res && res.status === 200) {
+          window.location.reload();
+        }
       }
     } catch (error) {}
   };

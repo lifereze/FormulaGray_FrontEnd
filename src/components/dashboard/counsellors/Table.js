@@ -7,27 +7,28 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ShowMenu from "../../buttons/ShowMenu";
 import { DownloadTableExcel } from "react-export-table-to-excel";
-import { userStore } from "../../../stores";
-
+import { Link } from "react-router-dom";
+import CreateCounsellor from "../../modals/CreateCounsellor";
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 export const Table = () => {
   const tableRef = useRef(null);
-  const user = userStore((state) => state.user);
   const [partners, setPartners] = useState();
   const [loading, setLoading] = useState(false);
+  const [showCreateCounsellor, setShowCreateCounsellor] = useState(false);
   useEffect(() => {
     const getPartners = async () => {
       try {
         setLoading(true);
-
         const res = await getAllRecruitmentPartners({
-          role: "recruitmentPartner",
+          role: "counselor",
         });
-        setPartners(res?.data?.recruitmentPartners);
-
+        if (res.status == 200) {
+          setPartners(res?.data?.counselors);
+          setLoading(false);
+        }
         setLoading(false);
       } catch (error) {
         console.log(error);
@@ -37,11 +38,13 @@ export const Table = () => {
   }, []);
   const deleteOnePartner = async (partner) => {
     const confirmer = window.confirm(
-      "Are you sure you want to delete this partner? You can not undo this action."
+      "Are you sure you want to delete this counsellor? You can not undo this action."
     );
     if (confirmer) {
-      const res = await deleteUser(partner._id);
-      setPartners((prev) => prev.filter((item) => item._id !== partner._id));
+      const res = await deleteUser(partner.counselor._id);
+      setPartners((prev) =>
+        prev.filter((item) => item.counselor._id !== partner.counselor._id)
+      );
       if (res && res.status == 200) {
         toast("Partner deleted successfully!");
       }
@@ -52,18 +55,15 @@ export const Table = () => {
     <div className="px-4 sm:px-6  mr-2 no-scrollbar ">
       <div className="flex items-center justify-between">
         <div className="">
-          <h1 className="md:text-xl font-bold text-blue-500">Partners</h1>
+          <h1 className="md:text-xl font-bold text-blue-500">Counsellors</h1>
         </div>
         <div>
-          <DownloadTableExcel
-            filename="Partners table"
-            sheet="Partners"
-            currentTableRef={tableRef.current}
+          <div
+            className="bg-white shadow-md rounded-md text-[#184061] cursor-pointer px-2 py-1.5 "
+            onClick={() => setShowCreateCounsellor(true)}
           >
-            <div className="bg-white shadow-md rounded-md text-[#184061] cursor-pointer px-2 py-1.5 ">
-              Generate report
-            </div>
-          </DownloadTableExcel>
+            Create Counsellor
+          </div>
         </div>
       </div>
       <div className="mt-8 flex flex-col">
@@ -98,31 +98,37 @@ export const Table = () => {
                       scope="col"
                       className="min-w-[12rem] py-3.5 pr-3 text-left text-sm font-semibold text-gray-900"
                     >
-                      Country
+                      Partners
                     </th>
                     <th
                       scope="col"
                       className="min-w-[12rem] py-3.5 pr-3 text-left text-sm font-semibold text-gray-900"
                     >
-                      Average charge per student
+                      Students
                     </th>
                     <th
                       scope="col"
                       className="min-w-[12rem] py-3.5 pr-3 text-left text-sm font-semibold text-gray-900"
                     >
-                      Average number of students annually
+                      Applications
                     </th>
                     <th
                       scope="col"
                       className="min-w-[12rem] py-3.5 pr-3 text-left text-sm font-semibold text-gray-900"
                     >
-                      Students To
+                      Pending
                     </th>
                     <th
                       scope="col"
                       className="min-w-[12rem] py-3.5 pr-3 text-left text-sm font-semibold text-gray-900"
                     >
-                      Identity Document
+                      Accepted
+                    </th>
+                    <th
+                      scope="col"
+                      className="min-w-[12rem] py-3.5 pr-3 text-left text-sm font-semibold text-gray-900"
+                    >
+                      Rejected
                     </th>
 
                     <th
@@ -131,6 +137,10 @@ export const Table = () => {
                     >
                       Approval status
                     </th>
+                    <th
+                      scope="col"
+                      className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                    ></th>
                     <th
                       scope="col"
                       className="relative py-3.5 pl-3 pr-4 sm:pr-6"
@@ -142,10 +152,10 @@ export const Table = () => {
                 <tbody className="divide-y divide-gray-200 bg-white">
                   {!loading &&
                     partners &&
-                    partners.map((partner) => (
-                      <tr key={partner.email}>
+                    partners?.map((partner) => (
+                      <tr key={partner?.counselor?.email}>
                         <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
-                          {partner?.email}
+                          {partner?.counselor?.email}
                         </td>
                         <td
                           className={classNames(
@@ -153,7 +163,7 @@ export const Table = () => {
                             "text-gray-900"
                           )}
                         >
-                          {partner?.firstName}
+                          {partner?.counselor?.firstName}
                         </td>
                         <td
                           className={classNames(
@@ -161,7 +171,7 @@ export const Table = () => {
                             "text-gray-900"
                           )}
                         >
-                          {partner?.lastName}
+                          {partner?.counselor?.lastName}
                         </td>
                         <td
                           className={classNames(
@@ -169,7 +179,7 @@ export const Table = () => {
                             "text-gray-900"
                           )}
                         >
-                          {partner?.business?.location?.country}
+                          {partner?.numberOfRecruitmentPartners}
                         </td>
                         <td
                           className={classNames(
@@ -177,7 +187,7 @@ export const Table = () => {
                             "text-gray-900"
                           )}
                         >
-                          {partner?.recruitmentDetails?.averageCharge}
+                          {partner?.numberOfStudents}
                         </td>
                         <td
                           className={classNames(
@@ -185,7 +195,7 @@ export const Table = () => {
                             "text-gray-900"
                           )}
                         >
-                          {partner?.recruitmentDetails?.averageStudentsAnnually}
+                          {partner?.numberOfApplications}
                         </td>
                         <td
                           className={classNames(
@@ -193,25 +203,35 @@ export const Table = () => {
                             "text-gray-900"
                           )}
                         >
-                          {partner?.recruitmentDetails?.studentsTo.map(
-                            (country) => (
-                              <span>{country},</span>
-                            )
+                          {partner?.numberOfPendingApplications}
+                        </td>
+                        <td
+                          className={classNames(
+                            "whitespace-nowrap py-4 px-3 text-left  capitalize text-sm font-medium",
+                            "text-gray-900"
                           )}
+                        >
+                          {partner?.numberOfAcceptedApplications}
+                        </td>
+                        <td
+                          className={classNames(
+                            "whitespace-nowrap py-4 px-3 text-left  capitalize text-sm font-medium",
+                            "text-gray-900"
+                          )}
+                        >
+                          {partner?.numberOfRejectedApplications}
                         </td>
 
-                        <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-blue-500">
-                          {partner?.identityDocument && (
-                            <a
-                              href={partner?.identityDocument}
-                              className="px-3 py-2"
-                            >
-                              View
-                            </a>
-                          )}
+                        <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
+                          {partner?.counselor?.approvalStatus}
                         </td>
                         <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
-                          {partner?.approvalStatus}
+                          <Link
+                            to={`/assignPartners/${partner?.counselor?._id}`}
+                            className=" bg-blue-500 rounded-md cursor-pointer text-white px-2 py-1.5"
+                          >
+                            Assign Partner
+                          </Link>
                         </td>
                         <td className="whitespace-nowrap py-4 px-2  text-left text-sm font-medium sm:pr-6">
                           <div className=" flex space-x-2 items-center">
@@ -221,11 +241,12 @@ export const Table = () => {
                             >
                               <AiOutlineDelete className="text-xl text-red-500" />
                             </div>
-                            <ShowMenu id={partner?._id} />
+                            <ShowMenu id={partner?.counselor?._id} />
                           </div>
                         </td>
                       </tr>
                     ))}
+                  {loading && <div className=" text-lg">Loading </div>}
                 </tbody>
               </table>
             </div>
@@ -233,6 +254,9 @@ export const Table = () => {
         </div>
       </div>
       <ToastContainer />
+      {showCreateCounsellor && (
+        <CreateCounsellor setShowCreateCounsellor={setShowCreateCounsellor} />
+      )}
     </div>
   );
 };

@@ -17,6 +17,14 @@ export const refreshSession = async () => {
       return error.response;
     });
 };
+export const createUser = async (data) => {
+  return await api
+    .post("/admin/createUser", data)
+    .then((response) => response)
+    .catch((error) => {
+      return error.response;
+    });
+};
 export const editUser = async (data) => {
   return await api
     .patch("/user/edit", data)
@@ -137,7 +145,7 @@ export const getAllSchools = async () => {
       return error.response;
     });
 };
-export const getAllPrograms = async ( page ) => {
+export const getAllPrograms = async (page) => {
   console.log(page);
   return await api
     .get(`/programme/programmes?pageNum=${page}&pageSize=10`)
@@ -162,6 +170,55 @@ export const getAllApplications = async (data) => {
       return error.response;
     });
 };
+export const counsellorGetAllApplications = async (data) => {
+  return await api
+    .post("/counselor/applications", data)
+    .then((response) => response)
+    .catch((error) => {
+      return error.response;
+    });
+};
+export const counsellorGetPartnersApplications = async (partnerId, data) => {
+  return await api
+    .post(`/counselor/applications/${partnerId}`, data)
+    .then((response) => response)
+    .catch((error) => {
+      return error.response;
+    });
+};
+export const counsellorGetAllPartnersApplications = async (partnerId) => {
+  return await api
+    .post(`/counselor/applications/${partnerId}`)
+    .then((response) => response)
+    .catch((error) => {
+      return error.response;
+    });
+};
+export const counsellorGetAllRecruitmentPartners = async () => {
+  return await api
+    .get("/counselor/recruitmentPartners")
+    .then((response) => response)
+    .catch((error) => {
+      return error.response;
+    });
+};
+export const counsellorGetAllStudents = async () => {
+  return await api
+    .get("/counselor/students")
+    .then((response) => response)
+    .catch((error) => {
+      return error.response;
+    });
+};
+export const counsellorGetPartnerStudents = async (partnerId) => {
+  return await api
+    .get(`/counselor/students/${partnerId}`)
+    .then((response) => response)
+    .catch((error) => {
+      return error.response;
+    });
+};
+
 export const adminGetAllApplications = async (data) => {
   return await api
     .post("/admin/get/applications", data)
@@ -237,6 +294,14 @@ export const adminDeleteStudent = async (id) => {
 export const adminDeleteApplication = async (id) => {
   return await api
     .delete(`admin/delete/application/${id}`)
+    .then((response) => response)
+    .catch((error) => {
+      return error.response;
+    });
+};
+export const counsellorDeleteApplication = async (id) => {
+  return await api
+    .delete(`/counselor/application/${id}`)
     .then((response) => response)
     .catch((error) => {
       return error.response;
@@ -333,6 +398,14 @@ export const updateStudent = async (data, id) => {
 export const updateApplication = async (id, data) => {
   return await api
     .patch(`/admin/edit/application/${id}`, data)
+    .then((response) => response)
+    .catch((error) => {
+      return error.response;
+    });
+};
+export const counsellorUpdateApplication = async (id, data) => {
+  return await api
+    .patch(`/counselor/application/${id}`, data)
     .then((response) => response)
     .catch((error) => {
       return error.response;

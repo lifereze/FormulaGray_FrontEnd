@@ -130,6 +130,8 @@ function Navbar() {
                   ? "/adminDashboard"
                   : user && user?.role == "student"
                   ? "/studentDashboard"
+                  : user?.role == "counselor"
+                  ? "counsellorDashboard"
                   : "/dashboard"
               }
             >
@@ -180,7 +182,9 @@ function Navbar() {
                           ? "/adminDashboard"
                           : user && user?.role == "student"
                           ? "/studentDashboard"
-                          : "/dashboard"
+                          : user?.role == "counselor"
+                          ? "/counsellorDashboard"
+                          : "dashboard"
                       }
                     >
                       {" "}
