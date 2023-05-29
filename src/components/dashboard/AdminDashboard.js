@@ -93,7 +93,7 @@ export const AdminDashboard = () => {
       const res = await getAllRecruitmentPartners({
         role: "student",
       });
-      setStudents(res?.data);
+      setStudents(res?.data?.students);
     };
     if (!students) {
       getStudents();
