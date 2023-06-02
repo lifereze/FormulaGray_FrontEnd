@@ -36,7 +36,7 @@ export const Table = () => {
         const res = await getAllRecruitmentPartners({
           role: "recruitmentPartner",
         });
-        setPartners(res.data);
+        setPartners(res?.data?.recruitmentPartners);
 
         setLoading(false);
       } catch (error) {
