@@ -8,6 +8,7 @@ import { Hero4 } from "./Hero4";
 import { Footer } from "./Footer";
 import Testimonials from "./Testimonials";
 import Chatbot from 'react-chatbot-kit'
+import { FloatingWhatsApp } from 'react-floating-whatsapp'
 export const LandingPage = () => {
   return (<div className="bg-white">
     <div className=" fixed w-full  z-50 ">
@@ -26,6 +27,11 @@ export const LandingPage = () => {
 <Chatbot/>
    </div> */}
       <Footer />
+      <FloatingWhatsApp 
+      phoneNumber="+254713799975"
+      accountName="Formula Gray"
+
+      />
     </div>
     </div>
   );
