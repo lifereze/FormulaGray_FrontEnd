@@ -4,13 +4,12 @@ import {
   counsellorGetPartnersApplications,
   counsellorGetAllPartnersApplications,
   counsellorDeleteApplication,
-} from "../../../data/api/authenticatedRequests";
-import PageLoader from "../../utils/PageLoader";
+} from "../../../../../data/api/authenticatedRequests";
 import moment from "moment";
 import { AiOutlineDelete } from "react-icons/ai";
 import { useParams } from "react-router-dom";
-import { userStore } from "../../../stores";
-import ShowApplicationMenu from "../../buttons/ShowApplicationMenu";
+import { userStore } from "../../../../../stores";
+import ShowApplicationMenu from "../../../../buttons/ShowApplicationMenu";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 export const Table = () => {

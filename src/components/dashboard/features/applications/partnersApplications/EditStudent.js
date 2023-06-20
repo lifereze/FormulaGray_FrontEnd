@@ -1,12 +1,9 @@
 import React from "react";
-import { Navbar } from "../Navbar";
 import { EditForm } from "./EditForm";
-import SideBar from "../SideBar";
-import Banner from "../Banner";
+import SideBar from "../../../SideBar";
+import Banner from "../../../Banner";
 
 export const EditStudent = (props) => {
-  
-
   return (
     <>
       <div className=" grid grid-cols-12">

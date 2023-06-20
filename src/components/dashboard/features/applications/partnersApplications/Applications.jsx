@@ -1,8 +1,8 @@
 import React,{useEffect,useState} from "react";
-import { Navbar } from "../Navbar";
+import { Navbar } from "../../../Navbar";
 import { Table } from "./Table";
-import SideBar from "../SideBar";
-import Banner from "../Banner";
+import SideBar from "../../../SideBar";
+import Banner from "../../../Banner";
 
 export const Applications = () => {
  

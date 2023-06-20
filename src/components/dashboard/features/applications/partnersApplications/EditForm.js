@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useMemo } from "react";
-import FileUpload from "../../uploads/FileUpload";
-import { firebaseUploadImg, firebaseUploadDoc } from "../../../data/api/upload";
+import FileUpload from "../../../../uploads/FileUpload";
+import { firebaseUploadImg, firebaseUploadDoc } from "../../../../../data/api/upload";
 import { getDownloadURL } from "firebase/storage";
-import Spinner from "../../utils/Spinner";
+import Spinner from "../../../../utils/Spinner";
 import {
   updateStudent,
   getStudent,
-} from "../../../data/api/authenticatedRequests";
+} from "../../../../../data/api/authenticatedRequests";
 import { useParams, useNavigate } from "react-router-dom";
 export const EditForm = (props) => {
   let { id } = useParams();

@@ -5,6 +5,11 @@ export const userStore = create((set) => ({
   storeUser: (user) => set({ user: user }),
   removeUser: () => set({ user: null }),
 }));
+export const useStage = create((set) => ({
+  stage: null,
+  setStage: (stage) => set({ stage: stage }),
+  removeStage: () => set({ stage: null }),
+}));
 export const filterStore = create((set) => ({
   filter: null,
   storeFilter: (filter) => set({ filter: filter }),

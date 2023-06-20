@@ -1,8 +1,8 @@
 import React from "react";
-import { Navbar } from "../Navbar";
+import { Navbar } from "../../../Navbar";
 import {Form} from "./Form";
-import SideBar from "../SideBar";
-import Banner from "../Banner";
+import SideBar from "../../../SideBar";
+import Banner from "../../../Banner";
 export const AddStudent = (props) => {
   return (
     <>

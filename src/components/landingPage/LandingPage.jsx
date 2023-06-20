@@ -23,9 +23,7 @@ export const LandingPage = () => {
       <Hero2 />
       <Testimonials />
       {/* <Hero4 /> */}
-      {/* <div className="" style={{maxWidth:"300px"}}>
-<Chatbot/>
-   </div> */}
+
       <Footer />
       <FloatingWhatsApp 
       phoneNumber="+254713799975"

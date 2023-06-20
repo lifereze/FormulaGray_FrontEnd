@@ -1,9 +1,9 @@
 import React,{useState,useEffect, useMemo} from 'react'
-import FileUpload from '../../uploads/FileUpload';
-import { firebaseUploadImg,firebaseUploadDoc } from "../../../data/api/upload";
+import FileUpload from '../../../../uploads/FileUpload';
+import { firebaseUploadImg,firebaseUploadDoc } from "../../../../../data/api/upload";
 import { getDownloadURL } from "firebase/storage";
-import Spinner from '../../utils/Spinner';
-import { uploadStudent } from '../../../data/api/authenticatedRequests';
+import Spinner from '../../../../utils/Spinner';
+import { uploadStudent } from '../../../../../data/api/authenticatedRequests';
 export const Form = (props) => {
   const initialize = {
     firstName:"",

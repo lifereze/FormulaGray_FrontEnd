@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Navbar } from "../Navbar";
+import { Navbar } from "../../../Navbar";
 import { Table } from "./Table";
-import SideBar from "../SideBar";
-import Banner from "../Banner";
+import SideBar from "../../../SideBar";
+import Banner from "../../../Banner";
 
-export const CounsellorApplications = () => {
+export const AdminApplications = () => {
   return (
     <div className=" grid grid-cols-12">
       <div className="md:col-span-2 hidden md:block h-screen overflow-y-hidden ">

@@ -29,7 +29,6 @@ export const Signin = () => {
     setInfo({ message: "", type: "" });
     setLoading(true);
     signin(userDetails).then((response) => {
-     
       setLoading(false);
       setInfo({ message: response.message, type: response.status });
       if (response.status === "success"&& response.data.user.role=='recruitmentPartner') {
@@ -44,6 +43,10 @@ export const Signin = () => {
       if (response.status === "success"&& response.data.user.role=='admin'){
         storeUser(response.data.user);
         navigate("/adminDashboard");
+      }
+      if (response.status === "success"&& response.data.user.role=='counselor'){
+        storeUser(response.data.user);
+        navigate("/counsellorDashboard");
       }
       if (response.status === "success"&& response.data.user.role=='student'){
         storeUser(response.data.user);

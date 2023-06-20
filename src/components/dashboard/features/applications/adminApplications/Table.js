@@ -1,76 +1,38 @@
 import { useEffect, useRef, useState } from "react";
-import {
-  adminGetAllApplications,
-  adminDeleteApplication,
-} from "../../../data/api/authenticatedRequests";
-
-import PageLoader from "../../loaders/PageLoader";
-import moment from "moment";
-import { AiOutlineDelete } from "react-icons/ai";
-import ShowApplicationMenu from "../../buttons/ShowApplicationMenu";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { extendedApiSlice } from "./adminAplicationsApiSlice";
 import { DownloadTableExcel } from "react-export-table-to-excel";
 import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useGetApplicationsQuery } from "./adminAplicationsApiSlice";
+import TableRow from "./TableRow";
 export const Table = () => {
   const tableRef = useRef(null);
-  const [students, setStudents] = useState();
   const [status, setStatus] = useState();
-  const [loading, setLoading] = useState(false);
   const { currentStage } = useParams();
-
-  useEffect(() => {
-    const getStudents = async () => {
-      try {
-        setLoading(true);
-        if (currentStage) {
-          const res = await adminGetAllApplications({
+  const { data, isLoading, isSuccess, isFetching, refetch, isError, error } =
+    useGetApplicationsQuery(
+      status
+        ? {
+            currentStage: status,
+          }
+        : currentStage
+        ? {
             currentStage: currentStage,
-          });
-          setStudents(res.data);
-        } else {
-          const res = await adminGetAllApplications();
-          setStudents(res.data);
-        }
-
-        setLoading(false);
-      } catch (error) {
-        console.log(error);
+          }
+        : undefined,
+      {
+        refetchOnMountOrArgChange: true,
       }
-    };
-    getStudents();
-  }, []);
-  const handleChange = async (e) => {
-    setLoading(true);
-    try {
-      const res = await adminGetAllApplications({
-        currentStage: e.target.value,
-      });
-      setStudents(res.data);
-    } catch (error) {
-      console.log(error);
-    }
-    setLoading(false);
-  };
-  const deleteOneApplication = async (student) => {
-    const confirmer = window.confirm(
-      "Are you sure you want to delete this application? You can not undo this action."
     );
-    if (confirmer) {
-      const res = await adminDeleteApplication(student._id);
-      if (res.status == 200) {
-        setStudents((prev) => prev.filter((item) => item._id !== student._id));
-        toast("Application deleted successfully!");
-      }
-    }
-  };
+  //const orderedApplicationIds = useSelector(selectApplicationIds);
+  console.log(data);
+  useEffect(() => {});
   return (
     <div className="px-4 sm:px-6  mr-2 no-scrollbar">
       <div className="flex items-center justify-between">
         <div className="">
           <h1 className="md:text-xl font-bold text-blue-500">Applications</h1>
         </div>
-        {console.log(students)}
         <div className="flex space-x-4 items-center">
           <div className="">
             <div className="col-span-6 sm:col-span-3">
@@ -78,7 +40,7 @@ export const Table = () => {
                 id="status"
                 name="status"
                 value={status}
-                onChange={(e) => handleChange(e)}
+                onChange={(e) => setStatus(e.target.value)}
                 autoComplete="status"
                 className="mt-1 block w-full rounded-md border text-[#184061] border-gray-300 bg-white  shadow-sm focus:border-indigo-500 focus:outline-none cursor-pointer focus:ring-indigo-500 sm:text-sm"
               >
@@ -171,62 +133,21 @@ export const Table = () => {
                 </thead>
 
                 <tbody className="divide-y divide-gray-200  bg-white">
-                  {!loading &&
-                    students &&
-                    students?.map((student) => (
-                      <tr>
-                        <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
-                          {moment(student?.createdAt).format("L")}
-                        </td>
-                        <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
-                          {student?.studentId?.email}
-                        </td>
-                        <td className="whitespace-nowrap py-4 px-3 text-left text-sm font-medium">
-                          {student?.studentId?.firstName}
-                        </td>
-                        <td className="whitespace-nowrap py-4 px-3 text-left text-sm font-medium">
-                          {student?.studentId?.lastName}
-                        </td>
-                        <td className="whitespace-nowrap py-4 px-3 text-left text-sm font-medium">
-                          {student?.recruitmentPartnerId?.email}
-                        </td>
-                        <td className="whitespace-nowrap capitalize px-3 text-left py-4 text-sm text-blue-500">
-                          {student?.programmeId?.title}
-                        </td>
-                        <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-blue-500">
-                          {student?.programmeId?.schoolId?.name}
-                        </td>
-
-                        <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
-                          {student?.currentStage}
-                        </td>
-                        <td className="whitespace-nowrap py-4 px-3  text-left text-sm font-medium sm:pr-6">
-                          <div className=" flex space-x-1 items-center">
-                            <div
-                              className=" cursor-pointer p-1 hover:bg-gray-100 rounded-full "
-                              onClick={() => deleteOneApplication(student)}
-                            >
-                              <AiOutlineDelete className="text-xl text-red-500" />
-                            </div>
-
-                            <ShowApplicationMenu
-                              id={student._id}
-                              student={student}
-                              setApplications={setStudents}
-                              role="admin"
-                            />
-                          </div>
-                        </td>
-                      </tr>
+                  {!isLoading &&
+                    isSuccess &&
+                    data.map((application) => (
+                      <TableRow
+                        key={application._id}
+                        application={application}
+                      />
                     ))}
                 </tbody>
-                {loading && <div className=" text-lg p-2">Loading</div>}
+                {isLoading && <div className=" text-lg p-2">Loading</div>}
               </table>
             </div>
           </div>
         </div>
       </div>
-      <ToastContainer />
     </div>
   );
 };

@@ -1,13 +1,10 @@
 import { useEffect, useRef, useState } from "react";
-import { getAllApplications } from "../../../data/api/authenticatedRequests";
-import PageLoader from "../../utils/PageLoader";
+import { getAllApplications } from "../../../../../data/api/authenticatedRequests";
 import moment from "moment";
 import { AiOutlineDelete } from "react-icons/ai";
 import { useParams } from "react-router-dom";
-import { userStore } from "../../../stores";
 export const Table = () => {
   const [students, setStudents] = useState();
-  const user = userStore((state) => state.user);
 
   const [loading, setLoading] = useState(false);
   const { currentStage } = useParams();

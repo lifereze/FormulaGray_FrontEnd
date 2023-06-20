@@ -7,11 +7,17 @@ import {
   updateApplication,
   counsellorUpdateApplication,
 } from "../../data/api/authenticatedRequests";
-function ShowApplicationMenu({ id, setApplications, student, role }) {
+import { useUpdateAdminApplicationMutation } from "../dashboard/features/applications/adminApplications/adminAplicationsApiSlice";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+function ShowApplicationMenu({ id, student, role }) {
   const [showMenu, setShowMenu] = useState(false);
   const ref = useRef();
+  const [updateAdminApplication] = useUpdateAdminApplicationMutation();
   UseOnClickOutside(ref, () => setShowMenu(false));
   const editApplication = async (data) => {
+    setShowMenu(false);
+
     try {
       if (role === "counsellor") {
         const res = await counsellorUpdateApplication(id, {
@@ -22,12 +28,8 @@ function ShowApplicationMenu({ id, setApplications, student, role }) {
           window.location.reload();
         }
       } else {
-        const res = await updateApplication(id, data);
-        console.log(res);
-
-        if (res && res.status === 200) {
-          window.location.reload();
-        }
+        const res = await updateAdminApplication({ id, data });
+        toast("Application updated successfully!");
       }
     } catch (error) {}
   };
@@ -38,7 +40,7 @@ function ShowApplicationMenu({ id, setApplications, student, role }) {
       </div>
       <div className=" relative  ">
         {showMenu && (
-          <div className=" left-10   p-1 bg-[#184061] text-gray-200 rounded-md   text-center">
+          <div className="left-10   p-1 bg-[#184061] text-gray-200 rounded-md   text-center">
             <div className="font-bold">Status</div>
             <div
               className=" flex items-center py-1 space-x-2 px-2 hover:bg-gray-200 cursor-pointer rounded-sm hover:text-[#184061]"
@@ -70,6 +72,7 @@ function ShowApplicationMenu({ id, setApplications, student, role }) {
           </div>
         )}
       </div>
+      <ToastContainer />
     </div>
   );
 }
