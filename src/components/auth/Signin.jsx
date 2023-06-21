@@ -23,14 +23,14 @@ export const Signin = () => {
     const validationResult = await validateSigninData(userDetails);
 
     if (!validationResult.status) {
-      setInfo({ message: validationResult.message, type: "error" });
+      setInfo({ message: validationResult.message, type: "error" })
       return;
     }
     setInfo({ message: "", type: "" });
     setLoading(true);
     signin(userDetails).then((response) => {
       setLoading(false);
-      setInfo({ message: response.message, type: response.status });
+      setInfo({ message: response.message, type: response.status })
       if (response.status === "success"&& response.data.user.role=='recruitmentPartner') {
         if(response.data.user.onboarding){
         storeUser(response.data.user);
