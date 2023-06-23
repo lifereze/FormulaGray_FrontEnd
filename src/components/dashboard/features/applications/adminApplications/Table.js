@@ -9,6 +9,7 @@ export const Table = () => {
   const tableRef = useRef(null);
   const [status, setStatus] = useState();
   const { currentStage } = useParams();
+
   const { data, isLoading, isSuccess, isFetching, refetch, isError, error } =
     useGetApplicationsQuery(
       status

@@ -5,6 +5,10 @@ import {
   counsellorGetAllPartnersApplications,
   counsellorDeleteApplication,
 } from "../../../../../data/api/authenticatedRequests";
+import {
+  useGetCounsellorApplicationsQuery,
+  useGetCounsellorSpecificPartnerApplicationsQuery,
+} from "./counsellorApplicationsApiSlice";
 import moment from "moment";
 import { AiOutlineDelete } from "react-icons/ai";
 import { useParams } from "react-router-dom";
@@ -12,58 +16,29 @@ import { userStore } from "../../../../../stores";
 import ShowApplicationMenu from "../../../../buttons/ShowApplicationMenu";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import TableRow from "./TableRow";
 export const Table = () => {
   const [students, setStudents] = useState();
+  const [status, setStatus] = useState();
   const user = userStore((state) => state.user);
 
   const [loading, setLoading] = useState(false);
   const { currentStage, partnerId } = useParams();
-  useEffect(() => {
-    const getStudents = async () => {
-      try {
-        setLoading(true);
-
-        if (currentStage && !partnerId) {
-          const res = await counsellorGetAllApplications({
+  const { data, isLoading, isSuccess, isFetching, refetch, isError, error } =
+    useGetCounsellorApplicationsQuery(
+      status
+        ? {
+            currentStage: status,
+          }
+        : currentStage
+        ? {
             currentStage: currentStage,
-          });
-          setStudents(res.data.applications);
-        } else if (partnerId) {
-          const res = await counsellorGetAllPartnersApplications(partnerId);
-          console.log(res);
-          setStudents(res.data.applications);
-        } else {
-          const res = await counsellorGetAllApplications();
-          setStudents(res.data.applications);
-        }
-
-        setLoading(false);
-      } catch (error) {
-        console.log(error);
+          }
+        : undefined,
+      {
+        refetchOnMountOrArgChange: true,
       }
-    };
-    getStudents();
-  }, []);
-  const handleChange = async (e) => {
-    setLoading(true);
-    try {
-      if (partnerId) {
-        const res = await counsellorGetPartnersApplications(partnerId, {
-          currentStage: e.target.value,
-        });
-        setStudents(res.data.applications);
-      } else {
-        const res = await counsellorGetAllApplications({
-          currentStage: e.target.value,
-        });
-
-        setStudents(res.data.applications);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-    setLoading(false);
-  };
+    );
   const deleteOneApplication = async (student) => {
     const confirmer = window.confirm(
       "Are you sure you want to delete this application? You can not undo this action."
@@ -88,7 +63,8 @@ export const Table = () => {
               <select
                 id="status"
                 name="status"
-                onChange={(e) => handleChange(e)}
+                value={status}
+                onChange={(e) => setStatus(e.target.value)}
                 autoComplete="status"
                 className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
               >
@@ -136,6 +112,12 @@ export const Table = () => {
                       scope="col"
                       className="min-w-[12rem] py-3.5 pr-3 text-left text-sm font-semibold text-gray-900"
                     >
+                      Recruitment Partner
+                    </th>
+                    <th
+                      scope="col"
+                      className="min-w-[12rem] py-3.5 pr-3 text-left text-sm font-semibold text-gray-900"
+                    >
                       Program
                     </th>
                     <th
@@ -161,53 +143,16 @@ export const Table = () => {
                 </thead>
 
                 <tbody className="divide-y divide-gray-200 bg-white">
-                  {!loading &&
-                    students &&
-                    students?.map((student) => (
-                      <tr>
-                        <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
-                          {moment(student?.createdAt).format("L")}
-                        </td>
-                        <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
-                          {student?.studentId?.email}
-                        </td>
-                        <td className="whitespace-nowrap py-4 px-3 text-left text-sm font-medium">
-                          {student?.studentId?.firstName}
-                        </td>
-                        <td className="whitespace-nowrap py-4 px-3 text-left text-sm font-medium">
-                          {student?.studentId?.lastName}
-                        </td>
-                        <td className="whitespace-nowrap px-3 capitalize text-left py-4 text-sm text-blue-500">
-                          {student?.programmeId?.title}
-                        </td>
-                        <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-blue-500">
-                          {student?.programmeId?.schoolId?.name}
-                        </td>
-
-                        <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
-                          {student?.currentStage}
-                        </td>
-                        <td className="whitespace-nowrap py-4 px-3  text-left text-sm font-medium sm:pr-6">
-                          <div className=" flex space-x-1 items-center">
-                            <div
-                              className=" cursor-pointer p-1 hover:bg-gray-100 rounded-full "
-                              onClick={() => {
-                                deleteOneApplication(student);
-                              }}
-                            >
-                              <AiOutlineDelete className="text-xl text-red-500" />
-                            </div>
-                            <ShowApplicationMenu
-                              id={student._id}
-                              student={student}
-                              setApplications={setStudents}
-                              role="counsellor"
-                            />
-                          </div>
-                        </td>
-                      </tr>
+                  {!isLoading &&
+                    isSuccess &&
+                    data.map((application) => (
+                      <TableRow
+                        key={application._id}
+                        application={application}
+                      />
                     ))}
                 </tbody>
+                {isLoading && <div className=" text-lg p-2">Loading</div>}
               </table>
             </div>
           </div>

@@ -8,8 +8,12 @@ import { Hero4 } from "./Hero4";
 import { Footer } from "./Footer";
 import Testimonials from "./Testimonials";
 import Chatbot from 'react-chatbot-kit'
+import { useState } from "react";
 import { FloatingWhatsApp } from 'react-floating-whatsapp'
+import OnboardingModal from "../modals/OnboardingModal";
 export const LandingPage = () => {
+  const [showOnboardingModal,setShowOnboardingModal]=useState(true);
+
   return (<div className="bg-white">
     <div className=" fixed w-full  z-50 ">
     <Navbar />
@@ -31,6 +35,9 @@ export const LandingPage = () => {
 
       />
     </div>
+    {showOnboardingModal&&<OnboardingModal
+    setShowOnboardingModal={setShowOnboardingModal}
+    />}
     </div>
   );
 };

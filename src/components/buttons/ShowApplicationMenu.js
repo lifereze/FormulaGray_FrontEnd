@@ -8,24 +8,32 @@ import {
   counsellorUpdateApplication,
 } from "../../data/api/authenticatedRequests";
 import { useUpdateAdminApplicationMutation } from "../dashboard/features/applications/adminApplications/adminAplicationsApiSlice";
+import { useUpdateCounsellorApplicationMutation } from "../dashboard/features/applications/counsellorApplications/counsellorApplicationsApiSlice";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 function ShowApplicationMenu({ id, student, role }) {
   const [showMenu, setShowMenu] = useState(false);
   const ref = useRef();
   const [updateAdminApplication] = useUpdateAdminApplicationMutation();
+  const [updateCounsellorApplication] =
+    useUpdateCounsellorApplicationMutation();
   UseOnClickOutside(ref, () => setShowMenu(false));
   const editApplication = async (data) => {
     setShowMenu(false);
 
     try {
+      console.log(role);
       if (role === "counsellor") {
-        const res = await counsellorUpdateApplication(id, {
-          updatedFields: { currentStage: data.currentStage },
-        });
-        console.log(res);
-        if (res && res.status === 200) {
-          window.location.reload();
+        try {
+          const res = await updateCounsellorApplication({
+            id,
+            data: { updatedFields: data },
+          });
+          toast("Application updated successfully!");
+
+          console.log(res);
+        } catch (error) {
+          console.log(error);
         }
       } else {
         const res = await updateAdminApplication({ id, data });
