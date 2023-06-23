@@ -27,7 +27,7 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
       },
     }),
     getCounsellorSpecificPartnerApplications: builder.query({
-      query: (partnerId, stage) => {
+      query: ({ partnerId, stage }) => {
         return {
           url: `/counselor/applications/${partnerId}`,
           method: "POST",
@@ -38,7 +38,7 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
         };
       },
       transformResponse: (responseData) => {
-        return responseData;
+        return responseData.applications;
       },
       providesTags: (result, error, arg) => {
         console.log(result);

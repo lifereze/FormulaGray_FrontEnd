@@ -1,31 +1,30 @@
 import { useState } from "react";
 
-import {
-  useGetCounsellorApplicationsQuery,
-  useGetCounsellorSpecificPartnerApplicationsQuery,
-} from "./counsellorApplicationsApiSlice";
+import { useGetCounsellorSpecificPartnerApplicationsQuery } from "./counsellorApplicationsApiSlice";
 import { useParams } from "react-router-dom";
 import { userStore } from "../../../../../stores";
 
 import TableRow from "./TableRow";
-export const Table = () => {
-  const [students, setStudents] = useState();
+export const SpecificPartnerTable = () => {
   const [status, setStatus] = useState();
-  const user = userStore((state) => state.user);
 
-  const [loading, setLoading] = useState(false);
   const { currentStage, partnerId } = useParams();
   const { data, isLoading, isSuccess, isFetching, refetch, isError, error } =
-    useGetCounsellorApplicationsQuery(
+    useGetCounsellorSpecificPartnerApplicationsQuery(
       status
         ? {
-            currentStage: status,
+            stage: { currentStage: status },
+            partnerId: partnerId,
           }
         : currentStage
         ? {
-            currentStage: currentStage,
+            stage: { currentStage: status },
+            partnerId: partnerId,
           }
-        : undefined,
+        : {
+            stage: undefined,
+            partnerId: partnerId,
+          },
       {
         refetchOnMountOrArgChange: true,
       }

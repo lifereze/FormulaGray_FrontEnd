@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { AiOutlineClose, AiOutlineArrowRight } from "react-icons/ai";
 import { userStore } from "../../stores";
-import { createUser } from "../../data/api/authenticatedRequests";
+import { sendCanadianEmail } from "../../data/api/authenticatedRequests";
 import Spinner from "../utils/Spinner";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
@@ -12,10 +12,11 @@ function OnboardingModal({ setShowOnboardingModal }) {
     email: "",
     firstName: "",
     lastName: "",
-    phone: "",
+    phoneNumber: "",
   };
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
   const [student, setStudent] = useState(initialize);
   const user = userStore((state) => state.user);
   const handleChange = (input) => {
@@ -29,33 +30,36 @@ function OnboardingModal({ setShowOnboardingModal }) {
       student.email.length > 0 &&
       student.firstName.length > 0 &&
       student.lastName.length > 0 &&
-      student.phone.length > 0
+      student.phoneNumber.length > 0
     ) {
-      toast.success("Details sent successfully.");
+      setLoading(true);
+      try {
+        console.log(student.email);
+        const res = await sendCanadianEmail({
+          email: student.email,
+          firstName: student.firstName,
+          lastName: student.lastName,
+          phoneNumber: student.phoneNumber,
+        });
+
+        if (res.status == 200) {
+          toast.success("Details sent successfully.");
+
+          setShowOnboardingModal(false);
+        } else {
+          toast.error(res.data.message);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+
       setShowOnboardingModal(false);
     } else {
-      setShowOnboardingModal(false);
+      return setError(true);
     }
-    // if (
-    //   student.email.length > 0 &&
-    //   student.firstName.length > 0 &&
-    //   student.lastName.length > 0
-    // ) {
-    //   setLoading(true);
-    //   try {
-    //     const res = await createUser(student);
-    //     if (res.status == 201) {
-    //       toast.success("student created successfully.");
 
-    //       setShowOnboardingModal(false);
-    //     } else {
-    //       toast.error(res.data.message);
-    //     }
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-    // }
-    // setLoading(false);
+    setLoading(false);
+    setShowOnboardingModal(false);
   };
 
   return (
@@ -81,6 +85,11 @@ function OnboardingModal({ setShowOnboardingModal }) {
               <div className=" text-center text-sm pt-2 w-full">
                 Programs in Vancouver and Halifax.
               </div>
+              {error && (
+                <div className=" text-center text-red-500 text-sm pt-2 w-full">
+                  Please fill in all the details
+                </div>
+              )}
 
               <div className="py-1">
                 <label
@@ -95,7 +104,7 @@ function OnboardingModal({ setShowOnboardingModal }) {
                   name="email"
                   value={student.email}
                   onChange={handleChange}
-                  className="w-full rounded-md text-black bg-transparent placeholder-white text-sm border focus:outline-none focus:ring-0 focus:border-bloow-blue "
+                  className="w-full rounded-md text-black bg-transparent  text-sm border focus:outline-none focus:ring-0 focus:border-bloow-blue "
                   placeholder="Enter Email"
                   required
                 />
@@ -114,7 +123,7 @@ function OnboardingModal({ setShowOnboardingModal }) {
                   value={student.firstName}
                   onChange={handleChange}
                   name="firstName"
-                  className="w-full rounded-md text-black border placeholder-white text-sm  focus:outline-none focus:ring-0 focus:border-bloow-blue bg-transparent"
+                  className="w-full rounded-md text-black border  text-sm  focus:outline-none focus:ring-0 focus:border-bloow-blue bg-transparent"
                   placeholder="Enter First Name"
                   required
                 />
@@ -132,7 +141,7 @@ function OnboardingModal({ setShowOnboardingModal }) {
                   name="lastName"
                   value={student.lastName}
                   onChange={handleChange}
-                  className="w-full rounded-md text-black border placeholder-white text-sm  focus:outline-none focus:ring-0 focus:border-bloow-blue bg-transparent"
+                  className="w-full rounded-md text-black border  text-sm  focus:outline-none focus:ring-0 focus:border-bloow-blue bg-transparent"
                   placeholder="Enter Last Name"
                   required
                 />
@@ -147,11 +156,11 @@ function OnboardingModal({ setShowOnboardingModal }) {
                 </label>
                 <input
                   type="text"
-                  name="phone"
-                  value={student.phone}
+                  name="phoneNumber"
+                  value={student.phoneNumber}
                   onChange={handleChange}
-                  className="w-full rounded-md text-black border placeholder-white text-sm  focus:outline-none focus:ring-0 focus:border-bloow-blue bg-transparent"
-                  placeholder="Enter Last Name"
+                  className="w-full rounded-md text-black border  text-sm  focus:outline-none focus:ring-0 focus:border-bloow-blue bg-transparent"
+                  placeholder="Enter phone eg +234713799975"
                   required
                 />
               </div>

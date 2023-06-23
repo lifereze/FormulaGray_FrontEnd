@@ -435,3 +435,11 @@ export const resetPassword = async (data) => {
       return error.response;
     });
 };
+export const sendCanadianEmail = async (data) => {
+  return await api
+    .post(`/email/send-canadian-email`, data)
+    .then((response) => response)
+    .catch((error) => {
+      return error.response;
+    });
+};

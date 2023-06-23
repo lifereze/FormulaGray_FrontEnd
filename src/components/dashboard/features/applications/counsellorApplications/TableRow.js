@@ -53,7 +53,7 @@ function TableRow({ application }) {
             className=" cursor-pointer p-1 hover:bg-gray-100 rounded-full "
             onClick={() => deleteOneApplication(application)}
           >
-            <AiOutlineDelete className="text-xl text-red-500" />
+            {/* <AiOutlineDelete className="text-xl text-red-500" /> */}
           </div>
 
           <ShowApplicationMenu
