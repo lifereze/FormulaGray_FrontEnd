@@ -2,7 +2,7 @@ import { apiSlice } from "../../../../../features/api/apiSlice";
 
 export const extendedApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getApplications: builder.query({
+    getPartnerApplications: builder.query({
       query: (stage) => {
         return {
           url: "/application/rectruitmentPartner/applications",
@@ -28,7 +28,7 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
       },
     }),
 
-    deleteApplication: builder.mutation({
+    deletePartnerApplication: builder.mutation({
       query: ({ id }) => ({
         url: `application/recruitmentPartner/delete/${id}`,
         method: "DELETE",
@@ -42,6 +42,6 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useGetApplicationsQuery, useDeleteApplicationMutation } =
+export const { useGetPartnerApplicationsQuery, useDeletePartnerApplicationMutation } =
   extendedApiSlice;
 // returns the query result object

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { useGetApplicationsQuery } from "./partnerApplicationsApiSlice";
+import { useGetPartnerApplicationsQuery } from "./partnerApplicationsApiSlice";
 import moment from "moment";
 import { AiOutlineDelete } from "react-icons/ai";
 import { useParams } from "react-router-dom";
@@ -10,7 +10,7 @@ export const Table = () => {
 
   const { currentStage } = useParams();
   const { data, isLoading, isSuccess, isFetching, refetch, isError, error } =
-    useGetApplicationsQuery(
+    useGetPartnerApplicationsQuery(
       status
         ? {
             currentStage: status,

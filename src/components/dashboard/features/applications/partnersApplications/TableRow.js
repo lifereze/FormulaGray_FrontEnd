@@ -2,9 +2,9 @@ import moment from "moment";
 import { AiOutlineDelete } from "react-icons/ai";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useDeleteApplicationMutation } from "./partnerApplicationsApiSlice";
+import { useDeletePartnerApplicationMutation } from "./partnerApplicationsApiSlice";
 function TableRow({ application }) {
-  const [deleteApplication] = useDeleteApplicationMutation();
+  const [deleteApplication] = useDeletePartnerApplicationMutation();
   const deleteOneApplication = async (student) => {
     const confirmer = window.confirm(
       "Are you sure you want to delete this application? You can not undo this action."
