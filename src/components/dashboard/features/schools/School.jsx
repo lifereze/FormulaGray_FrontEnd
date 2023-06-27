@@ -1,24 +1,21 @@
 import React,{useState,useEffect} from 'react'
-import Logo from "../../../constants/images/formulargray_03.png";
-import Campus1 from "../../../constants/images/uni.jpg";
-import Campus2 from "../../../constants/images/moi.jpg";
-import SideBar from "../SideBar";
-import Banner from "../Banner";
-import ProgramCard from '../programs/ProgramCard';
-import {FaFlagUsa,FaDonate,FaRegCalendarAlt} from 'react-icons/fa'
-import {IoLocationSharp,IoSchoolSharp} from 'react-icons/io5'
-import {AiOutlineHome,AiOutlineDollar,AiOutlineRead} from 'react-icons/ai'
+import Campus1 from "../../../../constants/images/uni.jpg";
+import SideBar from "../../SideBar";
+import Banner from "../../Banner";
+import ProgramCard from '../../programs/ProgramCard';
+import {FaFlagUsa} from 'react-icons/fa'
+import {AiOutlineHome,AiOutlineRead} from 'react-icons/ai'
 import {GrDocumentText} from 'react-icons/gr'
 import {BsCheck2} from 'react-icons/bs'
 import {FaBookReader} from 'react-icons/fa'
 import {GiOpenBook} from 'react-icons/gi'
 import {TbWorldDownload} from 'react-icons/tb'
-import { getSpecificSchool } from '../../../data/api/authenticatedRequests';
-import { getSchoolPrograms } from '../../../data/api/authenticatedRequests';
+import { getSpecificSchool } from '../../../../data/api/authenticatedRequests';
+import { getSchoolPrograms } from '../../../../data/api/authenticatedRequests';
 import { useParams } from 'react-router-dom';
-import PageLoader  from "../../utils/PageLoader";
+import PageLoader  from "../../../utils/PageLoader";
 import { Link } from "react-router-dom";
-import { userStore } from "../../../stores";
+import { userStore } from "../../../../stores";
 import {AiOutlineUpload} from 'react-icons/ai'
 function School() {
     const [loading,setLoading]=useState(false)

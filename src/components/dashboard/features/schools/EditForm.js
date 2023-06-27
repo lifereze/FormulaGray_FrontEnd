@@ -1,22 +1,24 @@
-import React, { useState, useEffect, useMemo } from "react";
-import FileUpload from "../../uploads/FileUpload";
-import { firebaseUploadImg, firebaseUploadDoc } from "../../../data/api/upload";
+import React, { useState, useEffect } from "react";
+import { firebaseUploadImg } from "../../../../data/api/upload";
 import { getDownloadURL } from "firebase/storage";
-import Spinner from "../../utils/Spinner";
-import {
-  adminEditSpecificSchool,
-  getSpecificSchool,
-} from "../../../data/api/authenticatedRequests";
-import { useDropzone } from "react-dropzone";
-import UploadImage from "../../uploads/UploadImage";
+import Spinner from "../../../utils/Spinner";
+
+import UploadImage from "../../../uploads/UploadImage";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Select from "react-select";
 import { useNavigate, useParams } from "react-router-dom";
-
+import {
+  useGetSpecificSchoolQuery,
+  useAdminEditSchoolMutation,
+} from "./schoolsApiSlice";
 export const EditForm = (props) => {
   const navigate = useNavigate();
   const { id } = useParams();
+  const { data } = useGetSpecificSchoolQuery(id);
+
+  const [adminEditSchool, { isLoading, error }] = useAdminEditSchoolMutation();
+
   const initialize = {
     name: "",
     about: "",
@@ -42,18 +44,15 @@ export const EditForm = (props) => {
     },
     setSchool,
   ] = useState(initialize);
-  const [isLoading, setIsLoading] = useState();
   const [isImageLoading, setFileLoading] = useState();
   const [imageUrl, setImageUrl] = useState("");
   const [imagesArray, setImagesArray] = useState([]);
   const [featuresArray, setFeaturesArray] = useState([]);
   useEffect(() => {
-    const getSchool = async () => {
-      const res = await getSpecificSchool(id);
-      setSchool(res.data);
-    };
-    getSchool();
-  }, []);
+    if (data) {
+      setSchool(data);
+    }
+  }, [data]);
   const handleChange = (input) => {
     setSchool((prevState) => ({
       ...prevState,
@@ -61,23 +60,27 @@ export const EditForm = (props) => {
     }));
   };
   const onSubmitHandler = async () => {
-    setIsLoading(true);
-    const res = await adminEditSpecificSchool(id, {
-      name,
-      about,
-      country,
-      city,
-      street,
-      images: imagesArray,
-      features: featuresArray,
-      nationalities,
-      numberOfStudents,
-    });
-    setIsLoading(false);
-    if (res && res.status == 200) {
+    console.log(nationalities);
+    const res = await adminEditSchool({
+      id,
+      data: {
+        name,
+        about,
+        country,
+        city,
+        street,
+        images: imagesArray,
+        features: featuresArray,
+        nationalities,
+        numberOfStudents,
+      },
+    }).unwrap();
+    if (!error) {
       toast("School edited  successfully!");
       setSchool(initialize);
       navigate("/adminDashboard");
+    } else {
+      console.log(res);
     }
   };
   const setFeatures = (kFeatures) => {

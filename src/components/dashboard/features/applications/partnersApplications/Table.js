@@ -1,48 +1,29 @@
 import { useEffect, useRef, useState } from "react";
-import { getAllApplications } from "../../../../../data/api/authenticatedRequests";
+import { useGetApplicationsQuery } from "./partnerApplicationsApiSlice";
 import moment from "moment";
 import { AiOutlineDelete } from "react-icons/ai";
 import { useParams } from "react-router-dom";
+import TableRow from "./TableRow";
 export const Table = () => {
   const [students, setStudents] = useState();
+  const [status, setStatus] = useState();
 
-  const [loading, setLoading] = useState(false);
   const { currentStage } = useParams();
-  useEffect(() => {
-    const getStudents = async () => {
-      try {
-        setLoading(true);
-
-        if (currentStage) {
-          const res = await getAllApplications({
+  const { data, isLoading, isSuccess, isFetching, refetch, isError, error } =
+    useGetApplicationsQuery(
+      status
+        ? {
+            currentStage: status,
+          }
+        : currentStage
+        ? {
             currentStage: currentStage,
-          });
-          setStudents(res.data.applications);
-        } else {
-          const res = await getAllApplications();
-          setStudents(res.data.applications);
-        }
-
-        setLoading(false);
-      } catch (error) {
-        console.log(error);
+          }
+        : undefined,
+      {
+        refetchOnMountOrArgChange: true,
       }
-    };
-    getStudents();
-  }, []);
-  const handleChange = async (e) => {
-    setLoading(true);
-    try {
-      const res = await getAllApplications({
-        currentStage: e.target.value,
-      });
-
-      setStudents(res.data.applications);
-    } catch (error) {
-      console.log(error);
-    }
-    setLoading(false);
-  };
+    );
 
   return (
     <div className="px-4 sm:px-6  mr-2 no-scrollbar">
@@ -56,7 +37,7 @@ export const Table = () => {
               <select
                 id="status"
                 name="status"
-                onChange={(e) => handleChange(e)}
+                onChange={(e) => setStatus(e.target.value)}
                 autoComplete="status"
                 className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
               >
@@ -129,41 +110,13 @@ export const Table = () => {
                 </thead>
 
                 <tbody className="divide-y divide-gray-200 bg-white">
-                  {!loading &&
-                    students &&
-                    students?.map((student) => (
-                      <tr>
-                        <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
-                          {moment(student?.createdAt).format("L")}
-                        </td>
-                        <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
-                          {student?.studentId?.email}
-                        </td>
-                        <td className="whitespace-nowrap py-4 px-3 text-left text-sm font-medium">
-                          {student?.studentId?.firstName}
-                        </td>
-                        <td className="whitespace-nowrap py-4 px-3 text-left text-sm font-medium">
-                          {student?.studentId?.lastName}
-                        </td>
-                        <td className="whitespace-nowrap px-3 capitalize text-left py-4 text-sm text-blue-500">
-                          {student?.programmeId?.title}
-                        </td>
-                        <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-blue-500">
-                          {student?.programmeId?.schoolId?.name}
-                        </td>
-
-                        <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
-                          {student?.currentStage}
-                        </td>
-                        <td className="whitespace-nowrap py-4 px-3  text-left text-sm font-medium sm:pr-6">
-                          <div
-                            className=" cursor-pointer p-1 hover:bg-gray-100 rounded-full "
-                            onClick={() => {}}
-                          >
-                            <AiOutlineDelete className="text-xl text-red-500" />
-                          </div>
-                        </td>
-                      </tr>
+                  {!isLoading &&
+                    isSuccess &&
+                    data.map((application) => (
+                      <TableRow
+                        key={application._id}
+                        application={application}
+                      />
                     ))}
                 </tbody>
               </table>

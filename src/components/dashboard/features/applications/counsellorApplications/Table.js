@@ -9,11 +9,8 @@ import { userStore } from "../../../../../stores";
 
 import TableRow from "./TableRow";
 export const Table = () => {
-  const [students, setStudents] = useState();
   const [status, setStatus] = useState();
-  const user = userStore((state) => state.user);
 
-  const [loading, setLoading] = useState(false);
   const { currentStage, partnerId } = useParams();
   const { data, isLoading, isSuccess, isFetching, refetch, isError, error } =
     useGetCounsellorApplicationsQuery(

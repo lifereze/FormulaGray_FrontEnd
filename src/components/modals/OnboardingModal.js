@@ -85,7 +85,7 @@ function OnboardingModal({ setShowOnboardingModal }) {
                     <IoSchoolOutline className="" />
                   </div>
                   <div className="">Continuous Care Assistant-Halifax</div>
-                </div>
+                </div> 
                 <div className="border-[#184061] border  flex space-x-2 items-center   rounded-lg text-sm text-gray-700  py-1 px-2">
                   <div className=" text-xl">
                     <IoSchoolOutline className="" />

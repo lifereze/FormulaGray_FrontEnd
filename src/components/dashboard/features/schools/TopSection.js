@@ -1,12 +1,9 @@
-import React, { useState, useEffect } from "react";
-import Search from "../../inputs/Search";
-import { searchStore } from "../../../stores/index";
-import Filter from "../../filter/Filter";
-import FilterModal from "../../filter/FilterModal";
-import { MdFilterListAlt } from "react-icons/md";
+import React, { useState } from "react";
+import Search from "../../../inputs/Search";
+import FilterModal from "../../../filter/FilterModal";
 import { AiOutlineUpload } from "react-icons/ai";
 import { Link } from "react-router-dom";
-import { userStore } from "../../../stores";
+import { userStore } from "../../../../stores";
 function TopSection() {
   const [filterModal, setFilterModal] = useState(false);
   const user = userStore((state) => state.user);

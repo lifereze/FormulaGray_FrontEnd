@@ -1,23 +1,21 @@
-import React, { useState, useEffect, useMemo } from "react";
-import FileUpload from "../../uploads/FileUpload";
-import { firebaseUploadImg, firebaseUploadDoc } from "../../../data/api/upload";
+import React, { useState } from "react";
+import { firebaseUploadImg } from "../../../../data/api/upload";
 import { getDownloadURL } from "firebase/storage";
-import Spinner from "../../utils/Spinner";
-import { uploadSchool } from "../../../data/api/authenticatedRequests";
-import { useDropzone } from "react-dropzone";
-import UploadImage from "../../uploads/UploadImage";
+import Spinner from "../../../utils/Spinner";
+import UploadImage from "../../../uploads/UploadImage";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Select from "react-select";
 import { useNavigate } from "react-router-dom";
+import { useAdminAddSchoolMutation } from "./schoolsApiSlice";
 
 export const Form = (props) => {
   const navigate = useNavigate();
+  const [adminAddSchool, { isLoading, error }] = useAdminAddSchoolMutation();
   const initialize = {
     name: "",
     about: "",
     country: "",
-
     city: "",
     street: "",
     numberOfStudents: 0,
@@ -29,7 +27,6 @@ export const Form = (props) => {
     { name, about, country, city, street, numberOfStudents, nationalities },
     setSchool,
   ] = useState(initialize);
-  const [isLoading, setIsLoading] = useState();
   const [isImageLoading, setFileLoading] = useState();
   const [imageUrl, setImageUrl] = useState("");
   const [imagesArray, setImagesArray] = useState([]);
@@ -42,8 +39,7 @@ export const Form = (props) => {
     }));
   };
   const onSubmitHandler = async () => {
-    setIsLoading(true);
-    const res = await uploadSchool({
+    const res = await adminAddSchool({
       name,
       about,
       country,
@@ -54,14 +50,14 @@ export const Form = (props) => {
       nationalities,
       numberOfStudents,
     });
-    setIsLoading(false);
-    if (res && res.status == 200) {
+    console.log(res);
+    if (!error) {
       toast("School uploaded  successfully!");
       setSchool(initialize);
       setTimeout(() => {
         navigate("/adminDashboard");
       }, 1000);
-    } else if (res && res.status !== 200) {
+    } else {
       toast("Something went wrong!");
     }
   };

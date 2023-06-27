@@ -1,24 +1,32 @@
-import { EnvelopeIcon, PhoneIcon } from "@heroicons/react/20/solid";
-import {AiOutlineArrowRight} from 'react-icons/ai'
-import { userStore } from "../../../stores";
-import { deleteSchool } from "../../../data/api/authenticatedRequests";
 
+import { userStore } from "../../../../stores";
+import { useDeleteSchoolMutation } from "./schoolsApiSlice";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { Link } from "react-router-dom";
 export const SchoolsCard = ({institution}) => {
   const user = userStore((state) => state.user);
+  const [deleteSchool,{isLoading,error}] = useDeleteSchoolMutation();
   const delete_School = async () => {
     try {
       const confirmer = window.confirm(
         "Are you sure you want to delete this School? You cannot undo this action."
       );
       if (confirmer) {
-        const res = await deleteSchool(institution._id);
+        const res = await deleteSchool(institution._id).unwrap()
+        if(!error){
+          toast.warn("School deleted successfully!");
 
-        ;
-        if (res && res.status == 200) {
-          window.location.reload();
         }
+        else{
+          console.log(error)
+        }
+     
       }
-    } catch (error) {}
+    } catch (error) {
+      console.log(error)
+
+    }
   };
   return (
     <div
@@ -55,16 +63,17 @@ export const SchoolsCard = ({institution}) => {
        { user?.role=="admin"&&<div className="w-full pr-2 flex flex-row-reverse ">
         <div className=" flex space-x-2 items-center">
 
-        <a href={`/schools/editSchool/${institution._id}`}>
+        <Link to={`/schools/editSchool/${institution._id}`}>
         <div className=" text-blue-500 text-sm px-4 py-2">
         Edit
         </div>
-       </a>
+       </Link>
        <div className=" text-sm p-1 cursor-pointer text-red-500" onClick={delete_School}>
         Delete
        </div>
        </div>
        </div>}
+       <ToastContainer />
     </div>
   );
 }

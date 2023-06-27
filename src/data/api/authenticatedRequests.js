@@ -299,6 +299,14 @@ export const adminDeleteApplication = async (id) => {
       return error.response;
     });
 };
+export const partnerDeleteApplication = async (id) => {
+  return await api
+    .delete(`application/recruitmentPartner/delete/${id}`)
+    .then((response) => response)
+    .catch((error) => {
+      return error.response;
+    });
+};
 export const counsellorDeleteApplication = async (id) => {
   return await api
     .delete(`/counselor/application/${id}`)

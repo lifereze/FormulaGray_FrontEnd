@@ -15,7 +15,7 @@ import {
   getAllSchools,
   getStudentApplications,
 } from "../../data/api/authenticatedRequests";
-import { SchoolsCard } from "./schools/SchoolsCard";
+import { SchoolsCard } from "./features/schools/SchoolsCard";
 import { Link } from "react-router-dom";
 import { CountryDistribution } from "../charts/CountryDistribution";
 import TopSchools from "../featuredComponents/TopSchools";
