@@ -5,6 +5,7 @@ import {
   searchStudents,
   counsellorGetAllStudents,
   counsellorGetPartnerStudents,
+  adminGetSpecificUser,
 } from "../../../data/api/authenticatedRequests";
 import { useParams } from "react-router-dom";
 import { deleteStudent } from "../../../data/api/authenticatedRequests";
@@ -22,6 +23,7 @@ export const CounsellorTable = () => {
   const { partnerId } = useParams();
   const search = searchStore((state) => state.search);
   const [students, setStudents] = useState();
+
   const user = userStore((state) => state.user);
   const [items, setItems] = useState([
     "Bachelors",
@@ -41,6 +43,7 @@ export const CounsellorTable = () => {
           const res = await counsellorGetPartnerStudents(partnerId);
           console.log(res);
           setStudents(res.data.students);
+       
         } else {
           const res = await counsellorGetAllStudents();
           setStudents(res.data.students);

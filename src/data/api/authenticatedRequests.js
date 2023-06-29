@@ -363,6 +363,14 @@ export const adminGetSpecificStudent = async (id) => {
       return error.response;
     });
 };
+export const adminGetSpecificUser = async (id, data) => {
+  return await api
+    .post(`/admin/get/user/${id}`, data)
+    .then((response) => response)
+    .catch((error) => {
+      return error.response;
+    });
+};
 export const adminEditSpecificStudent = async (id, data) => {
   return await api
     .patch(`/admin/edit/student/${id}`, data)

@@ -5,6 +5,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import {
   getAllRecruitmentPartners,
   updateUser,
+  adminGetSpecificUser,
 } from "../../../data/api/authenticatedRequests";
 import { deleteUser } from "../../../data/api/authenticatedRequests";
 import { ToastContainer, toast } from "react-toastify";
@@ -22,12 +23,27 @@ export const Table = () => {
   const tableRef = useRef(null);
   const user = userStore((state) => state.user);
   const [partners, setPartners] = useState();
+  const [counsellor, setCounsellor] = useState();
   const [loading, setLoading] = useState(false);
   const [assignedPartners, setAssignedPartners] = useState([]);
   const [loadingAssignPartner, setLoadingAssignPartner] = useState();
   const navigate = useNavigate();
 
   const { counsellorId } = useParams();
+  const getCounsellor = async () => {
+    try {
+      const res = await adminGetSpecificUser(counsellorId, {
+        role: "counselor",
+      });
+      setCounsellor(res.data);
+      console.log(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    getCounsellor();
+  }, []);
   useEffect(() => {
     const getPartners = async () => {
       try {
@@ -76,8 +92,21 @@ export const Table = () => {
   return (
     <div className="px-4 sm:px-6  mr-2 no-scrollbar ">
       <div className="flex items-center justify-between">
-        <div className="">
-          <h1 className="md:text-xl font-bold text-blue-500">Partners</h1>
+        <div className=" flex flex-col items-start">
+          <h1 className="md:text-xl font-bold text-blue-500">
+            Assing Partners
+          </h1>
+
+          <div className=" ">
+            Name:{" "}
+            <span className="text-blue-500 text-sm">
+              {counsellor?.firstName} {counsellor?.lastName}
+            </span>
+          </div>
+          <div className="">
+            Email:{" "}
+            <span className="text-blue-500 text-sm">{counsellor?.email}</span>
+          </div>
         </div>
         <div>
           <div

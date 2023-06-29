@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { AiOutlineClose, AiOutlineArrowRight } from "react-icons/ai";
-import { userStore } from "../../stores";
-import { createUser } from "../../data/api/authenticatedRequests";
-import Spinner from "../utils/Spinner";
-import { useNavigate } from "react-router-dom";
+import { useAdminCreateCounsellorMutation } from "../counsellorApiSlice";
+import Spinner from "../../../../utils/Spinner";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -15,10 +13,10 @@ function CreateCounsellor({ setShowCreateCounsellor }) {
     lastName: "",
     role: "counselor",
   };
-  const navigate = useNavigate();
+  const [adminCreateCounsellor, { isLoading, error }] =
+    useAdminCreateCounsellorMutation();
   const [loading, setLoading] = useState(false);
   const [counsellor, setCounsellor] = useState(initialize);
-  const user = userStore((state) => state.user);
   const handleChange = (input) => {
     setCounsellor((prevState) => ({
       ...prevState,
@@ -33,16 +31,16 @@ function CreateCounsellor({ setShowCreateCounsellor }) {
     ) {
       setLoading(true);
       try {
-        const res = await createUser(counsellor);
-        if (res.status == 201) {
+        const res = await adminCreateCounsellor(counsellor).unwrap();
+        if (!error) {
           toast.success("Counsellor created successfully.");
-          window.location.reload();
           setShowCreateCounsellor(false);
         } else {
-          toast.error(res.data.message);
+          console.log("This error", error.data.message);
+          //   toast.error(res.data.message);
         }
       } catch (error) {
-        console.log(error);
+        toast.error(error.data.message);
       }
     }
     setLoading(false);

@@ -27,7 +27,6 @@ import { EditAdminStudent } from "./components/dashboard/adminStudents/EditStude
 import { Partners } from "./components/dashboard/features/partners/adminPartners/Partners";
 import { AssignPartners } from "./components/dashboard/assignPartners/AssignPartners";
 import { CounsellorPartners } from "./components/dashboard/features/partners/counsellorPartners/counsellorPartners";
-import { Counsellors } from "./components/dashboard/counsellors/Counsellors";
 import { Visa } from "./components/dashboard/Visa";
 import { AddStudent } from "./components/dashboard/students/AddStudent";
 import { AddSchool } from "./components/dashboard/features/schools/AddSchool";
@@ -41,6 +40,10 @@ import { VerifyEmail } from "./components/pages/VerifyEmail";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { DuplicateProgram } from "./components/dashboard/programs/DuplicateProgram";
+import { AdminCounsellorPartners } from "./components/dashboard/features/partners/adminCounsellorPartners/AdminCounsellorPartners";
+import { AdminPartnerApplications } from "./components/dashboard/features/applications/adminPartnerApplications.js/AdminPartnerAppliations";
+import { Counsellors } from "./components/dashboard/features/counsellors/Counsellors";
+
 function App() {
   return (
     <div className=" bg-[#E6E9EF] text-black">
@@ -61,12 +64,14 @@ function App() {
           <Route path="/applications/:currentStage" element={<Applications />} />
           <Route path="/adminApplications" element={<AdminApplications />} />
           <Route path="/adminApplications/:currentStage" element={<AdminApplications />} />
+          <Route path="/adminApplications/:id/:partnerId" element={<AdminPartnerApplications />} />
           <Route exact path="/counsellorapplications" element={<CounsellorApplications />} />
           <Route exact  path="/counsellorapplications/:currentStage" element={<CounsellorApplications />} />
 
           <Route exact path="/counsellorapplications/:currentStage/:partnerId" element={<CounsellorApplications />} />
 
-          <Route path="/partners" element={<Partners />} />
+          <Route exact path="/partners" element={<Partners />} />
+          <Route exact path="/partners/:id" element={<AdminCounsellorPartners />} />
           <Route exact path="/assignPartners/:counsellorId" element={<AssignPartners />} />
           <Route path="/counsellorPartners" element={<CounsellorPartners />} />
           <Route path="/counsellors" element={<Counsellors />} />
