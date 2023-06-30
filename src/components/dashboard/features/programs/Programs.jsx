@@ -1,15 +1,18 @@
-import React,{useState,useEffect} from "react";
-import { Navbar } from "../Navbar";
+import React,{useState} from "react";
 import { ProgramsSection } from "./ProgramsSection";
+import { SearchedProgramsSection } from "./SearchedProgramsSection";
+import { FilteredProgramsSection } from "./FilteredProgramsSection";
 import {MdFilterListAlt} from 'react-icons/md'
-import SideBar from "../SideBar";
-import Banner from "../Banner";
-import FilterModal from "../../filter/FilterModal";
+import SideBar from "../../SideBar";
+import Banner from "../../Banner";
+import FilterModal from "../../../filter/FilterModal";
+import { searchStore,filterStore } from "../../../../stores/index";
 
-import Search from '../../inputs/Search'
+import Search from '../../../inputs/Search'
 export const Programs = () => {
 const [filterModal,setFilterModal]=useState(false);
-
+const search = searchStore((state) => state.search);
+const filter = filterStore((state) => state.filter);
   return (
     <>
     <div className=" grid grid-cols-12">
@@ -51,7 +54,7 @@ const [filterModal,setFilterModal]=useState(false);
                         <Filter />
                         </div> */}
                      <div className=" col-span-10">
-                     <ProgramsSection />
+                    {search?<SearchedProgramsSection/>:filter?<FilteredProgramsSection/>: <ProgramsSection />}
                      </div>
                       
                       </div>

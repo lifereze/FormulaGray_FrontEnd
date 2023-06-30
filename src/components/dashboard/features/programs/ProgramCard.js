@@ -1,15 +1,14 @@
 import React, { useState } from "react";
-import { GoLocation } from "react-icons/go";
 import { FiEdit2 } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import { AiOutlineArrowRight, AiFillDelete, AiFillCopy } from "react-icons/ai";
-import ProgramDetails from "../../modals/programDetails";
+import ProgramDetails from "../../../modals/programDetails";
 import {
   studentCreateApplication,
   deleteProgram,
-} from "../../../data/api/authenticatedRequests";
-import { userStore } from "../../../stores";
-import Spinner from "../../utils/BlueSpinner";
+} from "../../../../data/api/authenticatedRequests";
+import { userStore } from "../../../../stores";
+import Spinner from "../../../utils/BlueSpinner";
 function ProgramCard({ program }) {
   const [viewProgram, setViewProgram] = useState(false);
   const [loading, setLoading] = useState(false);

@@ -2,14 +2,14 @@ import { apiSlice } from "../../../../../features/api/apiSlice";
 
 export const extendedApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    adminGetCounsellorPartners: builder.query({
+    adminGetCounsellorStudents: builder.query({
       query: (id) => {
         return {
           url: `/admin/counselor/${id}/users`,
           method: "POST",
           credentials: "include",
           body: {
-            role: "recruitmentPartner",
+            role: "student",
           },
         };
       },
@@ -18,10 +18,10 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
       },
       providesTags: (result, error, arg) => {
         return [
-          { type: "Partner", id: "LIST" },
+          { type: "Student", id: "LIST" },
           result.map(({ _id }) => {
             console.log(_id);
-            return { type: "Partner", _id };
+            return { type: "Student", _id };
           }),
         ];
       },
@@ -39,37 +39,23 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
         return responseData;
       },
     }),
-    adminEditCounsellorPartner: builder.mutation({
-      query: ({ id, data }) => {
-        return {
-          url: `/admin/edit/user/${id}`,
-          method: "PATCH",
-          credentials: "include",
-          body: data,
-        };
-      },
 
-      invalidatesTags: (result, error, { id: _id }) => {
-        return [{ type: "Partner", _id }];
-      },
-    }),
-    adminDeleteCounsellorPartner: builder.mutation({
+    adminDeleteCounsellorStudent: builder.mutation({
       query: (id) => ({
         url: `/admin/delete/user/${id}`,
         method: "DELETE",
         credentials: "include",
       }),
       invalidatesTags: (result, error, { id: _id }) => {
-        return [{ type: "Partner", _id }];
+        return [{ type: "Student", _id }];
       },
     }),
   }),
 });
 
 export const {
-  useAdminGetCounsellorPartnersQuery,
+  useAdminGetCounsellorStudentsQuery,
   useAdminGetCounsellorQuery,
-  useAdminEditCounsellorPartnerMutation,
-  useAdminDeleteCounsellorPartnerMutation,
+  useAdminDeleteCounsellorStudentMutation,
 } = extendedApiSlice;
 // returns the query result object

@@ -1,10 +1,9 @@
 import React from "react";
-import { Navbar } from "../Navbar";
-import { EditForm } from "./EditForm";
-import SideBar from "../SideBar";
-import Banner from "../Banner";
+import { Form } from "./Form";
+import SideBar from "../../SideBar";
+import Banner from "../../Banner";
 import { useNavigate } from "react-router-dom";
-export const EditProgram = (props) => {
+export const AddProgram = (props) => {
   const navigate = useNavigate();
   return (
     <>
@@ -29,7 +28,7 @@ export const EditProgram = (props) => {
                   <div className="divide-y divide-gray-200">
                     <div className="pt-6 text-center">
                       <div className="text-xl font-bold">{props.heading}</div>
-                      <EditForm />
+                      <Form />
                     </div>
                   </div>
                 </div>

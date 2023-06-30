@@ -58,7 +58,7 @@ function TableRow({ counsellor }) {
         {counsellor?.numberOfRecruitmentPartners}
         {counsellor?.numberOfRecruitmentPartners > 0 ? (
           <Link
-            to={`/partners/${counsellor.counselor._id}`}
+            to={`/counsellors/partners/${counsellor.counselor._id}`}
             className="text-xs text-blue-500 pl-2"
           >
             view

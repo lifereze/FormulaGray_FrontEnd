@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from "react";
-import { Navbar } from "../Navbar";
+import React, { useState } from "react";
 import { SchoolProgramsSection } from "./SchoolProgramsSection";
 import { MdFilterListAlt } from "react-icons/md";
-import SideBar from "../SideBar";
-import Banner from "../Banner";
-import FilterModal from "../../filter/FilterModal";
+import SideBar from "../../SideBar";
+import Banner from "../../Banner";
+import FilterModal from "../../../filter/FilterModal";
 
-import Search from "../../inputs/Search";
+import Search from "../../../inputs/Search";
 export const SchoolPrograms = () => {
   const [filterModal, setFilterModal] = useState(false);
 

@@ -1,132 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
-import { EllipsisVerticalIcon } from "@heroicons/react/20/solid";
-import { GoLocation } from "react-icons/go";
-import { AiOutlineArrowRight } from "react-icons/ai";
 import {
   getSchoolPrograms,
   searchPrograms,
   filterPrograms,
-} from "../../../data/api/authenticatedRequests";
-import PageLoader from "../../utils/PageLoader";
+} from "../../../../data/api/authenticatedRequests";
+import PageLoader from "../../../utils/PageLoader";
 import { useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
 import { DownloadTableExcel } from "react-export-table-to-excel";
 import ProgramCard from "./ProgramCard";
-import { searchStore, filterStore } from "../../../stores/index";
-const programss = [
-  {
-    name: "Design, Surveying and Planning for Construction",
-    campus: "University of Toronto",
-    initials: "UOT",
-    school: "Rotman School of Management",
-    country: "Canada",
-    location: "Ellesmere Port, North West, GB",
-    href: "#",
-    duration: "1 year",
-    fees: "$14,250.00",
-    applicationFee: "$0.00",
-    commission: "$1,710.00",
-    bgColor: "bg-pink-600",
-  },
-  {
-    name: "Design, Surveying and Planning for Construction",
-    campus: "University of Toronto",
-    initials: "UOT",
-    school: "Rotman School of Management",
-    country: "Canada",
-    location: "Ellesmere Port, North West, GB",
-    href: "#",
-    duration: "1 year",
-    fees: "$14,250.00",
-    applicationFee: "$0.00",
-    commission: "$1,710.00",
-    bgColor: "bg-purple-600",
-  },
-  {
-    name: "Design, Surveying and Planning for Construction",
-    campus: "University of Toronto",
-    initials: "UOT",
-    school: "Rotman School of Management",
-    country: "Canada",
-    location: "Ellesmere Port, North West, GB",
-    href: "#",
-    duration: "1 year",
-    fees: "$14,250.00",
-    applicationFee: "$0.00",
-    commission: "$1,710.00",
-    bgColor: "bg-yellow-500",
-  },
-  {
-    name: "Design, Surveying and Planning for Construction",
-    campus: "University of Toronto",
-    initials: "UOT",
-    school: "Rotman School of Management",
-    country: "Canada",
-    location: "Ellesmere Port, North West, GB",
-    href: "#",
-    duration: "1 year",
-    fees: "$14,250.00",
-    applicationFee: "$0.00",
-    commission: "$1,710.00",
-    bgColor: "bg-green-500",
-  },
-  {
-    name: "Design, Surveying and Planning for Construction",
-    campus: "University of Toronto",
-    initials: "UOT",
-    school: "Rotman School of Management",
-    country: "Canada",
-    location: "Ellesmere Port, North West, GB",
-    href: "#",
-    duration: "1 year",
-    fees: "$14,250.00",
-    applicationFee: "$0.00",
-    commission: "$1,710.00",
-    bgColor: "bg-pink-600",
-  },
-  {
-    name: "Design, Surveying and Planning for Construction",
-    campus: "University of Toronto",
-    initials: "UOT",
-    school: "Rotman School of Management",
-    country: "Canada",
-    location: "Ellesmere Port, North West, GB",
-    href: "#",
-    duration: "1 year",
-    fees: "$14,250.00",
-    applicationFee: "$0.00",
-    commission: "$1,710.00",
-    bgColor: "bg-purple-600",
-  },
-  {
-    name: "Design, Surveying and Planning for Construction",
-    campus: "University of Toronto",
-    initials: "UOT",
-    school: "Rotman School of Management",
-    country: "Canada",
-    location: "Ellesmere Port, North West, GB",
-    href: "#",
-    duration: "1 year",
-    fees: "$14,250.00",
-    applicationFee: "$0.00",
-    commission: "$1,710.00",
-    bgColor: "bg-yellow-500",
-  },
-  {
-    name: "Design, Surveying and Planning for Construction",
-    campus: "University of Toronto",
-    initials: "UOT",
-    school: "Rotman School of Management",
-    country: "Canada",
-    location: "Ellesmere Port, North West, GB",
-    href: "#",
-    duration: "1 year",
-    fees: "$14,250.00",
-    applicationFee: "$0.00",
-    commission: "$1,710.00",
-    bgColor: "bg-green-500",
-  },
-];
+import { searchStore, filterStore } from "../../../../stores/index";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");

@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
+import { Counsellors } from "./components/dashboard/features/counsellors/Counsellors";
 import { LandingPage } from "./components/landingPage/LandingPage";
 import { Signin } from "./components/auth/Signin";
 import { Signup } from "./components/auth/Signup";
@@ -13,14 +13,14 @@ import { CounsellorDashboard } from "./components/dashboard/CounsellorDashboard"
 import { StudentDashboard } from "./components/dashboard/StudentDashboard";
 import { Schools } from "./components/dashboard/features/schools/Schools";
 import School from "./components/dashboard/features/schools/School";
-import { ApplyStudents } from "./components/dashboard/programs/ApplyStudents";
+import { ApplyStudents } from "./components/dashboard/features/programs/ApplyStudents";
 import { Applications } from "./components/dashboard/features/applications/partnersApplications/Applications";
 import { AdminApplications } from "./components/dashboard/features/applications/adminApplications/AdminApplications";
 import { CounsellorApplications } from "./components/dashboard/features/applications/counsellorApplications/CounsellorApplications";
 import { EditSchool } from "./components/dashboard/features/schools/EditSchool";
 import { AdminStudents } from "./components/dashboard/adminStudents/Students";
-import { Programs } from "./components/dashboard/programs/Programs";
-import { SchoolPrograms } from "./components/dashboard/programs/SchoolPrograms";
+import { Programs } from "./components/dashboard/features/programs/Programs";
+import { SchoolPrograms } from "./components/dashboard/features/programs/SchoolPrograms";
 import { Students } from "./components/dashboard/students/Students";
 import { CounsellorStudents } from "./components/dashboard/students/CounsellorStudents";
 import { EditAdminStudent } from "./components/dashboard/adminStudents/EditStudent";
@@ -30,8 +30,8 @@ import { CounsellorPartners } from "./components/dashboard/features/partners/cou
 import { Visa } from "./components/dashboard/Visa";
 import { AddStudent } from "./components/dashboard/students/AddStudent";
 import { AddSchool } from "./components/dashboard/features/schools/AddSchool";
-import { AddProgram } from "./components/dashboard/programs/AddProgram";
-import { EditProgram } from "./components/dashboard/programs/EditProgram";
+import { AddProgram } from "./components/dashboard/features/programs/AddProgram";
+import { EditProgram } from "./components/dashboard/features/programs/EditProgram";
 import { EditStudent } from "./components/dashboard/students/EditStudent";
 import { ViewEditStudent } from "./components/dashboard/ViewEditStudent";
 import { Countdown } from "./components/countdown/Countdown";
@@ -39,10 +39,9 @@ import { RecruitmentPartnerRegister } from "./components/pages/recruitmentPartne
 import { VerifyEmail } from "./components/pages/VerifyEmail";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { DuplicateProgram } from "./components/dashboard/programs/DuplicateProgram";
+import { DuplicateProgram } from "./components/dashboard/features/programs/DuplicateProgram";
 import { AdminCounsellorPartners } from "./components/dashboard/features/partners/adminCounsellorPartners/AdminCounsellorPartners";
 import { AdminPartnerApplications } from "./components/dashboard/features/applications/adminPartnerApplications.js/AdminPartnerAppliations";
-import { Counsellors } from "./components/dashboard/features/counsellors/Counsellors";
 
 function App() {
   return (
@@ -71,7 +70,7 @@ function App() {
           <Route exact path="/counsellorapplications/:currentStage/:partnerId" element={<CounsellorApplications />} />
 
           <Route exact path="/partners" element={<Partners />} />
-          <Route exact path="/partners/:id" element={<AdminCounsellorPartners />} />
+          <Route exact path="/counsellors/partners/:id" element={<AdminCounsellorPartners />} />
           <Route exact path="/assignPartners/:counsellorId" element={<AssignPartners />} />
           <Route path="/counsellorPartners" element={<CounsellorPartners />} />
           <Route path="/counsellors" element={<Counsellors />} />
