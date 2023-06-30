@@ -30,7 +30,7 @@ export const LandingPage = () => {
 
       <Footer />
       <FloatingWhatsApp 
-      phoneNumber="+254713799975"
+      phoneNumber="+2349117572427"
       accountName="Formula Gray"
 
       />
