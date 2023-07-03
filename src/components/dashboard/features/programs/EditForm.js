@@ -1,28 +1,45 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import Spinner from "../../utils/Spinner";
-import { uploadProgram } from "../../../data/api/authenticatedRequests";
+import Spinner from "../../../utils/Spinner";
+import {
+  editProgram,
+  getSpecificProgram,
+} from "../../../../data/api/authenticatedRequests";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Select from "react-select";
-export const Form = (props) => {
+export const EditForm = (props) => {
   const navigate = useNavigate();
   const initialize = {
     title: "",
     description: "",
-    country: "",
-    applicationFee: "",
-    tuitionFees: "",
   };
-  const { schoolId } = useParams();
-  const [
-    { title, description, country, applicationFees, tuitionFees },
-    setProgram,
-  ] = useState(initialize);
+  const { id } = useParams();
+  const [{ title, description }, setProgram] = useState(initialize);
   const [isLoading, setIsLoading] = useState();
   const [intakesArray, setIntakesArray] = useState([]);
   const [level, setLevel] = useState("");
+  const [applicationFees, setApplicationFees] = useState(0);
+  const [tuitionFees, setTuitionFees] = useState(0);
+
+  useEffect(() => {
+    const getProgram = async () => {
+      const res = await getSpecificProgram(id);
+      if (res && res.status == 200) {
+        setProgram((prevState) => ({
+          ...prevState,
+          title: res.data[0].title,
+          description: res.data[0].description,
+        }));
+        setApplicationFees(res.data[0].applicationFees);
+        setTuitionFees(res.data[0].tuitionFees);
+        setLevel(res.data[0].level);
+        setIntakesArray(res.data[0].intakes);
+      }
+    };
+    getProgram();
+  }, []);
 
   const handleChange = (input) => {
     setProgram((prevState) => ({
@@ -32,22 +49,24 @@ export const Form = (props) => {
   };
   const onSubmitHandler = async () => {
     setIsLoading(true);
-    const res = await uploadProgram({
-      title,
-      description,
-      country,
-      applicationFees,
-      tuitionFees,
-      schoolId: schoolId,
-      currency: "USD",
-      intakes: intakesArray,
-      level,
-    });
+    const res = await editProgram(
+      {
+        title,
+        description,
+
+        applicationFees,
+        tuitionFees,
+        currency: "USD",
+        intakes: intakesArray,
+        level,
+      },
+      id
+    );
     setIsLoading(false);
     if (res && res.status == 200) {
-      toast("Program uploaded  successfully!");
+      toast("Program edited  successfully!");
       setProgram(initialize);
-      navigate("/adminDashboard");
+      navigate("/programs");
     }
   };
   const setIntakes = (kIntakes) => {
@@ -107,37 +126,29 @@ export const Form = (props) => {
                   </div>
 
                   <div className="col-span-6">
-                    <label
-                      htmlFor="applicationFees"
-                      className="block text-sm font-medium text-gray-700"
-                    >
+                    <label className="block text-sm font-medium text-gray-700">
                       Application Fee
                     </label>
                     <input
-                      onChange={(e) => handleChange(e)}
-                      type="number"
-                      name="applicationFees"
-                      id="applicationFees"
                       value={applicationFees}
-                      autoComplete="applicationFees"
+                      onChange={(e) => {
+                        setApplicationFees(e.target.value);
+                      }}
+                      type="number"
                       className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                     />
                   </div>
 
                   <div className="col-span-6">
-                    <label
-                      htmlFor="tuitionFees"
-                      className="block text-sm font-medium text-gray-700"
-                    >
+                    <label className="block text-sm font-medium text-gray-700">
                       Tuition Fee
                     </label>
                     <input
-                      onChange={(e) => handleChange(e)}
-                      type="number"
-                      name="tuitionFees"
-                      id="tuitionFees"
                       value={tuitionFees}
-                      autoComplete="tuitionFees"
+                      onChange={(e) => {
+                        setTuitionFees(e.target.value);
+                      }}
+                      type="number"
                       className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                     />
                   </div>
@@ -177,6 +188,7 @@ export const Form = (props) => {
                     </div>
                     <select
                       name={"level"}
+                      value={level}
                       className="w-full rounded-md border focus:outline-none focus:ring-0 focus:border-bloow-blue"
                       onChange={(e) => {
                         setLevel(e.target.value);

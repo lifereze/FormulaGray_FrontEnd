@@ -1,11 +1,11 @@
 import React, { useEffect, useState, useRef } from "react";
-import { useAdminGetCounsellorsQuery } from "./counsellorApiSlice";
+import { useAdminGetCounsellorsQuery } from "../counsellorApiSlice";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { DownloadTableExcel } from "react-export-table-to-excel";
-import { Link } from "react-router-dom";
-import TableRow from "./TableRow";
-import CreateCounsellor from "./modals/CreateCounsellor";
+import StudentTableRow from "./StudentTableRow";
+import PartnerTableRow from "./PartnerTableRow";
+import CreateCounsellor from "../modals/CreateCounsellor";
+import { useParams } from "react-router-dom";
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
@@ -16,6 +16,7 @@ export const Table = () => {
   const { data, isLoading } = useAdminGetCounsellorsQuery({
     role: "counselor",
   });
+  const { studentId, partnerId } = useParams();
 
   return (
     <div className="px-4 sm:px-6  mr-2 no-scrollbar ">
@@ -60,65 +61,25 @@ export const Table = () => {
                     >
                       Last name
                     </th>
-                    <th
-                      scope="col"
-                      className="min-w-[12rem] py-3.5 pr-3 text-left text-sm font-semibold text-gray-900"
-                    >
-                      Partners
-                    </th>
-                    <th
-                      scope="col"
-                      className="min-w-[12rem] py-3.5 pr-3 text-left text-sm font-semibold text-gray-900"
-                    >
-                      Students
-                    </th>
-                    <th
-                      scope="col"
-                      className="min-w-[12rem] py-3.5 pr-3 text-left text-sm font-semibold text-gray-900"
-                    >
-                      Applications
-                    </th>
-                    <th
-                      scope="col"
-                      className="min-w-[12rem] py-3.5 pr-3 text-left text-sm font-semibold text-gray-900"
-                    >
-                      Pending
-                    </th>
-                    <th
-                      scope="col"
-                      className="min-w-[12rem] py-3.5 pr-3 text-left text-sm font-semibold text-gray-900"
-                    >
-                      Accepted
-                    </th>
-                    <th
-                      scope="col"
-                      className="min-w-[12rem] py-3.5 pr-3 text-left text-sm font-semibold text-gray-900"
-                    >
-                      Rejected
-                    </th>
 
                     <th
                       scope="col"
                       className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                     ></th>
-                    <th
-                      scope="col"
-                      className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                    ></th>
-                    <th
-                      scope="col"
-                      className="relative py-3.5 pl-3 pr-4 sm:pr-6"
-                    >
-                      <span className="sr-only">Edit</span>
-                    </th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200 bg-white">
                   {!isLoading &&
                     data &&
-                    data?.map((counselor) => (
-                      <TableRow counsellor={counselor} />
-                    ))}
+                    data?.map((counselor) => {
+                      return studentId ? (
+                        <StudentTableRow counsellor={counselor} />
+                      ) : partnerId ? (
+                        <PartnerTableRow counsellor={counselor} />
+                      ) : (
+                        <></>
+                      );
+                    })}
                   {isLoading && <div className=" text-lg">Loading </div>}
                 </tbody>
               </table>

@@ -1,32 +1,32 @@
-import ShowMenu from "./ShowMenu";
 import { AiOutlineDelete } from "react-icons/ai";
-import { useAdminDeleteCounsellorPartnerMutation } from "./adminCounsellorPartnersApiSlice";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
-function TableRow({ partner }) {
+import ShowFiles from "../components/ShowFiles";
+import { useAdminDeleteCounsellorStudentMutation } from "./adminCounsellorStudentsApiSlice";
+function TableRow({ student }) {
   function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
   }
   const { id } = useParams();
-  const [adminDeleteCounsellorPartner, { isLoading, error }] =
-    useAdminDeleteCounsellorPartnerMutation();
-  const deleteOnePartner = async (partner) => {
+  const [adminDeleteCounsellorStudent, { isLoading, error }] =
+    useAdminDeleteCounsellorStudentMutation();
+  const deleteOnestudent = async (student) => {
     const confirmer = window.confirm(
-      "Are you sure you want to delete this partner? You can not undo this action."
+      "Are you sure you want to delete this student? You can not undo this action."
     );
     if (confirmer) {
-      const res = await adminDeleteCounsellorPartner(partner._id);
+      const res = await adminDeleteCounsellorStudent(student._id);
       if (!error) {
-        toast("Partner deleted successfully!");
+        toast("Student deleted successfully!");
       }
     }
   };
   return (
-    <tr key={partner.email}>
+    <tr key={student.email}>
       <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
-        {partner?.email}
+        {student?.email}
       </td>
       <td
         className={classNames(
@@ -34,7 +34,7 @@ function TableRow({ partner }) {
           "text-gray-900"
         )}
       >
-        {partner?.firstName}
+        {student?.firstName}
       </td>
       <td
         className={classNames(
@@ -42,7 +42,7 @@ function TableRow({ partner }) {
           "text-gray-900"
         )}
       >
-        {partner?.lastName}
+        {student?.lastName}
       </td>
       <td
         className={classNames(
@@ -50,7 +50,7 @@ function TableRow({ partner }) {
           "text-gray-900"
         )}
       >
-        {partner?.business?.location?.country}
+        {student?.location?.country}
       </td>
       <td
         className={classNames(
@@ -58,7 +58,7 @@ function TableRow({ partner }) {
           "text-gray-900"
         )}
       >
-        {partner?.recruitmentDetails?.averageCharge}
+        {student?.educationLevel}
       </td>
       <td
         className={classNames(
@@ -66,41 +66,28 @@ function TableRow({ partner }) {
           "text-gray-900"
         )}
       >
-        {partner?.recruitmentDetails?.averageStudentsAnnually}
-      </td>
-      <td
-        className={classNames(
-          "whitespace-nowrap py-4 px-3 text-left  capitalize text-sm font-medium",
-          "text-gray-900"
+        {(Object.keys(student?.documents ? student?.documents : {})?.length >
+          0 && <ShowFiles docs={student?.documents} />) || (
+          <a href={`/student/edit/${student?._id}`}>Upload Docs</a>
         )}
-      >
-        {partner?.recruitmentDetails?.studentsTo.map((country) => (
-          <span>{country},</span>
-        ))}
-      </td>
-
-      <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-blue-500">
-        <Link to={`/adminApplications/${id}/${partner._id}`}>
-          View Applications
-        </Link>
       </td>
       <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
         <Link
-          to={`/counsellors/reassignPartner/${id}/${partner._id}`}
+          to={`/counsellors/reassignStudent/${id}/${student._id}`}
           className=" bg-blue-500 rounded-md cursor-pointer text-white px-2 py-1.5"
         >
           Re-assign Counsellor
         </Link>
       </td>
+
       <td className="whitespace-nowrap py-4 px-2  text-left text-sm font-medium sm:pr-6">
         <div className=" flex space-x-2 items-center">
           <div
             className=" cursor-pointer p-1 hover:bg-gray-100 rounded-full "
-            onClick={() => deleteOnePartner(partner)}
+            onClick={() => deleteOnestudent(student)}
           >
             <AiOutlineDelete className="text-xl text-red-500" />
           </div>
-          <ShowMenu id={partner?._id} />
         </div>
       </td>
       <ToastContainer />

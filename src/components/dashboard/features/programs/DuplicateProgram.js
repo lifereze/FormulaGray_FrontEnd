@@ -1,8 +1,7 @@
 import React from "react";
-import { Navbar } from "../Navbar";
 import { DuplicateForm } from "./DuplicateForm";
-import SideBar from "../SideBar";
-import Banner from "../Banner";
+import SideBar from "../../SideBar";
+import Banner from "../../Banner";
 import { useNavigate } from "react-router-dom";
 export const DuplicateProgram = (props) => {
   const navigate = useNavigate();

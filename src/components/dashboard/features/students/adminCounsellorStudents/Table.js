@@ -4,18 +4,18 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { DownloadTableExcel } from "react-export-table-to-excel";
 import { userStore } from "../../../../../stores";
-import {
-  useAdminGetCounsellorPartnersQuery,
-  useAdminGetCounsellorQuery,
-} from "./adminCounsellorPartnersApiSlice";
 
+import {
+  useAdminGetCounsellorQuery,
+  useAdminGetCounsellorStudentsQuery,
+} from "./adminCounsellorStudentsApiSlice";
 import TableRow from "./TableRow";
 
 export const Table = () => {
   const tableRef = useRef(null);
   const { id } = useParams();
   const user = userStore((state) => state.user);
-  const { data, isLoading } = useAdminGetCounsellorPartnersQuery(id);
+  const { data, isLoading } = useAdminGetCounsellorStudentsQuery(id);
   const { data: counsellor, isLoading: loading } = useAdminGetCounsellorQuery({
     id,
     data: {
@@ -29,7 +29,7 @@ export const Table = () => {
       <div className="flex items-center justify-between">
         <div className=" flex flex-col items-start">
           <h1 className="md:text-xl font-bold text-blue-500">
-            Counsellor's Partners
+            Counsellor's Students
           </h1>
           <div className=" ">
             Name:{" "}
@@ -84,41 +84,31 @@ export const Table = () => {
                     </th>
                     <th
                       scope="col"
-                      className="min-w-[12rem] py-3.5 pr-3 text-left text-sm font-semibold text-gray-900"
+                      className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                     >
-                      Country
-                    </th>
-                    <th
-                      scope="col"
-                      className="min-w-[12rem] py-3.5 pr-3 text-left text-sm font-semibold text-gray-900"
-                    >
-                      Average charge per student
-                    </th>
-                    <th
-                      scope="col"
-                      className="min-w-[12rem] py-3.5 pr-3 text-left text-sm font-semibold text-gray-900"
-                    >
-                      Average number of students annually
-                    </th>
-                    <th
-                      scope="col"
-                      className="min-w-[12rem] py-3.5 pr-3 text-left text-sm font-semibold text-gray-900"
-                    >
-                      Students To
-                    </th>
-                    <th
-                      scope="col"
-                      className="min-w-[12rem] py-3.5 pr-3 text-left text-sm font-semibold text-gray-900"
-                    >
-                      Applications
+                      Nationality
                     </th>
 
                     <th
                       scope="col"
                       className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                     >
-                      Re-assign
+                      Level of Education
                     </th>
+
+                    <th
+                      scope="col"
+                      className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                    >
+                      Documents
+                    </th>
+                    <th
+                      scope="col"
+                      className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                    >
+                      Reassign
+                    </th>
+
                     <th
                       scope="col"
                       className="relative py-3.5 pl-3 pr-4 sm:pr-6"
@@ -130,7 +120,7 @@ export const Table = () => {
                 <tbody className="divide-y divide-gray-200 bg-white">
                   {!isLoading &&
                     data &&
-                    data.map((partner) => <TableRow partner={partner} />)}
+                    data.map((student) => <TableRow student={student} />)}
                 </tbody>
               </table>
             </div>

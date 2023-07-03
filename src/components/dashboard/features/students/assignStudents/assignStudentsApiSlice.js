@@ -2,26 +2,22 @@ import { apiSlice } from "../../../../../features/api/apiSlice";
 
 export const extendedApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    adminGetCounsellorPartners: builder.query({
+    adminGetUnassignedStudents: builder.query({
       query: (id) => {
         return {
-          url: `/admin/counselor/${id}/users`,
-          method: "POST",
+          url: "/admin/students/withoutCounselorOrPartner",
+          method: "GET",
           credentials: "include",
-          body: {
-            role: "recruitmentPartner",
-          },
         };
       },
       transformResponse: (responseData) => {
-        return responseData.recruitmentPartners;
+        return responseData.students;
       },
       providesTags: (result, error, arg) => {
         return [
-          { type: "Partner", id: "LIST" },
+          { type: "AssignStudent", id: "LIST" },
           result.map(({ _id }) => {
-            console.log(_id);
-            return { type: "Partner", _id };
+            return { type: "AssignStudent", _id };
           }),
         ];
       },
@@ -39,37 +35,30 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
         return responseData;
       },
     }),
-    adminEditCounsellorPartner: builder.mutation({
+
+    adminAssignCounsellorStudent: builder.mutation({
       query: ({ id, data }) => {
+        console.log(data);
+
         return {
-          url: `/admin/edit/user/${id}`,
-          method: "PATCH",
+          url: `/admin/students/assignCounselor/${id}`,
+          method: "POST",
           credentials: "include",
           body: data,
         };
       },
-
-      invalidatesTags: (result, error, { id: _id }) => {
-        return [{ type: "Partner", _id }];
+      transformResponse: (responseData) => {
+        console.log(responseData);
+        return responseData;
       },
-    }),
-    adminDeleteCounsellorPartner: builder.mutation({
-      query: (id) => ({
-        url: `/admin/delete/user/${id}`,
-        method: "DELETE",
-        credentials: "include",
-      }),
-      invalidatesTags: (result, error, { id: _id }) => {
-        return [{ type: "Partner", _id }];
-      },
+      invalidatesTags: [{ type: "AssignStudent", id: "LIST" }],
     }),
   }),
 });
 
 export const {
-  useAdminGetCounsellorPartnersQuery,
+  useAdminGetUnassignedStudentsQuery,
   useAdminGetCounsellorQuery,
-  useAdminEditCounsellorPartnerMutation,
-  useAdminDeleteCounsellorPartnerMutation,
+  useAdminAssignCounsellorStudentMutation,
 } = extendedApiSlice;
 // returns the query result object

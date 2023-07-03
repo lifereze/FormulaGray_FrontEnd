@@ -25,6 +25,19 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
         ];
       },
     }),
+    adminGetPartner: builder.query({
+      query: ({ id }) => {
+        return {
+          url: `/admin/get/user/${id}`,
+          method: "POST",
+          credentials: "include",
+          body: { role: "recruitmentPartner" },
+        };
+      },
+      transformResponse: (responseData) => {
+        return responseData;
+      },
+    }),
     adminUpdatePartnerApplication: builder.mutation({
       query: ({ id, data }) => ({
         url: `/admin/edit/application/${id}`,
@@ -53,6 +66,7 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
 
 export const {
   useAdminGetPartnerApplicationsQuery,
+  useAdminGetPartnerQuery,
   useAdminDeletePartnerApplicationMutation,
   useAdminUpdatePartnerApplicationMutation,
 } = extendedApiSlice;

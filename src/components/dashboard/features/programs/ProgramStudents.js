@@ -1,16 +1,15 @@
-import React, { useEffect, useRef, useState } from "react";
-import { createApplication } from "../../../data/api/authenticatedRequests";
-import Spinner from "../../utils/Spinner";
+import React, { useEffect, useState } from "react";
+import { createApplication } from "../../../../data/api/authenticatedRequests";
 import {
   getAllStudents,
   getSpecificProgram,
   getAllRecruitmentPartners,
   searchStudents,
-} from "../../../data/api/authenticatedRequests";
+} from "../../../../data/api/authenticatedRequests";
 import { useParams } from "react-router-dom";
-import ApplyButton from "../../buttons/ApplyButton";
-import PageLoader from "../../utils/PageLoader";
-import { userStore, searchStore } from "../../../stores";
+import ApplyButton from "../../../buttons/ApplyButton";
+import PageLoader from "../../../utils/PageLoader";
+import { userStore, searchStore } from "../../../../stores";
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }

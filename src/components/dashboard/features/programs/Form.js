@@ -1,46 +1,28 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
-import Spinner from "../../utils/Spinner";
-import {
-  uploadProgram,
-  getSpecificProgram,
-} from "../../../data/api/authenticatedRequests";
+import Spinner from "../../../utils/Spinner";
+import { uploadProgram } from "../../../../data/api/authenticatedRequests";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Select from "react-select";
-export const DuplicateForm = (props) => {
+export const Form = (props) => {
   const navigate = useNavigate();
   const initialize = {
     title: "",
     description: "",
+    country: "",
+    applicationFee: "",
+    tuitionFees: "",
   };
-  const { id } = useParams();
-  const [{ title, description }, setProgram] = useState(initialize);
+  const { schoolId } = useParams();
+  const [
+    { title, description, country, applicationFees, tuitionFees },
+    setProgram,
+  ] = useState(initialize);
   const [isLoading, setIsLoading] = useState();
   const [intakesArray, setIntakesArray] = useState([]);
   const [level, setLevel] = useState("");
-  const [applicationFees, setApplicationFees] = useState(0);
-  const [tuitionFees, setTuitionFees] = useState(0);
-  const [school, setSchool] = useState();
-  useEffect(() => {
-    const getProgram = async () => {
-      const res = await getSpecificProgram(id);
-      if (res && res.status == 200) {
-        setProgram((prevState) => ({
-          ...prevState,
-          title: res.data[0].title,
-          description: res.data[0].description,
-        }));
-        setSchool(res.data[0].schoolId._id);
-        setApplicationFees(res.data[0].applicationFees);
-        setTuitionFees(res.data[0].tuitionFees);
-        setLevel(res.data[0].level);
-        setIntakesArray(res.data[0].intakes);
-      }
-    };
-    getProgram();
-  }, []);
 
   const handleChange = (input) => {
     setProgram((prevState) => ({
@@ -53,20 +35,19 @@ export const DuplicateForm = (props) => {
     const res = await uploadProgram({
       title,
       description,
-
+      country,
       applicationFees,
       tuitionFees,
-      schoolId: school,
+      schoolId: schoolId,
       currency: "USD",
       intakes: intakesArray,
       level,
     });
-
     setIsLoading(false);
     if (res && res.status == 200) {
-      toast("Program edited  successfully!");
+      toast("Program uploaded  successfully!");
       setProgram(initialize);
-      navigate("/programs");
+      navigate("/adminDashboard");
     }
   };
   const setIntakes = (kIntakes) => {
@@ -126,29 +107,37 @@ export const DuplicateForm = (props) => {
                   </div>
 
                   <div className="col-span-6">
-                    <label className="block text-sm font-medium text-gray-700">
+                    <label
+                      htmlFor="applicationFees"
+                      className="block text-sm font-medium text-gray-700"
+                    >
                       Application Fee
                     </label>
                     <input
-                      value={applicationFees}
-                      onChange={(e) => {
-                        setApplicationFees(e.target.value);
-                      }}
+                      onChange={(e) => handleChange(e)}
                       type="number"
+                      name="applicationFees"
+                      id="applicationFees"
+                      value={applicationFees}
+                      autoComplete="applicationFees"
                       className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                     />
                   </div>
 
                   <div className="col-span-6">
-                    <label className="block text-sm font-medium text-gray-700">
+                    <label
+                      htmlFor="tuitionFees"
+                      className="block text-sm font-medium text-gray-700"
+                    >
                       Tuition Fee
                     </label>
                     <input
-                      value={tuitionFees}
-                      onChange={(e) => {
-                        setTuitionFees(e.target.value);
-                      }}
+                      onChange={(e) => handleChange(e)}
                       type="number"
+                      name="tuitionFees"
+                      id="tuitionFees"
+                      value={tuitionFees}
+                      autoComplete="tuitionFees"
                       className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                     />
                   </div>
@@ -188,7 +177,6 @@ export const DuplicateForm = (props) => {
                     </div>
                     <select
                       name={"level"}
-                      value={level}
                       className="w-full rounded-md border focus:outline-none focus:ring-0 focus:border-bloow-blue"
                       onChange={(e) => {
                         setLevel(e.target.value);

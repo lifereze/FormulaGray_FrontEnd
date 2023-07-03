@@ -1,36 +1,55 @@
 import React, { useEffect, useState, useRef } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+import {
+  useAdminGetUnassignedStudentsQuery,
+  useAdminGetCounsellorQuery,
+  useAdminAssignCounsellorStudentMutation,
+} from "./assignStudentsApiSlice";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { DownloadTableExcel } from "react-export-table-to-excel";
-import { userStore } from "../../../../../stores";
-import {
-  useAdminGetCounsellorPartnersQuery,
-  useAdminGetCounsellorQuery,
-} from "./adminCounsellorPartnersApiSlice";
-
+import Spinner from "../../../../utils/Spinner";
 import TableRow from "./TableRow";
+import { useSelector } from "react-redux";
 
 export const Table = () => {
   const tableRef = useRef(null);
-  const { id } = useParams();
-  const user = userStore((state) => state.user);
-  const { data, isLoading } = useAdminGetCounsellorPartnersQuery(id);
+  const navigate = useNavigate();
+  const { counsellorId } = useParams();
+  const { data: students, isLoading } = useAdminGetUnassignedStudentsQuery();
   const { data: counsellor, isLoading: loading } = useAdminGetCounsellorQuery({
-    id,
+    id: counsellorId,
     data: {
       role: "counselor",
     },
   });
-
-  console.log(data);
+  const [
+    adminAssignCounsellorStudent,
+    { isLoading: loadingAssignPartner, error },
+  ] = useAdminAssignCounsellorStudentMutation();
+  const studentsIds = useSelector(
+    (state) => state.assignStudents.assignedStudents
+  );
+  console.log(studentsIds);
+  const assignStudents = () => {
+    adminAssignCounsellorStudent({
+      id: counsellorId,
+      data: {
+        assignedStudents: studentsIds,
+      },
+    });
+    if (!error) {
+      toast("Students added successfully.");
+      navigate("/counsellors");
+    }
+  };
   return (
     <div className="px-4 sm:px-6  mr-2 no-scrollbar ">
       <div className="flex items-center justify-between">
         <div className=" flex flex-col items-start">
           <h1 className="md:text-xl font-bold text-blue-500">
-            Counsellor's Partners
+            Assing Students
           </h1>
+
           <div className=" ">
             Name:{" "}
             <span className="text-blue-500 text-sm">
@@ -43,15 +62,16 @@ export const Table = () => {
           </div>
         </div>
         <div>
-          <DownloadTableExcel
-            filename="Partners table"
-            sheet="Partners"
-            currentTableRef={tableRef.current}
+          <div
+            className={
+              (studentsIds?.length === 0 &&
+                "bg-white shadow-md rounded-md text-[#184061] cursor-pointer px-2 py-1.5 ") ||
+              "bg-blue-500 shadow-md rounded-md text-white cursor-pointer px-2 py-1.5 "
+            }
+            onClick={studentsIds?.length > 0 ? assignStudents : () => {}}
           >
-            <div className="bg-white shadow-md rounded-md text-[#184061] cursor-pointer px-2 py-1.5 ">
-              Generate report
-            </div>
-          </DownloadTableExcel>
+            {loadingAssignPartner ? <Spinner /> : "Assign Students"}
+          </div>
         </div>
       </div>
       <div className="mt-8 flex flex-col">
@@ -64,6 +84,10 @@ export const Table = () => {
               >
                 <thead className="bg-gray-50">
                   <tr>
+                    <th
+                      scope="col"
+                      className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                    ></th>
                     <th
                       scope="col"
                       className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
@@ -88,37 +112,7 @@ export const Table = () => {
                     >
                       Country
                     </th>
-                    <th
-                      scope="col"
-                      className="min-w-[12rem] py-3.5 pr-3 text-left text-sm font-semibold text-gray-900"
-                    >
-                      Average charge per student
-                    </th>
-                    <th
-                      scope="col"
-                      className="min-w-[12rem] py-3.5 pr-3 text-left text-sm font-semibold text-gray-900"
-                    >
-                      Average number of students annually
-                    </th>
-                    <th
-                      scope="col"
-                      className="min-w-[12rem] py-3.5 pr-3 text-left text-sm font-semibold text-gray-900"
-                    >
-                      Students To
-                    </th>
-                    <th
-                      scope="col"
-                      className="min-w-[12rem] py-3.5 pr-3 text-left text-sm font-semibold text-gray-900"
-                    >
-                      Applications
-                    </th>
 
-                    <th
-                      scope="col"
-                      className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                    >
-                      Re-assign
-                    </th>
                     <th
                       scope="col"
                       className="relative py-3.5 pl-3 pr-4 sm:pr-6"
@@ -129,8 +123,8 @@ export const Table = () => {
                 </thead>
                 <tbody className="divide-y divide-gray-200 bg-white">
                   {!isLoading &&
-                    data &&
-                    data.map((partner) => <TableRow partner={partner} />)}
+                    students &&
+                    students.map((student) => <TableRow student={student} />)}
                 </tbody>
               </table>
             </div>

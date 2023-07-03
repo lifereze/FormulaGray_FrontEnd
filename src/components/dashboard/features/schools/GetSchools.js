@@ -4,7 +4,6 @@ import { useGetAllSchoolsQuery } from "./schoolsApiSlice";
 function GetSchools() {
   const { data, isLoading, isSuccess, isFetching, refetch, isError, error } =
     useGetAllSchoolsQuery();
-  console.log(data);
   return (
     <div className="col-span-10">
       <div className="grid  gap-3  md:grid-cols-3 grid-cols-1">

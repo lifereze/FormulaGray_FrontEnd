@@ -2,7 +2,7 @@ import React,{useState,useEffect} from 'react'
 import Campus1 from "../../../../constants/images/uni.jpg";
 import SideBar from "../../SideBar";
 import Banner from "../../Banner";
-import ProgramCard from '../../programs/ProgramCard';
+import ProgramCard from '../../features/programs/ProgramCard';
 import {FaFlagUsa} from 'react-icons/fa'
 import {AiOutlineHome,AiOutlineRead} from 'react-icons/ai'
 import {GrDocumentText} from 'react-icons/gr'

@@ -1,6 +1,5 @@
-import React, { useLayoutEffect, useRef, useState, useEffect } from "react";
-import { createApplication } from "../../../data/api/authenticatedRequests";
-import Spinner from "../../utils/Spinner";
+import React, { useState, useEffect } from "react";
+import { createApplication } from "../../../../data/api/authenticatedRequests";
 
 function TableCard(student, program) {
   useEffect(() => {}, []);
