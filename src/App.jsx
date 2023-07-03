@@ -25,7 +25,8 @@ import { Students } from "./components/dashboard/students/Students";
 import { CounsellorStudents } from "./components/dashboard/students/CounsellorStudents";
 import { EditAdminStudent } from "./components/dashboard/adminStudents/EditStudent";
 import { Partners } from "./components/dashboard/features/partners/adminPartners/Partners";
-import { AssignPartners } from "./components/dashboard/assignPartners/AssignPartners";
+import { AssignPartners } from "./components/dashboard/features/partners/assignPartners/AssignPartners";
+import {AssignStudents} from "./components/dashboard/features/students/assignStudents/AssignStudents";
 import { CounsellorPartners } from "./components/dashboard/features/partners/counsellorPartners/counsellorPartners";
 import { Visa } from "./components/dashboard/Visa";
 import { AddStudent } from "./components/dashboard/students/AddStudent";
@@ -42,7 +43,8 @@ import "react-toastify/dist/ReactToastify.css";
 import { DuplicateProgram } from "./components/dashboard/features/programs/DuplicateProgram";
 import { AdminCounsellorPartners } from "./components/dashboard/features/partners/adminCounsellorPartners/AdminCounsellorPartners";
 import { AdminPartnerApplications } from "./components/dashboard/features/applications/adminPartnerApplications.js/AdminPartnerAppliations";
-
+import { AdminCounsellorStudents } from "./components/dashboard/features/students/adminCounsellorStudents/AdminCounsellorStudents";
+import { Reassign } from "./components/dashboard/features/counsellors/reassign/Reassign";
 function App() {
   return (
     <div className=" bg-[#E6E9EF] text-black">
@@ -71,7 +73,11 @@ function App() {
 
           <Route exact path="/partners" element={<Partners />} />
           <Route exact path="/counsellors/partners/:id" element={<AdminCounsellorPartners />} />
+          <Route exact path="/counsellors/students/:id" element={<AdminCounsellorStudents />} />
+          <Route exact path="/counsellors/reassignStudent/:oldCounsellorId/:studentId" element={<Reassign/>} />
+          <Route exact path="/counsellors/reassignPartner/:oldCounsellorId/:partnerId" element={<Reassign/>} />
           <Route exact path="/assignPartners/:counsellorId" element={<AssignPartners />} />
+          <Route exact path="/assignStudents/:counsellorId" element={<AssignStudents />} />
           <Route path="/counsellorPartners" element={<CounsellorPartners />} />
           <Route path="/counsellors" element={<Counsellors />} />
           <Route path="/programs" element={<Programs />} />

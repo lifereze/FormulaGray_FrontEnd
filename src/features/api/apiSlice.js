@@ -11,6 +11,8 @@ export const apiSlice = createApi({
     "Program",
     "SchoolProgram",
     "Student",
+    "AssignStudent",
+    "AssignPartner",
   ],
   endpoints: (builder) => ({}),
 });

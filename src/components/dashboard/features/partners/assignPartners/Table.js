@@ -1,36 +1,55 @@
 import React, { useEffect, useState, useRef } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+import {
+  useAdminGetUnassignedPartnersQuery,
+  useAdminGetCounsellorQuery,
+  useAdminAssignCounsellorPartnerMutation,
+} from "./assignPartnersApiSlice";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { DownloadTableExcel } from "react-export-table-to-excel";
-import { userStore } from "../../../../../stores";
-
-import {
-  useAdminGetCounsellorQuery,
-  useAdminGetCounsellorStudentsQuery,
-} from "./adminCounsellorStudentsApiSlice";
+import Spinner from "../../../../utils/Spinner";
 import TableRow from "./TableRow";
+import { useSelector } from "react-redux";
 
 export const Table = () => {
   const tableRef = useRef(null);
-  const { id } = useParams();
-  const user = userStore((state) => state.user);
-  const { data, isLoading } = useAdminGetCounsellorStudentsQuery(id);
+  const navigate = useNavigate();
+  const { counsellorId } = useParams();
+  const { data: partners, isLoading } = useAdminGetUnassignedPartnersQuery();
   const { data: counsellor, isLoading: loading } = useAdminGetCounsellorQuery({
-    id,
+    id: counsellorId,
     data: {
       role: "counselor",
     },
   });
-
-  console.log(data);
+  const [
+    adminAssignCounsellorPartner,
+    { isLoading: loadingAssignPartner, error },
+  ] = useAdminAssignCounsellorPartnerMutation();
+  const partnersIds = useSelector(
+    (state) => state.assignPartners.assignedPartners
+  );
+  console.log(partnersIds);
+  const assignPartners = () => {
+    adminAssignCounsellorPartner({
+      id: counsellorId,
+      data: {
+        assignedRecruitmentPartners: partnersIds,
+      },
+    });
+    if (!error) {
+      toast("Partners added successfully.");
+      navigate("/counsellors");
+    }
+  };
   return (
     <div className="px-4 sm:px-6  mr-2 no-scrollbar ">
       <div className="flex items-center justify-between">
         <div className=" flex flex-col items-start">
           <h1 className="md:text-xl font-bold text-blue-500">
-            Counsellor's Students
+            Assing Students
           </h1>
+
           <div className=" ">
             Name:{" "}
             <span className="text-blue-500 text-sm">
@@ -43,15 +62,16 @@ export const Table = () => {
           </div>
         </div>
         <div>
-          <DownloadTableExcel
-            filename="Partners table"
-            sheet="Partners"
-            currentTableRef={tableRef.current}
+          <div
+            className={
+              (partnersIds?.length === 0 &&
+                "bg-white shadow-md rounded-md text-[#184061] cursor-pointer px-2 py-1.5 ") ||
+              "bg-blue-500 shadow-md rounded-md text-white cursor-pointer px-2 py-1.5 "
+            }
+            onClick={partnersIds?.length > 0 ? assignPartners : () => {}}
           >
-            <div className="bg-white shadow-md rounded-md text-[#184061] cursor-pointer px-2 py-1.5 ">
-              Generate report
-            </div>
-          </DownloadTableExcel>
+            {loadingAssignPartner ? <Spinner /> : "Assign Partners"}
+          </div>
         </div>
       </div>
       <div className="mt-8 flex flex-col">
@@ -64,6 +84,10 @@ export const Table = () => {
               >
                 <thead className="bg-gray-50">
                   <tr>
+                    <th
+                      scope="col"
+                      className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                    ></th>
                     <th
                       scope="col"
                       className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
@@ -82,45 +106,12 @@ export const Table = () => {
                     >
                       Last name
                     </th>
-                    <th
-                      scope="col"
-                      className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                    >
-                      Nationality
-                    </th>
-
-                    <th
-                      scope="col"
-                      className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                    >
-                      Level of Education
-                    </th>
-
-                    <th
-                      scope="col"
-                      className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                    >
-                      Documents
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                    >
-                      Reassign
-                    </th>
-
-                    <th
-                      scope="col"
-                      className="relative py-3.5 pl-3 pr-4 sm:pr-6"
-                    >
-                      <span className="sr-only">Edit</span>
-                    </th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200 bg-white">
                   {!isLoading &&
-                    data &&
-                    data.map((student) => <TableRow student={student} />)}
+                    partners &&
+                    partners.map((partner) => <TableRow partner={partner} />)}
                 </tbody>
               </table>
             </div>

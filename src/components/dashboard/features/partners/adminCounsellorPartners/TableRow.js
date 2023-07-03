@@ -85,7 +85,12 @@ function TableRow({ partner }) {
         </Link>
       </td>
       <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
-        {partner?.approvalStatus}
+        <Link
+          to={`/counsellors/reassignPartner/${id}/${partner._id}`}
+          className=" bg-blue-500 rounded-md cursor-pointer text-white px-2 py-1.5"
+        >
+          Re-assign Counsellor
+        </Link>
       </td>
       <td className="whitespace-nowrap py-4 px-2  text-left text-sm font-medium sm:pr-6">
         <div className=" flex space-x-2 items-center">

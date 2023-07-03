@@ -56,24 +56,28 @@ function TableRow({ counsellor }) {
         )}
       >
         {counsellor?.numberOfRecruitmentPartners}
-        {counsellor?.numberOfRecruitmentPartners > 0 ? (
-          <Link
-            to={`/counsellors/partners/${counsellor.counselor._id}`}
-            className="text-xs text-blue-500 pl-2"
-          >
-            view
-          </Link>
-        ) : (
-          <></>
-        )}
+
+        <Link
+          to={`/counsellors/partners/${counsellor.counselor._id}`}
+          className="text-xs text-blue-500 pl-2"
+        >
+          view
+        </Link>
       </td>
       <td
         className={classNames(
-          "whitespace-nowrap py-4 px-3 text-left  capitalize text-sm font-medium",
+          "whitespace-nowrap py-4 px-3 text-left   capitalize text-sm font-medium",
           "text-gray-900"
         )}
       >
         {counsellor?.numberOfStudents}
+
+        <Link
+          to={`/counsellors/students/${counsellor.counselor._id}`}
+          className="text-xs text-blue-500 pl-2 capitalize"
+        >
+          view
+        </Link>
       </td>
       <td
         className={classNames(
@@ -109,14 +113,19 @@ function TableRow({ counsellor }) {
       </td>
 
       <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
-        {counsellor?.approvalStatus}
+        <Link
+          to={`/assignStudents/${counsellor?.counselor?._id}`}
+          className=" bg-blue-500 rounded-md cursor-pointer text-white px-2 py-1.5"
+        >
+          Assign Students
+        </Link>
       </td>
       <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
         <Link
           to={`/assignPartners/${counsellor?.counselor?._id}`}
           className=" bg-blue-500 rounded-md cursor-pointer text-white px-2 py-1.5"
         >
-          Assign Partner
+          Assign Partners
         </Link>
       </td>
       <td className="whitespace-nowrap py-4 px-2  text-left text-sm font-medium sm:pr-6">

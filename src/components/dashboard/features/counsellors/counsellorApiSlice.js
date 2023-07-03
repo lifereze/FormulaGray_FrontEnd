@@ -4,7 +4,6 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     adminGetCounsellors: builder.query({
       query: (data) => {
-       
         return {
           url: "/admin/get/users",
           method: "POST",
@@ -16,7 +15,6 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
         return responseData.counselors;
       },
       providesTags: (result, error, arg) => {
-       
         return [
           { type: "Counsellor", id: "LIST" },
           result.map(({ counselor }) => {
@@ -36,6 +34,22 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: [{ type: "Counsellor", id: "LIST" }],
     }),
+    adminReassignStudent: builder.mutation({
+      query: ({ counsellorId, data }) => ({
+        url: `/admin/reassign-student/${counsellorId}`,
+        method: "PATCH",
+        credentials: "include",
+        body: data,
+      }),
+    }),
+    adminReassignPartner: builder.mutation({
+      query: ({ counsellorId, data }) => ({
+        url: `/admin/reassign-recruitment-partner/${counsellorId}`,
+        method: "PATCH",
+        credentials: "include",
+        body: data,
+      }),
+    }),
     adminDeleteCounsellor: builder.mutation({
       query: (id) => ({
         url: `/admin/delete/user/${id}`,
@@ -54,5 +68,7 @@ export const {
 
   useAdminCreateCounsellorMutation,
   useAdminDeleteCounsellorMutation,
+  useAdminReassignStudentMutation,
+  useAdminReassignPartnerMutation,
 } = extendedApiSlice;
 // returns the query result object

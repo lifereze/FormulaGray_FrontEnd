@@ -2,13 +2,17 @@ import { useEffect, useRef, useState } from "react";
 import { DownloadTableExcel } from "react-export-table-to-excel";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { useAdminGetPartnerApplicationsQuery } from "./adminPartnerApplicationsApiSlice";
+import {
+  useAdminGetPartnerApplicationsQuery,
+  useAdminGetPartnerQuery,
+} from "./adminPartnerApplicationsApiSlice";
 import TableRow from "./TableRow";
 export const Table = () => {
   const tableRef = useRef(null);
   const [status, setStatus] = useState();
   const { currentStage, id, partnerId } = useParams();
-
+  const { data: partner } = useAdminGetPartnerQuery({ id: partnerId });
+  console.log("partner", partner);
   const { data, isLoading, isSuccess, isFetching, refetch, isError, error } =
     useAdminGetPartnerApplicationsQuery(
       status
@@ -49,17 +53,14 @@ export const Table = () => {
             <div className=" ">
               Name:{" "}
               <span className="text-blue-500 text-sm">
-                {data[0]?.recruitmentPartnerId?.firstName}{" "}
-                {data[0]?.recruitmentPartnerId?.lastName}
+                {partner?.firstName} {partner?.lastName}
               </span>
             </div>
           )}
           {data && (
             <div className="">
               Email:{" "}
-              <span className="text-blue-500 text-sm">
-                {data[0]?.recruitmentPartnerId?.email}
-              </span>
+              <span className="text-blue-500 text-sm">{partner?.email}</span>
             </div>
           )}
         </div>
