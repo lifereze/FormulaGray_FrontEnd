@@ -1,4 +1,4 @@
-import React, { useEffect,  useState } from "react";
+import React, { useEffect, useState } from "react";
 import { createApplication } from "../../../../data/api/authenticatedRequests";
 import {
   getAllStudents,
@@ -9,7 +9,6 @@ import { useParams } from "react-router-dom";
 import { userStore } from "../../../../stores";
 import ProgramStudents from "./ProgramStudents";
 import Search from "../../../inputs/Search";
-
 
 export const Table = () => {
   const [isLoading, setIsLoading] = useState();
@@ -38,7 +37,7 @@ export const Table = () => {
   }, []);
   useEffect(() => {
     const getStudents = async () => {
-      if (user.role == "recruitmentPartner") {
+      if (user?.role == "recruitmentPartner") {
         try {
           setLoading(true);
           const res = await getAllStudents();
@@ -52,6 +51,7 @@ export const Table = () => {
           setLoading(true);
           const res = await getAllRecruitmentPartners({ role: "student" });
           setStudents(res.data);
+
           setLoading(false);
         } catch (error) {
           console.log(error);

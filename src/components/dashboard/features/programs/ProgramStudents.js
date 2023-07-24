@@ -50,7 +50,7 @@ function ProgramStudents() {
         } catch (error) {
           console.log(error);
         }
-      } else if (user.role == "recruitmentPartner") {
+      } else if (user?.role == "recruitmentPartner") {
         try {
           setLoading(true);
           const res = await getAllStudents();
@@ -59,11 +59,12 @@ function ProgramStudents() {
         } catch (error) {
           console.log(error);
         }
-      } else if (user.role == "admin") {
+      } else if (user?.role == "admin") {
         try {
           setLoading(true);
           const res = await getAllRecruitmentPartners({ role: "student" });
-          setStudents(res.data);
+          console.log(res);
+          setStudents(res.data.students);
           setLoading(false);
         } catch (error) {
           console.log(error);
