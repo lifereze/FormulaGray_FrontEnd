@@ -113,6 +113,14 @@ export const adminCreateApplication = async (data) => {
       return error.response;
     });
 };
+export const counsellorCreateApplication = async (data) => {
+  return await api
+    .post("/counselor/create-application", data)
+    .then((response) => response)
+    .catch((error) => {
+      return error.response;
+    });
+};
 export const studentCreateApplication = async (data) => {
   return await api
     .post("/application/student/create", data)

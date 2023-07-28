@@ -8,6 +8,7 @@ import { forgotPassword } from "../../data/api/authenticatedRequests";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { signin } from "../../data/controller";
+import { Link } from "react-router-dom";
 
 export const ForgotPassword = () => {
   const navigate = useNavigate();
@@ -49,9 +50,9 @@ export const ForgotPassword = () => {
         <div className="flex h-full  flex-1 flex-col justify-center py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
           <div className="mx-auto w-full max-w-sm lg:w-96">
             <div>
-              <a href="/">
+              <Link to="/">
                 <img className="h-12 w-auto" src={Logo} alt="Formular Gray" />
-              </a>
+              </Link>
               <h2 className="mt-6 text-3xl font-bold tracking-tight text-gray-500">
                 Forgot Password
               </h2>

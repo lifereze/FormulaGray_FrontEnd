@@ -12,6 +12,7 @@ import {
   ChartBarIcon,
   UsersIcon,
 } from "@heroicons/react/24/outline";
+import { Link } from "react-router-dom";
 
 const navigation = [
   { name: "Dashboard", href: "/dashboard", icon: HomeIcon, current: true },
@@ -99,20 +100,20 @@ export const Navbar = () => {
                     </div>
                   </Transition.Child>
                   <div className="flex flex-shrink-0 items-center px-4">
-                    <a href="/" className="text-white">
+                    <Link to="/" className="text-white">
                       <span className="sr-only">FormularGray</span>
                       <span className="pt-3 font-bold text-lg">
                         FormularGray
                       </span>
-                    </a>
+                    </Link>
                   </div>
                   <div className="mt-5 h-0 flex-1 overflow-y-auto">
                     <nav className="px-2">
                       <div className="space-y-1">
                         {navigation.map((item) => (
-                          <a
+                          <Link
                             key={item.name}
-                            href={item.href}
+                            to={item.href}
                             className={classNames(
                               item.current
                                 ? "bg-gray-900 text-white"
@@ -131,7 +132,7 @@ export const Navbar = () => {
                               aria-hidden="true"
                             />
                             {item.name}
-                          </a>
+                          </Link>
                         ))}
                       </div>
                     </nav>
@@ -152,9 +153,9 @@ export const Navbar = () => {
             <div className="flex h-16 flex-shrink-0 items-center px-4">
               <div className="text-lg font-bold text-black">
                 <div className="mt-1">
-                  <a href="/">
+                  <Link to="/">
                     <img src={Logo} />
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -162,9 +163,9 @@ export const Navbar = () => {
               <nav className="flex-1 px-2 py-4">
                 <div className="space-y-1">
                   {navigation.map((item) => (
-                    <a
+                    <Link
                       key={item.name}
-                      href={item.href}
+                      to={item.href}
                       className={classNames(
                         item.current
                           ? "text-indigo-500"
@@ -183,7 +184,7 @@ export const Navbar = () => {
                         aria-hidden="true"
                       />
                       {item.name}
-                    </a>
+                    </Link>
                   ))}
                 </div>
               </nav>
@@ -240,15 +241,15 @@ export const Navbar = () => {
                       <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                         <Menu.Item>
                           {({ active }) => (
-                            <a
-                              href="/"
+                            <Link
+                              to="/"
                               className={classNames(
                                 active ? "bg-gray-100" : "",
                                 "block px-4 py-2 text-sm text-gray-700"
                               )}
                             >
                               Menu link
-                            </a>
+                            </Link>
                           )}
                         </Menu.Item>
                       </Menu.Items>

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import {
   createApplication,
   adminCreateApplication,
+  counsellorCreateApplication,
 } from "../../data/api/authenticatedRequests";
 import Spinner from "../utils/Spinner";
 import { ToastContainer, toast } from "react-toastify";
@@ -18,7 +19,7 @@ function ApplyButton({ student, programId, setStudents }) {
         studentId: student._id,
         programmeId: programId,
       });
-   
+
       setIsLoading(false);
       if (res && res.status == 200) {
         toast("Application went through successfully!");
@@ -29,7 +30,18 @@ function ApplyButton({ student, programId, setStudents }) {
         studentId: student._id,
         programmeId: programId,
       });
-     
+
+      setIsLoading(false);
+      if (res && res.status == 200) {
+        toast("Application went through successfully!");
+        setStudents((prev) => prev.filter((item) => item._id !== student._id));
+      }
+    } else if (user?.role == "counselor") {
+      const res = await counsellorCreateApplication({
+        studentId: student._id,
+        programmeId: programId,
+      });
+
       setIsLoading(false);
       if (res && res.status == 200) {
         toast("Application went through successfully!");

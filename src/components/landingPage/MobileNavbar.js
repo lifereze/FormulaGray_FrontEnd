@@ -176,8 +176,8 @@ function Navbar() {
                     /> */}
                   </div>
                   <div className={`capitalize text-sm  text-white`}>
-                    <a
-                      href={
+                    <Link
+                      to={
                         user && user?.role == "admin"
                           ? "/adminDashboard"
                           : user && user?.role == "student"
@@ -192,7 +192,7 @@ function Navbar() {
                         {(user && user.firstName && user.firstName) ||
                           (user.email && user.email.split("@")[0])}
                       </div>
-                    </a>
+                    </Link>
                   </div>
                 </li>
 

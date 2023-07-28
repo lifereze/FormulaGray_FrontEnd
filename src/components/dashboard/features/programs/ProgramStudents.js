@@ -5,6 +5,7 @@ import {
   getSpecificProgram,
   getAllRecruitmentPartners,
   searchStudents,
+  counsellorGetAllStudents,
 } from "../../../../data/api/authenticatedRequests";
 import { useParams } from "react-router-dom";
 import ApplyButton from "../../../buttons/ApplyButton";
@@ -40,6 +41,7 @@ function ProgramStudents() {
     getProgram();
   }, []);
   useEffect(() => {
+    console.log(user?.role);
     const getStudents = async () => {
       if (search) {
         try {
@@ -59,7 +61,18 @@ function ProgramStudents() {
         } catch (error) {
           console.log(error);
         }
+      } else if (user?.role == "counselor") {
+        try {
+          setLoading(true);
+          const res = await counsellorGetAllStudents();
+          setStudents(res.data.students);
+          setLoading(false);
+        } catch (error) {
+          console.log(error);
+        }
       } else if (user?.role == "admin") {
+        console.log("hello");
+
         try {
           setLoading(true);
           const res = await getAllRecruitmentPartners({ role: "student" });

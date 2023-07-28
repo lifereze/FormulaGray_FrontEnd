@@ -68,7 +68,7 @@ function TableRow({ student }) {
       >
         {(Object.keys(student?.documents ? student?.documents : {})?.length >
           0 && <ShowFiles docs={student?.documents} />) || (
-          <a href={`/student/edit/${student?._id}`}>Upload Docs</a>
+          <Link to={`/student/edit/${student?._id}`}>Upload Docs</Link>
         )}
       </td>
       <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">

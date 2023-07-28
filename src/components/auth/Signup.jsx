@@ -7,6 +7,7 @@ import { userStore } from "../../stores";
 import Logo from "../../constants/images/formulargray_03.png";
 import regPic from '../../assets/nobg-register.png'
 import Spinner from "../utils/Spinner";
+import { Link } from "react-router-dom";
 const signUpOptions = [
   { id: "student", title: "Student" },
   { id: "recruitmentPartner", title: "Recruitment partner" },
@@ -83,12 +84,12 @@ export const Signup = () => {
           <div className="mx-auto w-full max-w-sm lg:w-96">
             <div>
             <div className=" flex justify-between items-center">
-              <a href="/">
+              <Link to="/">
                 <img className="h-12 w-auto" src={Logo} alt="Formular Gray" />
-              </a>
-              <a href="/" className=" text-blue-600  cursor-pointer">
+              </Link>
+              <Link to="/" className=" text-blue-600  cursor-pointer">
 Home
-              </a>
+              </Link>
               </div>
               <h2 className="mt-2 text-3xl font-bold tracking-tight text-gray-500">
                 Create an account
@@ -208,7 +209,7 @@ Home
                   <div className="flex">
                     <div>Already have an account? </div>
                     <div className="text-blue-500 ml-1">
-                      <a href="/signin">Sign in</a>
+                      <Link to="/signin">Sign in</Link>
                     </div>
                   </div>
                   <div>

@@ -9,7 +9,7 @@ import { useParams } from "react-router-dom";
 import { userStore } from "../../../../stores";
 import ProgramStudents from "./ProgramStudents";
 import Search from "../../../inputs/Search";
-
+import { Link } from "react-router-dom";
 export const Table = () => {
   const [isLoading, setIsLoading] = useState();
   const [students, setStudents] = useState();
@@ -35,31 +35,7 @@ export const Table = () => {
     };
     getProgram();
   }, []);
-  useEffect(() => {
-    const getStudents = async () => {
-      if (user?.role == "recruitmentPartner") {
-        try {
-          setLoading(true);
-          const res = await getAllStudents();
-          setStudents(res.data.students);
-          setLoading(false);
-        } catch (error) {
-          console.log(error);
-        }
-      } else {
-        try {
-          setLoading(true);
-          const res = await getAllRecruitmentPartners({ role: "student" });
-          setStudents(res.data);
 
-          setLoading(false);
-        } catch (error) {
-          console.log(error);
-        }
-      }
-    };
-    getStudents();
-  }, [user]);
   return (
     <div className="px-4 sm:px-6  mr-2 no-scrollbar ">
       <div className="flex items-center justify-between">
@@ -71,14 +47,22 @@ export const Table = () => {
         <div className=" flex items-center gap-x-2">
           <Search />
           <div className="mt-4 sm:mt-0 ">
-            <a href="/applications">
+            <Link
+              to={
+                user?.role == "admin"
+                  ? "/adminapplications"
+                  : user?.role == "recruitmentPartner"
+                  ? "/applications"
+                  : "/counsellorApplications"
+              }
+            >
               <button
                 type="button"
                 className="inline-flex items-center justify-center rounded-md border border-transparent bg-blue-500 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto"
               >
                 Applications
               </button>
-            </a>
+            </Link>
           </div>
         </div>
       </div>

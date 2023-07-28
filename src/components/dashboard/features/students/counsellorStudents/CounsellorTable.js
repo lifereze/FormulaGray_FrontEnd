@@ -1,75 +1,28 @@
 import React, { useEffect, useState, useRef } from "react";
 import { GrFormEdit } from "react-icons/gr";
 import { AiOutlineDelete } from "react-icons/ai";
-import {
-  searchStudents,
-  counsellorGetAllStudents,
-  counsellorGetPartnerStudents,
-  adminGetSpecificUser,
-} from "../../../data/api/authenticatedRequests";
-import { useParams } from "react-router-dom";
-import { deleteStudent } from "../../../data/api/authenticatedRequests";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { DownloadTableExcel } from "react-export-table-to-excel";
-import ShowFiles from "../../buttons/showFiles";
-import { searchStore, studentsStore, userStore } from "../../../stores/index";
+import ShowFiles from "../../../../buttons/showFiles";
+import { searchStore, userStore } from "../../../../../stores/index";
+import { useGetCounsellorStudentsQuery } from "./counsellorStudentsApiSlice";
+import { Link } from "react-router-dom";
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 export const CounsellorTable = () => {
   const tableRef = useRef(null);
-  const { partnerId } = useParams();
-  const search = searchStore((state) => state.search);
-  const [students, setStudents] = useState();
 
   const user = userStore((state) => state.user);
-  const [items, setItems] = useState([
-    "Bachelors",
-    "Doctorate",
-    "Masters",
-    "Diploma",
-  ]);
-  const [loading, setLoading] = useState(false);
-  useEffect(() => {
-    const getStudents = async () => {
-      try {
-        setLoading(true);
-        if (search) {
-          const res = await searchStudents({ query: search });
-          setStudents(res?.data ? res?.data : []);
-        } else if (partnerId) {
-          const res = await counsellorGetPartnerStudents(partnerId);
-          console.log(res);
-          setStudents(res.data.students);
-       
-        } else {
-          const res = await counsellorGetAllStudents();
-          setStudents(res.data.students);
-        }
+  const { data, isLoading, isSuccess, isFetching, refetch, isError, error } =
+    useGetCounsellorStudentsQuery();
 
-        setLoading(false);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    if (!students && user) {
-      getStudents();
-    }
-  }, [search, user, partnerId]);
   const deleteOneStudent = async (student) => {
     const confirmer = window.confirm(
       "Are you sure you want to delete this student? You can not undo this action."
     );
-    if (confirmer) {
-      const res = await deleteStudent(student?._id);
-
-      if (res && res.status == 200) {
-        toast("Student deleted successfully!");
-      }
-      window.location.reload(false);
-    }
   };
 
   return (
@@ -145,11 +98,11 @@ export const CounsellorTable = () => {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200 pb-64 bg-white">
-                  {!loading &&
-                    students &&
-                    students?.length &&
-                    students?.length > 0 &&
-                    students?.map((student) => (
+                  {!isLoading &&
+                    data &&
+                    data?.length &&
+                    data?.length > 0 &&
+                    data?.map((student) => (
                       <tr key={student?.email}>
                         <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
                           {student?.email}
@@ -184,20 +137,20 @@ export const CounsellorTable = () => {
                           )?.length > 0 && (
                             <ShowFiles docs={student?.documents} />
                           )) || (
-                            <a href={`/student/edit/${student?._id}`}>
+                            <Link to={`/student/edit/${student?._id}`}>
                               Upload Docs
-                            </a>
+                            </Link>
                           )}
                         </td>
                         <td className="whitespace-nowrap py-4 px-2  text-left text-sm font-medium sm:pr-6">
                           <div className=" flex space-x-2 items-center">
                             <div className="p-1 hover:bg-gray-100 rounded-full">
-                              <a
-                                href={`/student/edit/${student?._id}`}
+                              <Link
+                                to={`/student/edit/${student?._id}`}
                                 className="text-indigo-600 hover:text-indigo-900"
                               >
                                 <GrFormEdit className=" text-2xl" />
-                              </a>
+                              </Link>
                             </div>
                             <div
                               className=" cursor-pointer p-1 hover:bg-gray-100 rounded-full "

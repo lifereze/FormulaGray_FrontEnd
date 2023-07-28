@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { CheckIcon } from "@heroicons/react/24/solid";
 import { useRecruiter } from "../stores";
-
+import { Link } from "react-router-dom";
 export const Steps = () => {
   const navSteps = [
     { id: "01", name: "Contact information", href: "#", status: "current" },
@@ -44,7 +44,7 @@ export const Steps = () => {
         {steps.map((step, stepIdx) => (
           <li key={step.name} className="relative md:flex md:flex-1">
             {step.status === "complete" ? (
-              <a href={step.href} className="group flex w-full items-center">
+              <Link to={step.href} className="group flex w-full items-center">
                 <span className="flex items-center px-6 py-4 text-sm font-medium">
                   <span className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-indigo-600 group-hover:bg-indigo-800">
                     <CheckIcon
@@ -56,10 +56,10 @@ export const Steps = () => {
                     {step.name}
                   </span>
                 </span>
-              </a>
+              </Link>
             ) : step.status === "current" ? (
-              <a
-                href={step.href}
+              <Link
+                to={step.href}
                 className="flex items-center px-6 py-4 text-sm font-medium"
                 aria-current="step"
               >
@@ -69,9 +69,9 @@ export const Steps = () => {
                 <span className="ml-4 text-sm font-medium text-indigo-600">
                   {step.name}
                 </span>
-              </a>
+              </Link>
             ) : (
-              <a href={step.href} className="group flex items-center">
+              <Link to={step.href} className="group flex items-center">
                 <span className="flex items-center px-6 py-4 text-sm font-medium">
                   <span className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full border-2 border-gray-300 group-hover:border-gray-400">
                     <span className="text-gray-500 group-hover:text-gray-900">
@@ -82,7 +82,7 @@ export const Steps = () => {
                     {step.name}
                   </span>
                 </span>
-              </a>
+              </Link>
             )}
 
             {stepIdx !== steps.length - 1 ? (

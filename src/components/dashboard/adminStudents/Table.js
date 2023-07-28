@@ -11,6 +11,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { DownloadTableExcel } from "react-export-table-to-excel";
 import ShowFiles from "../../buttons/showFiles";
 import { searchStore, studentsStore } from "../../../stores/index";
+import { Link } from "react-router-dom";
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
@@ -173,18 +174,18 @@ export const Table = () => {
                           {(student?.documents && (
                             <ShowFiles docs={student?.documents} />
                           )) || (
-                            <a href={`/adminStudent/edit/${student?._id}`}>
+                            <Link to={`/adminStudent/edit/${student?._id}`}>
                               Upload Docs
-                            </a>
+                            </Link>
                           )}
                         </td>
                         <td className="whitespace-nowrap py-4 px-2  text-left text-sm font-medium sm:pr-6">
                           <div className=" flex space-x-2 items-center">
-                            <a href={`/adminStudent/edit/${student?._id}`}>
+                            <Link to={`/adminStudent/edit/${student?._id}`}>
                               <div className="p-1 hover:bg-gray-100 rounded-full">
                                 <GrFormEdit className=" text-2xl" />
                               </div>
-                            </a>
+                            </Link>
                             <div
                               className=" cursor-pointer p-1 hover:bg-gray-100 rounded-full "
                               onClick={() => deleteOneStudent(student)}

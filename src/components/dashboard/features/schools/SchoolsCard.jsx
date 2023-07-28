@@ -33,7 +33,7 @@ export const SchoolsCard = ({institution}) => {
       className="bg-white rounded-md shadow"
     >
       
-        <a href={`/schools/${institution._id}`}>
+        <Link to={`/schools/${institution._id}`}>
           <div className="">
           <div
             key={institution.name}
@@ -59,7 +59,7 @@ export const SchoolsCard = ({institution}) => {
          
           </div>
 
-        </a>
+        </Link>
        { user?.role=="admin"&&<div className="w-full pr-2 flex flex-row-reverse ">
         <div className=" flex space-x-2 items-center">
 

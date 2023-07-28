@@ -1,5 +1,5 @@
 import { useLayoutEffect, useRef, useState } from "react";
-
+import { Link } from "react-router-dom";
 const people = [
   {
     firstName: "Lindsay",
@@ -76,14 +76,14 @@ export const Table = (props) => {
         <h1 className="text-xl font-bold text-indigo-500">{props.heading}</h1>
         </div>
         <div className="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
-          <a href="/addStudent">
+          <Link to="/addStudent">
             <button
               type="button"
               className="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-500 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto"
             >
               {props.buttonName}
             </button>
-          </a>
+          </Link>
         </div>
       </div>
       <div className="mt-8 flex flex-col">
@@ -271,12 +271,11 @@ export const Table = (props) => {
                         {person.leadStatus}
                       </td>
                       <td className="whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                        <a
-                          href="/viewStudent"
+                        <Link to="/viewStudent"
                           className="text-indigo-600 hover:text-indigo-900"
                         >
                           Edit<span className="sr-only">, {person.name}</span>
-                        </a>
+                        </Link>
                       </td>
                     </tr>
                   ))}

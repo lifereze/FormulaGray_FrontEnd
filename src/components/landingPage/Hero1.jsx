@@ -3,6 +3,7 @@ import SchoolDetails from "../modals/SchoolDetails";
 import {IoSchool} from 'react-icons/io5'
 import {FaSchool} from 'react-icons/fa'
 import {HiOutlineUsers} from 'react-icons/hi'
+import { Link } from "react-router-dom";
 export const Hero1 = () => {
   const [students,setStudents]=useState(false)
   const [schoolUpload,setSchoolUpload]=useState(false)
@@ -23,7 +24,7 @@ export const Hero1 = () => {
               <p>We are committed to supporting you through this journey from start to finish. We provide over 100,000 programmes from a network of universities across over 6 countries. Our team of experts are available to walk you through each process; course selection, application, visa processing, etc</p>
               <p>We connect you to quality education, globally.
 </p>
-<a href="/signin" className="text-blue-500 hover:underline">Start your journey today</a>
+<Link to="/signin" className="text-blue-500 hover:underline">Start your journey today</Link>
             </div>
             <div>
            {  !students&& <button
@@ -54,7 +55,7 @@ export const Hero1 = () => {
             <p>We have partnered with thousands of agents over the last decade, providing a platform to expand their reach and grow their businesses. We offer a fully-functional search feature, an easy-to-use interface and streamlined processes to allow you meet your business needs with easy to follow steps.</p>
             <p>Our objective is to collaborate with you as you support your students through the process of making the right choices in order to fulfill their education goals and life aspirations. We aim to convert applications within 72 hours – the best within the industry.</p>
             <p>We want you to consider us not just as a platform for submitting applications but a committed partner for growth.</p>
-            <a href="/signin" className="text-blue-500 hover:underline">Become a part of our community today.</a>
+            <Link to="/signin" className="text-blue-500 hover:underline">Become a part of our community today.</Link>
             </div>
             <div>
             {  !agents&& <button
@@ -85,7 +86,7 @@ export const Hero1 = () => {
             <p>We have partnered with thousands of agents over the last decade, providing a platform to expand their reach and grow their businesses. We offer a fully-functional search feature, an easy-to-use interface and streamlined processes to allow you meet your business needs with easy to follow steps.</p>
             <p>Our objective is to collaborate with you as you support your students through the process of making the right choices in order to fulfill their education goals and life aspirations. We aim to convert applications within 72 hours – the best within the industry.</p>
             <p>We want you to consider us not just as a platform for submitting applications but a committed partner for growth.</p>
-            <a href="/signin" className="text-blue-500 hover:underline">Become a part of our community today.</a>
+            <Link to="/signin" className="text-blue-500 hover:underline">Become a part of our community today.</Link>
             </div>
             <div>
             {  !institutions&& <button

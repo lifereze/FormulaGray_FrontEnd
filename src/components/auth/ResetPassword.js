@@ -8,6 +8,7 @@ import { resetPassword } from "../../data/api/authenticatedRequests";
 import { signin } from "../../data/controller";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Link } from "react-router-dom";
 export const ResetPassword = () => {
   const navigate = useNavigate();
   const { resetLink } = useParams();
@@ -27,7 +28,7 @@ export const ResetPassword = () => {
       if (res.status == 200) {
         navigate("/signin");
       } else {
-        const message = res?.data?.message; 
+        const message = res?.data?.message;
         toast(message);
       }
     }
@@ -51,9 +52,9 @@ export const ResetPassword = () => {
         <div className="flex h-full  flex-1 flex-col justify-center py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
           <div className="mx-auto w-full max-w-sm lg:w-96">
             <div>
-              <a href="/">
+              <Link to="/">
                 <img className="h-12 w-auto" src={Logo} alt="Formular Gray" />
-              </a>
+              </Link>
               <h2 className="mt-6 text-3xl font-bold tracking-tight text-gray-500">
                 Reset Password
               </h2>

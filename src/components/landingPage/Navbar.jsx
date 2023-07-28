@@ -18,7 +18,7 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
-
+import { Link } from "react-router-dom";
 const features = [
   {
     name: "Schools",
@@ -109,9 +109,9 @@ export const Navbar = () => {
                         <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
                           <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
                             {features.map((item) => (
-                              <a
+                              <Link
                                 key={item.name}
-                                href={item.href}
+                                to={item.href}
                                 className="-m-3 flex items-start rounded-lg p-3 hover:bg-gray-50"
                               >
                                 <item.icon
@@ -126,14 +126,14 @@ export const Navbar = () => {
                                     {item.description}
                                   </p>
                                 </div>
-                              </a>
+                              </Link>
                             ))}
                           </div>
                           <div className="space-y-6 bg-gray-50 px-5 py-5 sm:flex sm:space-y-0 sm:space-x-10 sm:px-8">
                             {callsToAction.map((item) => (
                               <div key={item.name} className="flow-root">
-                                <a
-                                  href={item.href}
+                                <Link 
+                                  to={item.href}
                                   className="-m-3 flex items-center rounded-md p-3 text-base font-medium text-gray-900 hover:bg-gray-100"
                                 >
                                   <item.icon
@@ -141,7 +141,7 @@ export const Navbar = () => {
                                     aria-hidden="true"
                                   />
                                   <span className="ml-3">{item.name}</span>
-                                </a>
+                                </Link>
                               </div>
                             ))}
                           </div>
@@ -152,24 +152,24 @@ export const Navbar = () => {
                 )}
               </Popover>
 
-              <a
-                href="/schools"
+              <Link
+              to="/schools"
                 className="text-base font-medium text-gray-500 hover:text-gray-900"
               >
                 Schools
-              </a>
-              <a
-                href="/programs"
+              </Link>
+              <Link
+                to="/programs"
                 className="text-base font-medium text-gray-500 hover:text-gray-900"
               >
                 Programs
-              </a>
-              <a
-                href="/visa"
+              </Link>
+              <Link
+                to="/visa"
                 className="text-base font-medium text-gray-500 hover:text-gray-900"
               >
                 Visa
-              </a>
+              </Link>
 
               <Popover className="relative">
                 {({ open }) => (
@@ -189,9 +189,9 @@ export const Navbar = () => {
                         <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
                           <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
                             {resources.map((item) => (
-                              <a
+                              <Link
                                 key={item.name}
-                                href={item.href}
+                                to={item.href}
                                 className="-m-3 flex items-start rounded-lg p-3 hover:bg-gray-50"
                               >
                                 <item.icon
@@ -206,7 +206,7 @@ export const Navbar = () => {
                                     {item.description}
                                   </p>
                                 </div>
-                              </a>
+                              </Link>
                             ))}
                           </div>
                           <div className="bg-gray-50 px-5 py-5 sm:px-8 sm:py-8">
@@ -220,12 +220,12 @@ export const Navbar = () => {
                                     key={item.id}
                                     className="truncate text-base"
                                   >
-                                    <a
-                                      href={item.href}
+                                    <Link
+                                      to={item.href}
                                       className="font-medium text-gray-900 hover:text-gray-700"
                                     >
                                       {item.name}
-                                    </a>
+                                    </Link>
                                   </li>
                                 ))}
                               </ul>
@@ -248,23 +248,23 @@ export const Navbar = () => {
               </Popover>
             </Popover.Group>
           {!user&&  <div className="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
-              <a
-                href="/signin"
+              <Link
+                to="/signin"
                 className="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900"
               >
                 Sign in
-              </a>
-              <a
-                href="/signup"
+              </Link>
+              <Link
+                to="/signup"
                 className="ml-8 inline-flex items-center bg-indigo-500 justify-center whitespace-nowrap rounded-md border border-transparent px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
               >
                 Sign up
-              </a>
+              </Link>
             </div>||
-           <a href={user&&user?.role=='admin'?'/adminDashboard':user&&user?.role=='student'?'/studentDashboard':'/dashboard'}> <div className="hidden md:block cursor-pointer font-semibold capitalize text-purple-900">
+           <Link to={user&&user?.role=='admin'?'/adminDashboard':user&&user?.role=='student'?'/studentDashboard':'/dashboard'}> <div className="hidden md:block cursor-pointer font-semibold capitalize text-purple-900">
               {user &&user.firstName && user.firstName|| user.email && user.email.split("@")[0]}
            
-            </div></a>}
+            </div></Link>}
           </div>
         </div>
 
@@ -308,9 +308,9 @@ export const Navbar = () => {
                 <div className="mt-6">
                   <nav className="grid gap-y-8">
                     {features.map((item) => (
-                      <a
+                      <Link
                         key={item.name}
-                        href={item.href}
+                        to={item.href}
                         className="-m-3 flex items-center rounded-md p-3 hover:bg-gray-50"
                       >
                         <item.icon
@@ -320,7 +320,7 @@ export const Navbar = () => {
                         <span className="ml-3 text-base font-medium text-gray-900">
                           {item.name}
                         </span>
-                      </a>
+                      </Link>
                     ))}
                   </nav>
                 </div>
@@ -351,20 +351,20 @@ export const Navbar = () => {
                   ))}
                 </div>
                 <div>
-                  <a
-                    href="/signup"
+                  <Link
+                    to="/signup"
                     className="flex w-full items-center  bg-indigo-500 justify-center rounded-md border border-transparent px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
                   >
                     Sign up
-                  </a>
+                  </Link>
                   <p className="mt-6 text-center text-base font-medium text-gray-500">
                     Existing customer?
-                    <a
-                      href="/signin"
+                    <Link
+                      to="/signin"
                       className="text-indigo-500 hover:text-indigo-700"
                     >
                       Sign in
-                    </a>
+                    </Link>
                   </p>
                 </div>
               </div>

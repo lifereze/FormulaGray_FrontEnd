@@ -22,7 +22,7 @@ import { AdminStudents } from "./components/dashboard/adminStudents/Students";
 import { Programs } from "./components/dashboard/features/programs/Programs";
 import { SchoolPrograms } from "./components/dashboard/features/programs/SchoolPrograms";
 import { Students } from "./components/dashboard/students/Students";
-import { CounsellorStudents } from "./components/dashboard/students/CounsellorStudents";
+import { CounsellorStudents } from "./components/dashboard/features/students/counsellorStudents/CounsellorStudents";
 import { EditAdminStudent } from "./components/dashboard/adminStudents/EditStudent";
 import { Partners } from "./components/dashboard/features/partners/adminPartners/Partners";
 import { AssignPartners } from "./components/dashboard/features/partners/assignPartners/AssignPartners";
@@ -45,6 +45,8 @@ import { AdminCounsellorPartners } from "./components/dashboard/features/partner
 import { AdminPartnerApplications } from "./components/dashboard/features/applications/adminPartnerApplications.js/AdminPartnerAppliations";
 import { AdminCounsellorStudents } from "./components/dashboard/features/students/adminCounsellorStudents/AdminCounsellorStudents";
 import { Reassign } from "./components/dashboard/features/counsellors/reassign/Reassign";
+import { CreateStudent } from "./components/dashboard/features/students/counsellorStudents/CreateStudent";
+
 function App() {
   return (
     <div className=" bg-[#E6E9EF] text-black">
@@ -80,6 +82,7 @@ function App() {
           <Route exact path="/assignStudents/:counsellorId" element={<AssignStudents />} />
           <Route path="/counsellorPartners" element={<CounsellorPartners />} />
           <Route path="/counsellors" element={<Counsellors />} />
+          <Route path="/counsellor/student/create" element={<CreateStudent />} />
           <Route path="/programs" element={<Programs />} />
           <Route path="/school/programs/:schoolId" element={<SchoolPrograms />} />
           <Route path="/programs/:id" element={<ApplyStudents />} />

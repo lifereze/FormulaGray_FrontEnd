@@ -1,8 +1,5 @@
 import React from "react";
-import students from '../../assets/students.jpg'
-import studentsPhone from '../../assets/student-cellphone.jpg'
-import smilingStudents from '../../assets/blur.png'
-import happyStudents from '../../assets/happy-students.jpg'
+import { Link } from "react-router-dom";
 import nobgMultinational from '../../assets/nbMulti.png'
 export const Hero = () => {
   return (
@@ -30,12 +27,12 @@ export const Hero = () => {
           </p>
           <div className="mt-10 sm:flex sm:justify-center lg:justify-start">
             <div className="mt-3 rounded-md sm:mt-0 sm:ml-3">
-              <a
-                href="/signin"
+              <Link
+                to="/signin"
                 className="flex w-full items-center  text-indigo-500 justify-center rounded-md  bg-white px-8 py-3 text-base font-medium hover:bg-gray-200 md:py-4 md:px-10 md:text-lg"
               >
                 Get started
-              </a>
+              </Link>
             </div>
           </div>
         </div>

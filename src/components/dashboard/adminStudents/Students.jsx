@@ -3,6 +3,7 @@ import { Navbar } from "../Navbar";
 import { Table } from "./Table";
 import SideBar from "../SideBar";
 import Banner from "../Banner";
+import { Link } from "react-router-dom";
 import { getAllStudents } from "../../../data/api/authenticatedRequests";
 import PageLoader  from "../../utils/PageLoader";
 import Search from "../../inputs/Search";
@@ -34,14 +35,14 @@ export const AdminStudents = () => {
           <div className="">
             <Search/>
           </div>
-          <a href="/addStudent">
+          <Link to="/addStudent">
             <button
               type="button"
               className="inline-flex items-center justify-center rounded-md border border-transparent bg-blue-500 px-2 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto"
             >
               Add student
             </button>
-          </a>
+          </Link>
         </div>
       </div>
                         <Table

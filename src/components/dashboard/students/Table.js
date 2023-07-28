@@ -12,6 +12,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { DownloadTableExcel } from "react-export-table-to-excel";
 import ShowFiles from "../../buttons/showFiles";
 import { searchStore, studentsStore, userStore } from "../../../stores/index";
+import { Link } from "react-router-dom";
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
@@ -184,20 +185,20 @@ export const Table = () => {
                           )?.length > 0 && (
                             <ShowFiles docs={student?.documents} />
                           )) || (
-                            <a href={`/student/edit/${student?._id}`}>
+                            <Link to={`/student/edit/${student?._id}`}>
                               Upload Docs
-                            </a>
+                            </Link>
                           )}
                         </td>
                         <td className="whitespace-nowrap py-4 px-2  text-left text-sm font-medium sm:pr-6">
                           <div className=" flex space-x-2 items-center">
                             <div className="p-1 hover:bg-gray-100 rounded-full">
-                              <a
-                                href={`/student/edit/${student?._id}`}
+                              <Link
+                                to={`/student/edit/${student?._id}`}
                                 className="text-indigo-600 hover:text-indigo-900"
                               >
                                 <GrFormEdit className=" text-2xl" />
-                              </a>
+                              </Link>
                             </div>
                             <div
                               className=" cursor-pointer p-1 hover:bg-gray-100 rounded-full "

@@ -1,57 +1,26 @@
 import React, { useEffect, useState, useRef } from "react";
 import { GrFormEdit } from "react-icons/gr";
 import { AiOutlineDelete } from "react-icons/ai";
-import {
-  getAllRecruitmentPartners,
-  searchStudents,
-} from "../../../data/api/authenticatedRequests";
-import { deleteStudent } from "../../../data/api/authenticatedRequests";
+
+import { useParams } from "react-router-dom";
+import { deleteStudent } from "../../../../../data/api/authenticatedRequests";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { DownloadTableExcel } from "react-export-table-to-excel";
-import ShowFiles from "../../buttons/showFiles";
-import { searchStore, studentsStore } from "../../../stores/index";
+import ShowFiles from "../../../../buttons/showFiles";
+import { searchStore, userStore } from "../../../../../stores/index";
 import { Link } from "react-router-dom";
+import { useGetCounsellorPartnerStudentsQuery } from "./counsellorStudentsApiSlice";
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export const AdminTable = () => {
+export const CounsellorPartnerStudentsTable = () => {
   const tableRef = useRef(null);
-  const search = searchStore((state) => state.search);
-  const students = studentsStore((state) => state.students);
-  const setStudents = studentsStore((state) => state.storeStudents);
-  const [items, setItems] = useState([
-    "Bachelors",
-    "Doctorate",
-    "Masters",
-    "Diploma",
-  ]);
-  const [loading, setLoading] = useState(false);
-  useEffect(() => {
-    const getStudents = async () => {
-      try {
-        setLoading(true);
-        if (search) {
-          const res = await searchStudents({ query: search });
-          setStudents(res?.data ? res?.data : []);
-        } else {
-          const res = await getAllRecruitmentPartners({
-            role: "student",
-          });
-          setStudents(res.data);
-        }
+  const { partnerId } = useParams();
 
-        setLoading(false);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    if (!students || students.length == 0) {
-      getStudents();
-    }
-    console.log(students);
-  }, [search]);
+  const user = userStore((state) => state.user);
+  const { data, isLoading } = useGetCounsellorPartnerStudentsQuery(partnerId);
   const deleteOneStudent = async (student) => {
     const confirmer = window.confirm(
       "Are you sure you want to delete this student? You can not undo this action."
@@ -75,7 +44,7 @@ export const AdminTable = () => {
             sheet="applications"
             currentTableRef={tableRef.current}
           >
-            <div className="bg-white shadow-md rounded-md cursor-pointer px-2 py-1">
+            <div className="bg-white shadow-md rounded-md text-[#184061] cursor-pointer px-2 py-1.5 ">
               Generate report
             </div>
           </DownloadTableExcel>
@@ -139,11 +108,11 @@ export const AdminTable = () => {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200 pb-64 bg-white">
-                  {!loading &&
-                    students &&
-                    students?.length &&
-                    students?.length > 0 &&
-                    students?.map((student) => (
+                  {!isLoading &&
+                    data &&
+                    data?.length &&
+                    data?.length > 0 &&
+                    data?.map((student) => (
                       <tr key={student?.email}>
                         <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
                           {student?.email}
@@ -169,9 +138,7 @@ export const AdminTable = () => {
                         </td>
 
                         <td className="whitespace-nowrap px-3 text-left py-4 text-sm text-gray-500">
-                          {student?.educationLevel
-                            ? student?.educationLevel
-                            : items[Math.floor(Math.random() * items.length)]}
+                          {student?.educationLevel}
                         </td>
 
                         <td className="whitespace-nowrap px-3 z-10 text-left py-4 text-sm text-gray-500">

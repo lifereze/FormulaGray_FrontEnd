@@ -7,6 +7,7 @@ import Spinner from "../utils/Spinner";
 import loginPic from '../../assets/nobg-register.png'
 import { validateSigninData } from "../../validator";
 import { signin } from "../../data/controller";
+import { Link } from "react-router-dom";
 
 export const Signin = () => {
   const navigate = useNavigate();
@@ -73,12 +74,12 @@ export const Signin = () => {
           <div className="mx-auto w-full max-w-sm lg:w-96">
             <div>
               <div className=" flex justify-between items-center">
-              <a href="/">
+              <Link to="/">
                 <img className="h-12 w-auto" src={Logo} alt="Formular Gray" />
-              </a>
-              <a href="/" className=" text-blue-600  cursor-pointer">
+              </Link>
+              <Link to="/" className=" text-blue-600  cursor-pointer">
 Home
-              </a>
+              </Link>
               </div>
              
               <h2 className="mt-6 text-3xl font-bold tracking-tight text-gray-500">
@@ -156,18 +157,17 @@ Home
                     </div>
 
                     <div className="text-sm">
-                      <a
-                        href="/forgotPassword"
+                      <Link to="/forgotPassword"
                         className="font-medium text-indigo-500 hover:text-indigo-700"
                       >
                         Forgot your password?
-                      </a>
+                      </Link>
                     </div>
                   </div>
                   <div className="flex">
                     <div>Don't have an account? </div>
                     <div className=" ml-1 text-indigo-500">
-                      <a href="/signup">Sign up</a>
+                      <Link to="/signup">Sign up</Link>
                     </div>
                   </div>
                   <div>
