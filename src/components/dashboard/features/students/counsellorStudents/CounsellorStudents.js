@@ -2,17 +2,24 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { CounsellorTable } from "./CounsellorTable";
 import { CounsellorPartnerStudentsTable } from "./CounsellorPartnerStudentsTable";
+import { CounsellorPartnersStudentsTable } from "./CounsellorPartnersStudentsTable";
 import SideBar from "../../../SideBar";
 import Banner from "../../../Banner";
 import Approval from "../../../../modals/Approval";
 import Search from "../../../../inputs/Search";
 import { useGetCounsellorPartnerQuery } from "./counsellorStudentsApiSlice";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { setCounsellor, setPartner } from "./studentsTypeSlice";
+
 export const CounsellorStudents = () => {
   const [showApproval, setShowApproval] = useState(false);
   const { partnerId } = useParams();
   const { data, isLoading } = useGetCounsellorPartnerQuery(partnerId);
-
+  const dispatch = useDispatch();
+  const studentsType = useSelector(
+    (state) => state.counsellorStudentsType.studentsType
+  );
   return (
     <div className=" grid grid-cols-12">
       <div className="md:col-span-2 hidden md:block h-screen overflow-y-hidden ">
@@ -30,8 +37,32 @@ export const CounsellorStudents = () => {
                       <div className="flex items-center gap-2 flex-wrap justify-between">
                         <div className=" flex flex-col items-start">
                           <h1 className="md:text-xl font-bold text-blue-500">
-                            Students
+                            Counsellor Students
                           </h1>
+                          {!partnerId && (
+                            <div className=" flex space-x-2 mt-4">
+                              <div
+                                className={
+                                  studentsType == "counsellor"
+                                    ? " bg-white py-1 px-2  text-blue-600 rounded-md cursor-pointer text-sm"
+                                    : "bg-white py-1 px-2  rounded-md cursor-pointer text-sm"
+                                }
+                                onClick={() => dispatch(setCounsellor())}
+                              >
+                                Your Students
+                              </div>
+                              <div
+                                className={
+                                  studentsType == "partner"
+                                    ? " bg-white py-1 px-2  text-blue-600 rounded-md cursor-pointer text-sm"
+                                    : "bg-white py-1 px-2  rounded-md cursor-pointer text-sm"
+                                }
+                                onClick={() => dispatch(setPartner())}
+                              >
+                                Your Partners' Students
+                              </div>
+                            </div>
+                          )}
                           {partnerId && (
                             <div className=" flex space-x-2">
                               <div className=""> Partner's Email:</div>
@@ -70,7 +101,9 @@ export const CounsellorStudents = () => {
                       {partnerId ? (
                         <CounsellorPartnerStudentsTable />
                       ) : (
-                        <CounsellorTable />
+                        (studentsType == "counsellor" && (
+                          <CounsellorTable />
+                        )) || <CounsellorPartnersStudentsTable />
                       )}
                     </div>
                   </div>

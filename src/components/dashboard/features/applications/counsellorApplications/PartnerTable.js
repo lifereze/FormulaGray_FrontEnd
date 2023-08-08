@@ -1,21 +1,19 @@
 import { useState } from "react";
-
-import { useGetCounsellorApplicationsQuery } from "./counsellorApplicationsApiSlice";
-import { useParams } from "react-router-dom";
-
-import TableRow from "./TableRow";
-import { useDispatch, useSelector } from "react-redux";
 import { setCounsellor, setPartner } from "./applicationsTypeSlice";
 
-export const Table = () => {
+import { useGetCounsellorApplicationsForPartnersQuery } from "./counsellorApplicationsApiSlice";
+import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import TableRow from "./TableRow";
+export const PartnerTable = () => {
   const [status, setStatus] = useState();
   const dispatch = useDispatch();
-  const { currentStage, partnerId } = useParams();
   const applicationsType = useSelector(
     (state) => state.counsellorApplicationsType.applicationsType
   );
+  const { currentStage } = useParams();
   const { data, isLoading, isSuccess, isFetching, refetch, isError, error } =
-    useGetCounsellorApplicationsQuery(
+    useGetCounsellorApplicationsForPartnersQuery(
       status
         ? {
             currentStage: status,

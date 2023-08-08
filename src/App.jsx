@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Counsellors } from "./components/dashboard/features/counsellors/Counsellors";
 import { LandingPage } from "./components/landingPage/LandingPage";
 import { Signin } from "./components/auth/Signin";
-import { Signup } from "./components/auth/Signup";
+import { Signup } from "./components/dashboard/features/user/Signup";
 import { ForgotPassword } from "./components/auth/ForgotPassword";
 import { ResetPassword } from "./components/auth/ResetPassword";
 import { Dashboard } from "./components/dashboard/Dashboard";

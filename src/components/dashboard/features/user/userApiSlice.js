@@ -2,63 +2,98 @@ import { apiSlice } from "../../../../features/api/apiSlice";
 
 export const extendedApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    adminGetUnassignedStudents: builder.query({
-      query: (id) => {
+    signUpUser: builder.mutation({
+      query: (data) => {
         return {
-          url: "/admin/students/withoutCounselorOrPartner",
+          url: "/auth/register",
+          method: "POST",
+          body: data,
+          credentials: "include",
+        };
+      },
+      transformResponse: (response) => {
+        if (response?.data) {
+          return {
+            status: "success",
+            data: response?.data,
+            message: response?.data?.message,
+          };
+        } else {
+          return response;
+        }
+      },
+    }),
+    signInUser: builder.mutation({
+      query: (data) => {
+        return {
+          url: "/auth/login",
+          method: "POST",
+          body: data,
+          credentials: "include",
+        };
+      },
+      transformResponse: (response) => {
+        return {
+          status: "success",
+          data: response?.data,
+          message: response?.data?.message,
+        };
+      },
+      providesTags: (result, error, arg) => {
+        return [
+          { type: "User", id: "LIST" },
+          result.data(({ _id }) => {
+            return { type: "User", _id };
+          }),
+        ];
+      },
+    }),
+    sendEmailVerificationLink: builder.mutation({
+      query: (email) => {
+        return {
+          url: "/auth/sendEmailVerificationLink",
+          method: "POST",
+          credentials: "include",
+          body: email,
+        };
+      },
+      transformResponse: (responseData) => {
+        return responseData;
+      },
+    }),
+    refreshToken: builder.query({
+      query: () => {
+        return {
+          url: "/auth/refreshSession",
           method: "GET",
           credentials: "include",
         };
       },
       transformResponse: (responseData) => {
-        return responseData.students;
-      },
-      providesTags: (result, error, arg) => {
-        return [
-          { type: "AssignStudent", id: "LIST" },
-          result.map(({ _id }) => {
-            return { type: "AssignStudent", _id };
-          }),
-        ];
+        return responseData;
       },
     }),
-    adminGetCounsellor: builder.query({
-      query: ({ id, data }) => {
+    verifyEmail: builder.mutation({
+      query: (token) => {
         return {
-          url: `/admin/get/user/${id}`,
+          url: "/auth/verifyEmail",
           method: "POST",
           credentials: "include",
-          body: data,
+          body: token,
         };
       },
       transformResponse: (responseData) => {
         return responseData;
       },
-    }),
-
-    adminAssignCounsellorStudent: builder.mutation({
-      query: ({ id, data }) => {
-        console.log(data);
-
-        return {
-          url: `/admin/students/assignCounselor/${id}`,
-          method: "POST",
-          credentials: "include",
-          body: data,
-        };
-      },
-      transformResponse: (responseData) => {
-        console.log(responseData);
-        return responseData;
-      },
-      invalidatesTags: [{ type: "AssignStudent", id: "LIST" }],
     }),
   }),
 });
 
 export const {
-  useAdminGetUnassignedStudentsQuery,
-  useAdminGetCounsellorQuery,
-  useAdminAssignCounsellorStudentMutation,
+  useRefreshTokenQuery,
+  useSendEmailVerificationLinkMutation,
+  useVerifyEmailMutation,
+  useSignUpUserMutation,
+  useSignInUserMutation,
 } = extendedApiSlice;
 // returns the query result object

@@ -2,15 +2,15 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Notification } from "../../../ui";
 import { validateSignupData } from "../../../../validator";
-import {
-  signup,
-  send_email_verification_link,
-} from "../../../../data/controller";
+
 import { userStore } from "../../../../stores";
 import Logo from "../../../../constants/images/formulargray_03.png";
 import regPic from "../../../../assets/nobg-register.png";
 import Spinner from "../../../utils/Spinner";
 import { Link } from "react-router-dom";
+import { useSignUpUserMutation } from "./userApiSlice";
+import { useSendEmailVerificationLinkMutation } from "./userApiSlice";
+import { isError } from "joi";
 const signUpOptions = [
   { id: "student", title: "Student" },
   { id: "recruitmentPartner", title: "Recruitment partner" },
@@ -18,7 +18,11 @@ const signUpOptions = [
 
 export const Signup = () => {
   const navigate = useNavigate();
-  const storeUser = userStore((state) => state.storeUser);
+  const [signUpUser, { isLoading, isSuccess, error }] = useSignUpUserMutation();
+  const [
+    sendEmailVerificationLink,
+    { isLoading: loading, error: errorMsg, isSuccess: success },
+  ] = useSendEmailVerificationLinkMutation();
 
   const [userDetails, setUserDetails] = useState({
     email: "",
@@ -26,7 +30,6 @@ export const Signup = () => {
     confirmPassword: "",
     role: "",
   });
-  const [loading, setLoading] = useState(false);
   const [info, setInfo] = useState({ message: "", type: "" });
 
   const handleSubmit = async () => {
@@ -37,35 +40,41 @@ export const Signup = () => {
       return;
     }
     setInfo({ message: "", type: "" });
-    setLoading(true);
-    signup(userDetails).then((response) => {
-      setLoading(false);
-      setInfo({ message: response.message, type: response.status });
 
-      if (response.status === "success") {
-        storeUser(response.data.user);
-        send_email_verification_link({ email: userDetails.email }).then(
-          (response) => {
-            if (response.status === "success") {
-              setInfo({
-                message:
-                  "Please check your email to complete registration then Login.",
-                type: "success",
-              });
-
-              setTimeout(() => {
-                navigate("/signin");
-              }, 5000);
-            } else {
-              setInfo({
-                message: "Something went wrong.",
-                type: "error",
-              });
-            }
-          }
-        );
+    try {
+      const response = await signUpUser(userDetails).unwrap();
+      console.log(response);
+      console.log(isSuccess);
+      const res = await sendEmailVerificationLink({
+        email: userDetails.email,
+      }).unwrap();
+      console.log(res);
+      console.log(success);
+      setInfo({
+        message: "Please check your email to complete registration then Login.",
+        type: "success",
+      });
+      setTimeout(() => {
+        navigate("/signin");
+      }, 5000);
+      if (error === true) {
+        console.log(error);
+        return setInfo({ message: error.data.message, type: "error" });
       }
-    });
+      if (isError === true) {
+        console.log(isError);
+        setInfo({
+          message: "Something went wrong.",
+          type: "error",
+        });
+      }
+    } catch (error) {
+      console.log(error);
+      setInfo({
+        message: error.data.message,
+        type: "error",
+      });
+    }
   };
   return (
     <>
@@ -207,14 +216,8 @@ export const Signup = () => {
                     </div>
                   </div>
 
-                  <div className="flex">
-                    <div>Already have an account? </div>
-                    <div className="text-blue-500 ml-1">
-                      <Link to="/signin">Sign in</Link>
-                    </div>
-                  </div>
                   <div>
-                    {(loading && (
+                    {((loading || isLoading) && (
                       <button className="flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                         <Spinner />
                       </button>
@@ -227,6 +230,12 @@ export const Signup = () => {
                         Sign up
                       </button>
                     )}
+                  </div>
+                  <div className="flex">
+                    <div className=" text-black">Already have an account? </div>
+                    <div className="text-blue-500 ml-1">
+                      <Link to="/signin">Sign in</Link>
+                    </div>
                   </div>
                 </div>
               </div>

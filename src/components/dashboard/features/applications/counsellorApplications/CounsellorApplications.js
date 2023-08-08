@@ -2,12 +2,17 @@ import React, { useEffect, useState } from "react";
 import { Navbar } from "../../../Navbar";
 import { Table } from "./Table";
 import { SpecificPartnerTable } from "./SpecificPartnerTable";
+import { PartnerTable } from "./PartnerTable";
 import SideBar from "../../../SideBar";
 import Banner from "../../../Banner";
 import { useParams } from "react-router-dom";
-
+import { useSelector } from "react-redux";
 export const CounsellorApplications = () => {
   const { partnerId } = useParams();
+  const applicationsType = useSelector(
+    (state) => state.counsellorApplicationsType.applicationsType
+  );
+
   return (
     <div className=" grid grid-cols-12">
       <div className="md:col-span-2 hidden md:block h-screen overflow-y-hidden ">
@@ -22,7 +27,13 @@ export const CounsellorApplications = () => {
                 <div className="divide-y divide-gray-200">
                   <div className=" text-center">
                     <div>
-                      {(!partnerId && <Table buttonLink="/addStudent" />) || (
+                      {!partnerId &&
+                        (applicationsType === "counsellor" ? (
+                          <Table buttonLink="/addStudent" />
+                        ) : (
+                          <PartnerTable />
+                        ))}
+                      {partnerId && (
                         <SpecificPartnerTable buttonLink="/addStudent" />
                       )}
                     </div>

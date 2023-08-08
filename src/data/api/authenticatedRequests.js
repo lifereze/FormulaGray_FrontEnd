@@ -212,7 +212,7 @@ export const counsellorGetAllRecruitmentPartners = async () => {
 };
 export const counsellorGetAllStudents = async () => {
   return await api
-    .get("/counselor/students")
+    .post("/counselor/students")
     .then((response) => response)
     .catch((error) => {
       return error.response;

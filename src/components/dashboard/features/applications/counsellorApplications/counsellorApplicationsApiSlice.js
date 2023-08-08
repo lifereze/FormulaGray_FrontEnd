@@ -10,6 +10,32 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
           credentials: "include",
           body: {
             ...stage,
+           
+          },
+        };
+      },
+      transformResponse: (responseData) => {
+        return responseData.applications;
+      },
+      providesTags: (result, error, arg) => {
+        console.log(result);
+        return [
+          { type: "Application", id: "LIST" },
+          result.map(({ _id }) => {
+            return { type: "Application", _id };
+          }),
+        ];
+      },
+    }),
+    getCounsellorApplicationsForPartners: builder.query({
+      query: (stage) => {
+        return {
+          url: "/counselor/applications",
+          method: "POST",
+          credentials: "include",
+          body: {
+            ...stage,
+            userType: "partners",
           },
         };
       },
@@ -80,6 +106,7 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
 
 export const {
   useGetCounsellorApplicationsQuery,
+  useGetCounsellorApplicationsForPartnersQuery,
   useGetCounsellorSpecificPartnerApplicationsQuery,
   useDeleteCounsellorApplicationMutation,
   useUpdateCounsellorApplicationMutation,

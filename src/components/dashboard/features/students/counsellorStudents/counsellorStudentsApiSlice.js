@@ -6,7 +6,31 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
       query: () => {
         return {
           url: "/counselor/students",
-          method: "GET",
+          method: "POST",
+          credentials: "include",
+        };
+      },
+      transformResponse: (responseData) => {
+        return responseData.students;
+      },
+      providesTags: (result, error, arg) => {
+        console.log(result);
+        return [
+          { type: "CounsellorStudent", id: "LIST" },
+          result.map(({ _id }) => {
+            return { type: "CounsellorStudent", _id };
+          }),
+        ];
+      },
+    }),
+    getCounsellorStudentsForPartners: builder.query({
+      query: () => {
+        return {
+          url: "/counselor/students",
+          method: "POST",
+          body: {
+            userType: "partners",
+          },
           credentials: "include",
         };
       },
@@ -97,6 +121,7 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
 
 export const {
   useGetCounsellorStudentsQuery,
+  useGetCounsellorStudentsForPartnersQuery,
   useGetCounsellorPartnerStudentsQuery,
   useGetCounsellorPartnerQuery,
   useCounsellorAddStudentMutation,
