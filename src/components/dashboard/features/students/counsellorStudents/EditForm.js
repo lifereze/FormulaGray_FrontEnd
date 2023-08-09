@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useMemo } from "react";
 import FileUpload from "../../../../uploads/FileUpload";
-import { firebaseUploadImg, firebaseUploadDoc } from "../../../../../data/api/upload";
+import {
+  firebaseUploadImg,
+  firebaseUploadDoc,
+} from "../../../../../data/api/upload";
 import { getDownloadURL } from "firebase/storage";
 import Spinner from "../../../../utils/Spinner";
 import {
@@ -8,9 +11,16 @@ import {
   getStudent,
 } from "../../../../../data/api/authenticatedRequests";
 import { useParams, useNavigate } from "react-router-dom";
+import { useCounsellorEditStudentMutation } from "./counsellorStudentsApiSlice";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 export const EditForm = (props) => {
   let { id } = useParams();
   const navigate = useNavigate();
+  const [counsellorEditStudent, { isLoading, error }] =
+    useCounsellorEditStudentMutation();
+
   const initialize = {
     firstName: "",
     lastName: "",
@@ -44,8 +54,6 @@ export const EditForm = (props) => {
     },
     setStudent,
   ] = useState(initialize);
-
-  const [isLoading, setIsLoading] = useState();
 
   const [isResumeLoading, setResumeLoading] = useState();
   const [resumeUrl, setResumeUrl] = useState("");
@@ -176,32 +184,28 @@ export const EditForm = (props) => {
     }));
   };
   const onSubmitHandler = async () => {
-    setIsLoading(true);
-    const res = await updateStudent(
-      {
-        firstName,
-        lastName,
-        email,
-        phoneNumber,
-        countryOfInterest,
-        educationLevel,
-        country: location.country,
-        city: location.city,
-        state: location.state,
-        streetAddress: location.streetAddress,
-        zipCode: location.zipCode,
-        BACertificate: degreeUrl,
-        BATranscript: transcriptUrl,
-        OlevelCertificate: ordinaryUrl,
-        resume: resumeUrl,
-        recommendationLetter: recommendationUrl,
-        statementOfPurpose: statementUrl,
-      },
-      id
-    );
-    setIsLoading(false);
-    if (res.status == 200) {
-      navigate("/students");
+    const res = await counsellorEditStudent(id, {
+      firstName,
+      lastName,
+      email,
+      phoneNumber,
+      countryOfInterest,
+      educationLevel,
+      country: location.country,
+      city: location.city,
+      state: location.state,
+      streetAddress: location.streetAddress,
+      zipCode: location.zipCode,
+      BACertificate: degreeUrl,
+      BATranscript: transcriptUrl,
+      OlevelCertificate: ordinaryUrl,
+      resume: resumeUrl,
+      recommendationLetter: recommendationUrl,
+      statementOfPurpose: statementUrl,
+    });
+    if (!error) {
+      toast("Student updated successfully!");
+      navigate("/counsellorStudents");
     }
   };
   return (
@@ -516,6 +520,7 @@ export const EditForm = (props) => {
           <div className="border-t border-gray-200" />
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };

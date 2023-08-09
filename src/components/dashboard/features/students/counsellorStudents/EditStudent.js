@@ -21,7 +21,7 @@ export const EditStudent = (props) => {
                   <div className="divide-y divide-gray-200">
                     <div className="pt-6 text-center">
                       <div className="text-xl font-bold">{props.heading}</div>
-                      <EditForm />
+                      {/* <EditForm /> */}
                     </div>
                   </div>
                 </div>

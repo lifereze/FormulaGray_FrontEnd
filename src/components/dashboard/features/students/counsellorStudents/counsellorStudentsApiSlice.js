@@ -92,30 +92,30 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
       },
       invalidatesTags: [{ type: "CounsellorStudent", id: "LIST" }],
     }),
-    // counsellorEditStudent: builder.mutation({
-    //   query: ({ id, data }) => {
-    //     return {
-    //       url: `/admin/edit/school/${id}`,
-    //       method: "PATCH",
-    //       credentials: "include",
-    //       body: data,
-    //     };
-    //   },
+    counsellorEditStudent: builder.mutation({
+      query: ({ id, data }) => {
+        return {
+          url: `/student/edit/${id}`,
+          method: "PATCH",
+          credentials: "include",
+          body: data,
+        };
+      },
 
-    //   invalidatesTags: (result, error, { id: _id }) => {
-    //     return [{ type: "School", _id }];
-    //   },
-    // }),
-    // deleteSchool: builder.mutation({
-    //   query: (id) => ({
-    //     url: `/school/delete/${id}`,
-    //     method: "DELETE",
-    //     credentials: "include",
-    //   }),
-    //   invalidatesTags: (result, error, { id: _id }) => {
-    //     return [{ type: "School", _id }];
-    //   },
-    // }),
+      invalidatesTags: (result, error, { id: _id }) => {
+        return [{ type: "CounsellorStudent", _id }];
+      },
+    }),
+    deleteStudent: builder.mutation({
+      query: (id) => ({
+        url: `/student/delete/${id}`,
+        method: "DELETE",
+        credentials: "include",
+      }),
+      invalidatesTags: (result, error, { id: _id }) => {
+        return [{ type: "CounsellorStudent", _id }];
+      },
+    }),
   }),
 });
 
@@ -124,6 +124,8 @@ export const {
   useGetCounsellorStudentsForPartnersQuery,
   useGetCounsellorPartnerStudentsQuery,
   useGetCounsellorPartnerQuery,
+  useCounsellorEditStudentMutation,
+  useDeleteStudentMutation,
   useCounsellorAddStudentMutation,
 } = extendedApiSlice;
 // returns the query result object

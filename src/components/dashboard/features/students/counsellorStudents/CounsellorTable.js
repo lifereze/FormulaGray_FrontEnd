@@ -6,7 +6,10 @@ import "react-toastify/dist/ReactToastify.css";
 import { DownloadTableExcel } from "react-export-table-to-excel";
 import ShowFiles from "../../../../buttons/showFiles";
 import { searchStore, userStore } from "../../../../../stores/index";
-import { useGetCounsellorStudentsQuery } from "./counsellorStudentsApiSlice";
+import {
+  useGetCounsellorStudentsQuery,
+  useDeleteStudentMutation,
+} from "./counsellorStudentsApiSlice";
 import { Link } from "react-router-dom";
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -19,12 +22,22 @@ export const CounsellorTable = () => {
   const { data, isLoading, isSuccess, isFetching, refetch, isError, error } =
     useGetCounsellorStudentsQuery();
 
-  const deleteOneStudent = async (student) => {
+  const [deleteStudent, { error: deleteError }] = useDeleteStudentMutation();
+  const deleteOneStudent = async (id) => {
     const confirmer = window.confirm(
-      "Are you sure you want to delete this student? You can not undo this action."
+      "Are you sure you want to delete this counsellor? You can not undo this action."
     );
+    if (confirmer) {
+      try {
+        const res = await deleteStudent(id).unwrap();
+        if (!deleteError) {
+          toast("Student deleted successfully!");
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
   };
-
   return (
     <div className="">
       <div className=" flex mt-2 flex-row-reverse">
@@ -146,7 +159,7 @@ export const CounsellorTable = () => {
                           <div className=" flex space-x-2 items-center">
                             <div className="p-1 hover:bg-gray-100 rounded-full">
                               <Link
-                                to={`/student/edit/${student?._id}`}
+                                to={`/counsellor/student/edit/${student?._id}`}
                                 className="text-indigo-600 hover:text-indigo-900"
                               >
                                 <GrFormEdit className=" text-2xl" />
@@ -154,7 +167,7 @@ export const CounsellorTable = () => {
                             </div>
                             <div
                               className=" cursor-pointer p-1 hover:bg-gray-100 rounded-full "
-                              onClick={() => deleteOneStudent(student)}
+                              onClick={() => deleteOneStudent(student?._id)}
                             >
                               <AiOutlineDelete className="text-xl text-red-500" />
                             </div>

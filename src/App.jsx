@@ -46,6 +46,7 @@ import { AdminPartnerApplications } from "./components/dashboard/features/applic
 import { AdminCounsellorStudents } from "./components/dashboard/features/students/adminCounsellorStudents/AdminCounsellorStudents";
 import { Reassign } from "./components/dashboard/features/counsellors/reassign/Reassign";
 import { CreateStudent } from "./components/dashboard/features/students/counsellorStudents/CreateStudent";
+import { EditStudent as CounsellorEditStudent } from "./components/dashboard/features/students/counsellorStudents/EditStudent";
 
 function App() {
   return (
@@ -92,6 +93,7 @@ function App() {
           <Route exact path="/counsellorStudents" element={<CounsellorStudents />} />
           <Route exact path="/counsellorStudents/:partnerId" element={<CounsellorStudents />} />
           <Route path="/adminStudents" element={<AdminStudents />} />
+          <Route exact  path="/counsellor/student/edit/:id" element={<CounsellorEditStudent />} />
           <Route path="/student/edit/:id" element={<EditStudent />} />
           <Route path="/adminStudent/edit/:id" element={<EditAdminStudent />} />
           <Route path="/schools" element={<Schools />} />

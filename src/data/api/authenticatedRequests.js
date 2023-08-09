@@ -210,9 +210,9 @@ export const counsellorGetAllRecruitmentPartners = async () => {
       return error.response;
     });
 };
-export const counsellorGetAllStudents = async () => {
+export const counsellorGetAllStudents = async (data) => {
   return await api
-    .post("/counselor/students")
+    .post("/counselor/students", data)
     .then((response) => response)
     .catch((error) => {
       return error.response;

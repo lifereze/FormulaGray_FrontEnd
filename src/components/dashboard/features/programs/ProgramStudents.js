@@ -19,6 +19,7 @@ function ProgramStudents() {
   const [students, setStudents] = useState();
   const [loading, setLoading] = useState(false);
   const [program, setProgram] = useState();
+  const [partnerStudents, setPartnerStudents] = useState(false);
   const [loadingProgram, setLoadingProgram] = useState(false);
   const user = userStore((state) => state.user);
   const search = searchStore((state) => state.search);
@@ -62,13 +63,26 @@ function ProgramStudents() {
           console.log(error);
         }
       } else if (user?.role == "counselor") {
-        try {
-          setLoading(true);
-          const res = await counsellorGetAllStudents();
-          setStudents(res.data.students);
-          setLoading(false);
-        } catch (error) {
-          console.log(error);
+        if (partnerStudents) {
+          try {
+            setLoading(true);
+            const res = await counsellorGetAllStudents({
+              userType: "partners",
+            });
+            setStudents(res.data.students);
+            setLoading(false);
+          } catch (error) {
+            console.log(error);
+          }
+        } else {
+          try {
+            setLoading(true);
+            const res = await counsellorGetAllStudents();
+            setStudents(res.data.students);
+            setLoading(false);
+          } catch (error) {
+            console.log(error);
+          }
         }
       } else if (user?.role == "admin") {
         console.log("hello");
@@ -85,9 +99,31 @@ function ProgramStudents() {
       }
     };
     getStudents();
-  }, [user, search]);
+  }, [user, search, partnerStudents]);
   return (
     <div>
+      <div className=" flex space-x-2 my-4 ml-2">
+        <div
+          className={
+            partnerStudents
+              ? " bg-white px-2 py-1 rounded-md text-sm cursor-pointer"
+              : " bg-white px-2 py-1 text-blue-600 rounded-md text-sm cursor-pointer"
+          }
+          onClick={() => setPartnerStudents(false)}
+        >
+          Your Students
+        </div>
+        <div
+          className={
+            !partnerStudents
+              ? " bg-white px-2 py-1 rounded-md text-sm cursor-pointer"
+              : " bg-white px-2 py-1 text-blue-600 rounded-md text-sm cursor-pointer"
+          }
+          onClick={() => setPartnerStudents(true)}
+        >
+          Your Partners' Students
+        </div>
+      </div>
       <table className="min-w-full table-fixed divide-y divide-gray-300">
         <thead className="bg-gray-50">
           <tr>
