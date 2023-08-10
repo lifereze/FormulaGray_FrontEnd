@@ -9,14 +9,20 @@ import {
 } from "../../../../data/api/authenticatedRequests";
 import { userStore } from "../../../../stores";
 import Spinner from "../../../utils/BlueSpinner";
+import { useNavigate } from "react-router-dom";
 function ProgramCard({ program }) {
   const [viewProgram, setViewProgram] = useState(false);
   const [loading, setLoading] = useState(false);
   const user = userStore((state) => state.user);
+  const navigate = useNavigate();
 
   const makeApplication = async () => {
     setLoading(true);
-    const res = await studentCreateApplication({ programmeId: program._id });
+    if (user?.role) {
+      const res = await studentCreateApplication({ programmeId: program._id });
+    } else {
+      navigate("/signin");
+    }
 
     setLoading(false);
   };
@@ -99,14 +105,25 @@ function ProgramCard({ program }) {
             </div>
           </div>
         ) : (
-          <Link
-            to={`/programs/${program._id}`}
-            className="w-1/2 flex items-start justify-start"
-          >
-            <div className=" p-2 border cursor-pointer border-blue-600 rounded-lg hover:bg-blue-600 hover:text-white text-blue-600">
-              Select Student
-            </div>
-          </Link>
+          (user?.role && (
+            <Link
+              to={`/programs/${program._id}`}
+              className="w-1/2 flex items-start justify-start"
+            >
+              <div className=" p-2 border cursor-pointer border-blue-600 rounded-lg hover:bg-blue-600 hover:text-white text-blue-600">
+                Select Student
+              </div>
+            </Link>
+          )) || (
+            <Link
+              to={"/signin"}
+              className="w-1/2 flex items-start justify-start"
+            >
+              <div className=" p-2 px-8 border cursor-pointer border-blue-600 rounded-lg hover:bg-blue-600 hover:text-white text-blue-600">
+                Apply
+              </div>
+            </Link>
+          )
         )}
         <div
           className=" flex  items-center w-1/2 space-x-2 cursor-pointer text-blue-600"
