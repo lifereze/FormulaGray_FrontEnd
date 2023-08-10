@@ -229,7 +229,7 @@ function SideBar() {
         </Link>
       )}
       <Link
-        to={(user?.role && "/programs") || "/signin"}
+        to={"/programs"}
         className={
           currentRoute == "programs"
             ? "flex space-x-2 cursor-pointer items-center p-2 pr-12 w-10/12 rounded-lg  bg-gray-100 text-[#184061] font-normal  "
@@ -240,7 +240,7 @@ function SideBar() {
         <div className="">Programs</div>
       </Link>
       <Link
-        to={(user?.role && "/schools") || "/signin"}
+        to={"/schools"}
         className={
           currentRoute == "schools"
             ? "flex space-x-2 cursor-pointer items-center p-2 pr-12 w-10/12 rounded-lg  bg-gray-100 text-[#184061] font-normal  "
