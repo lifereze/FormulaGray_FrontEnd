@@ -136,7 +136,7 @@ export const AdminDashboard = () => {
                               <BsFillCheckSquareFill className=" text-4xl text-white" />
                             }
                             number={
-                              acceptedApplications ? 46 : 0
+                              acceptedApplications ? acceptedApplications : 0
                             }
                             title="Accepted"
                             color="#FFF"
